@@ -23,8 +23,8 @@ namespace CastleGrimtol.Project
 |    |__| [__   |  |    |___    | __ |__/ | |\/|  |  |  | |    
 |___ |  | ___]  |  |___ |___    |__] |  \ | |  |  |  |__| |___ 
                                                                ");
-                Console.WriteLine("\n| n | New Game");
-                Console.WriteLine("| q | Exit");
+                Console.WriteLine("\n| N | New Game");
+                Console.WriteLine("| Q | Exit");
                 keyInfo = Console.ReadKey(true);
                 if (keyInfo.Key == ConsoleKey.Q)
                 {
@@ -177,25 +177,25 @@ namespace CastleGrimtol.Project
                         Console.ReadKey(true);
                         break;
                     }
-                    if (keyInfo.Key == ConsoleKey.A && validActionKeys.Contains("a"))
+                    if ((keyInfo.Key == ConsoleKey.A || keyInfo.Key == ConsoleKey.LeftArrow) && validActionKeys.Contains("a"))
                     {
                         Console.Clear();
                         MovePlayer(0, -1);
                         break;
                     }
-                    if (keyInfo.Key == ConsoleKey.W && validActionKeys.Contains("w"))
+                    if ((keyInfo.Key == ConsoleKey.W || keyInfo.Key == ConsoleKey.UpArrow) && validActionKeys.Contains("w"))
                     {
                         Console.Clear();
                         MovePlayer(-1, 0);
                         break;
                     }
-                    if (keyInfo.Key == ConsoleKey.D && validActionKeys.Contains("d"))
+                    if ((keyInfo.Key == ConsoleKey.D || keyInfo.Key == ConsoleKey.RightArrow) && validActionKeys.Contains("d"))
                     {
                         Console.Clear();
                         MovePlayer(0, 1);
                         break;
                     }
-                    if (keyInfo.Key == ConsoleKey.S && validActionKeys.Contains("s"))
+                    if ((keyInfo.Key == ConsoleKey.S || keyInfo.Key == ConsoleKey.DownArrow) && validActionKeys.Contains("s"))
                     {
                         Console.Clear();
                         MovePlayer(1, 0);
@@ -254,10 +254,11 @@ namespace CastleGrimtol.Project
 
         public Game()
         {
-            MapTemplate = @"ER:TR:ER:TR.
-                            TR:SR:TR:ER.
-                            ER:TR:ER:TR.
-                            TR:ER:TR:ER.";
+            MapTemplate = @"ER:TR:ER:TR:ER:ER.
+                            TR:TR:TR:ER:TR:ER.
+                            ER:TR:ER:TR:ER:ER.
+                            TR:SR:TR:ER:TR:ER.
+                            TR:ER:TR:ER:TR:ER.";
             StartScreen();
         }
     }

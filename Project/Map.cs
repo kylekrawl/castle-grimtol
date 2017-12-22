@@ -130,46 +130,58 @@ namespace CastleGrimtol.Project
 
                     if (y == 0)
                     {
-                        topBorder += ",___,";
+                        topBorder += room.VisitedByPlayer ? ",___," : "?????";
                     }
                     else
                     {
                         if (room.Exits.Contains("n"))
                         {
-                            topBorder += "|- -|";
+                            topBorder += (room.VisitedByPlayer || Grid[y-1][x].VisitedByPlayer) ? "|- -|" : "?????";
                         }
                         else
                         {
-                            topBorder += "|---|";
+                            topBorder += (room.VisitedByPlayer || Grid[y-1][x].VisitedByPlayer) ? "|---|" : "?????";
                         }
                     }
 
                     // Build Middle Border
-                    var centerChar = player.Y == y && player.X == x ? "o" : " ";
+                    string centerChar;
+
+                    if (room.VisitedByPlayer) {
+                        if (player.Y == y && player.X == x) {
+                            centerChar = "o";
+                        } else {
+                            centerChar = " ";
+                        }
+                        
+                    } else {
+                        centerChar = "?";
+                    }
+
                     if (room.Exits.Contains("w"))
                     {
-                        middleSection += " ";
+                        middleSection += room.VisitedByPlayer ? " " : "?";
                     }
                     else
                     {
-                        middleSection += "|";
+                        middleSection += room.VisitedByPlayer ? "|" : "?";
                     }
 
-                    middleSection += $" {centerChar} ";
+                    middleSection += room.VisitedByPlayer ? $" {centerChar} " : $"?{centerChar}?";
 
                     if (room.Exits.Contains("e"))
                     {
-                        middleSection += " ";
+                        middleSection += room.VisitedByPlayer ? " " : "?";
                     }
                     else
                     {
-                        middleSection += "|";
+                        middleSection += room.VisitedByPlayer ? "|" : "?";
                     }
 
                     // Build Bottom Border
-                    if (y == Grid[y].Count - 1)
+                    if (y == Grid.Count - 1)
                     {
-                        bottomBorder += "'---'";
+                        bottomBorder += room.VisitedByPlayer ? "'---'" : "?????";
                     }
                 }
 
@@ -183,15 +195,27 @@ namespace CastleGrimtol.Project
 
             }
             /*
-            var ct0 = @",___,,___,,___,";
-            var ct1 = @"|        ||   |";
-            var ct2 = @"|- -||---||- -|";
-            var ct3 = @"|        ||   |";
-            var ct4 = @"|- -||- -||- -|";
-            var ct5 = @"|             |";
-            var ct6 = @"|---||---||- -|";
-            var ct7 = @"|   ||        |";
-            var ct8 = @"'---''---''---'";
+            @",___,,___,,___,";
+            @"|        ||   |";
+            @"|- -||---||- -|";
+            @"|        ||   |";
+            @"|- -||- -||- -|";
+            @"|             |";
+            @"|---||---||- -|";
+            @"|   ||        |";
+            @"'---''---''---'";
+            */
+
+            /*
+            @",___,,___,,___,";
+            @"|???     ||   |";
+            @"|- -||---||- -|";
+            @"|        ||   |";
+            @"|- -||- -||- -|";
+            @"|             |";
+            @"|---||---||- -|";
+            @"|   ||        |";
+            @"'---''---''---'";
             */
         }
 

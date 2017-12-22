@@ -41,6 +41,7 @@ namespace CastleGrimtol.Project
             Description = $"Test Room at (x:{x} , y:{y})";
             Y = y;
             X = x;
+            VisitedByPlayer = false;
         }
     }
 
@@ -55,6 +56,7 @@ namespace CastleGrimtol.Project
             Description = $"Empty Room at (x:{x} , y:{y})";
             Y = y;
             X = x;
+            VisitedByPlayer = false;
         }
     }
 
