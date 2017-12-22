@@ -8,14 +8,14 @@ namespace CastleGrimtol.Project
     {
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
-        public List<Item> Items { get; set; }
+        public virtual List<Item> Items { get; set; }
         public int Y { get; set; }
         public int X { get; set; }
         public bool PassagesBuilt { get; set; }
         public virtual bool VisitedByPlayer { get; set; }
         public List<string> Exits { get; set; } = new List<string>();
 
-        public void UseItem(Item item)
+        public virtual void UseItem(Item item)
         {
             throw new System.NotImplementedException();
         }
@@ -39,6 +39,11 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override List<Item> Items { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine("Nothing happens.");
+        }
         public override void Event(Game game, Player player)
         {
             Console.WriteLine("Nothing happens. This is just a test room after all.");
@@ -50,6 +55,9 @@ namespace CastleGrimtol.Project
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>(){
+                new TestItem(), new TestItem()
+            };
         }
     }
 
@@ -57,6 +65,11 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override List<Item> Items { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine("Nothing happens.");
+        }
         public override void Event(Game game, Player player)
         {
             Console.WriteLine("Nothing happens. This is just an empty room after all.");
@@ -68,6 +81,7 @@ namespace CastleGrimtol.Project
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -76,7 +90,11 @@ namespace CastleGrimtol.Project
         public override string Name { get; set; }
         public override string Description { get; set; }
         public override bool VisitedByPlayer { get; set; }
-
+        public override List<Item> Items { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine("Nothing happens.");
+        }
         public override void Event(Game game, Player player)
         {
             Console.WriteLine("Nothing happens. This is just a start room after all.");
@@ -88,6 +106,7 @@ namespace CastleGrimtol.Project
             Y = y;
             X = x;
             VisitedByPlayer = true;
+            Items = new List<Item>();
         }
     }
 
@@ -95,9 +114,12 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-
         public override bool VisitedByPlayer { get; set; }
-
+        public override List<Item> Items { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine("Nothing happens.");
+        }
         public override void Event(Game game, Player player)
         {
             Console.WriteLine("\nYou immediately die without explanation.");
@@ -112,6 +134,7 @@ namespace CastleGrimtol.Project
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 }

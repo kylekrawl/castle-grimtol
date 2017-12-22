@@ -4,8 +4,26 @@ namespace CastleGrimtol.Project
 {
     public abstract class Item : IItem
     {
-        public string Name { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public string Description { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public virtual string Name { get; set; }
+        public virtual string Description { get; set; }
+
+        public Item()
+        {
+            Name = "Item";
+            Description = "";
+        }
+    }
+
+    public class TestItem : Item
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+
+        public TestItem()
+        {
+            Name = "Test Item";
+            Description = "A test item.";
+        }
     }
 }
 

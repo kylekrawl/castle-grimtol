@@ -176,6 +176,9 @@ namespace CastleGrimtol.Project
                         Console.WriteLine("| S | Go South");
                     }
                     Console.WriteLine("| L | Look");
+                    Console.WriteLine("| I | View Inventory");
+                    Console.WriteLine("| U | Use Item");
+                    Console.WriteLine("| T | Take Item");
                     Console.WriteLine("| H | Help");
                     Console.WriteLine("| Q | Quit");
 
@@ -196,6 +199,30 @@ namespace CastleGrimtol.Project
                     {
                         Console.Clear();
                         Look();
+                        Console.WriteLine("\n<Press any key to continue.>");
+                        Console.ReadKey(true);
+                        break;
+                    }
+                    if (keyInfo.Key == ConsoleKey.I)
+                    {
+                        Console.Clear();
+                        CheckInventory();
+                        Console.WriteLine("\n<Press any key to continue.>");
+                        Console.ReadKey(true);
+                        break;
+                    }
+                    if (keyInfo.Key == ConsoleKey.T)
+                    {
+                        Console.Clear();
+                        TakeItemInterface();
+                        Console.WriteLine("\n<Press any key to continue.>");
+                        Console.ReadKey(true);
+                        break;
+                    }
+                    if (keyInfo.Key == ConsoleKey.U)
+                    {
+                        Console.Clear();
+                        UseItemInterface();
                         Console.WriteLine("\n<Press any key to continue.>");
                         Console.ReadKey(true);
                         break;
@@ -254,12 +281,131 @@ namespace CastleGrimtol.Project
 
         public void UseItem(string itemName)
         {
-            throw new System.NotImplementedException();
+            Console.Clear();
+            for (var i = 0; i < CurrentPlayer.Inventory.Count; i++)
+            {
+                var item = CurrentPlayer.Inventory[i];
+                if (item.Name == itemName) {
+                    Console.WriteLine($"You use the {item.Name}.\n");
+                    CurrentRoom.UseItem(item);
+                    break;
+                    // may need to retool this if have multiple instances of same item with multiple (but limited) uses 
+                }
+            }
+            
+        }
+        public void TakeItem(string itemName)
+        {
+            for (var i = 0; i < CurrentRoom.Items.Count; i++)
+            {
+                var item = CurrentRoom.Items[i];
+                if (itemName == item.Name)
+                {
+                    CurrentPlayer.Inventory.Add(item);
+                    CurrentRoom.Items.Remove(item);
+                    break;
+                }
+            }
+        }
+        public void UseItemInterface()
+        {
+            if (CurrentPlayer.Inventory.Count > 0)
+            {
+                Console.Clear();
+                Console.WriteLine("\nChoose an item (type number and press <Enter>):\n");
+                for (var i = 0; i < CurrentPlayer.Inventory.Count; i++)
+                {
+                    var item = CurrentPlayer.Inventory[i];
+                    Console.WriteLine($"{i + 1}. {item.Name}");
+                    Console.WriteLine($"-----------------------------");
+                    Console.WriteLine($"{item.Description}");
+                    Console.WriteLine($"-----------------------------\n");
+                }
+                var choice = Console.ReadLine();
+                var parsed = 0;
+                var valid = int.TryParse(choice, out parsed);
+                if (!valid || parsed < 1 || parsed > CurrentPlayer.Inventory.Count)
+                {
+                    Console.WriteLine("Invalid choice.");
+                }
+                else
+                {
+                    UseItem(CurrentPlayer.Inventory[parsed - 1].Name);
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no items to take.");
+            }
+        }
+        public void TakeItemInterface()
+        {
+            if (CurrentRoom.Items.Count > 0)
+            {
+                Console.Clear();
+                Console.WriteLine("\nChoose an item (type number and press <Enter>):\n");
+                for (var i = 0; i < CurrentRoom.Items.Count; i++)
+                {
+                    var item = CurrentRoom.Items[i];
+                    Console.WriteLine($"{i + 1}. {item.Name}");
+                    Console.WriteLine($"-----------------------------");
+                    Console.WriteLine($"{item.Description}");
+                    Console.WriteLine($"-----------------------------\n");
+                }
+                var choice = Console.ReadLine();
+                var parsed = 0;
+                var valid = int.TryParse(choice, out parsed);
+                if (!valid || parsed < 1 || parsed > CurrentRoom.Items.Count)
+                {
+                    Console.WriteLine("Invalid choice.");
+                }
+                else
+                {
+                    Console.WriteLine($"You take the {CurrentRoom.Items[parsed - 1].Name}.");
+                    TakeItem(CurrentRoom.Items[parsed - 1].Name);
+                    
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no items to take.");
+            }
+        }
+        public void CheckInventory()
+        {
+            if (CurrentPlayer.Inventory.Count > 0)
+            {
+                Console.WriteLine("\nThe following items are in your inventory:\n");
+                for (var i = 0; i < CurrentPlayer.Inventory.Count; i++)
+                {
+                    var item = CurrentPlayer.Inventory[i];
+                    Console.WriteLine($"{item.Name}");
+                    Console.WriteLine($"-----------------------------");
+                    Console.WriteLine($"{item.Description}");
+                    Console.WriteLine($"-----------------------------\n");
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no items in your inventory.");
+            }
         }
         public void Look()
         {
             Console.WriteLine($"{CurrentRoom.Name}");
             Console.WriteLine($"{CurrentRoom.Description}");
+            if (CurrentRoom.Items.Count > 0)
+            {
+                Console.WriteLine("\nThe following items are in the room:\n");
+                for (var i = 0; i < CurrentRoom.Items.Count; i++)
+                {
+                    var item = CurrentRoom.Items[i];
+                    Console.WriteLine($"{item.Name}");
+                    Console.WriteLine($"-----------------------------");
+                    Console.WriteLine($"{item.Description}");
+                    Console.WriteLine($"-----------------------------\n");
+                }
+            }
         }
         public void MovePlayer(int dy, int dx)
         {
@@ -275,7 +421,8 @@ namespace CastleGrimtol.Project
             Look();
             CurrentRoom.Event(this, CurrentPlayer);
             //Fix for bug in which after Event an causes Game Over screen, game loop does not exit properly when player quits after Continuing Game
-            if (!Playing || !ApplicationActive) {
+            if (!Playing || !ApplicationActive)
+            {
                 return;
             }
             Console.WriteLine("\n<Press any key to continue.>");
