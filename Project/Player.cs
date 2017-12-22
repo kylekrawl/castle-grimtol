@@ -7,17 +7,12 @@ namespace CastleGrimtol.Project
         public int X { get; set; }
         public int Y { get; set; }
         public int Score { get; set; }
-        public List<Item> Inventory { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-
-        public void Move(int x, int y)
-        {
-            Y += y;
-            X += x;
-        }
+        public List<Item> Inventory { get; set; }
 
         public Player()
         {
             Score = 0;
+            Inventory = new List<Item>(){};
             // Will need to pass map to player constructor eventually
             X = 0;
             Y = 0;

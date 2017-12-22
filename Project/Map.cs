@@ -115,7 +115,7 @@ namespace CastleGrimtol.Project
             }
         }
 
-        public void PrintMap()
+        public void PrintMap(Player player)
         {
 
             for (var y = 0; y < Grid.Count; y++)
@@ -147,6 +147,7 @@ namespace CastleGrimtol.Project
                     }
 
                     // Build Middle Border
+                    var centerChar = player.Y == y && player.X == x ? "o" : " ";
                     if (room.Exits.Contains("w"))
                     {
                         middleSection += " ";
@@ -156,7 +157,7 @@ namespace CastleGrimtol.Project
                         middleSection += "|";
                     }
 
-                    middleSection += "   ";
+                    middleSection += $" {centerChar} ";
 
                     if (room.Exits.Contains("e"))
                     {
@@ -177,10 +178,11 @@ namespace CastleGrimtol.Project
                 //Console.WriteLine($"{topBorder}\n{middleSection}\n{bottomBorder}");
                 Console.WriteLine(topBorder);
                 Console.WriteLine(middleSection);
-                if (!(bottomBorder == "")) {
+                if (!(bottomBorder == ""))
+                {
                     Console.WriteLine(bottomBorder);
                 }
-                
+
             }
             /*
             var ct0 = @",___,,___,,___,";
@@ -195,9 +197,22 @@ namespace CastleGrimtol.Project
             */
         }
 
-        public bool ValidRoom(int x, int y)
+        public bool ValidRoom(int y, int x)
         {
-            return Grid[y] != null && Grid[y][x] != null;
+            bool valid = true;
+            bool inYRange = y >= 0 && y < Grid.Count;
+            if (!inYRange)
+            {
+                valid = false;
+            }
+            else
+            {
+                if (!(x >= 0 && x < Grid[y].Count))
+                {
+                    valid = false;
+                }
+            }
+            return valid;
         }
 
         public Map(string template, string name)
