@@ -9,13 +9,12 @@ namespace CastleGrimtol.Project
         public int Score { get; set; }
         public List<Item> Inventory { get; set; }
 
-        public Player()
+        public Player(Map map)
         {
             Score = 0;
             Inventory = new List<Item>(){};
-            // Will need to pass map to player constructor eventually
-            X = 0;
-            Y = 0;
+            X = map.PlayerStartX;
+            Y = map.PlayerStartY;
         }
     }
 }

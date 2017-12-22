@@ -5,27 +5,21 @@ namespace CastleGrimtol.Project
 {
     public class Map
     {
-        /*
-        EC:TC:EC:TC.
-        TC:EC:TC:EC.
-        EC:TC:EC:TC.
-        TC:EC:TC:EC.
-        */
         public string Template { get; set; }
         public string Name { get; set; }
-
-
+        public int PlayerStartY { get; set; }
+        public int PlayerStartX { get; set; }
         public Dictionary<string, Type> RoomDict = new Dictionary<string, Type>()
         {
             {"TR", typeof(TestRoom)},
-            {"ER", typeof(EmptyRoom)}
+            {"ER", typeof(EmptyRoom)},
+            {"SR", typeof(StartRoom)}
         };
 
         public List<List<Room>> Grid = new List<List<Room>>();
 
         public void GenerateGrid()
         {
-            //var mapRows = new List<List<object>>();
             var templateRows = Template.Split(".");
             for (int y = 0; y < templateRows.Length - 1; y++)
             {
@@ -35,6 +29,10 @@ namespace CastleGrimtol.Project
                 for (int x = 0; x < templateRooms.Length; x++)
                 {
                     var templateRoom = templateRooms[x].Trim();
+                    if (templateRoom == "SR") {
+                        PlayerStartY = y;
+                        PlayerStartX = x;
+                    }
                     var roomType = RoomDict[templateRoom];
                     var mapRoom = (Room)Activator.CreateInstance(RoomDict[templateRoom], y, x);
                     mapRow.Add(mapRoom);

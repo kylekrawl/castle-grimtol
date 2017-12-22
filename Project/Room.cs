@@ -3,27 +3,17 @@ using System.Collections.Generic;
 
 namespace CastleGrimtol.Project
 {
-    // public class Room : IRoom
-    // {
-    //     public string Name { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    //     public string Description { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    //     public List<Item> Items { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-
-    //     public void UseItem(Item item)
-    //     {
-    //         throw new System.NotImplementedException();
-    //     }
-    // }
 
     public abstract class Room : IRoom
     {
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
         public List<Item> Items { get; set; }
-        public int Y;
-        public int X;
-        public bool PassagesBuilt;
-        public List<string> Exits = new List<string>();
+        public int Y { get; set; }
+        public int X { get; set; }
+        public bool PassagesBuilt { get; set; }
+        public virtual bool VisitedByPlayer { get; set; }
+        public List<string> Exits { get; set; } = new List<string>();
 
         public void UseItem(Item item)
         {
@@ -48,13 +38,10 @@ namespace CastleGrimtol.Project
         public TestRoom(int y, int x) : base(y, x)
         {
             Name = "Test Room";
-            Description = $"Test Room at ({x} , {y})";
+            Description = $"Test Room at (x:{x} , y:{y})";
             Y = y;
             X = x;
-            //PassagesBuilt = false;
-            //Exits =  new List<string>();
         }
-
     }
 
     public class EmptyRoom : Room, IRoom
@@ -64,12 +51,27 @@ namespace CastleGrimtol.Project
 
         public EmptyRoom(int y, int x) : base(y, x)
         {
-            Name = "Empty Cell";
-            Description = $"Test Room at ({x} , {y})";
+            Name = "Empty Room";
+            Description = $"Empty Room at (x:{x} , y:{y})";
             Y = y;
             X = x;
-            //PassagesBuilt = false;
-            //Exits =  new List<string>();
+        }
+    }
+
+    public class StartRoom : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+
+        public override bool VisitedByPlayer { get; set; }
+
+        public StartRoom(int y, int x) : base(y, x)
+        {
+            Name = "Start Room";
+            Description = $"Start Room at (x:{x} , y:{y})";
+            Y = y;
+            X = x;
+            VisitedByPlayer = true;
         }
     }
 }
