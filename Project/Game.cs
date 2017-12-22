@@ -9,14 +9,15 @@ namespace CastleGrimtol.Project
         public Map CurrentMap { get; set; }
         public Room CurrentRoom { get; set; }
         public Player CurrentPlayer { get; set; }
-        //public bool SavedProgress { get; set; }
+        public bool SavedProgress { get; set; }
         public bool Playing { get; set; }
+        public bool ApplicationActive { get; set; }
         ConsoleKeyInfo keyInfo;
 
         public void StartScreen()
         {
             SetConsoleColors();
-            while (true)
+            while (ApplicationActive)
             {
                 Console.Clear();
                 Console.WriteLine(@"____ ____ ____ ___ _    ____    ____ ____ _ _  _ ___ ____ _    
@@ -24,17 +25,33 @@ namespace CastleGrimtol.Project
 |___ |  | ___]  |  |___ |___    |__] |  \ | |  |  |  |__| |___ 
                                                                ");
                 Console.WriteLine("\n| N | New Game");
+                if (SavedProgress)
+                {
+                    Console.WriteLine("| C | Continue");
+                }
                 Console.WriteLine("| Q | Exit");
                 keyInfo = Console.ReadKey(true);
                 if (keyInfo.Key == ConsoleKey.Q)
                 {
                     Console.Clear();
+                    ApplicationActive = false;
                     return;
                 }
                 if (keyInfo.Key == ConsoleKey.N)
                 {
                     Console.Clear();
                     Setup();
+                }
+                if (keyInfo.Key == ConsoleKey.C && SavedProgress)
+                {
+                    // Reset player position to room visited just before the room they died in / quit from
+                    // Will eventually need to have more logic resetting the latter
+                    CurrentPlayer.Y = CurrentPlayer.PreviousY;
+                    CurrentPlayer.X = CurrentPlayer.PreviousX;
+                    CurrentRoom = CurrentMap.Grid[CurrentPlayer.Y][CurrentPlayer.X];
+                    Console.Clear();
+                    Playing = true;
+                    MainLoop();
                 }
                 // Print title
                 // Print options:
@@ -51,14 +68,19 @@ namespace CastleGrimtol.Project
 
         }
 
-        public void GameOverScreen()
+        public void GameOver()
         {
+            Playing = false;
+            Console.Clear();
+            SetConsoleColors("gameOver");
+            Console.Clear();
             Console.WriteLine(@"____ ____ _  _ ____    ____ _  _ ____ ____ 
 | __ |__| |\/| |___    |  | |  | |___ |__/ 
 |__] |  | |  | |___    |__|  \/  |___ |  \ 
                                            ");
             Console.WriteLine("\n<Press any key to continue.>");
             Console.ReadKey(true);
+            StartScreen();
         }
 
         public void SetConsoleColors(string mode = "default")
@@ -97,6 +119,7 @@ namespace CastleGrimtol.Project
             CurrentMap = new Map(MapTemplate, "Test");
             CurrentPlayer = new Player(CurrentMap);
             CurrentRoom = CurrentMap.Grid[CurrentPlayer.Y][CurrentPlayer.X];
+            SavedProgress = true;
             Intro();
             MainLoop();
             //Console.Clear();
@@ -240,6 +263,8 @@ namespace CastleGrimtol.Project
         }
         public void MovePlayer(int dy, int dx)
         {
+            CurrentPlayer.PreviousY = CurrentPlayer.Y;
+            CurrentPlayer.PreviousX = CurrentPlayer.X;
             CurrentPlayer.Y += dy;
             CurrentPlayer.X += dx;
             CurrentRoom = CurrentMap.Grid[CurrentPlayer.Y][CurrentPlayer.X];
@@ -248,16 +273,22 @@ namespace CastleGrimtol.Project
                 CurrentRoom.VisitedByPlayer = true;
             }
             Look();
+            CurrentRoom.Event(this, CurrentPlayer);
+            //Fix for bug in which after Event an causes Game Over screen, game loop does not exit properly when player quits after Continuing Game
+            if (!Playing || !ApplicationActive) {
+                return;
+            }
             Console.WriteLine("\n<Press any key to continue.>");
             Console.ReadKey(true);
         }
 
         public Game()
         {
+            ApplicationActive = true;
             MapTemplate = @"ER:TR:ER:TR:ER:ER.
                             TR:TR:TR:ER:TR:ER.
                             ER:TR:ER:TR:ER:ER.
-                            TR:SR:TR:ER:TR:ER.
+                            TR:SR:TR:DR:TR:ER.
                             TR:ER:TR:ER:TR:ER.";
             StartScreen();
         }

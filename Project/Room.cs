@@ -20,6 +20,11 @@ namespace CastleGrimtol.Project
             throw new System.NotImplementedException();
         }
 
+        public virtual void Event(Game game, Player player)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Room(int y, int x)
         {
             Name = "Room";
@@ -34,7 +39,10 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("Nothing happens. This is just a test room after all.");
+        }
         public TestRoom(int y, int x) : base(y, x)
         {
             Name = "Test Room";
@@ -49,7 +57,10 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("Nothing happens. This is just an empty room after all.");
+        }
         public EmptyRoom(int y, int x) : base(y, x)
         {
             Name = "Empty Room";
@@ -64,9 +75,12 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-
         public override bool VisitedByPlayer { get; set; }
 
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("Nothing happens. This is just a start room after all.");
+        }
         public StartRoom(int y, int x) : base(y, x)
         {
             Name = "Start Room";
@@ -74,6 +88,30 @@ namespace CastleGrimtol.Project
             Y = y;
             X = x;
             VisitedByPlayer = true;
+        }
+    }
+
+    public class DeathRoom : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+
+        public override bool VisitedByPlayer { get; set; }
+
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou immediately die without explanation.");
+            Console.WriteLine("\n<Press any key to continue.>");
+            Console.ReadKey(true);
+            game.GameOver();
+        }
+        public DeathRoom(int y, int x) : base(y, x)
+        {
+            Name = "Death Room";
+            Description = $"Death Room at (x:{x} , y:{y})";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
         }
     }
 }

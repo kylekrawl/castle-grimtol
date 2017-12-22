@@ -13,7 +13,8 @@ namespace CastleGrimtol.Project
         {
             {"TR", typeof(TestRoom)},
             {"ER", typeof(EmptyRoom)},
-            {"SR", typeof(StartRoom)}
+            {"SR", typeof(StartRoom)},
+            {"DR", typeof(DeathRoom)}
         };
 
         public List<List<Room>> Grid = new List<List<Room>>();
@@ -206,17 +207,6 @@ namespace CastleGrimtol.Project
             @"'---''---''---'";
             */
 
-            /*
-            @",___,,___,,___,";
-            @"|???     ||   |";
-            @"|- -||---||- -|";
-            @"|        ||   |";
-            @"|- -||- -||- -|";
-            @"|             |";
-            @"|---||---||- -|";
-            @"|   ||        |";
-            @"'---''---''---'";
-            */
         }
 
         public bool ValidRoom(int y, int x)
