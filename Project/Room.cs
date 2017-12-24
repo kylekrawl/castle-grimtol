@@ -14,7 +14,7 @@ namespace CastleGrimtol.Project
         public bool PassagesBuilt { get; set; }
         public virtual bool VisitedByPlayer { get; set; }
         public List<string> Exits { get; set; } = new List<string>();
-
+        public string EventStage {get; set;}
         public virtual void UseItem(Item item)
         {
             throw new System.NotImplementedException();
@@ -85,7 +85,7 @@ namespace CastleGrimtol.Project
         }
     }
 
-    public class StartRoom : Room, IRoom
+    public class MainFoyer : Room, IRoom
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
@@ -99,10 +99,13 @@ namespace CastleGrimtol.Project
         {
             Console.WriteLine("Nothing happens. This is just a start room after all.");
         }
-        public StartRoom(int y, int x) : base(y, x)
+        public MainFoyer(int y, int x) : base(y, x)
         {
-            Name = "Start Room";
-            Description = $"Start Room at (x:{x} , y:{y})";
+            Name = "Main Foyer";
+            Description = $@"
+A large room crafted from dark, polished stone. A collection of tapestries and paintings adorn the walls, 
+and a large, ornately carved table sits in the room's center. A makeshift alchemical workstation takes 
+up most of the table's space...probably Dr. Rithbaun's handiwork.";
             Y = y;
             X = x;
             VisitedByPlayer = true;

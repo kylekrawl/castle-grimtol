@@ -9,6 +9,7 @@ namespace CastleGrimtol.Project
         public Map CurrentMap { get; set; }
         public Room CurrentRoom { get; set; }
         public Player CurrentPlayer { get; set; }
+        public string MainQuestStage { get; set; }
         public bool SavedProgress { get; set; }
         public bool Playing { get; set; }
         public bool ApplicationActive { get; set; }
@@ -20,11 +21,30 @@ namespace CastleGrimtol.Project
             while (ApplicationActive)
             {
                 Console.Clear();
-                Console.WriteLine(@"____ ____ ____ ___ _    ____    ____ ____ _ _  _ ___ ____ _    
-|    |__| [__   |  |    |___    | __ |__/ | |\/|  |  |  | |    
-|___ |  | ___]  |  |___ |___    |__] |  \ | |  |  |  |__| |___ 
+                Console.WriteLine("\n");
+                Console.WriteLine(@"  ____ ____ ____ ___ _    ____    ____ ____ _ _  _ ___ ____ _    
+  |    |__| [__   |  |    |___    | __ |__/ | |\/|  |  |  | |    
+  |___ |  | ___]  |  |___ |___    |__] |  \ | |  |  |  |__| |___ 
                                                                ");
-                Console.WriteLine("\n| N | New Game");
+                Console.WriteLine(@" 
+                                                
+                       
+
+                 .|_
+                  :;|_|        |_|_|_|
+                 |_|_|_|        | = |
+                  | = | :.,.  |_|_|_|_|
+                |_|_|_|_|:;:   | = = |
+                 | = | | = |   | = = |
+               ';.;.|_|_|_|_|_|_|_|_|_|_|
+                :;:.  =  =  =  =  =  = |
+                |; = [-] =  =  =  =  = | 
+              ..'''''''''''''''''''''''''.,
+          ..''                            '.
+       .''                                  ;
+     .'                                      '.
+  .''                                          ''.");
+                Console.WriteLine("\n\n\n\n| N | New Game");
                 if (SavedProgress)
                 {
                     Console.WriteLine("| C | Continue");
@@ -128,8 +148,60 @@ namespace CastleGrimtol.Project
         public void Intro()
         {
             // Print intro text, keypress to advance
-            // Choose player name?
-            Console.WriteLine("TODO: Add actual game intro here.");
+            // Choose player name
+
+            Console.WriteLine("Choose a name:");
+            var choice = Console.ReadLine();
+            if (choice != "")
+            {
+                CurrentPlayer.Name = choice;
+            }
+            Console.Clear();
+            Console.WriteLine(@"
+After a week of traveling, you had finally arrived at Castle Grimtol. It had all started with a
+hastily scrawled note from Dr. Damian Rithbaun, the man who had taught you everything you knew
+about the art of alchemy. A note that said only 'I am in danger. Come to Grimtol.' After talking
+with a few locals in the nearby town, you'd managed to piece together that the good Doctor had
+been staying at the castle to teach the three Grimtol heirs in the arts of alchemy. Nothing all
+that suspicious, except he hadn't been seen for weeks. Coupled with all the stories of strange 
+happeningsin the vicinity of the castle grounds, there was definitely *something* going on. And now, 
+standing before the castle doors, it was your job to figure it out.");
+
+            Console.WriteLine("\n<Press any key to continue.>");
+            Console.ReadKey(true);
+            Console.Clear();
+
+            Console.WriteLine($@"
+{CurrentPlayer.Name}: 'What have you gotten yourself into this time, old man?'
+
+You knock on the front door. No answer. A quick tug on the handle reveals that it's locked.
+
+{CurrentPlayer.Name}: 'Figures.'
+
+Just then, you hear a strange, almost mechanical scuffling sound from inside. After a few seconds, 
+the door swings slowly open.
+
+{CurrentPlayer.Name}: 'Well, that looks promising. Definitely not a trap. That old man is lucky I 
+owe him one.'");
+
+            Console.WriteLine("\n<Press any key to continue.>");
+            Console.ReadKey(true);
+            Console.Clear();
+
+            Console.WriteLine($@"
+You walk inside, and find yourself in a large room crafted from dark, polished stone. A collection
+of tapestries and paintings adorn the walls, and a large, ornately carved table sits in the room's center.
+A makeshift alchemical workstation takes up most of the table's space...probably Dr. Rithbaun's handiwork.
+            
+Suddenly, you hear the door slam shut behind you.
+
+{CurrentPlayer.Name}: 'Knew it.'
+
+As you turn around, you notice the door isn't just locked. It's gone. The wall is a smooth, stone surface
+devoid of doors of any sort.
+
+{CurrentPlayer.Name}: 'Huh...well, that's new.'");
+            
             Console.WriteLine("\n<Press any key to continue.>");
             Console.ReadKey(true);
         }
@@ -285,14 +357,15 @@ namespace CastleGrimtol.Project
             for (var i = 0; i < CurrentPlayer.Inventory.Count; i++)
             {
                 var item = CurrentPlayer.Inventory[i];
-                if (item.Name == itemName) {
+                if (item.Name == itemName)
+                {
                     Console.WriteLine($"You use the {item.Name}.\n");
                     CurrentRoom.UseItem(item);
                     break;
                     // may need to retool this if have multiple instances of same item with multiple (but limited) uses 
                 }
             }
-            
+
         }
         public void TakeItem(string itemName)
         {
@@ -312,7 +385,7 @@ namespace CastleGrimtol.Project
             if (CurrentPlayer.Inventory.Count > 0)
             {
                 Console.Clear();
-                Console.WriteLine("\nChoose an item (type number and press <Enter>):\n");
+                Console.WriteLine("\nChoose an item (Type number and press <Enter>):\n");
                 for (var i = 0; i < CurrentPlayer.Inventory.Count; i++)
                 {
                     var item = CurrentPlayer.Inventory[i];
@@ -335,7 +408,7 @@ namespace CastleGrimtol.Project
             }
             else
             {
-                Console.WriteLine("There are no items to take.");
+                Console.WriteLine("There are no items to use.");
             }
         }
         public void TakeItemInterface()
@@ -363,7 +436,7 @@ namespace CastleGrimtol.Project
                 {
                     Console.WriteLine($"You take the {CurrentRoom.Items[parsed - 1].Name}.");
                     TakeItem(CurrentRoom.Items[parsed - 1].Name);
-                    
+
                 }
             }
             else
@@ -383,6 +456,14 @@ namespace CastleGrimtol.Project
                     Console.WriteLine($"-----------------------------");
                     Console.WriteLine($"{item.Description}");
                     Console.WriteLine($"-----------------------------\n");
+                }
+                Console.WriteLine("| U | Use Item");
+                Console.WriteLine("\n<Press any other key to continue.>");
+                keyInfo = Console.ReadKey(true);
+                if (keyInfo.Key == ConsoleKey.U)
+                {
+                    Console.Clear();
+                    UseItemInterface();
                 }
             }
             else
@@ -432,12 +513,33 @@ namespace CastleGrimtol.Project
         public Game()
         {
             ApplicationActive = true;
-            MapTemplate = @"ER:TR:ER:TR:ER:ER.
-                            TR:TR:TR:ER:TR:ER.
-                            ER:TR:ER:TR:ER:ER.
-                            TR:SR:TR:DR:TR:ER.
-                            TR:ER:TR:ER:TR:ER.";
+            MapTemplate = @"ER:TR:ER:TR:ER:ER:TR.
+                            TR:TR:TR:ER:TR:ER:TR.
+                            ER:TR:ER:TR:ER:ER:TR.
+                            TR:TR:TR:DR:TR:ER:TR.
+                            TR:TR:TR:DR:TR:ER:TR.
+                            TR:MF:TR:ER:TR:ER:TR.";
             StartScreen();
         }
     }
 }
+/*
+ 
+                                                
+                       
+
+                 .|_
+                  :;|_|        |_|_|_|
+                 |_|_|_|        | = |
+                  | = | :.,.  |_|_|_|_|
+                |_|_|_|_|:;:   | = = |
+                 | = | | = |   | = = |
+               ';.;.|_|_|_|_|_|_|_|_|_|_|
+                :;:.  =  =  =  =  =  = |
+                |; = [-] =  =  =  =  = | 
+              ..'''''''''''''''''''''''''.,
+          ..''                            '.
+       .''                                  ;
+     .'                                      '.
+  .''                                          ''.
+ */

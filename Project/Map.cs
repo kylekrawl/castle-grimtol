@@ -13,7 +13,7 @@ namespace CastleGrimtol.Project
         {
             {"TR", typeof(TestRoom)},
             {"ER", typeof(EmptyRoom)},
-            {"SR", typeof(StartRoom)},
+            {"MF", typeof(MainFoyer)},
             {"DR", typeof(DeathRoom)}
         };
 
@@ -30,7 +30,7 @@ namespace CastleGrimtol.Project
                 for (int x = 0; x < templateRooms.Length; x++)
                 {
                     var templateRoom = templateRooms[x].Trim();
-                    if (templateRoom == "SR") {
+                    if (templateRoom == "MF") {
                         PlayerStartY = y;
                         PlayerStartX = x;
                     }

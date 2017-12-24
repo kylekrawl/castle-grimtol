@@ -25,22 +25,75 @@ namespace CastleGrimtol.Project
             Description = "A test item.";
         }
     }
+
+    public class Weapon : Item
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public int DamageType { get; set; }
+        public int Damage { get; set; }
+        public List<List<string>> CraftingCombinations {get; set;}
+        public Weapon()
+        {
+            Name = "Weapon";
+            Description = "";
+        }
+    }
+
+    public class MaterialItem : Item
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public List<List<string>> CraftingCombinations {get; set;}
+        public MaterialItem()
+        {
+            Name = "Material Item";
+            Description = "";
+        }
+    }
+
+    public class QuestItem : Item
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+
+        public List<List<string>> CraftingCombinations {get; set;}
+
+        public QuestItem()
+        {
+            Name = "Quest Item";
+            Description = "";
+        }
+    }
+
+    public class HealingItem : Item
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public List<Item> Components { get; set; }
+        public int HealAmount { get; set; }
+        public int NumUses { get; set; }
+        public List<List<string>> CraftingCombinations {get; set;}
+        public HealingItem()
+        {
+            Name = "Healing Item";
+            Description = "";
+        }
+    }
+
+    public class OffensiveItem : Item
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public List<Item> Components { get; set; }
+        public string DamageType { get; set; }
+        public int Damage { get; set; }
+        public int NumUses { get; set; }
+        public List<List<string>> CraftingCombinations {get; set;}
+        public OffensiveItem()
+        {
+            Name = "Offensive Item";
+            Description = "";
+        }
+    }
 }
-
-
-
-
-
-/*
-Items:
-- Weapons:
-    - for player and enemies (unlimited use)
-- Materials:
-    - can be combined with other items to modify item or create new item
-- Protective:
-    - bestow beneficial effects on user
-- Offensive:
-    - damage enemy, but limited use
-- Quest:
-    - used to advance game progression
- */
