@@ -6,23 +6,19 @@ namespace CastleGrimtol.Project
     {
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
+        public virtual string DamageType { get; set; }
+        public virtual int Damage { get; set; }
+        public virtual int HealAmount { get; set; }
+        public virtual List<List<string>> CraftingCombinations { get; set; }
 
         public Item()
         {
             Name = "Item";
             Description = "";
-        }
-    }
-
-    public class TestItem : Item
-    {
-        public override string Name { get; set; }
-        public override string Description { get; set; }
-
-        public TestItem()
-        {
-            Name = "Test Item";
-            Description = "A test item.";
+            DamageType = "";
+            Damage = 0;
+            HealAmount = 0;
+            CraftingCombinations = new List<List<string>>();
         }
     }
 
@@ -30,8 +26,8 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public string DamageType { get; set; }
-        public int Damage { get; set; }
+        public override string DamageType { get; set; }
+        public override int Damage { get; set; }
         public FlintlockPistol()
         {
             Name = "Flintlock Pistol";
@@ -45,9 +41,9 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public string DamageType { get; set; }
-        public int Damage { get; set; }
-        public List<List<string>> CraftingCombinations { get; set; }
+        public override string DamageType { get; set; }
+        public override int Damage { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
         public IncendiaryPistol()
         {
             Name = "Incendiary Pistol";
@@ -55,7 +51,9 @@ namespace CastleGrimtol.Project
             DamageType = "burning";
             Damage = 7;
             CraftingCombinations = new List<List<string>>(){
-                new List<string>(){ "Flintlock Pistol", "Bone Ash"}
+                new List<string>(){ "Flintlock Pistol", "Bone Ash"},
+                new List<string>(){ "Venomous Pistol", "Bone Ash"},
+                new List<string>(){ "Warp Pistol", "Bone Ash"}
             };
         }
     }
@@ -64,9 +62,9 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public string DamageType { get; set; }
-        public int Damage { get; set; }
-        public List<List<string>> CraftingCombinations { get; set; }
+        public override string DamageType { get; set; }
+        public override int Damage { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
         public VenomousPistol()
         {
             Name = "Venomous Pistol";
@@ -74,7 +72,9 @@ namespace CastleGrimtol.Project
             DamageType = "corrosive";
             Damage = 7;
             CraftingCombinations = new List<List<string>>(){
-                new List<string>(){ "Flintlock Pistol", "Acrid Powder"}
+                new List<string>(){ "Flintlock Pistol", "Acrid Powder"},
+                new List<string>(){ "Incendiary Pistol", "Acrid Powder"},
+                new List<string>(){ "Warp Pistol", "Acrid Powder"}
             };
         }
     }
@@ -83,9 +83,9 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public string DamageType { get; set; }
-        public int Damage { get; set; }
-        public List<List<string>> CraftingCombinations { get; set; }
+        public override string DamageType { get; set; }
+        public override int Damage { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
         public WarpPistol()
         {
             Name = "Warp Pistol";
@@ -93,22 +93,10 @@ namespace CastleGrimtol.Project
             DamageType = "chaos";
             Damage = 7;
             CraftingCombinations = new List<List<string>>(){
-                new List<string>(){ "Flintlock Pistol", "Luminous Dust"}
+                new List<string>(){ "Flintlock Pistol", "Luminous Dust"},
+                new List<string>(){ "Incendiary Pistol", "Luminous Dust"},
+                new List<string>(){ "Venomous Pistol", "Luminous Dust"}
             };
-        }
-    }
-
-    public class QuestItem : Item
-    {
-        public override string Name { get; set; }
-        public override string Description { get; set; }
-
-        public List<List<string>> CraftingCombinations { get; set; }
-
-        public QuestItem()
-        {
-            Name = "Quest Item";
-            Description = "";
         }
     }
 
@@ -116,17 +104,15 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public string DamageType { get; set; }
-        public int Damage { get; set; }
-        public int NumUses { get; set; }
-        public List<List<string>> CraftingCombinations { get; set; }
+        public override string DamageType { get; set; }
+        public override int Damage { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
         public IncendiaryGrenade()
         {
             Name = "Incendiary Grenade";
             Description = "An incendiary explosive projectile.";
             DamageType = "burning";
             Damage = 10;
-            NumUses = 1;
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Reactive Solid", "Bone Ash"}
             };
@@ -137,17 +123,15 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public string DamageType { get; set; }
-        public int Damage { get; set; }
-        public int NumUses { get; set; }
-        public List<List<string>> CraftingCombinations { get; set; }
+        public override string DamageType { get; set; }
+        public override int Damage { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
         public VenomousGrenade()
         {
             Name = "Venomous Grenade";
             Description = "An explosive projectile with an acidic payload.";
             DamageType = "corrosive";
             Damage = 10;
-            NumUses = 1;
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Reactive Solid", "Acrid Powder"}
             };
@@ -158,17 +142,15 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public string DamageType { get; set; }
-        public int Damage { get; set; }
-        public int NumUses { get; set; }
-        public List<List<string>> CraftingCombinations { get; set; }
+        public override string DamageType { get; set; }
+        public override int Damage { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
         public WarpGrenade()
         {
             Name = "Warp Grenade";
             Description = "An explosive projectile capable of destabilizing matter.";
             DamageType = "chaos";
             Damage = 10;
-            NumUses = 1;
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Reactive Solid", "Luminous Dust"}
             };
@@ -289,7 +271,7 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public List<List<string>> CraftingCombinations { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
         public ReactiveSolid()
         {
             Name = "Reactive Solid";
@@ -306,13 +288,11 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public int NumUses { get; set; }
-        public List<List<string>> CraftingCombinations { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
         public PulseEmitter()
         {
             Name = "Pulse Emitter";
             Description = "A device capable of deactivating mechanical traps.";
-            NumUses = 1;
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Reactive Solid", "Pulse Crystal"}
             };
@@ -323,9 +303,8 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public List<List<string>> CraftingCombinations { get; set; }
-        public int HealAmount { get; set; }
-        public int NumUses { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
+        public override int HealAmount { get; set; }
         public HealingElixir()
         {
             Name = "Healing Elixir";
@@ -336,7 +315,6 @@ namespace CastleGrimtol.Project
                 new List<string>(){ "Quivering Ooze", "Crimson Oil"}
             };
             HealAmount = 10;
-            NumUses = 1;
         }
     }
 
@@ -344,9 +322,8 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public List<List<string>> CraftingCombinations { get; set; }
-        public int HealAmount { get; set; }
-        public int NumUses { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
+        public override int HealAmount { get; set; }
         public MedicinalSalve()
         {
             Name = "Medicinal Salve";
@@ -357,7 +334,6 @@ namespace CastleGrimtol.Project
                 new List<string>(){ "Quivering Ooze", "Reactive Solid"}
             };
             HealAmount = 20;
-            NumUses = 1;
         }
     }
 
@@ -365,9 +341,8 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public List<List<string>> CraftingCombinations { get; set; }
-        public int HealAmount { get; set; }
-        public int NumUses { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
+        public override int HealAmount { get; set; }
         public Panacea()
         {
             Name = "Panacea";
@@ -376,7 +351,6 @@ namespace CastleGrimtol.Project
                 new List<string>(){ "Reactive Solid", "Healing Elixir"},
             };
             HealAmount = 30;
-            NumUses = 1;
         }
     }
 }

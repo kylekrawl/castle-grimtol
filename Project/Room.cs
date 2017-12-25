@@ -56,7 +56,7 @@ namespace CastleGrimtol.Project
             X = x;
             VisitedByPlayer = false;
             Items = new List<Item>(){
-                new TestItem(), new TestItem()
+                new LuminousDust(), new ReactiveSolid(), new CrimsonOil(), new YellowIchor(), new ReactiveSolid(), new BoneAsh(), new AcridPowder()
             };
         }
     }

@@ -21,7 +21,9 @@ namespace CastleGrimtol.Project
         {
             Name = "Alchemist";
             Score = 0;
-            Inventory = new List<Item>() { };
+            Inventory = new List<Item>() { 
+                new FlintlockPistol()
+            };
             X = map.PlayerStartX;
             Y = map.PlayerStartY;
             PreviousY = Y;

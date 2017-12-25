@@ -11,6 +11,21 @@ namespace CastleGrimtol.Project
         public Player CurrentPlayer { get; set; }
         public string MainQuestStage { get; set; }
         public bool SavedProgress { get; set; }
+        public List<Type> CraftableItems = new List<Type>()
+        {
+            typeof(IncendiaryPistol),
+            typeof(VenomousPistol),
+            typeof(WarpPistol),
+            typeof(IncendiaryGrenade),
+            typeof(VenomousGrenade),
+            typeof(WarpGrenade),
+            typeof(HealingElixir),
+            typeof(MedicinalSalve),
+            typeof(Panacea),
+            typeof(PulseEmitter),
+            typeof(ReactiveSolid)
+
+        };
         public bool Playing { get; set; }
         public bool ApplicationActive { get; set; }
         ConsoleKeyInfo keyInfo;
@@ -201,7 +216,7 @@ As you turn around, you notice the door isn't just locked. It's gone. The wall i
 devoid of doors of any sort.
 
 {CurrentPlayer.Name}: 'Huh...well, that's new.'");
-            
+
             Console.WriteLine("\n<Press any key to continue.>");
             Console.ReadKey(true);
         }
@@ -251,6 +266,7 @@ devoid of doors of any sort.
                     Console.WriteLine("| I | View Inventory");
                     Console.WriteLine("| U | Use Item");
                     Console.WriteLine("| T | Take Item");
+                    Console.WriteLine("| C | Craft Item");
                     Console.WriteLine("| H | Help");
                     Console.WriteLine("| Q | Quit");
 
@@ -279,8 +295,6 @@ devoid of doors of any sort.
                     {
                         Console.Clear();
                         CheckInventory();
-                        Console.WriteLine("\n<Press any key to continue.>");
-                        Console.ReadKey(true);
                         break;
                     }
                     if (keyInfo.Key == ConsoleKey.T)
@@ -295,6 +309,14 @@ devoid of doors of any sort.
                     {
                         Console.Clear();
                         UseItemInterface();
+                        Console.WriteLine("\n<Press any key to continue.>");
+                        Console.ReadKey(true);
+                        break;
+                    }
+                    if (keyInfo.Key == ConsoleKey.C)
+                    {
+                        Console.Clear();
+                        CraftItemInterface();
                         Console.WriteLine("\n<Press any key to continue.>");
                         Console.ReadKey(true);
                         break;
@@ -442,6 +464,100 @@ devoid of doors of any sort.
             else
             {
                 Console.WriteLine("There are no items to take.");
+            }
+        }
+        public void CraftItemInterface()
+        {
+            if (CurrentPlayer.Inventory.Count > 1)
+            {
+                Item component1 = CurrentPlayer.Inventory[0];
+                Item component2 = CurrentPlayer.Inventory[1];
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine("\nChoose first component (Type number and press <Enter>):\n");
+                    for (var i = 0; i < CurrentPlayer.Inventory.Count; i++)
+                    {
+                        var item = CurrentPlayer.Inventory[i];
+                        Console.WriteLine($"{i + 1}. {item.Name}");
+                        Console.WriteLine($"-----------------------------");
+                        Console.WriteLine($"{item.Description}");
+                        Console.WriteLine($"-----------------------------\n");
+                    }
+                    var choice = Console.ReadLine();
+                    var parsed = 0;
+                    var valid = int.TryParse(choice, out parsed);
+                    if (!valid || parsed < 1 || parsed > CurrentPlayer.Inventory.Count)
+                    {
+                        Console.WriteLine("Invalid choice.");
+                        Console.WriteLine("\n<Press any other key to continue.>");
+                        keyInfo = Console.ReadKey(true);
+                    }
+                    else
+                    {
+                        component1 = CurrentPlayer.Inventory[parsed - 1];
+                        CurrentPlayer.Inventory.Remove(component1);
+                        break;
+                    }
+                }
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine("\nChoose second component (Type number and press <Enter>):\n");
+                    for (var i = 0; i < CurrentPlayer.Inventory.Count; i++)
+                    {
+                        var item = CurrentPlayer.Inventory[i];
+                        Console.WriteLine($"{i + 1}. {item.Name}");
+                        Console.WriteLine($"-----------------------------");
+                        Console.WriteLine($"{item.Description}");
+                        Console.WriteLine($"-----------------------------\n");
+                    }
+                    var choice2 = Console.ReadLine();
+                    var parsed2 = 0;
+                    var valid2 = int.TryParse(choice2, out parsed2);
+                    if (!valid2 || parsed2 < 1 || parsed2 > CurrentPlayer.Inventory.Count)
+                    {
+                        Console.WriteLine("Invalid choice.");
+                        Console.WriteLine("\n<Press any other key to continue.>");
+                        keyInfo = Console.ReadKey(true);
+                    }
+                    else
+                    {
+                        component2 = CurrentPlayer.Inventory[parsed2 - 1];
+                        break;
+                    }
+                }
+                var validCombination = false;
+                var validItem = (Item)Activator.CreateInstance(CraftableItems[0]);
+                for (var i = 0; i < CraftableItems.Count; i++)
+                {
+                    var item = (Item)Activator.CreateInstance(CraftableItems[i]);
+                    for (var j = 0; j < item.CraftingCombinations.Count; j++)
+                    {
+                        var combination = item.CraftingCombinations[j];
+                        if (combination.Contains(component1.Name) && combination.Contains(component2.Name))
+                        {
+                            validCombination = true;
+                            validItem = item;
+                            break;
+                        }
+                    }
+                }
+                if (!validCombination)
+                {
+                    CurrentPlayer.Inventory.Add(component1);
+                    Console.WriteLine("The components fail to produce a reaction.");
+                }
+                else
+                {
+                    CurrentPlayer.Inventory.Remove(component2);
+                    CurrentPlayer.Inventory.Add(validItem);
+                    Console.WriteLine($"{component1.Name} and {component2.Name} react successfully, producing {validItem.Name}.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("You at least two items for crafting.");
             }
         }
         public void CheckInventory()
