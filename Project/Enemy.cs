@@ -11,11 +11,11 @@ namespace CastleGrimtol.Project
         public virtual string DefeatedDescription { get; set; }
         public virtual string VictoriousDescription { get; set; }
         public virtual string Type { get; set; }
-        public virtual int Health { get; set; }
-        public virtual int MaxHealth { get; set; }
-        public virtual int DefenseRating { get; set; }
-        public virtual int MaxDefenseRating { get; set; }
-        public virtual Dictionary<List<string>, int> Attacks { get; set; }
+        public virtual double Health { get; set; }
+        public virtual double MaxHealth { get; set; }
+        public virtual double DefenseRating { get; set; }
+        public virtual double MaxDefenseRating { get; set; }
+        public virtual List<Attack> Attacks { get; set; }
         public virtual List<Item> DropItems { get; set; }
 
         public Item DropItem()
@@ -23,11 +23,6 @@ namespace CastleGrimtol.Project
             Random r = new Random();
             int randIndex = r.Next(0, DropItems.Count);
             return DropItems[randIndex];
-        }
-
-        public void Attack()
-        {
-            throw new System.NotImplementedException();
         }
 
         public Enemy()
@@ -42,7 +37,7 @@ namespace CastleGrimtol.Project
             MaxHealth = 0;
             DefenseRating = 0;
             MaxDefenseRating = 0;
-            Attacks = new Dictionary<List<string>, int>();
+            Attacks = new List<Attack>();
             DropItems = new List<Item>();
         }
     }
@@ -55,11 +50,11 @@ namespace CastleGrimtol.Project
         public override string DefeatedDescription { get; set; }
         public override string VictoriousDescription { get; set; }
         public override string Type { get; set; }
-        public override int Health { get; set; }
-        public override int MaxHealth { get; set; }
-        public override int DefenseRating { get; set; }
-        public override int MaxDefenseRating { get; set; }
-        public override Dictionary<List<string>, int> Attacks { get; set; }
+        public override double Health { get; set; }
+        public override double MaxHealth { get; set; }
+        public override double DefenseRating { get; set; }
+        public override double MaxDefenseRating { get; set; }
+        public override List<Attack> Attacks { get; set; }
         public override List<Item> DropItems { get; set; }
 
         public TestEnemy()
@@ -74,20 +69,9 @@ namespace CastleGrimtol.Project
             Health = MaxHealth;
             MaxDefenseRating = 15;
             DefenseRating = MaxDefenseRating;
-            Attacks = new Dictionary<List<string>, int>()
+            Attacks = new List<Attack>()
             {
-                {new List<string>(){
-                    "weak",
-                    $"{this.Name} uses a weak attack!"
-                }, 5 },
-                {new List<string>(){
-                    "moderate",
-                    $"{this.Name} uses a moderate attack!"
-                }, 10 },
-                {new List<string>(){
-                    "strong",
-                    $"{this.Name} uses a strong attack!"
-                }, 15 }
+               new Attack("Weak Attack", $"{this.Name} uses a weak attack.", 5, 65)
             };
             DropItems = new List<Item>(){
                 new BoneAsh(), new MetalCore(), new CrimsonOil()

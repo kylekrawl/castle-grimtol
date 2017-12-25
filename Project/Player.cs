@@ -10,10 +10,10 @@ namespace CastleGrimtol.Project
         public int PreviousY { get; set; }
         public int PreviousX { get; set; }
         public int Score { get; set; }
-        public int Health { get; set; }
-        public int MaxHealth { get; set; }
-        public int DefenseRating { get; set; }
-        public int MaxDefenseRating { get; set; }
+        public double Health { get; set; }
+        public double MaxHealth { get; set; }
+        public double DefenseRating { get; set; }
+        public double MaxDefenseRating { get; set; }
         public Item Weapon { get; set; }
         public List<Item> Inventory { get; set; }
 
