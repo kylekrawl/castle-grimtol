@@ -9,6 +9,8 @@ namespace CastleGrimtol.Project
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
         public virtual List<Item> Items { get; set; }
+        public virtual List<string> Attributes {get; set;}
+        public virtual Enemy Enemy {get; set;}
         public int Y { get; set; }
         public int X { get; set; }
         public bool PassagesBuilt { get; set; }
@@ -30,8 +32,10 @@ namespace CastleGrimtol.Project
             Name = "Room";
             Y = y;
             X = x;
+            Attributes = new List<string>(){"basic"};
             PassagesBuilt = false;
             Exits = new List<string>();
+            Enemy = null;
         }
     }
 

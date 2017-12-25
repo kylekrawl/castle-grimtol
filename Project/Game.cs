@@ -26,6 +26,9 @@ namespace CastleGrimtol.Project
             typeof(ReactiveSolid)
 
         };
+        public List<string> CombatItems = new List<string>() {
+
+        };
         public bool Playing { get; set; }
         public bool ApplicationActive { get; set; }
         ConsoleKeyInfo keyInfo;
@@ -372,7 +375,30 @@ devoid of doors of any sort.
                 // Get player action
             }
         }
-
+        public void Combat(Enemy enemy)
+        {
+            Console.Clear();
+            Console.WriteLine(enemy.ApproachDescription);
+            Console.WriteLine("\n<Press any key to continue.>");
+            Console.ReadKey(true);
+            while (true) {
+                Console.WriteLine(enemy.CombatDescription);
+                var validCombatItems = new List<Item>();
+                for (var i = 0; i < CurrentPlayer.Inventory.Count; i++) {
+                    var item = CurrentPlayer.Inventory[i];
+                    if (CombatItems.Contains(item.Name)) {
+                        validCombatItems.Add(item);
+                    }
+                }
+                Console.WriteLine("\nPress key to choose an action:");
+                Console.WriteLine("| F | Attack with Pistol");
+                    if (validCombatItems.Count > 0)
+                    {
+                        Console.WriteLine("| U | Use Item");
+                    }
+                    keyInfo = Console.ReadKey(true);
+            }
+        }
         public void UseItem(string itemName)
         {
             Console.Clear();

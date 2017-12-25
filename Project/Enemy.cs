@@ -6,7 +6,10 @@ namespace CastleGrimtol.Project
     public abstract class Enemy
     {
         public virtual string Name { get; set; }
-        public virtual string Description { get; set; }
+        public virtual string ApproachDescription { get; set; }
+        public virtual string CombatDescription { get; set; }
+        public virtual string DefeatedDescription { get; set; }
+        public virtual string VictoriousDescription { get; set; }
         public virtual string Type { get; set; }
         public virtual int Health { get; set; }
         public virtual int MaxHealth { get; set; }
@@ -30,7 +33,10 @@ namespace CastleGrimtol.Project
         public Enemy()
         {
             Name = "Enemy";
-            Description = "";
+            ApproachDescription = "";
+            CombatDescription = "";
+            DefeatedDescription = "";
+            VictoriousDescription = "";
             Type = "";
             Health = 0;
             MaxHealth = 0;
@@ -44,7 +50,10 @@ namespace CastleGrimtol.Project
     public abstract class TestEnemy : Enemy
     {
         public override string Name { get; set; }
-        public override string Description { get; set; }
+        public override string ApproachDescription { get; set; }
+        public override string CombatDescription { get; set; }
+        public override string DefeatedDescription { get; set; }
+        public override string VictoriousDescription { get; set; }
         public override string Type { get; set; }
         public override int Health { get; set; }
         public override int MaxHealth { get; set; }
@@ -56,7 +65,10 @@ namespace CastleGrimtol.Project
         public TestEnemy()
         {
             Name = "Test Enemy";
-            Description = "It is a standard Test Enemy.";
+            ApproachDescription = "A terrifying creature lumbers toward you.";
+            CombatDescription = "The creature flails around menacingly.";
+            DefeatedDescription = "The creature lets out a gurgling cry as it fall to the ground.";
+            VictoriousDescription = "The creature lands a killing blow.";
             Type = "purification";
             MaxHealth = 20;
             Health = MaxHealth;
