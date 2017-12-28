@@ -42,7 +42,7 @@ namespace CastleGrimtol.Project
         }
     }
 
-    public abstract class TestEnemy : Enemy
+    public class TestEnemy : Enemy
     {
         public override string Name { get; set; }
         public override string ApproachDescription { get; set; }
@@ -67,11 +67,12 @@ namespace CastleGrimtol.Project
             Type = "purification";
             MaxHealth = 20;
             Health = MaxHealth;
-            MaxDefenseRating = 15;
+            MaxDefenseRating = 10;
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
-               new Attack("Weak Attack", $"{this.Name} uses a weak attack.", 5, 65)
+               new Attack("Weak Attack", $"{this.Name} uses a weak attack.", 15, 50),
+               new Attack("Strong Attack", $"{this.Name} uses a strong attack.", 50, 100)
             };
             DropItems = new List<Item>(){
                 new BoneAsh(), new MetalCore(), new CrimsonOil()

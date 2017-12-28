@@ -14,7 +14,8 @@ namespace CastleGrimtol.Project
             {"TR", typeof(TestRoom)},
             {"ER", typeof(EmptyRoom)},
             {"MF", typeof(MainFoyer)},
-            {"DR", typeof(DeathRoom)}
+            {"DR", typeof(DeathRoom)},
+            {"NR", typeof(EnemyRoom)}
         };
 
         public List<List<Room>> Grid = new List<List<Room>>();

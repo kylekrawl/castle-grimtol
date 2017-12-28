@@ -30,7 +30,7 @@ namespace CastleGrimtol.Project
             PreviousX = X;
             MaxHealth = 100;
             Health = MaxHealth;
-            MaxDefenseRating = 20;
+            MaxDefenseRating = 15;
             DefenseRating = MaxDefenseRating;
         }
     }

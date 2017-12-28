@@ -144,4 +144,32 @@ up most of the table's space...probably Dr. Rithbaun's handiwork.";
             Items = new List<Item>();
         }
     }
+
+    public class EnemyRoom : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override List<Item> Items { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine("Nothing happens.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            if (Enemy.Health > 0) {
+                game.Combat(Enemy);
+            }
+        }
+        public EnemyRoom(int y, int x) : base(y, x)
+        {
+            Name = "Enemy Room";
+            Description = $"Enemy Room at (x:{x} , y:{y})";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+            Items = new List<Item>();
+            Enemy = new TestEnemy();
+        }
+    }
 }

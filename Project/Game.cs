@@ -99,6 +99,7 @@ namespace CastleGrimtol.Project
                     CurrentPlayer.Y = CurrentPlayer.PreviousY;
                     CurrentPlayer.X = CurrentPlayer.PreviousX;
                     CurrentRoom = CurrentMap.Grid[CurrentPlayer.Y][CurrentPlayer.X];
+                    CurrentPlayer.Health = CurrentPlayer.MaxHealth/2;
                     Console.Clear();
                     Playing = true;
                     MainLoop();
@@ -396,100 +397,114 @@ devoid of doors of any sort.
 
             while (true)
             {
-                Console.WriteLine(enemy.CombatDescription);
                 var validCombatItems = new List<Item>();
                 var validHealingItems = new List<Item>();
                 Item chosenCombatItem = null;
                 Item chosenHealingItem = null;
-                for (var i = 0; i < CurrentPlayer.Inventory.Count; i++)
+                while (true)
                 {
-                    var item = CurrentPlayer.Inventory[i];
-                    if (CombatItems.Contains(item.Name))
+                    Console.Clear();
+                    Console.WriteLine(enemy.CombatDescription);
+
+                    for (var i = 0; i < CurrentPlayer.Inventory.Count; i++)
                     {
-                        validCombatItems.Add(item);
-                    }
-                    if (HealingItems.Contains(item.Name))
-                    {
-                        validHealingItems.Add(item);
-                    }
-                }
-                Console.WriteLine("\nPress key to choose an action:");
-                Console.WriteLine("| A | Pistol Attack");
-                if (validCombatItems.Count > 0)
-                {
-                    Console.WriteLine("| C | Use Combat Item");
-                }
-                if (validHealingItems.Count > 0)
-                {
-                    Console.WriteLine("| H | Use Healing Item");
-                }
-                keyInfo = Console.ReadKey(true);
-                if (keyInfo.Key == ConsoleKey.A)
-                {
-                    foreach (var item in CurrentPlayer.Inventory)
-                    {
-                        if (item.Name.Split(" ")[1] == "Pistol")
+                        var item = CurrentPlayer.Inventory[i];
+                        if (CombatItems.Contains(item.Name))
                         {
-                            chosenCombatItem = item;
+                            validCombatItems.Add(item);
+                        }
+                        if (HealingItems.Contains(item.Name))
+                        {
+                            validHealingItems.Add(item);
                         }
                     }
-                }
-                if (keyInfo.Key == ConsoleKey.C)
-                {
-                    while (true)
+                    Console.WriteLine("\nPress key to choose an action:");
+                    Console.WriteLine("| A | Pistol Attack");
+                    if (validCombatItems.Count > 0)
                     {
-                        Console.Clear();
-                        Console.WriteLine("\nChoose an item (Type number and press <Enter>):\n");
-                        for (var i = 0; i < validCombatItems.Count; i++)
-                        {
-                            var item = validCombatItems[i];
-                            Console.WriteLine($"{i + 1}. {item.Name}");
-                            Console.WriteLine($"-----------------------------");
-                            Console.WriteLine($"{item.Description}");
-                            Console.WriteLine($"-----------------------------\n");
-                        }
-                        var choice = Console.ReadLine();
-                        var parsed = 0;
-                        var valid = int.TryParse(choice, out parsed);
-                        if (!valid || parsed < 1 || parsed > validCombatItems.Count)
-                        {
-                            Console.WriteLine("Invalid choice.");
-                        }
-                        else
-                        {
-                            chosenCombatItem = validCombatItems[parsed - 1];
-                            CurrentPlayer.Inventory.Remove(chosenCombatItem);
-                            break;
-                        }
+                        Console.WriteLine("| C | Use Combat Item");
                     }
-                }
-                if (keyInfo.Key == ConsoleKey.H)
-                {
-                    while (true)
+                    if (validHealingItems.Count > 0)
                     {
-                        Console.Clear();
-                        Console.WriteLine("\nChoose an item (Type number and press <Enter>):\n");
-                        for (var i = 0; i < validHealingItems.Count; i++)
+                        Console.WriteLine("| H | Use Healing Item");
+                    }
+                    keyInfo = Console.ReadKey(true);
+                    if (keyInfo.Key == ConsoleKey.A)
+                    {
+                        foreach (var item in CurrentPlayer.Inventory)
                         {
-                            var item = validHealingItems[i];
-                            Console.WriteLine($"{i + 1}. {item.Name}");
-                            Console.WriteLine($"-----------------------------");
-                            Console.WriteLine($"{item.Description}");
-                            Console.WriteLine($"-----------------------------\n");
+                            if (item.Name.Split(" ")[1] == "Pistol")
+                            {
+                                chosenCombatItem = item;
+                            }
                         }
-                        var choice = Console.ReadLine();
-                        var parsed = 0;
-                        var valid = int.TryParse(choice, out parsed);
-                        if (!valid || parsed < 1 || parsed > validHealingItems.Count)
+                        break;
+                    }
+                    else if (keyInfo.Key == ConsoleKey.C && validCombatItems.Count > 0)
+                    {
+                        while (true)
                         {
-                            Console.WriteLine("Invalid choice.");
+                            Console.Clear();
+                            Console.WriteLine("\nChoose an item (Type number and press <Enter>):\n");
+                            for (var i = 0; i < validCombatItems.Count; i++)
+                            {
+                                var item = validCombatItems[i];
+                                Console.WriteLine($"{i + 1}. {item.Name}");
+                                Console.WriteLine($"-----------------------------");
+                                Console.WriteLine($"{item.Description}");
+                                Console.WriteLine($"-----------------------------\n");
+                            }
+                            var choice = Console.ReadLine();
+                            var parsed = 0;
+                            var valid = int.TryParse(choice, out parsed);
+                            if (!valid || parsed < 1 || parsed > validCombatItems.Count)
+                            {
+                                Console.WriteLine("Invalid choice.");
+                            }
+                            else
+                            {
+                                chosenCombatItem = validCombatItems[parsed - 1];
+                                CurrentPlayer.Inventory.Remove(chosenCombatItem);
+                                break;
+                            }
                         }
-                        else
+                        break;
+                    }
+                    else if (keyInfo.Key == ConsoleKey.H && validHealingItems.Count > 0)
+                    {
+                        while (true)
                         {
-                            chosenHealingItem = validHealingItems[parsed - 1];
-                            CurrentPlayer.Inventory.Remove(chosenHealingItem);
-                            break;
+                            Console.Clear();
+                            Console.WriteLine("\nChoose an item (Type number and press <Enter>):\n");
+                            for (var i = 0; i < validHealingItems.Count; i++)
+                            {
+                                var item = validHealingItems[i];
+                                Console.WriteLine($"{i + 1}. {item.Name}");
+                                Console.WriteLine($"-----------------------------");
+                                Console.WriteLine($"{item.Description}");
+                                Console.WriteLine($"-----------------------------\n");
+                            }
+                            var choice = Console.ReadLine();
+                            var parsed = 0;
+                            var valid = int.TryParse(choice, out parsed);
+                            if (!valid || parsed < 1 || parsed > validHealingItems.Count)
+                            {
+                                Console.WriteLine("Invalid choice.");
+                            }
+                            else
+                            {
+                                chosenHealingItem = validHealingItems[parsed - 1];
+                                CurrentPlayer.Inventory.Remove(chosenHealingItem);
+                                break;
+                            }
                         }
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid choice.");
+                        Console.WriteLine("\n<Press any key to continue.>");
+                        Console.ReadKey(true);
                     }
                 }
                 Console.Clear();
@@ -517,7 +532,7 @@ devoid of doors of any sort.
                     }
                     else
                     {
-                        Console.WriteLine($"{enemy} dodges the attack.");
+                        Console.WriteLine($"{enemy.Name} dodges the attack.");
                     }
                 }
                 if (!(chosenHealingItem == null))
@@ -535,18 +550,18 @@ devoid of doors of any sort.
                     Console.WriteLine(enemy.DefeatedDescription);
                     var drop = enemy.DropItem();
                     CurrentPlayer.Inventory.Add(drop);
-                    Console.WriteLine($"{enemy} drops {drop}. You pick it up.");
+                    Console.WriteLine($"{enemy.Name} drops {drop.Name}. You pick it up.");
                     return;
                 }
                 else
                 {
                     Attack attackChoice = null;
                     Random r = new Random();
-                    int attackNum = r.Next(1, 101);
+                    double attackNum = r.Next(1, 101);
                     for (var i = 0; i < enemy.Attacks.Count; i++)
                     {
                         var attack = enemy.Attacks[i];
-                        if (attackNum >= attack.Frequency)
+                        if (attackNum <= attack.Frequency)
                         {
                             attackChoice = attack;
                             break;
@@ -841,8 +856,8 @@ devoid of doors of any sort.
             MapTemplate = @"ER:TR:ER:TR:ER:ER:TR.
                             TR:TR:TR:ER:TR:ER:TR.
                             ER:TR:ER:TR:ER:ER:TR.
-                            TR:TR:TR:DR:TR:ER:TR.
-                            TR:TR:TR:DR:TR:ER:TR.
+                            TR:NR:TR:TR:TR:ER:TR.
+                            TR:TR:TR:TR:TR:ER:TR.
                             TR:MF:TR:ER:TR:ER:TR.";
             StartScreen();
         }
