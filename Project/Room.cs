@@ -169,7 +169,7 @@ up most of the table's space...probably Dr. Rithbaun's handiwork.";
             X = x;
             VisitedByPlayer = false;
             Items = new List<Item>();
-            Enemy = new TestEnemy();
+            Enemy = new KilnbornSentinel();
         }
     }
 }

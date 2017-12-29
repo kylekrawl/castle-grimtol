@@ -195,7 +195,7 @@ about the art of alchemy. A note that said only 'I am in danger. Come to Grimtol
 with a few locals in the nearby town, you'd managed to piece together that the good Doctor had
 been staying at the castle to teach the three Grimtol heirs in the arts of alchemy. Nothing all
 that suspicious, except he hadn't been seen for weeks. Coupled with all the stories of strange 
-happeningsin the vicinity of the castle grounds, there was definitely *something* going on. And now, 
+happenings in the vicinity of the castle grounds, there was definitely *something* going on. And now, 
 standing before the castle doors, it was your job to figure it out.");
 
             Console.WriteLine("\n<Press any key to continue.>");
@@ -512,11 +512,11 @@ devoid of doors of any sort.
                 {
                     if (chosenCombatItem.Name.Split(" ")[1] == "Pistol")
                     {
-                        Console.WriteLine($"You carefully take aim at {enemy.Name} and fire a shot from your {chosenCombatItem.Name}.");
+                        Console.WriteLine($"\nYou carefully take aim at {enemy.Name} and fire a shot from your {chosenCombatItem.Name}.");
                     }
                     else
                     {
-                        Console.WriteLine($"You lob the {chosenCombatItem.Name} at {enemy.Name}.");
+                        Console.WriteLine($"\nYou lob the {chosenCombatItem.Name} at {enemy.Name}.");
                     }
                     Random r = new Random();
                     int attackVal = r.Next(1, 21);
@@ -527,18 +527,18 @@ devoid of doors of any sort.
                         {
                             damage *= 1.5;
                         }
-                        Console.WriteLine($"{enemy.Name} takes {damage} damage.");
+                        Console.WriteLine($"\n{enemy.Name} takes {damage} damage.");
                         enemy.Health -= damage;
                     }
                     else
                     {
-                        Console.WriteLine($"{enemy.Name} dodges the attack.");
+                        Console.WriteLine($"\n{enemy.Name} dodges the attack.");
                     }
                 }
                 if (!(chosenHealingItem == null))
                 {
 
-                    Console.WriteLine($"You use the {chosenHealingItem.Name} to restore {chosenHealingItem.HealAmount} health.");
+                    Console.WriteLine($"\nYou use the {chosenHealingItem.Name} to restore {chosenHealingItem.HealAmount} health.");
                     CurrentPlayer.Health += chosenHealingItem.HealAmount;
                     if (CurrentPlayer.Health > CurrentPlayer.MaxHealth)
                     {
@@ -550,7 +550,7 @@ devoid of doors of any sort.
                     Console.WriteLine(enemy.DefeatedDescription);
                     var drop = enemy.DropItem();
                     CurrentPlayer.Inventory.Add(drop);
-                    Console.WriteLine($"{enemy.Name} drops {drop.Name}. You pick it up.");
+                    Console.WriteLine($"\n{enemy.Name} drops {drop.Name}. You pick it up.");
                     return;
                 }
                 else
@@ -573,12 +573,12 @@ devoid of doors of any sort.
                     if (attackVal >= CurrentPlayer.DefenseRating)
                     {
                         var damage = attackChoice.Damage;
-                        Console.WriteLine($"You take {damage} damage.");
+                        Console.WriteLine($"\nYou take {damage} damage.");
                         CurrentPlayer.Health -= damage;
                     }
                     else
                     {
-                        Console.WriteLine($"You dodge the attack.");
+                        Console.WriteLine($"\nYou dodge the attack.");
                     }
                     if (CurrentPlayer.Health <= 0)
                     {
