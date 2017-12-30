@@ -117,7 +117,7 @@ is a blade hurtling toward you.";
             Attacks = new List<Attack>()
             {
                new Attack("Blade Strike", $"\n{this.Name} slashes at you with a bladed arm.", 15, 50),
-               new Attack("Blade Spin", $"\n{this.Name} begins whirling toward you, wildly striking with its blades.", 50, 100)
+               new Attack("Blade Spin", $"\n{this.Name} begins whirling toward you, striking wildly with its blades.", 50, 100)
             };
             DropItems = new List<Item>(){
                 new BoneAsh(), new MetalCore(), new CrimsonOil()
@@ -144,7 +144,7 @@ is a blade hurtling toward you.";
         {
             Name = "Cinder Golem";
             ApproachDescription = @"
-Facing you is a hulking suit of black armor, robed in a cloud of thick lack smoke. A dull orange glow shines from within the 
+Facing you is a hulking suit of black armor, robed in a cloud of thick black smoke. A dull orange glow shines from within the 
 towering construct, and you can feel the heat it radiates even at a distance. As the smoke around it shifts, you see that it's 
 carrying a massive halberd with a wickedly curved blade. You can see that its metal faceplate has been worked into a terrifying 
 mockery of a human face, it's expression somewhere between a rictus of pain and a malicious grin. With heavy, echoing footfall, 
@@ -194,8 +194,7 @@ fungus. Black, fist-size nodules protrude from it's body at odd intervals. As th
 from a gaping mouth lined with needle-like fang. Suddenly, the creature lets out horrific shriek and begins running directly toward you.";
             CombatDescription = @"The horror dashes around erratically, all the while moving closer to your position.";
             DefeatedDescription = @"The creature lets out a gurgling cry and falls to the ground, it's body slowly dissolving into a thick black ooze.";
-            VictoriousDescription = @"In your weakened state, the creature grabs you. It's terrifying maw fills your vision as it lets out a triumphant
-            shriek.";
+            VictoriousDescription = @"In your weakened state, the creature grabs you. It's terrifying maw fills your vision as it lets out a triumphant shriek.";
             Type = "corruption";
             MaxHealth = 20;
             Health = MaxHealth;
@@ -320,7 +319,8 @@ You feel a sudden, terrifying feeling that you're being watched. Suddenly, a str
 almost immediately. You can just barely discern that it's some kind of spindly, many-limbed humanoid figure. Suddenly, it appears again, but closer. 
 This time, it lingers for a second before disappearing. It resembles a gigantic insect with an oddly geometric, mirrored carapace. When it appears for
 the third time, it's mere feet away, and you can see the wicked spines protruding from its limbs.";
-            DefeatedDescription = @"The insectoid monstrosity blinks in and out of visibility as it darts around the room.";
+            CombatDescription = @"The insectoid monstrosity blinks in and out of visibility as it darts around the room.";
+            DefeatedDescription = @"The creature lets out a surprised shriek, then suddenly explodes, sending glassy bits of shell in every direction.";
             VictoriousDescription = @"In a moment of distraction, you lose sight of the creature completely. You feel a stinging pain in 
 your back before your vision goes black.";
             Type = "transmutation";

@@ -9,13 +9,26 @@ namespace CastleGrimtol.Project
         public string Name { get; set; }
         public int PlayerStartY { get; set; }
         public int PlayerStartX { get; set; }
-        public Dictionary<string, Type> RoomDict = new Dictionary<string, Type>()
+        public Dictionary<string, Type> Rooms = new Dictionary<string, Type>()
         {
-            {"TR", typeof(TestRoom)},
-            {"ER", typeof(EmptyRoom)},
+            {"II", typeof(TestRoom)},
+            {"OO", typeof(EmptyRoom)},
             {"MF", typeof(MainFoyer)},
-            {"DR", typeof(DeathRoom)},
-            {"NR", typeof(EnemyRoom)}
+            {"ER", typeof(EnemyRoom)},
+            {"TR", typeof(TrapRoom)}
+        };
+        public List<Trap> Traps = new List<Trap>()
+        {
+            new FlameTrap(), new FlameTrap(),
+            new AcidTrap(), new AcidTrap(),
+            new RiftTrap(), new RiftTrap()
+        };
+
+        public List<Enemy> Enemies = new List<Enemy>()
+        {
+            new KilnbornSentinel(), new CinderGolem(),
+            new RavenousHusk(), new WeepingHorror(),
+            new ShiftingSlime(), new FlickeringTerror()
         };
 
         public List<List<Room>> Grid = new List<List<Room>>();
@@ -31,12 +44,29 @@ namespace CastleGrimtol.Project
                 for (int x = 0; x < templateRooms.Length; x++)
                 {
                     var templateRoom = templateRooms[x].Trim();
-                    if (templateRoom == "MF") {
+                    if (templateRoom == "MF")
+                    {
                         PlayerStartY = y;
                         PlayerStartX = x;
                     }
-                    var roomType = RoomDict[templateRoom];
-                    var mapRoom = (Room)Activator.CreateInstance(RoomDict[templateRoom], y, x);
+                    var roomType = Rooms[templateRoom];
+                    var mapRoom = (Room)Activator.CreateInstance(Rooms[templateRoom], y, x);
+                    if (templateRoom == "TR")
+                    {
+                        Random r = new Random();
+                        int randIndex = r.Next(0, Traps.Count);
+                        Trap trap = Traps[randIndex];
+                        mapRoom.Trap = trap;
+                        Traps.Remove(trap);
+                    }
+                    if (templateRoom == "ER")
+                    {
+                        Random r = new Random();
+                        int randIndex = r.Next(0, Enemies.Count);
+                        Enemy enemy = Enemies[randIndex];
+                        mapRoom.Enemy = enemy;
+                        Enemies.Remove(enemy);
+                    }
                     mapRow.Add(mapRoom);
                 }
                 Grid.Add(mapRow);
@@ -138,25 +168,31 @@ namespace CastleGrimtol.Project
                     {
                         if (room.Exits.Contains("n"))
                         {
-                            topBorder += (room.VisitedByPlayer || Grid[y-1][x].VisitedByPlayer) ? "|- -|" : "?????";
+                            topBorder += (room.VisitedByPlayer || Grid[y - 1][x].VisitedByPlayer) ? "|- -|" : "?????";
                         }
                         else
                         {
-                            topBorder += (room.VisitedByPlayer || Grid[y-1][x].VisitedByPlayer) ? "|---|" : "?????";
+                            topBorder += (room.VisitedByPlayer || Grid[y - 1][x].VisitedByPlayer) ? "|---|" : "?????";
                         }
                     }
 
                     // Build Middle Border
                     string centerChar;
 
-                    if (room.VisitedByPlayer) {
-                        if (player.Y == y && player.X == x) {
+                    if (room.VisitedByPlayer)
+                    {
+                        if (player.Y == y && player.X == x)
+                        {
                             centerChar = "o";
-                        } else {
+                        }
+                        else
+                        {
                             centerChar = " ";
                         }
-                        
-                    } else {
+
+                    }
+                    else
+                    {
                         centerChar = "?";
                     }
 

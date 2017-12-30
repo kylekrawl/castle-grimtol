@@ -43,7 +43,7 @@ namespace CastleGrimtol.Project
         };
         public bool Playing { get; set; }
         public bool ApplicationActive { get; set; }
-        ConsoleKeyInfo keyInfo;
+        public ConsoleKeyInfo keyInfo { get; set; }
 
         public void StartScreen()
         {
@@ -99,7 +99,7 @@ namespace CastleGrimtol.Project
                     CurrentPlayer.Y = CurrentPlayer.PreviousY;
                     CurrentPlayer.X = CurrentPlayer.PreviousX;
                     CurrentRoom = CurrentMap.Grid[CurrentPlayer.Y][CurrentPlayer.X];
-                    CurrentPlayer.Health = CurrentPlayer.MaxHealth/2;
+                    CurrentPlayer.Health = CurrentPlayer.MaxHealth / 2;
                     Console.Clear();
                     Playing = true;
                     MainLoop();
@@ -256,7 +256,8 @@ devoid of doors of any sort.
                     var validActionKeys = new List<string>() { };
                     Console.Clear();
                     CurrentMap.PrintMap(CurrentPlayer);
-                    Console.WriteLine($"{CurrentRoom.Name}");
+                    Console.WriteLine($"\n{CurrentPlayer.Name}: {CurrentPlayer.Health} / {CurrentPlayer.MaxHealth} HP");
+                    Console.WriteLine($"\n{CurrentRoom.Name}");
                     Console.WriteLine("\nPress key to choose an action:");
                     if (CurrentMap.ValidRoom(CurrentPlayer.Y, CurrentPlayer.X - 1) && CurrentRoom.Exits.Contains("w"))
                     {
@@ -365,27 +366,60 @@ devoid of doors of any sort.
                     Console.WriteLine("\n<Press any key to continue.>");
                     Console.ReadKey(true);
                 }
-
-
-                // Run room action
-                // Room.MainEffects(player?)
-                // Get valid player actions based on room/player conditions
-                // if player dead, route to game over
-                // else
-                // if player not in combat or otherwise immobilized (certain trap rooms?)
-                // if valid room to x direction move x direction
-                // check inventory
-                // look - replay room description? Allow deeper inspection of room features?
-                // use noncombat item
-                // if room is crafting station
-                // if alchemy station use alchemy station options
-                // if weapon upgrade station use weapon upgrade options
-                // else if player in combat
-                // attack enemy
-                // use combat item
-                // quit game
-                // return to start screen
-                // Get player action
+            }
+        }
+        public void TrapEvent()
+        {
+            if (CurrentRoom.Trap.Active)
+            {
+                Console.WriteLine(CurrentRoom.Trap.TriggeredText);
+                var canDisable = false;
+                Item disableItem = null;
+                foreach (var item in CurrentPlayer.Inventory)
+                {
+                    if (item.Name == "Pulse Emitter")
+                    {
+                        canDisable = true;
+                        disableItem = item;
+                        break;
+                    }
+                }
+                if (canDisable)
+                {
+                    Console.WriteLine("\n| U | Use Pulse Emitter");
+                    Console.WriteLine("\n<Press any other key to continue.>");
+                }
+                else
+                {
+                    Console.WriteLine("\n<Press any key to continue.>");
+                }
+                keyInfo = Console.ReadKey(true);
+                if (keyInfo.Key == ConsoleKey.U && canDisable)
+                {
+                    Console.Clear();
+                    Console.WriteLine("\nYou quickly activate a Pulse Emitter and toss it into the center of the room. It emits a strange blue light, follwed by a piercing tone.");
+                    Console.WriteLine(CurrentRoom.Trap.FailureText);
+                    CurrentPlayer.Inventory.Remove(disableItem);
+                } else {
+                    Console.WriteLine(CurrentRoom.Trap.SuccessText);
+                    CurrentPlayer.Health -= CurrentRoom.Trap.Damage;
+                    if (CurrentPlayer.Health <= 0)
+                    {
+                        Console.WriteLine($"\nYou have been killed by the {CurrentRoom.Trap.Name}.");
+                        Console.WriteLine("\n<Press any key to continue.>");
+                        Console.ReadKey(true);
+                        GameOver();
+                    }
+                    if (!Playing || !ApplicationActive)
+                    {
+                        return;
+                    }
+                }
+                CurrentRoom.Trap.Active = false;
+            }
+            else
+            {
+                Console.WriteLine(CurrentRoom.Trap.DisabledText);
             }
         }
         public void Combat(Enemy enemy)
@@ -418,6 +452,8 @@ devoid of doors of any sort.
                             validHealingItems.Add(item);
                         }
                     }
+                    Console.WriteLine($"\n{CurrentRoom.Enemy.Name}: {CurrentRoom.Enemy.Health} / {CurrentRoom.Enemy.MaxHealth} HP");
+                    Console.WriteLine($"\n{CurrentPlayer.Name}: {CurrentPlayer.Health} / {CurrentPlayer.MaxHealth} HP");
                     Console.WriteLine("\nPress key to choose an action:");
                     Console.WriteLine("| A | Pistol Attack");
                     if (validCombatItems.Count > 0)
@@ -608,7 +644,6 @@ devoid of doors of any sort.
                     Console.WriteLine($"You use the {item.Name}.\n");
                     CurrentRoom.UseItem(item);
                     break;
-                    // may need to retool this if have multiple instances of same item with multiple (but limited) uses 
                 }
             }
 
@@ -853,12 +888,12 @@ devoid of doors of any sort.
         public Game()
         {
             ApplicationActive = true;
-            MapTemplate = @"ER:TR:ER:TR:ER:ER:TR.
-                            TR:TR:TR:ER:TR:ER:TR.
-                            ER:TR:ER:TR:ER:ER:TR.
-                            TR:NR:TR:TR:TR:ER:TR.
-                            TR:TR:TR:TR:TR:ER:TR.
-                            TR:MF:TR:ER:TR:ER:TR.";
+            MapTemplate = @"OO:OO:OO:OO:OO:ER:OO.
+                            OO:TR:OO:ER:OO:TR:OO.
+                            ER:OO:OO:OO:OO:OO:OO.
+                            OO:ER:OO:TR:OO:OO:ER.
+                            TR:II:OO:OO:TR:OO:OO.
+                            II:MF:TR:OO:OO:ER:OO.";
             StartScreen();
         }
     }

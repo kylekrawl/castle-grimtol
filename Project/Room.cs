@@ -9,14 +9,15 @@ namespace CastleGrimtol.Project
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
         public virtual List<Item> Items { get; set; }
-        public virtual List<string> Attributes {get; set;}
-        public virtual Enemy Enemy {get; set;}
+        public virtual List<string> Attributes { get; set; }
+        public virtual Enemy Enemy { get; set; }
         public int Y { get; set; }
         public int X { get; set; }
         public bool PassagesBuilt { get; set; }
         public virtual bool VisitedByPlayer { get; set; }
         public List<string> Exits { get; set; } = new List<string>();
-        public string EventStage {get; set;}
+        public string EventStage { get; set; }
+        public virtual Trap Trap { get; set; }
         public virtual void UseItem(Item item)
         {
             throw new System.NotImplementedException();
@@ -32,7 +33,7 @@ namespace CastleGrimtol.Project
             Name = "Room";
             Y = y;
             X = x;
-            Attributes = new List<string>(){"basic"};
+            Attributes = new List<string>() { "basic" };
             PassagesBuilt = false;
             Exits = new List<string>();
             Enemy = null;
@@ -50,7 +51,7 @@ namespace CastleGrimtol.Project
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("Nothing happens. This is just a test room after all.");
+            Console.WriteLine("\nNothing happens. This is just a test room after all.");
         }
         public TestRoom(int y, int x) : base(y, x)
         {
@@ -60,7 +61,7 @@ namespace CastleGrimtol.Project
             X = x;
             VisitedByPlayer = false;
             Items = new List<Item>(){
-                new LuminousDust(), new ReactiveSolid(), new CrimsonOil(), new YellowIchor(), new ReactiveSolid(), new BoneAsh(), new AcridPowder()
+                new LuminousDust(), new ReactiveSolid(), new CrimsonOil(), new YellowIchor(), new ReactiveSolid(), new BoneAsh(), new AcridPowder(), new PulseEmitter()
             };
         }
     }
@@ -76,7 +77,7 @@ namespace CastleGrimtol.Project
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("Nothing happens. This is just an empty room after all.");
+            Console.WriteLine("\nNothing happens. This is just an empty room after all.");
         }
         public EmptyRoom(int y, int x) : base(y, x)
         {
@@ -101,7 +102,7 @@ namespace CastleGrimtol.Project
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("Nothing happens. This is just a start room after all.");
+            Console.WriteLine("\nNothing happens. This is just a start room after all.");
         }
         public MainFoyer(int y, int x) : base(y, x)
         {
@@ -157,7 +158,8 @@ up most of the table's space...probably Dr. Rithbaun's handiwork.";
         }
         public override void Event(Game game, Player player)
         {
-            if (Enemy.Health > 0) {
+            if (Enemy.Health > 0)
+            {
                 game.Combat(Enemy);
             }
         }
@@ -169,7 +171,34 @@ up most of the table's space...probably Dr. Rithbaun's handiwork.";
             X = x;
             VisitedByPlayer = false;
             Items = new List<Item>();
-            Enemy = new KilnbornSentinel();
+            Enemy = null;
+        }
+    }
+
+    public class TrapRoom : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override List<Item> Items { get; set; }
+        public override Trap Trap { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine("Nothing happens.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            game.TrapEvent();
+        }
+        public TrapRoom(int y, int x) : base(y, x)
+        {
+            Name = "Trap Room";
+            Description = $"Trap Room at (x:{x} , y:{y})";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+            Items = new List<Item>();
+            Trap = null;
         }
     }
 }
