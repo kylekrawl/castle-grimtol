@@ -11,6 +11,7 @@ namespace CastleGrimtol.Project
         public Player CurrentPlayer { get; set; }
         public string MainQuestStage { get; set; }
         public bool SavedProgress { get; set; }
+        public string EventStage { get; set; }
         public List<Type> CraftableItems = new List<Type>()
         {
             typeof(IncendiaryPistol),
