@@ -18,7 +18,7 @@ namespace CastleGrimtol.Project
         public virtual bool CraftingArea { get; set; }
         public virtual bool VisitedByPlayer { get; set; }
         public List<string> Exits { get; set; } = new List<string>();
-        public virtual string EventStage { get; set; }
+        public virtual string Stage { get; set; }
         public virtual Trap Trap { get; set; }
         public virtual void UseItem(Item item)
         {
@@ -42,7 +42,7 @@ namespace CastleGrimtol.Project
             Note = null;
             Enemy = null;
             Trap = null;
-            EventStage = null;
+            Stage = null;
         }
     }
 
@@ -106,6 +106,11 @@ long as I can keep killing them.");
             if (Enemy.Health > 0)
             {
                 game.Combat(Enemy);
+            }
+            if (game.MainQuestStage["purification"] == "catalyst") {
+                Console.WriteLine($"\nYou notice a strange object sitting at the edge of the room.");
+                Items.Add(new EnergeticCatalyst());
+                game.MainQuestStage["purification"] = "fuel";
             }
         }
         public EnemyRoom(int y, int x) : base(y, x)
@@ -322,26 +327,44 @@ fairly advanced alchemical texts, along with a few tomes on cross-planar travel 
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Fuel Orb") {
+                Console.WriteLine($"Even with a fuel source, this kiln is completely wrecked. This is probably better used elsewhere.");
+            } else {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null)) {
+                Console.WriteLine("\nYou spot a note on the floor next to the kiln.");
+                game.GetNote();
+                game.MainQuestStage["purification"] = "catalyst"; 
+            }
         }
         public RefiningLab(int y, int x) : base(y, x)
         {
             Name = "Refining Lab";
             Description = $@"
 Sturdy wooden counters lined with various alchemical and blackmithing tools are arranged along the room's walls. At it's center lies
-a large ceramic kiln. Neat rows of copper wiring link the kiln's base to a mechanical device beside it. Probably an alchemical battery of some sort.
-The whole apparatus looks functional, and in fact appears to have been recently used. A powdery residue lines its interior.";
+a large kiln. It looks to have been recently used...a powdery residue lines its interior. The last user of the device apparently
+didn't want anyone else to have access to it, however, as the control panel next to it has been smashed to pieces with something heavy. 
+It's likely beyond repair.";
             Y = y;
             X = x;
             Items = new List<Item>() { new AlchemicalResidue() };
+            Note = new Note("Page from Aldric's Journal: Refining Lab", $@"
+August 7:
+
+The catalyst has gone missing again. I assume that one of those inferior beasts my siblings created wandered off with it.
+I'm going to have to find something else to power the furnace.
+
+This is infuriating! If I happen across Miranda or Theodore I'm going to strangle them with my bare hands!");
+            
         }
     }
 
@@ -349,10 +372,26 @@ The whole apparatus looks functional, and in fact appears to have been recently 
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override string Stage { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
+            if (item.Name == "Fuel Orb") {
+                Console.WriteLine($"You place the Fuel Orb into the indentation on the furnace console. The machine roars to life, giving off an intense heat.");
+                Stage = "furnace on";
+                Description = $@"
+The furnace at the center of the room gives off an intense heat as the Fuel Orb in the console next to it pulses with orange light.";
+            } else {
+                if (item.Name == "Wooden Effigy") {
+                    if (Stage == "furnace on") {
+                        Console.WriteLine($"Using a nearby pair of tongs, you place the Wooden Effigy into the furnace. It quickly burns, revealing the Steel Key that had been sealed inside.");
+                        Items.Add(new SteelKey());
+                    } else {
+                        Console.WriteLine($"It's certainly flammable, but with the furnace powered off there's not much you can do with it right now.");
+                    }
+                }
+            }
             Console.WriteLine($"{item.Name} fails to be of any use.");
         }
         public override void Event(Game game, Player player)
@@ -369,6 +408,7 @@ a hemispherical indentation.";
             Y = y;
             X = x;
             Items = new List<Item>();
+            Stage = null;
         }
     }
 

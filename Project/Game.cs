@@ -473,7 +473,7 @@ devoid of doors of any sort.
             if (!(CurrentRoom.Note == null))
             {
                 CurrentPlayer.Notes.Add(CurrentRoom.Note);
-                Console.WriteLine($"'{CurrentRoom.Note.Name}' has been added to your notebook.");
+                Console.WriteLine($"\n'{CurrentRoom.Note.Name}' has been added to your notebook.");
                 CurrentRoom.Note = null;
             }
         }
@@ -506,7 +506,7 @@ devoid of doors of any sort.
                 if (KeyInfo.Key == ConsoleKey.U && canDisable)
                 {
                     Console.Clear();
-                    Console.WriteLine("\nYou quickly activate a Pulse Emitter and toss it into the center of the room. It emits a strange blue light, follwed by a piercing tone.");
+                    Console.WriteLine("\nYou quickly activate a Pulse Emitter and toss it into the center of the room. It emits a strange blue light, followed by a piercing tone.");
                     Console.WriteLine(CurrentRoom.Trap.FailureText);
                     CurrentPlayer.Inventory.Remove(disableItem);
                 }

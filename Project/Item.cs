@@ -402,6 +402,17 @@ namespace CastleGrimtol.Project
         }
     }
 
+    public class SteelKey : Item
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public SteelKey()
+        {
+            Name = "Steel Key";
+            Description = "A heavy key made from polished steel.";
+        }
+    }
+
     public class SunCrest : Item
     {
         public override string Name { get; set; }
@@ -545,7 +556,7 @@ namespace CastleGrimtol.Project
         }
     }
 
-        public class AnchorOfCorruption : Item
+    public class AnchorOfCorruption : Item
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
@@ -611,7 +622,7 @@ namespace CastleGrimtol.Project
         }
     }
 
-     public class AnchorOfTransmutation : Item
+    public class AnchorOfTransmutation : Item
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
