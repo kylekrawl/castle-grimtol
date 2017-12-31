@@ -362,7 +362,7 @@ available surface, and alchemical tools of all sorts seem to be scattered seemin
         }
     }
 
-    public class MakeshiftLibrary : Room, IRoom
+    public class HaphazardLibrary : Room, IRoom
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
@@ -378,9 +378,9 @@ available surface, and alchemical tools of all sorts seem to be scattered seemin
         {
             Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
         }
-        public MakeshiftLibrary(int y, int x) : base(y, x)
+        public HaphazardLibrary(int y, int x) : base(y, x)
         {
-            Name = "Makeshift Library";
+            Name = "Hapahazard Library";
             Description = $@"
 The room looks to have been a pantry or cellar of some sort. The wooden shelves that line it's walls, however, are now filled entirely with books. They all look to be
 fairly advanced alchemical texts, along with a few tomes on cross-planar travel and even more esoteric topics.";
@@ -448,6 +448,7 @@ a hemispherical indentation.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -477,6 +478,7 @@ a large safe set into the wall. A keyhole sits conspicuously above its handle.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -507,6 +509,7 @@ has been carved in large, Gothic letters.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -539,6 +542,7 @@ lies empty.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -568,6 +572,7 @@ in the room is the glowing red disc hovering in midair at the room's center. Str
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -597,6 +602,7 @@ corrosive muck.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -626,6 +632,7 @@ of bones wired together into a terrifiying skeletal form. The grim sculpture app
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -656,6 +663,7 @@ notice that only one of the gears is spinning...the gear that would go next to i
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -686,6 +694,7 @@ be a hole gouged in the portrait where the subject's left eye should be.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -715,6 +724,7 @@ on the floor.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -744,6 +754,7 @@ center of the room is a glowing green disc, it's surface covered in strange rune
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -773,6 +784,7 @@ any you've seen before.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -801,10 +813,11 @@ components. A strange device in the center of the room's ceiling projects a beam
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
-    public class LiquifactionLab : Room, IRoom
+    public class LiquefactionLab : Room, IRoom
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
@@ -820,9 +833,9 @@ components. A strange device in the center of the room's ceiling projects a beam
         {
             Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
         }
-        public LiquifactionLab(int y, int x) : base(y, x)
+        public LiquefactionLab(int y, int x) : base(y, x)
         {
-            Name = "Liquifaction Lab";
+            Name = "Liquefaction Lab";
             Description = $@"
 The room is empty except for a large device at its center. The contraption is a cylindrical container with a removable lid connected
 to a series of pipes that lead up to the ceiling. A single panel next to it is covered with poorly labelled buttons and valves that appear to
@@ -830,6 +843,7 @@ control the operation of the device.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -860,6 +874,7 @@ illegible handwriting.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -891,6 +906,7 @@ aside from those on the level where you're currently standing.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -920,6 +936,7 @@ a language you don't recognize.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -949,6 +966,7 @@ it' surface dotted with unfamiliar runes.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -977,6 +995,7 @@ a few of the cells have a few bones strewn about, it doesn't look like thi dunge
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -1008,6 +1027,7 @@ been set up in one of the room's corners.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
@@ -1036,10 +1056,11 @@ Once majestic elk now gaze at you with glass eyes, and a ferociously positioned 
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 
-    public class Armory : Room, IRoom
+    public class DustyArmory : Room, IRoom
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
@@ -1055,9 +1076,9 @@ Once majestic elk now gaze at you with glass eyes, and a ferociously positioned 
         {
             Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
         }
-        public Armory(int y, int x) : base(y, x)
+        public DustyArmory(int y, int x) : base(y, x)
         {
-            Name = "Armory";
+            Name = "Dusty Armory";
             Description = $@"
 The walls of the room are covered in weapons straight out of medieval Europe, alongside tapestries depicting historic battles. The floorspace is devoted to
 immaculately maintained suits of armor from various nations.";
@@ -1065,6 +1086,7 @@ immaculately maintained suits of armor from various nations.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
+            Items = new List<Item>();
         }
     }
 }

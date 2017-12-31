@@ -15,7 +15,37 @@ namespace CastleGrimtol.Project
             {"OO", typeof(EmptyRoom)},
             {"MF", typeof(MainFoyer)},
             {"ER", typeof(EnemyRoom)},
-            {"TR", typeof(TrapRoom)}
+            {"TR", typeof(TrapRoom)},
+            {"AL", typeof(AssemblyLab)},
+            {"SA", typeof(StorageArea)},
+            {"OL", typeof(OvergrownLab)},
+            {"GV", typeof(GerminationVats)},
+            {"ML", typeof(MakeshiftLab)},
+            {"HL", typeof(HaphazardLibrary)},
+            {"RL", typeof(RefiningLab)},
+            {"FR", typeof(FurnaceRoom)},
+            {"AP", typeof(AbandonedParlor)},
+            {"CS", typeof(ConvertedSunroom)},
+            {"IG", typeof(ImmaculateGallery)},
+            {"AS", typeof(AldricsStudy)},
+            {"FC", typeof(FetidCourtyard)},
+            {"MW", typeof(MacabreWorkroom)},
+            {"CG", typeof(ClockworkGarden)},
+            {"RW", typeof(RansackedWorkroom)},
+            {"VR", typeof(ViviansRoom)},
+            {"MS", typeof(MirandasStudio)},
+            {"CL", typeof(CrystallographyLab)},
+            {"OB", typeof(OpticsLab)},
+            {"LL", typeof(LiquefactionLab)},
+            {"VL", typeof(VaporizationLab)},
+            {"GL", typeof(GrandLibrary)},
+            {"TS", typeof(TheodoresStudy)},
+            {"CC", typeof(CentralChamber)},
+            {"FD", typeof(ForgottenDungeon)},
+            {"DA", typeof(DustyArmory)},
+            {"TM", typeof(TrophyRoom)},
+            {"OR", typeof(OperatingRoom)}
+
         };
         public List<Trap> Traps = new List<Trap>()
         {

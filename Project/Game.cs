@@ -889,12 +889,12 @@ devoid of doors of any sort.
         public Game()
         {
             ApplicationActive = true;
-            MapTemplate = @"OO:OO:OO:OO:OO:ER:OO.
-                            OO:TR:OO:ER:OO:TR:OO.
-                            ER:OO:OO:OO:OO:OO:OO.
-                            OO:ER:OO:TR:OO:OO:ER.
-                            TR:II:OO:OO:TR:OO:OO.
-                            II:MF:TR:OO:OO:ER:OO.";
+            MapTemplate = @"VR:MS:TR:FD:ML:GL:ER.
+                            TR:RW:GV:ER:VL:TS:LL.
+                            MW:ER:CG:TR:ER:DA:OB.
+                            OL:FC:OR:CC:HL:CL:TR.
+                            TR:RL:ER:FR:IG:ER:TM.
+                            AS:MF:AL:TR:AP:SA:CS.";
             StartScreen();
         }
     }
