@@ -58,9 +58,10 @@ namespace CastleGrimtol.Project
         }
         public override void Event(Game game, Player player)
         {
-            if (!(Note == null)) {
+            if (!(Note == null))
+            {
                 Console.WriteLine("\nYou spot a page that looks like it's been wripped out of a journal. It's in Dr. Rithbaun's handwriting.");
-                game.GetNote();   
+                game.GetNote();
             }
         }
         public MainFoyer(int y, int x) : base(y, x)
@@ -107,7 +108,8 @@ long as I can keep killing them.");
             {
                 game.Combat(Enemy);
             }
-            if (game.MainQuestStage["purification"] == "catalyst") {
+            if (game.MainQuestStage["purification"] == "catalyst")
+            {
                 Console.WriteLine($"\nYou notice a strange object sitting at the edge of the room.");
                 Items.Add(new EnergeticCatalyst());
                 game.MainQuestStage["purification"] = "fuel";
@@ -332,18 +334,22 @@ fairly advanced alchemical texts, along with a few tomes on cross-planar travel 
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            if (item.Name == "Fuel Orb") {
+            if (item.Name == "Fuel Orb")
+            {
                 Console.WriteLine($"Even with a fuel source, this kiln is completely wrecked. This is probably better used elsewhere.");
-            } else {
+            }
+            else
+            {
                 Console.WriteLine($"{item.Name} fails to be of any use.");
             }
         }
         public override void Event(Game game, Player player)
         {
-            if (!(Note == null)) {
+            if (!(Note == null))
+            {
                 Console.WriteLine("\nYou spot a note on the floor next to the kiln.");
                 game.GetNote();
-                game.MainQuestStage["purification"] = "catalyst"; 
+                game.MainQuestStage["purification"] = "catalyst";
             }
         }
         public RefiningLab(int y, int x) : base(y, x)
@@ -358,13 +364,10 @@ It's likely beyond repair.";
             X = x;
             Items = new List<Item>() { new AlchemicalResidue() };
             Note = new Note("Page from Aldric's Journal: Refining Lab", $@"
-August 7:
-
 The catalyst has gone missing again. I assume that one of those inferior beasts my siblings created wandered off with it.
 I'm going to have to find something else to power the furnace.
 
 This is infuriating! If I happen across Miranda or Theodore I'm going to strangle them with my bare hands!");
-            
         }
     }
 
@@ -377,22 +380,33 @@ This is infuriating! If I happen across Miranda or Theodore I'm going to strangl
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            if (item.Name == "Fuel Orb") {
+            if (item.Name == "Fuel Orb")
+            {
                 Console.WriteLine($"You place the Fuel Orb into the indentation on the furnace console. The machine roars to life, giving off an intense heat.");
                 Stage = "furnace on";
                 Description = $@"
-The furnace at the center of the room gives off an intense heat as the Fuel Orb in the console next to it pulses with orange light.";
-            } else {
-                if (item.Name == "Wooden Effigy") {
-                    if (Stage == "furnace on") {
+The entire room is lined with thick metal plating affixed to that walls with rivets. The furnace at the center of the room gives off an intense heat as the Fuel 
+Orb in the console next to it pulses with orange light.";
+            }
+            else
+            {
+                if (item.Name == "Wooden Effigy")
+                {
+                    if (Stage == "furnace on")
+                    {
                         Console.WriteLine($"Using a nearby pair of tongs, you place the Wooden Effigy into the furnace. It quickly burns, revealing the Steel Key that had been sealed inside.");
                         Items.Add(new SteelKey());
-                    } else {
+                    }
+                    else
+                    {
                         Console.WriteLine($"It's certainly flammable, but with the furnace powered off there's not much you can do with it right now.");
                     }
                 }
+                else
+                {
+                    Console.WriteLine($"{item.Name} fails to be of any use.");
+                }
             }
-            Console.WriteLine($"{item.Name} fails to be of any use.");
         }
         public override void Event(Game game, Player player)
         {
@@ -416,11 +430,48 @@ a hemispherical indentation.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override string Stage { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Steel Key")
+            {
+                Console.WriteLine($@"
+The Steel Key fits perfectly into the safe's keyhole. You turn the key and swing open the door to reveal...a concrete wall. Somebody clearly didn't
+want anyone to get into this safe. On closer inspection, the wall is cracked, and there seems to be a space behind it. It'll still take a bit of force
+to break through, but you're an alchemist after all...");
+                Stage = "safe open";
+                Description = $@"
+The room's walls are decorated with a wallpaper bearing a repeating geometric pattern, and the floor is covered with an expensive-looking rug. Two couches sit before
+an elaborate stone fireplace at one edge of the room, both covered in a thin layer of dust. The wall safe at the corner of the room lies open, but the concrete wall 
+inside presents an annoying obstacle.";
+            }
+            else
+            {
+                if (item.Name.Split(" ")[1] == "Grenade")
+                {
+                    if (Stage == "safe open")
+                    {
+                        Console.WriteLine($@"
+You lob an {item.Name} at the concrete wall. The explosion easily destroys it's target, revealing a small space at the very back of the safe.
+Sitting amidst the rubble of the wall is a strange, pointed object.");
+                        Items.Add(new SunCrest());
+                        Description = $@"
+The room's walls are decorated with a wallpaper bearing a repeating geometric pattern, and the floor is covered with an expensive-looking rug. Two couches sit before
+an elaborate stone fireplace at one edge of the room, both covered in a thin layer of dust. The wall safe at the corner of the room lies open, and the concrete wall
+inide has been reduced to rubble.";
+                    }
+                    else
+                    {
+                        Console.WriteLine($"It's certainly flammable, but with the furnace powered off there's not much you can do with it right now.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"{item.Name} fails to be of any use.");
+                }
+            }
         }
         public override void Event(Game game, Player player)
         {
@@ -436,6 +487,7 @@ a large safe set into the wall. A keyhole sits conspicuously above its handle.";
             Y = y;
             X = x;
             Items = new List<Item>();
+            Stage = null;
         }
     }
 
@@ -443,12 +495,36 @@ a large safe set into the wall. A keyhole sits conspicuously above its handle.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Sun Crest")
+            {
+                Console.WriteLine($@"");
+                Stage = "braziers lit";
+                Description = $@"
+The outside-facing walls of the room feature large windows that have since been neatly boarded up. The skylight in the ceiling has been given a similar treatment.
+The eight iron braziers along the room's edges are now lit, giving off a pale orange glow.";
+            }
+            else if (item.Name == "Incendiary Pistol")
+            {
+                Console.WriteLine($@"
+Thinking incendiary bullets might do the trick, you fire a shot from your pistol at the nearest brazier. It ignites briefly, but the flame quickly dies.
+This method probably won't be of much use.");
+            }
+            else if (item.Name == "Incendiary Grenade")
+            {
+                Console.WriteLine($@"
+That would probably do quite a bit more than just lighting a few braziers. There has to be a better way...");
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
+
         public override void Event(Game game, Player player)
         {
             Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
@@ -464,6 +540,24 @@ has been carved in large, Gothic letters.";
             Y = y;
             X = x;
             Items = new List<Item>();
+            Note = new Note("Page from Aldric's Journal: Converted Sunroom", $@"
+I can't stand looking at the sun anymore. What need do I have for it, when I have the pure, beautiful light of alchemical flame! And that hideous crest that once had a 
+place of honor in this room...it shall remain locked away, just like the light it celebrates. Indeed, the sun is a MOCKERY of my glorious creations! 
+
+But Rithbaun. Rithbaun has other ideas. I know he's hunting me. He's jealous of my work! He tried to tell me I was going too far, but I've SEEN what the 
+glorious light of purity can do. If he gets to me, the world will need a record of my journey. Of my VISION.
+
+I've known it since I was young. There's something wrong with the world. Greed, war, destruction...the genesis of it all lies within us. Mankind is a disease, and as a young man I 
+set out to find a cure. I left Grimtol heading northeast, until after many weeks of travel I found myself in the wastes of Siberia. I sought to conquer my own mental weakness through exposure 
+to the elements, but it left me feeling empty. I continued my search, heading south into China. I spoke to many of the scholars there, but none could help me in my search. Losing hope, 
+I headed southeast through Laos and Vietnam,eventually making my way to the Phillippines. It was there that rumors of a revered sage brought me west to India. I studied under many 
+excellent teachers there, but never found the person or the answer I sought. Falling deeper into despair, I turned my sights to the southwest, crossing the Atlantic until I reached
+South America. From there, I wandered northwest through Central America. I was barely lucid, but I felt something powerful driving me onward. I soon reached the United States, and heard
+a beautiful voice calling me to the north. And it was in the middle of the Canadian wilderness that I saw it. A beautiful vison of the world, cleansed by fire, and humanity elevated to
+its ideal form. No war, no disease, no suffering...the path lay before me with astonishing clarity. When I finally sailed east, returning to Grimtol, I knew that I had finally found it.
+The CURE. The cure for humanity.
+
+<After this are several pages of mostly incomprehensible ranting>");
         }
     }
 
@@ -509,9 +603,10 @@ lies empty.";
         }
         public override void Event(Game game, Player player)
         {
-            if (!(Note == null)) {
+            if (!(Note == null))
+            {
                 Console.WriteLine("\nYou spot a page that looks like it's been wripped out of a journal. It's in Dr. Rithbaun's handwriting.");
-                game.GetNote();   
+                game.GetNote();
             }
         }
         public AldricsStudy(int y, int x) : base(y, x)
@@ -692,9 +787,10 @@ on the floor.";
         }
         public override void Event(Game game, Player player)
         {
-            if (!(Note == null)) {
+            if (!(Note == null))
+            {
                 Console.WriteLine("\nYou spot a page that looks like it's been wripped out of a journal. It's in Dr. Rithbaun's handwriting.");
-                game.GetNote();   
+                game.GetNote();
             }
         }
         public MirandasStudio(int y, int x) : base(y, x)
@@ -872,9 +968,10 @@ aside from those on the level where you're currently standing.";
         }
         public override void Event(Game game, Player player)
         {
-            if (!(Note == null)) {
+            if (!(Note == null))
+            {
                 Console.WriteLine("\nYou spot a page that looks like it's been wripped out of a journal. It's in Dr. Rithbaun's handwriting.");
-                game.GetNote();   
+                game.GetNote();
             }
         }
         public TheodoresStudy(int y, int x) : base(y, x)
