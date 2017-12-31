@@ -231,7 +231,7 @@ tables aligned in neat, even rows. Several of them are occupied by what look to 
 A tidy alchemical workstation sits in one coerner of the room.";
             Y = y;
             X = x;
-            VisitedByPlayer = true;
+            VisitedByPlayer = false;
             CraftingArea = true;
             RespawnItems = new List<Item>() { new BoneAsh(), new CrimsonOil() };
             Items = new List<Item>() { new BoneAsh(), new CrimsonOil() };
@@ -262,7 +262,7 @@ The room is lit only by a faintly glowing lamp on a counter at its center. The w
 the majority of which are filled with various mechanical components. A few of them contain bones, neatly sorted by type.";
             Y = y;
             X = x;
-            VisitedByPlayer = true;
+            VisitedByPlayer = false;
             RespawnItems = new List<Item>() { new BoneAsh(), new MetalCore() };
             Items = new List<Item>() { new BoneAsh(), new MetalCore() };
         }
@@ -293,7 +293,7 @@ jut from cracks in the dark stone walls at odd intervals, and nearly all of the 
 alchemical workstation in one corner of the room appears to be undisturbed.";
             Y = y;
             X = x;
-            VisitedByPlayer = true;
+            VisitedByPlayer = false;
             CraftingArea = true;
             RespawnItems = new List<Item>() { new AcridPowder(), new PutridNodule() };
             Items = new List<Item>() { new AcridPowder(), new PutridNodule() };
@@ -325,7 +325,7 @@ filled with rows of massive glass containers filled with a bright green, cloudy 
 They look vaguely organic, but beyond that you can't quite identify them.";
             Y = y;
             X = x;
-            VisitedByPlayer = true;
+            VisitedByPlayer = false;
             RespawnItems = new List<Item>() { new AcridPowder(), new YellowIchor() };
             Items = new List<Item>() { new AcridPowder(), new YellowIchor() };
         }
@@ -355,7 +355,7 @@ The room appears to be some kind of kitchen and dining area that has been somewh
 available surface, and alchemical tools of all sorts seem to be scattered seemingly at random around the room.";
             Y = y;
             X = x;
-            VisitedByPlayer = true;
+            VisitedByPlayer = false;
             CraftingArea = true;
             RespawnItems = new List<Item>() { new LuminousDust(), new QuiveringOoze() };
             Items = new List<Item>() { new LuminousDust(), new QuiveringOoze() };
@@ -386,7 +386,7 @@ The room looks to have been a pantry or cellar of some sort. The wooden shelves 
 fairly advanced alchemical texts, along with a few tomes on cross-planar travel and even more esoteric topics.";
             Y = y;
             X = x;
-            VisitedByPlayer = true;
+            VisitedByPlayer = false;
             RespawnItems = new List<Item>() { new LuminousDust(), new TwistedCrystal() };
             Items = new List<Item>() { new LuminousDust(), new TwistedCrystal() };
         }
@@ -417,7 +417,7 @@ a large ceramic kiln. Neat rows of copper wiring link the kiln's base to a mecha
 The whole apparatus looks functional, and in fact appears to have been recently used. A powdery residue lines its interior.";
             Y = y;
             X = x;
-            VisitedByPlayer = true;
+            VisitedByPlayer = false;
             Items = new List<Item>() { new AlchemicalResidue() };
         }
     }
@@ -447,7 +447,7 @@ the object appears to be an alchemical furnace of some sort, it's hatch ajar. Th
 a hemispherical indentation.";
             Y = y;
             X = x;
-            VisitedByPlayer = true;
+            VisitedByPlayer = false;
         }
     }
 
@@ -476,7 +476,7 @@ an elaborate stone fireplace at one edge of the room, both covered in a thin lay
 a large safe set into the wall. A keyhole sits conspicuously above its handle.";
             Y = y;
             X = x;
-            VisitedByPlayer = true;
+            VisitedByPlayer = false;
         }
     }
 
@@ -506,11 +506,11 @@ A raised stone platform sit at the room's center. The platform has a strange, ei
 has been carved in large, Gothic letters.";
             Y = y;
             X = x;
-            VisitedByPlayer = true;
+            VisitedByPlayer = false;
         }
     }
 
-    public class Gallery : Room, IRoom
+    public class ImmaculateGallery : Room, IRoom
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
@@ -526,9 +526,9 @@ has been carved in large, Gothic letters.";
         {
             Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
         }
-        public Gallery(int y, int x) : base(y, x)
+        public ImmaculateGallery(int y, int x) : base(y, x)
         {
-            Name = "Gallery";
+            Name = "Immaculate Gallery";
             Description = $@"
 The room is crafted almost entirely from white stone, and lit by lanterns tucked into wall sconces at regular intervals. The walls
 are lined with paintings, most of them rendered in a stunningly realistic style. Statues of human figures reminiscent of the work
@@ -538,7 +538,533 @@ At the base of the statue is an elaborate arrangement of thick copper wires, all
 lies empty.";
             Y = y;
             X = x;
-            VisitedByPlayer = true;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class AldricsStudy : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public AldricsStudy(int y, int x) : base(y, x)
+        {
+            Name = "Aldric's Study";
+            Description = $@"
+A wood-panelled room decorated with tapestries and sculptures, all placed with seemingly painstaking precision. A small desk lies in one corner, the papers on its 
+surface neatly organized. Several bookshelves line the walls, and a quick glance suggests the books have been arranged alphabetically. The only thing out of place 
+in the room is the glowing red disc hovering in midair at the room's center. Strange runes flicker across it's surface.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class FetidCourtyard : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public FetidCourtyard(int y, int x) : base(y, x)
+        {
+            Name = "Fetid Courtyard";
+            Description = $@"
+You're in an open courtyard that looks to have been abandoned long ago. The remnants of cobblestone pathways are barely visible beneath overgrown shrubs. The pool at the 
+courtyard's center is clogged with thick slime that appears to be slowly eating away at the marble tiles around it. You can barely make out an object beneath the 
+corrosive muck.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class MacabreWorkroom : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public MacabreWorkroom(int y, int x) : base(y, x)
+        {
+            Name = "Macabre Workroom";
+            Description = $@"
+The room is dimly lit by a faint green glow. As your eyes adjust to the light, you see that the walls of the room are covered with sketches, all depicting horrific
+figures. Some appear to be horrifically deformed skeletons, while others resemble carnivorous, plantlike creatures. Hanging in the center of the room is a collection 
+of bones wired together into a terrifiying skeletal form. The grim sculpture appears to be missing a head.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class ClockworkGarden : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public ClockworkGarden(int y, int x) : base(y, x)
+        {
+            Name = "Clockwork Garden";
+            Description = $@"
+The room is dominated by a massive structure composed of a multitude of gears and mechanical limbs that protude from the walls, ceiling and floor to form a veritable
+maze of strange clockwork parts. On closer inspection, the contraption appears to have been designed with a plant motif -- the gears resemble thorned flowers, while the 
+mechanical limbs mimic vines and branches. The centerpoint of the device appears to be a 'trunk' at the center of the room. It's covered with gears of varying sizes. You
+notice that only one of the gears is spinning...the gear that would go next to it appears to be missing.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class RansackedWorkroom : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public RansackedWorkroom(int y, int x) : base(y, x)
+        {
+            Name = "Ransacked Workroom";
+            Description = $@"
+The room looks to have been used for artistic work at some point, but now lies in complete disarray. Discarded sketches cover the floor alongside spilled
+containers of ink and paint. An overturned easel lies in one corner next to a wall of empty shelves. Only one item appears undisturbed: A large painting of
+a young girl hanging on one of the walls. Beneath the painting a small brass plate with the name 'Vivian Grimtol' inscribed on it. On closer inspection, there appears to
+be a hole gouged in the portrait where the subject's left eye should be.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class ViviansRoom : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public ViviansRoom(int y, int x) : base(y, x)
+        {
+            Name = "Vivian's Room";
+            Description = $@"
+You're in what looks to be a child's room. The wallpaper features a pink, floral design, and the ceiling has been painted to resemble a blue sky with a few
+puffy clouds. The bed looks unmade, yet the thin layer of dust coating every surface in the room suggest it hasn't been disturbed in awhile. A few dolls lie scattered
+on the floor.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class MirandasStudio : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public MirandasStudio(int y, int x) : base(y, x)
+        {
+            Name = "Miranda's Studio";
+            Description = $@"
+The wall of the room are covered with half-finished sketches and paintings, most of them in a decidely grotesque style. Aside from the artwork,
+the room is unfurnished save for a sleeping cushion and blanket thrown into one of the corners, seemingly as an afterthought. Hovering in the 
+center of the room is a glowing green disc, it's surface covered in strange runes.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class CrystallographyLab : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public CrystallographyLab(int y, int x) : base(y, x)
+        {
+            Name = "Crystallography Lab";
+            Description = $@"
+The walls of the room are completely taken up by shelves, each one packed haphazardly with crystals of varying shape, size, and color. Jut under half of them appear to be accompanied
+by an identifying label. At the center of the room is a contraption that resembles an hourglass. At it's base appears to be a kind of alchemical furnace but it's more advanced than
+any you've seen before.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class OpticsLab : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public OpticsLab(int y, int x) : base(y, x)
+        {
+            Name = "Optics Lab";
+            Description = $@"
+The room is composed almost completely of white stone. Several tables line the walls, all of them covered in a disorganized array of lenses, crystals, and assorted alchemical
+components. A strange device in the center of the room's ceiling projects a beam of light directly downward, illuminating a platform at the room's center.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class LiquifactionLab : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public LiquifactionLab(int y, int x) : base(y, x)
+        {
+            Name = "Liquifaction Lab";
+            Description = $@"
+The room is empty except for a large device at its center. The contraption is a cylindrical container with a removable lid connected
+to a series of pipes that lead up to the ceiling. A single panel next to it is covered with poorly labelled buttons and valves that appear to
+control the operation of the device.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class VaporizationLab : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public VaporizationLab(int y, int x) : base(y, x)
+        {
+            Name = "Vaporization Lab";
+            Description = $@"
+The room is a mess of tables and shelves strewn with a combination of alchemical, handwritten notes, and mechanical components of all sorts. On a
+table at the center of the room sits a device consisting of a glass chamber with a removable door. A thin pipe connects the interior of the chamber
+to a metal box on a seperate table. The device appears to be operated by a nearby panel of levers and valves, a few of them labelled with nearly
+illegible handwriting.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class GrandLibrary : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public GrandLibrary(int y, int x) : base(y, x)
+        {
+            Name = "Grand Library";
+            Description = $@"
+The first thing you notice is that the walls of the room are completely covered in bookshelves, all haphazardly 
+packed with tomes of all sorts. The second thing you notice is that both the ceiling and floor of the room have been carved out,
+and filled with a complex mess of rickety wooden walkways and...even *more* bookshelves. The 'floor' of the level on which you're currently standing
+is little more than a haphazardly constructed platform itself. Even stranger, there doesn't even appear to be a way to reach any of the bookshelves 
+aside from those on the level where you're currently standing.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class TheodoresStudy : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public TheodoresStudy(int y, int x) : base(y, x)
+        {
+            Name = "Theodores's Study";
+            Description = $@"
+The room is essentially a maze of bookshelves leading to a desk at the center. Open books and scattered notes lay everywhere. It's o cluttered that
+you almost don't notice the overing in the glowing violet disc floating just above the desk. The surface of the disk is marked with luminous runes from
+a language you don't recognize.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class CentralChamber : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public CentralChamber(int y, int x) : base(y, x)
+        {
+            Name = "Central Chamber";
+            Description = $@"
+You're in an unfurnished chamber made from roughly hewn stone. It seems that the castle residents never got around to
+uing it for anything in particular. Curiously, however, there's a strange, glowing white disc floating in the center of the room,
+it' surface dotted with unfamiliar runes.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class ForgottenDungeon : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public ForgottenDungeon(int y, int x) : base(y, x)
+        {
+            Name = "Forgotten Dungeon";
+            Description = $@"
+The stone room is lined with cells, their iron bars coated with rust. Look to be some sort of dungeon...fitting for a castle. Although'
+a few of the cells have a few bones strewn about, it doesn't look like thi dungeon has been getting much use as of late.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class OperatingRoom : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public OperatingRoom(int y, int x) : base(y, x)
+        {
+            Name = "Operating Room";
+            Description = $@"
+The room is bare save for a row of operating tables and a large, metal locker. A medicinal smell fills the air. The door to the locker lies open, revealing a 
+pile of strange corpses resembling creatures out of a nightmare. On one of the operating tables lies the body of something that looks vaguely humanoid, save for 
+the gray skin and extra limbs. A black circle has been drawn on its chest, about where it's heart would be if it were human. A simple alchemical workstation has 
+been set up in one of the room's corners.";
+            CraftingArea = true;
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class TrophyRoom : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public TrophyRoom(int y, int x) : base(y, x)
+        {
+            Name = "Trophy Room";
+            Description = $@"
+You're in a simple room with wood-panelled walls. It appears to be some sort of hunter's trophy room, and is filled with taxidermied animals of all sorts.
+Once majestic elk now gaze at you with glass eyes, and a ferociously positioned bear rears up at the center of the room.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
+        }
+    }
+
+    public class Armory : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public Armory(int y, int x) : base(y, x)
+        {
+            Name = "Armory";
+            Description = $@"
+The walls of the room are covered in weapons straight out of medieval Europe, alongside tapestries depicting historic battles. The floorspace is devoted to
+immaculately maintained suits of armor from various nations.";
+            CraftingArea = true;
+            Y = y;
+            X = x;
+            VisitedByPlayer = false;
         }
     }
 }

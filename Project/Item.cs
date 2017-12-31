@@ -501,14 +501,14 @@ namespace CastleGrimtol.Project
         }
     }
 
-    public class PetrifiedEye : Item
+    public class GlassEye : Item
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public PetrifiedEye()
+        public GlassEye()
         {
-            Name = "Petrified Eye";
-            Description = "A shrunken human eye. You can still make out the green iris.";
+            Name = "Glass Eye";
+            Description = "A faithful recreation of a human eye in colored glass. It was clearly designed by a skilled artist.";
         }
     }
 
@@ -541,7 +541,7 @@ namespace CastleGrimtol.Project
         public ViviansCharm()
         {
             Name = "Vivian's Charm";
-            Description = "A small, silver locket. Inside is a small scrap of parchment with a series of cuneiform letters. On the back is an inscription: 'For my precious daughter. I will always protect you.'";
+            Description = "A small, silver locket. Inside is a small scrap of parchment with a series of cuneiform letters. On the back is an inscription: 'For my precious Vivi. I will always protect you.'";
         }
     }
 
