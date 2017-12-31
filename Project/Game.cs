@@ -164,7 +164,7 @@ namespace CastleGrimtol.Project
             CurrentPlayer = new Player(CurrentMap);
             CurrentRoom = CurrentMap.Grid[CurrentPlayer.Y][CurrentPlayer.X];
             SavedProgress = true;
-            Intro();
+            Intro();            
             MainLoop();
             //Console.Clear();
         }
@@ -226,6 +226,10 @@ devoid of doors of any sort.
 
 {CurrentPlayer.Name}: 'Huh...well, that's new.'");
 
+            Console.WriteLine("\n<Press any key to continue.>");
+            Console.ReadKey(true);
+            Console.Clear();
+            CurrentRoom.Event(this, CurrentPlayer);
             Console.WriteLine("\n<Press any key to continue.>");
             Console.ReadKey(true);
         }
@@ -463,6 +467,14 @@ devoid of doors of any sort.
                     Console.WriteLine("\n<Press any key to continue.>");
                     Console.ReadKey(true);
                 }
+            }
+        }
+        public void GetNote() {
+            if (!(CurrentRoom.Note == null))
+            {
+                CurrentPlayer.Notes.Add(CurrentRoom.Note);
+                Console.WriteLine($"'{CurrentRoom.Note.Name}' has been added to your notebook.");
+                CurrentRoom.Note = null;
             }
         }
         public void TrapEvent()
@@ -935,7 +947,7 @@ devoid of doors of any sort.
                     var choice = Console.ReadLine();
                     var parsed = 0;
                     var valid = int.TryParse(choice, out parsed);
-                    if (!valid || parsed < 1 || parsed > CurrentPlayer.Inventory.Count)
+                    if (!valid || parsed < 1 || parsed > CurrentPlayer.Notes.Count)
                     {
                         Console.WriteLine("Invalid choice.");
                         Console.WriteLine("\n<Press any key to continue.>");
