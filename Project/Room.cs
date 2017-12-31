@@ -382,13 +382,163 @@ available surface, and alchemical tools of all sorts seem to be scattered seemin
         {
             Name = "Makeshift Library";
             Description = $@"
-The room looks to have been once used for food storage. The wooden shelves that line it's walls, however, are now filled entirely with books. They all look to be
+The room looks to have been a pantry or cellar of some sort. The wooden shelves that line it's walls, however, are now filled entirely with books. They all look to be
 fairly advanced alchemical texts, along with a few tomes on cross-planar travel and even more esoteric topics.";
             Y = y;
             X = x;
             VisitedByPlayer = true;
             RespawnItems = new List<Item>() { new LuminousDust(), new TwistedCrystal() };
             Items = new List<Item>() { new LuminousDust(), new TwistedCrystal() };
+        }
+    }
+
+    public class RefiningLab : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public RefiningLab(int y, int x) : base(y, x)
+        {
+            Name = "Refining Lab";
+            Description = $@"
+Sturdy wooden counters lined with various alchemical and blackmithing tools are arranged along the room's walls. At it's center lies
+a large ceramic kiln. Neat rows of copper wiring link the kiln's base to a mechanical device beside it. Probably an alchemical battery of some sort.
+The whole apparatus looks functional, and in fact appears to have been recently used. A powdery residue lines its interior.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = true;
+            Items = new List<Item>() { new AlchemicalResidue() };
+        }
+    }
+
+    public class FurnaceRoom : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public FurnaceRoom(int y, int x) : base(y, x)
+        {
+            Name = "Furnace Room";
+            Description = $@"
+The entire room is lined with thick metal plating affixed to that walls with rivets. It's empty save for a large metal cylinder at its center. On closer inspection,
+the object appears to be an alchemical furnace of some sort, it's hatch ajar. The interior is room temperature...it's clearly not working. The console next to it has
+a hemispherical indentation.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = true;
+        }
+    }
+
+    public class AbandonedParlor : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public AbandonedParlor(int y, int x) : base(y, x)
+        {
+            Name = "Abandoned Parlor";
+            Description = $@"
+The room's walls are decorated with a wallpaper bearing a repeating geometric pattern, and the floor is covered with an expensive-looking rug. Two couches sit before
+an elaborate stone fireplace at one edge of the room, both covered in a thin layer of dust. In one corner of the room the wallpaper has been peeled aside, revealing a 
+a large safe set into the wall. A keyhole sits conspicuously above its handle.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = true;
+        }
+    }
+
+    public class ConvertedSunroom : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public ConvertedSunroom(int y, int x) : base(y, x)
+        {
+            Name = "Converted Sunroom";
+            Description = $@"
+The outside-facing walls of the room feature large windows that have since been neatly boarded up. The skylight in the ceiling has been given a similar treatment.
+The room itelf is completely empty save for two features. Eight iron braziers are arranged along the room's edges, one in each corner and one at the midpoint of each wall. 
+A raised stone platform sit at the room's center. The platform has a strange, eight-pointed indentation at its center. Around this indentation, the phrase 'post tenebras lux' 
+has been carved in large, Gothic letters.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = true;
+        }
+    }
+
+    public class Gallery : Room, IRoom
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
+        public override List<Item> Items { get; set; }
+        public override List<Item> RespawnItems { get; set; }
+        public override void UseItem(Item item)
+        {
+            Console.WriteLine($"{item.Name} fails to be of any use.");
+        }
+        public override void Event(Game game, Player player)
+        {
+            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+        }
+        public Gallery(int y, int x) : base(y, x)
+        {
+            Name = "Gallery";
+            Description = $@"
+The room is crafted almost entirely from white stone, and lit by lanterns tucked into wall sconces at regular intervals. The walls
+are lined with paintings, most of them rendered in a stunningly realistic style. Statues of human figures reminiscent of the work
+of the great Classical sculptors are arranged neatly around the room's edges. At the center of the room is a massive jade statue of
+an Eastern dragon. It's eyes seem to stare directly at you. The statues's tail is wrapped around an egg seemingly carved from solid gold. 
+At the base of the statue is an elaborate arrangement of thick copper wires, all of them connected to a cylindrical indentation that currently 
+lies empty.";
+            Y = y;
+            X = x;
+            VisitedByPlayer = true;
         }
     }
 }
