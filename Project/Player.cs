@@ -16,6 +16,7 @@ namespace CastleGrimtol.Project
         public double MaxDefenseRating { get; set; }
         public Item Weapon { get; set; }
         public List<Item> Inventory { get; set; }
+        public List<Note> Notes { get; set; }
 
         public Player(Map map)
         {
@@ -23,6 +24,17 @@ namespace CastleGrimtol.Project
             Score = 0;
             Inventory = new List<Item>() { 
                 new FlintlockPistol()
+            };
+            Notes = new List<Note>() {
+                new Note("Dr. Rithbaun's Letter", $@"
+<The handwriting is messy, as if the note was written in haste>
+
+{Name}:
+
+I am in danger. Come to Grimtol.
+
+- R
+")
             };
             X = map.PlayerStartX;
             Y = map.PlayerStartY;

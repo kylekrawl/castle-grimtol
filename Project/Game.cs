@@ -9,10 +9,13 @@ namespace CastleGrimtol.Project
         public Map CurrentMap { get; set; }
         public Room CurrentRoom { get; set; }
         public Player CurrentPlayer { get; set; }
-        public string MainQuestStage { get; set; }
+        public Dictionary<string, string> MainQuestStage { get; set; } = new Dictionary<string, string>(){
+            {"purification", "start"},
+            {"corruption", "start"},
+            {"transmutation", "start"}
+        };
         public bool SavedProgress { get; set; }
-        public string EventStage { get; set; }
-        public List<Type> CraftableItems = new List<Type>()
+        public List<Type> CraftableItems { get; set; } = new List<Type>()
         {
             typeof(IncendiaryPistol),
             typeof(VenomousPistol),
@@ -44,7 +47,7 @@ namespace CastleGrimtol.Project
         };
         public bool Playing { get; set; }
         public bool ApplicationActive { get; set; }
-        public ConsoleKeyInfo keyInfo { get; set; }
+        public ConsoleKeyInfo KeyInfo { get; set; }
 
         public void StartScreen()
         {
@@ -81,19 +84,19 @@ namespace CastleGrimtol.Project
                     Console.WriteLine("| C | Continue");
                 }
                 Console.WriteLine("| Q | Exit");
-                keyInfo = Console.ReadKey(true);
-                if (keyInfo.Key == ConsoleKey.Q)
+                KeyInfo = Console.ReadKey(true);
+                if (KeyInfo.Key == ConsoleKey.Q)
                 {
                     Console.Clear();
                     ApplicationActive = false;
                     return;
                 }
-                if (keyInfo.Key == ConsoleKey.N)
+                if (KeyInfo.Key == ConsoleKey.N)
                 {
                     Console.Clear();
                     Setup();
                 }
-                if (keyInfo.Key == ConsoleKey.C && SavedProgress)
+                if (KeyInfo.Key == ConsoleKey.C && SavedProgress)
                 {
                     // Reset player position to room visited just before the room they died in / quit from
                     // Will eventually need to have more logic resetting the latter
@@ -105,17 +108,6 @@ namespace CastleGrimtol.Project
                     Playing = true;
                     MainLoop();
                 }
-                // Print title
-                // Print options:
-                // if no game started:
-                //  - New Game
-                // Run Setup
-                // if game started:
-                //  - Restart Game
-                // Run Reset
-                //  - Continue (if game begun)
-                // Run MainLoop without resetting
-                //  - Exit
             }
 
         }
@@ -281,27 +273,45 @@ devoid of doors of any sort.
                         Console.WriteLine("| S | Go South");
                     }
                     Console.WriteLine("| L | Look");
-                    Console.WriteLine("| I | View Inventory");
-                    Console.WriteLine("| U | Use Item");
-                    Console.WriteLine("| T | Take Item");
-                    Console.WriteLine("| C | Craft Item");
+                    if (CurrentPlayer.Notes.Count > 0)
+                    {
+                        validActionKeys.Add("n");
+                        Console.WriteLine("| N | View Notebook");
+                    }
+                    if (CurrentPlayer.Inventory.Count > 0)
+                    {
+                        validActionKeys.Add("i");
+                        validActionKeys.Add("u");
+                        Console.WriteLine("| I | View Inventory");
+                        Console.WriteLine("| U | Use Item");
+                    }
+                    if (CurrentRoom.Items.Count > 0)
+                    {
+                        validActionKeys.Add("t");
+                        Console.WriteLine("| T | Take Item");
+                    }
+                    if (CurrentRoom.CraftingArea)
+                    {
+                        validActionKeys.Add("c");
+                        Console.WriteLine("| C | Craft Item");
+                    }
                     Console.WriteLine("| H | Help");
                     Console.WriteLine("| Q | Quit");
 
-                    keyInfo = Console.ReadKey(true);
-                    if (keyInfo.Key == ConsoleKey.Q)
+                    KeyInfo = Console.ReadKey(true);
+                    if (KeyInfo.Key == ConsoleKey.Q)
                     {
                         Console.Clear();
                         Playing = false;
                         return;
                     }
-                    if (keyInfo.Key == ConsoleKey.H)
+                    if (KeyInfo.Key == ConsoleKey.H)
                     {
                         Console.Clear();
                         HelpScreen();
                         break;
                     }
-                    if (keyInfo.Key == ConsoleKey.L)
+                    if (KeyInfo.Key == ConsoleKey.L)
                     {
                         Console.Clear();
                         Look();
@@ -309,13 +319,19 @@ devoid of doors of any sort.
                         Console.ReadKey(true);
                         break;
                     }
-                    if (keyInfo.Key == ConsoleKey.I)
+                    if (KeyInfo.Key == ConsoleKey.N && validActionKeys.Contains("n"))
+                    {
+                        Console.Clear();
+                        CheckNotes();
+                        break;
+                    }
+                    if (KeyInfo.Key == ConsoleKey.I && validActionKeys.Contains("i"))
                     {
                         Console.Clear();
                         CheckInventory();
                         break;
                     }
-                    if (keyInfo.Key == ConsoleKey.T)
+                    if (KeyInfo.Key == ConsoleKey.T && validActionKeys.Contains("t"))
                     {
                         Console.Clear();
                         TakeItemInterface();
@@ -323,7 +339,7 @@ devoid of doors of any sort.
                         Console.ReadKey(true);
                         break;
                     }
-                    if (keyInfo.Key == ConsoleKey.U)
+                    if (KeyInfo.Key == ConsoleKey.U && validActionKeys.Contains("u"))
                     {
                         Console.Clear();
                         UseItemInterface();
@@ -331,7 +347,7 @@ devoid of doors of any sort.
                         Console.ReadKey(true);
                         break;
                     }
-                    if (keyInfo.Key == ConsoleKey.C)
+                    if (KeyInfo.Key == ConsoleKey.C && validActionKeys.Contains("c"))
                     {
                         Console.Clear();
                         CraftItemInterface();
@@ -339,25 +355,25 @@ devoid of doors of any sort.
                         Console.ReadKey(true);
                         break;
                     }
-                    if ((keyInfo.Key == ConsoleKey.A || keyInfo.Key == ConsoleKey.LeftArrow) && validActionKeys.Contains("a"))
+                    if ((KeyInfo.Key == ConsoleKey.A || KeyInfo.Key == ConsoleKey.LeftArrow) && validActionKeys.Contains("a"))
                     {
                         Console.Clear();
                         MovePlayer(0, -1);
                         break;
                     }
-                    if ((keyInfo.Key == ConsoleKey.W || keyInfo.Key == ConsoleKey.UpArrow) && validActionKeys.Contains("w"))
+                    if ((KeyInfo.Key == ConsoleKey.W || KeyInfo.Key == ConsoleKey.UpArrow) && validActionKeys.Contains("w"))
                     {
                         Console.Clear();
                         MovePlayer(-1, 0);
                         break;
                     }
-                    if ((keyInfo.Key == ConsoleKey.D || keyInfo.Key == ConsoleKey.RightArrow) && validActionKeys.Contains("d"))
+                    if ((KeyInfo.Key == ConsoleKey.D || KeyInfo.Key == ConsoleKey.RightArrow) && validActionKeys.Contains("d"))
                     {
                         Console.Clear();
                         MovePlayer(0, 1);
                         break;
                     }
-                    if ((keyInfo.Key == ConsoleKey.S || keyInfo.Key == ConsoleKey.DownArrow) && validActionKeys.Contains("s"))
+                    if ((KeyInfo.Key == ConsoleKey.S || KeyInfo.Key == ConsoleKey.DownArrow) && validActionKeys.Contains("s"))
                     {
                         Console.Clear();
                         MovePlayer(1, 0);
@@ -394,14 +410,17 @@ devoid of doors of any sort.
                 {
                     Console.WriteLine("\n<Press any key to continue.>");
                 }
-                keyInfo = Console.ReadKey(true);
-                if (keyInfo.Key == ConsoleKey.U && canDisable)
+                KeyInfo = Console.ReadKey(true);
+                if (KeyInfo.Key == ConsoleKey.U && canDisable)
                 {
                     Console.Clear();
                     Console.WriteLine("\nYou quickly activate a Pulse Emitter and toss it into the center of the room. It emits a strange blue light, follwed by a piercing tone.");
                     Console.WriteLine(CurrentRoom.Trap.FailureText);
                     CurrentPlayer.Inventory.Remove(disableItem);
-                } else {
+                }
+                else
+                {
+                    Console.Clear();
                     Console.WriteLine(CurrentRoom.Trap.SuccessText);
                     CurrentPlayer.Health -= CurrentRoom.Trap.Damage;
                     if (CurrentPlayer.Health <= 0)
@@ -465,8 +484,8 @@ devoid of doors of any sort.
                     {
                         Console.WriteLine("| H | Use Healing Item");
                     }
-                    keyInfo = Console.ReadKey(true);
-                    if (keyInfo.Key == ConsoleKey.A)
+                    KeyInfo = Console.ReadKey(true);
+                    if (KeyInfo.Key == ConsoleKey.A)
                     {
                         foreach (var item in CurrentPlayer.Inventory)
                         {
@@ -477,7 +496,7 @@ devoid of doors of any sort.
                         }
                         break;
                     }
-                    else if (keyInfo.Key == ConsoleKey.C && validCombatItems.Count > 0)
+                    else if (KeyInfo.Key == ConsoleKey.C && validCombatItems.Count > 0)
                     {
                         while (true)
                         {
@@ -507,7 +526,7 @@ devoid of doors of any sort.
                         }
                         break;
                     }
-                    else if (keyInfo.Key == ConsoleKey.H && validHealingItems.Count > 0)
+                    else if (KeyInfo.Key == ConsoleKey.H && validHealingItems.Count > 0)
                     {
                         while (true)
                         {
@@ -751,7 +770,7 @@ devoid of doors of any sort.
                     {
                         Console.WriteLine("Invalid choice.");
                         Console.WriteLine("\n<Press any other key to continue.>");
-                        keyInfo = Console.ReadKey(true);
+                        KeyInfo = Console.ReadKey(true);
                     }
                     else
                     {
@@ -779,7 +798,7 @@ devoid of doors of any sort.
                     {
                         Console.WriteLine("Invalid choice.");
                         Console.WriteLine("\n<Press any other key to continue.>");
-                        keyInfo = Console.ReadKey(true);
+                        KeyInfo = Console.ReadKey(true);
                     }
                     else
                     {
@@ -820,6 +839,52 @@ devoid of doors of any sort.
                 Console.WriteLine("You at least two items for crafting.");
             }
         }
+        public void CheckNotes()
+        {
+            while (true)
+            {
+                if (CurrentPlayer.Notes.Count > 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine("\nChoose a note to read (Type number and press <Enter>):\n");
+                    for (var i = 0; i < CurrentPlayer.Notes.Count; i++)
+                    {
+                        var note = CurrentPlayer.Notes[i];
+                        Console.WriteLine($"{i + 1}. {note.Name}");
+                    }
+                    var choice = Console.ReadLine();
+                    var parsed = 0;
+                    var valid = int.TryParse(choice, out parsed);
+                    if (!valid || parsed < 1 || parsed > CurrentPlayer.Inventory.Count)
+                    {
+                        Console.WriteLine("Invalid choice.");
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine(CurrentPlayer.Notes[parsed - 1].Name);
+                        Console.WriteLine("--------------------------------------");
+                        Console.WriteLine("\n" + CurrentPlayer.Notes[parsed - 1].Text);
+                        Console.WriteLine("\n--------------------------------------");
+                        Console.WriteLine("\n| X | Exit Notes Menu");
+                        Console.WriteLine("\n<Press any other key to continue.>");
+                        KeyInfo = Console.ReadKey(true);
+                        if (KeyInfo.Key == ConsoleKey.X)
+                        {
+                            Console.Clear();
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("You do not have any notes.");
+                    Console.WriteLine("\n<Press any other key to continue.>");
+                    Console.ReadKey(true);
+                    break;
+                }
+            }
+        }
         public void CheckInventory()
         {
             if (CurrentPlayer.Inventory.Count > 0)
@@ -835,8 +900,8 @@ devoid of doors of any sort.
                 }
                 Console.WriteLine("| U | Use Item");
                 Console.WriteLine("\n<Press any other key to continue.>");
-                keyInfo = Console.ReadKey(true);
-                if (keyInfo.Key == ConsoleKey.U)
+                KeyInfo = Console.ReadKey(true);
+                if (KeyInfo.Key == ConsoleKey.U)
                 {
                     Console.Clear();
                     UseItemInterface();

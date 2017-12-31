@@ -38,6 +38,7 @@ namespace CastleGrimtol.Project
             Attributes = new List<string>() { "basic" };
             PassagesBuilt = false;
             Exits = new List<string>();
+            CraftingArea = false;
             Enemy = null;
             Trap = null;
             EventStage = null;
@@ -188,7 +189,7 @@ up most of the table's space...probably Dr. Rithbaun's handiwork.";
         public override Trap Trap { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine("Nothing happens.");
+            Console.WriteLine($"{item.Name} fails to be of any use.");
         }
         public override void Event(Game game, Player player)
         {
@@ -961,7 +962,7 @@ a language you don't recognize.";
             Name = "Central Chamber";
             Description = $@"
 You're in an unfurnished chamber made from roughly hewn stone. It seems that the castle residents never got around to
-uing it for anything in particular. Curiously, however, there's a strange, glowing white disc floating in the center of the room,
+using it for anything in particular. Curiously, however, there's a strange, glowing white disc floating in the center of the room,
 it' surface dotted with unfamiliar runes.";
             Y = y;
             X = x;
