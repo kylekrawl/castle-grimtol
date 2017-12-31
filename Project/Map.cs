@@ -11,8 +11,6 @@ namespace CastleGrimtol.Project
         public int PlayerStartX { get; set; }
         public Dictionary<string, Type> Rooms = new Dictionary<string, Type>()
         {
-            {"II", typeof(TestRoom)},
-            {"OO", typeof(EmptyRoom)},
             {"MF", typeof(MainFoyer)},
             {"ER", typeof(EnemyRoom)},
             {"TR", typeof(TrapRoom)},

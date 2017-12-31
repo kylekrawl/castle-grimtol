@@ -232,10 +232,47 @@ devoid of doors of any sort.
 
         public void HelpScreen()
         {
-            // Will need a way to prevent this from wasting player's turn if in combat.
-            // Might be able to bundle player action prompt in method and call again in
-            // a way that avoids triggering enemy action round
-            Console.WriteLine("TODO: Add actual 'Help' info here.");
+            //Need to add pagination to this
+            Console.WriteLine("\nUnless otherwise stated, all commands are performed by pressing a single key.");
+            Console.WriteLine("\n-------------------------------");
+            Console.WriteLine("MOVEMENT:");
+            Console.WriteLine("-------------------------------");
+            Console.WriteLine("\nOnly move directions that lead to valid passageways will be available.\n");
+            Console.WriteLine("Go West  | A or ←");
+            Console.WriteLine("Go North | W or ↑");
+            Console.WriteLine("Go East  | D or →");
+            Console.WriteLine("Go South | S or ↓");
+            Console.WriteLine("\n-------------------------------");
+            Console.WriteLine("BASIC COMMANDS:");
+            Console.WriteLine("-------------------------------");
+            Console.WriteLine("\nLook | L");
+            Console.WriteLine("Review the description of the current room, including takeable items.\n");
+            Console.WriteLine("\nView Notebook | N");
+            Console.WriteLine("Review the notes you've collected.");
+            Console.WriteLine("\nView Inventory | I");
+            Console.WriteLine("View the items in your inventory.");
+            Console.WriteLine("\nUse Item | U");
+            Console.WriteLine("Brings up the Use Item menu, displaying a numbered list of items in your inventory.\n Type a number and press ENTER to use the corresponding item in the current room.");
+            Console.WriteLine("\nTake Item | T");
+            Console.WriteLine("Brings up the Take Item menu, displaying a numbered list of items in the room.\n Type a number and press ENTER to add the corresponding item to your inventory.");
+            Console.WriteLine("This command is only available if there are takeable items in the room.");
+            Console.WriteLine("\nCraft Item | C");
+            Console.WriteLine("Brings up the Craft Item menu (see CRAFTING below.)");
+            Console.WriteLine("This command is only available if there is an alchemical workstation in the current room.");
+            Console.WriteLine("\nQuit | Q");
+            Console.WriteLine("Exits the game, returning you to the Start Menu. \nYour current progress will be saved as long as you do not fully exit the application.");
+            Console.WriteLine("\n-------------------------------");
+            Console.WriteLine("CRAFTING:");
+            Console.WriteLine("-------------------------------");
+            Console.WriteLine("\nThe Craft Item Menu allows you to attempt to combine two items.");
+            Console.WriteLine("Opening the Craft Item Menu will display a numbered list of items in your inventory.\n You will be prompted to select an item to use as the first crafting component,\n which can be done by typing a number from the list and pressing ENTER.");
+            Console.WriteLine("This process will be repeated for the second component.\n Once two components are selected, if they are a valid combination they will both be consumed, and a new item will be added to your inventory.");
+            Console.WriteLine("If the combination is invalid, the items will not be consumed.");
+            Console.WriteLine("\n-------------------------------");
+            Console.WriteLine("COMBAT:");
+            Console.WriteLine("-------------------------------");
+            Console.WriteLine("\nTODO");
+            Console.WriteLine("-------------------------------");
             Console.WriteLine("\n<Press any key to continue.>");
             Console.ReadKey(true);
         }
@@ -942,7 +979,6 @@ devoid of doors of any sort.
             }
             Look();
             CurrentRoom.Event(this, CurrentPlayer);
-            //Fix for bug in which after Event an causes Game Over screen, game loop does not exit properly when player quits after Continuing Game
             if (!Playing || !ApplicationActive)
             {
                 return;

@@ -8,9 +8,9 @@ namespace CastleGrimtol.Project
     {
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
-        public virtual List<Item> Items { get; set; }
+        public virtual List<Item> Items { get; set; } = new List<Item>();
+        public virtual Dictionary<string, Note> Notes { get; set; } = new Dictionary<string, Note>();
         public virtual List<Item> RespawnItems { get; set; }
-        public virtual List<string> Attributes { get; set; }
         public virtual Enemy Enemy { get; set; }
         public int Y { get; set; }
         public int X { get; set; }
@@ -35,8 +35,8 @@ namespace CastleGrimtol.Project
             Name = "Room";
             Y = y;
             X = x;
-            Attributes = new List<string>() { "basic" };
             PassagesBuilt = false;
+            VisitedByPlayer = false;
             Exits = new List<string>();
             CraftingArea = false;
             Enemy = null;
@@ -45,62 +45,11 @@ namespace CastleGrimtol.Project
         }
     }
 
-    public class TestRoom : Room, IRoom
-    {
-        public override string Name { get; set; }
-        public override string Description { get; set; }
-        public override List<Item> Items { get; set; }
-        public override void UseItem(Item item)
-        {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
-        }
-        public override void Event(Game game, Player player)
-        {
-            Console.WriteLine("\nNothing happens. This is just a test room after all.");
-        }
-        public TestRoom(int y, int x) : base(y, x)
-        {
-            Name = "Test Room";
-            Description = $"Test Room at (x:{x} , y:{y})";
-            Y = y;
-            X = x;
-            VisitedByPlayer = false;
-            Items = new List<Item>(){
-                new LuminousDust(), new ReactiveSolid(), new CrimsonOil(), new YellowIchor(), new ReactiveSolid(), new BoneAsh(), new AcridPowder(), new PulseEmitter()
-            };
-        }
-    }
-
-    public class EmptyRoom : Room, IRoom
-    {
-        public override string Name { get; set; }
-        public override string Description { get; set; }
-        public override List<Item> Items { get; set; }
-        public override void UseItem(Item item)
-        {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
-        }
-        public override void Event(Game game, Player player)
-        {
-            Console.WriteLine("\nNothing happens. This is just an empty room after all.");
-        }
-        public EmptyRoom(int y, int x) : base(y, x)
-        {
-            Name = "Empty Room";
-            Description = $"Empty Room at (x:{x} , y:{y})";
-            Y = y;
-            X = x;
-            VisitedByPlayer = false;
-            Items = new List<Item>();
-        }
-    }
-
     public class MainFoyer : Room, IRoom
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
         public override bool VisitedByPlayer { get; set; }
-        public override List<Item> Items { get; set; }
         public override void UseItem(Item item)
         {
             Console.WriteLine($"{item.Name} fails to be of any use.");
@@ -119,35 +68,6 @@ up most of the table's space...probably Dr. Rithbaun's handiwork.";
             Y = y;
             X = x;
             VisitedByPlayer = true;
-            Items = new List<Item>();
-        }
-    }
-
-    public class DeathRoom : Room, IRoom
-    {
-        public override string Name { get; set; }
-        public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override List<Item> Items { get; set; }
-        public override void UseItem(Item item)
-        {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
-        }
-        public override void Event(Game game, Player player)
-        {
-            Console.WriteLine("\nYou immediately die without explanation.");
-            Console.WriteLine("\n<Press any key to continue.>");
-            Console.ReadKey(true);
-            game.GameOver();
-        }
-        public DeathRoom(int y, int x) : base(y, x)
-        {
-            Name = "Death Room";
-            Description = $"Death Room at (x:{x} , y:{y})";
-            Y = y;
-            X = x;
-            VisitedByPlayer = false;
-            Items = new List<Item>();
         }
     }
 
@@ -211,7 +131,6 @@ up most of the table's space...probably Dr. Rithbaun's handiwork.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
         public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
@@ -232,7 +151,6 @@ tables aligned in neat, even rows. Several of them are occupied by what look to 
 A tidy alchemical workstation sits in one coerner of the room.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             CraftingArea = true;
             RespawnItems = new List<Item>() { new BoneAsh(), new CrimsonOil() };
             Items = new List<Item>() { new BoneAsh(), new CrimsonOil() };
@@ -243,8 +161,6 @@ A tidy alchemical workstation sits in one coerner of the room.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -263,7 +179,6 @@ The room is lit only by a faintly glowing lamp on a counter at its center. The w
 the majority of which are filled with various mechanical components. A few of them contain bones, neatly sorted by type.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             RespawnItems = new List<Item>() { new BoneAsh(), new MetalCore() };
             Items = new List<Item>() { new BoneAsh(), new MetalCore() };
         }
@@ -273,7 +188,6 @@ the majority of which are filled with various mechanical components. A few of th
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
         public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
@@ -294,7 +208,6 @@ jut from cracks in the dark stone walls at odd intervals, and nearly all of the 
 alchemical workstation in one corner of the room appears to be undisturbed.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             CraftingArea = true;
             RespawnItems = new List<Item>() { new AcridPowder(), new PutridNodule() };
             Items = new List<Item>() { new AcridPowder(), new PutridNodule() };
@@ -305,8 +218,6 @@ alchemical workstation in one corner of the room appears to be undisturbed.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -326,7 +237,6 @@ filled with rows of massive glass containers filled with a bright green, cloudy 
 They look vaguely organic, but beyond that you can't quite identify them.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             RespawnItems = new List<Item>() { new AcridPowder(), new YellowIchor() };
             Items = new List<Item>() { new AcridPowder(), new YellowIchor() };
         }
@@ -336,7 +246,6 @@ They look vaguely organic, but beyond that you can't quite identify them.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
         public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
@@ -356,7 +265,6 @@ The room appears to be some kind of kitchen and dining area that has been somewh
 available surface, and alchemical tools of all sorts seem to be scattered seemingly at random around the room.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             CraftingArea = true;
             RespawnItems = new List<Item>() { new LuminousDust(), new QuiveringOoze() };
             Items = new List<Item>() { new LuminousDust(), new QuiveringOoze() };
@@ -367,8 +275,6 @@ available surface, and alchemical tools of all sorts seem to be scattered seemin
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -387,7 +293,6 @@ The room looks to have been a pantry or cellar of some sort. The wooden shelves 
 fairly advanced alchemical texts, along with a few tomes on cross-planar travel and even more esoteric topics.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             RespawnItems = new List<Item>() { new LuminousDust(), new TwistedCrystal() };
             Items = new List<Item>() { new LuminousDust(), new TwistedCrystal() };
         }
@@ -397,8 +302,6 @@ fairly advanced alchemical texts, along with a few tomes on cross-planar travel 
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -418,7 +321,6 @@ a large ceramic kiln. Neat rows of copper wiring link the kiln's base to a mecha
 The whole apparatus looks functional, and in fact appears to have been recently used. A powdery residue lines its interior.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>() { new AlchemicalResidue() };
         }
     }
@@ -427,8 +329,6 @@ The whole apparatus looks functional, and in fact appears to have been recently 
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -448,7 +348,6 @@ the object appears to be an alchemical furnace of some sort, it's hatch ajar. Th
 a hemispherical indentation.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -457,8 +356,6 @@ a hemispherical indentation.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -478,7 +375,6 @@ an elaborate stone fireplace at one edge of the room, both covered in a thin lay
 a large safe set into the wall. A keyhole sits conspicuously above its handle.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -487,8 +383,6 @@ a large safe set into the wall. A keyhole sits conspicuously above its handle.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -509,7 +403,6 @@ A raised stone platform sit at the room's center. The platform has a strange, ei
 has been carved in large, Gothic letters.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -518,8 +411,6 @@ has been carved in large, Gothic letters.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -542,7 +433,6 @@ At the base of the statue is an elaborate arrangement of thick copper wires, all
 lies empty.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -551,8 +441,6 @@ lies empty.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -572,7 +460,6 @@ surface neatly organized. Several bookshelves line the walls, and a quick glance
 in the room is the glowing red disc hovering in midair at the room's center. Strange runes flicker across it's surface.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -581,8 +468,6 @@ in the room is the glowing red disc hovering in midair at the room's center. Str
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -602,7 +487,6 @@ courtyard's center is clogged with thick slime that appears to be slowly eating 
 corrosive muck.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -611,8 +495,6 @@ corrosive muck.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -632,7 +514,6 @@ figures. Some appear to be horrifically deformed skeletons, while others resembl
 of bones wired together into a terrifiying skeletal form. The grim sculpture appears to be missing a head.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -641,8 +522,6 @@ of bones wired together into a terrifiying skeletal form. The grim sculpture app
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -663,7 +542,6 @@ mechanical limbs mimic vines and branches. The centerpoint of the device appears
 notice that only one of the gears is spinning...the gear that would go next to it appears to be missing.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -672,8 +550,6 @@ notice that only one of the gears is spinning...the gear that would go next to i
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -694,7 +570,6 @@ a young girl hanging on one of the walls. Beneath the painting a small brass pla
 be a hole gouged in the portrait where the subject's left eye should be.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -703,8 +578,6 @@ be a hole gouged in the portrait where the subject's left eye should be.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -724,7 +597,6 @@ puffy clouds. The bed looks unmade, yet the thin layer of dust coating every sur
 on the floor.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -733,8 +605,6 @@ on the floor.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -754,7 +624,6 @@ the room is unfurnished save for a sleeping cushion and blanket thrown into one 
 center of the room is a glowing green disc, it's surface covered in strange runes.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -763,8 +632,6 @@ center of the room is a glowing green disc, it's surface covered in strange rune
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -784,7 +651,6 @@ by an identifying label. At the center of the room is a contraption that resembl
 any you've seen before.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -793,8 +659,6 @@ any you've seen before.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -813,7 +677,6 @@ The room is composed almost completely of white stone. Several tables line the w
 components. A strange device in the center of the room's ceiling projects a beam of light directly downward, illuminating a platform at the room's center.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -822,8 +685,6 @@ components. A strange device in the center of the room's ceiling projects a beam
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -843,7 +704,6 @@ to a series of pipes that lead up to the ceiling. A single panel next to it is c
 control the operation of the device.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -852,8 +712,6 @@ control the operation of the device.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -874,7 +732,6 @@ to a metal box on a seperate table. The device appears to be operated by a nearb
 illegible handwriting.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -883,8 +740,6 @@ illegible handwriting.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -906,7 +761,6 @@ is little more than a haphazardly constructed platform itself. Even stranger, th
 aside from those on the level where you're currently standing.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -915,8 +769,6 @@ aside from those on the level where you're currently standing.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -936,7 +788,6 @@ you almost don't notice the overing in the glowing violet disc floating just abo
 a language you don't recognize.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -945,8 +796,6 @@ a language you don't recognize.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -966,7 +815,6 @@ using it for anything in particular. Curiously, however, there's a strange, glow
 it' surface dotted with unfamiliar runes.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -975,8 +823,6 @@ it' surface dotted with unfamiliar runes.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -995,7 +841,6 @@ The stone room is lined with cells, their iron bars coated with rust. Look to be
 a few of the cells have a few bones strewn about, it doesn't look like thi dungeon has been getting much use as of late.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -1004,8 +849,6 @@ a few of the cells have a few bones strewn about, it doesn't look like thi dunge
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -1027,7 +870,6 @@ been set up in one of the room's corners.";
             CraftingArea = true;
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -1036,8 +878,6 @@ been set up in one of the room's corners.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -1056,7 +896,6 @@ You're in a simple room with wood-panelled walls. It appears to be some sort of 
 Once majestic elk now gaze at you with glass eyes, and a ferociously positioned bear rears up at the center of the room.";
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }
@@ -1065,8 +904,6 @@ Once majestic elk now gaze at you with glass eyes, and a ferociously positioned 
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
-        public override bool VisitedByPlayer { get; set; }
-        public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -1083,10 +920,8 @@ Once majestic elk now gaze at you with glass eyes, and a ferociously positioned 
             Description = $@"
 The walls of the room are covered in weapons straight out of medieval Europe, alongside tapestries depicting historic battles. The floorspace is devoted to
 immaculately maintained suits of armor from various nations.";
-            CraftingArea = true;
             Y = y;
             X = x;
-            VisitedByPlayer = false;
             Items = new List<Item>();
         }
     }

@@ -42,44 +42,6 @@ namespace CastleGrimtol.Project
         }
     }
 
-    public class TestEnemy : Enemy
-    {
-        public override string Name { get; set; }
-        public override string ApproachDescription { get; set; }
-        public override string CombatDescription { get; set; }
-        public override string DefeatedDescription { get; set; }
-        public override string VictoriousDescription { get; set; }
-        public override string Type { get; set; }
-        public override double Health { get; set; }
-        public override double MaxHealth { get; set; }
-        public override double DefenseRating { get; set; }
-        public override double MaxDefenseRating { get; set; }
-        public override List<Attack> Attacks { get; set; }
-        public override List<Item> DropItems { get; set; }
-
-        public TestEnemy()
-        {
-            Name = "Test Enemy";
-            ApproachDescription = "A terrifying creature lumbers toward you.";
-            CombatDescription = "The creature flails around menacingly.";
-            DefeatedDescription = "The creature lets out a gurgling cry as it fall to the ground.";
-            VictoriousDescription = "The creature lands a killing blow.";
-            Type = "purification";
-            MaxHealth = 20;
-            Health = MaxHealth;
-            MaxDefenseRating = 10;
-            DefenseRating = MaxDefenseRating;
-            Attacks = new List<Attack>()
-            {
-               new Attack("Weak Attack", $"{this.Name} uses a weak attack.", 15, 50),
-               new Attack("Strong Attack", $"{this.Name} uses a strong attack.", 50, 100)
-            };
-            DropItems = new List<Item>(){
-                new BoneAsh(), new MetalCore(), new CrimsonOil()
-            };
-        }
-    }
-
     public class KilnbornSentinel : Enemy
     {
         public override string Name { get; set; }
@@ -116,8 +78,8 @@ is a blade hurtling toward you.";
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
-               new Attack("Blade Strike", $"\n{this.Name} slashes at you with a bladed arm.", 15, 50),
-               new Attack("Blade Spin", $"\n{this.Name} begins whirling toward you, striking wildly with its blades.", 50, 100)
+               new Attack("Blade Strike", $"\n{this.Name} slashes at you with a bladed arm.", 10, 50),
+               new Attack("Blade Spin", $"\n{this.Name} begins whirling toward you, striking wildly with its blades.", 20, 100)
             };
             DropItems = new List<Item>(){
                 new BoneAsh(), new MetalCore(), new CrimsonOil()
@@ -162,7 +124,7 @@ toward you in a lethal arc.";
             Attacks = new List<Attack>()
             {
                new Attack("Halberd Strike", $"\n{this.Name} swings at you with it's halberd.", 15, 50),
-               new Attack("Incinerating Breath", $"\n{this.Name} spews a glowing cloud of flame in your direction.", 50, 100)
+               new Attack("Incinerating Breath", $"\n{this.Name} spews a glowing cloud of flame in your direction.", 25, 100)
             };
             DropItems = new List<Item>(){
                 new BoneAsh(), new MetalCore(), new CrimsonOil()
@@ -202,8 +164,8 @@ from a gaping mouth lined with needle-like fang. Suddenly, the creature lets out
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
-               new Attack("Claw Strike", $"\n{this.Name} swings at you with it's piercing claws.", 15, 50),
-               new Attack("Vicious Bite", $"\n{this.Name} lurches toward you with it's horrific mouth open wide.", 50, 100)
+               new Attack("Claw Strike", $"\n{this.Name} swings at you with it's piercing claws.", 10, 50),
+               new Attack("Vicious Bite", $"\n{this.Name} lurches toward you with it's horrific mouth open wide.", 20, 100)
             };
             DropItems = new List<Item>(){
                 new AcridPowder(), new PutridNodule(), new YellowIchor()
@@ -247,7 +209,7 @@ hear is it's horrific wails.";
             Attacks = new List<Attack>()
             {
                new Attack("Vine Lash", $"\n{this.Name} strikes at you with a hideous, barbed vine.", 15, 50),
-               new Attack("Acidic Burst", $"\n{this.Name} launches a blob of corrosive liquid in your direction.", 50, 100)
+               new Attack("Acidic Burst", $"\n{this.Name} launches a blob of corrosive liquid in your direction.", 25, 100)
             };
             DropItems = new List<Item>(){
                 new AcridPowder(), new PutridNodule(), new YellowIchor()
@@ -287,8 +249,8 @@ looking much like a serpent ready to strike, and you realize that the lights are
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
-               new Attack("Gelatinous Strike", $"\n{this.Name} attacks you with a clublike pseudopod.", 15, 50),
-               new Attack("Gelatinous Bombardment", $"\n{this.Name} launches a mass of pulsating silver ooze directly at you.", 50, 100)
+               new Attack("Gelatinous Strike", $"\n{this.Name} attacks you with a clublike pseudopod.", 10, 50),
+               new Attack("Gelatinous Bombardment", $"\n{this.Name} launches a mass of pulsating silver ooze directly at you.", 20, 100)
             };
             DropItems = new List<Item>(){
                 new LuminousDust(), new TwistedCrystal(), new QuiveringOoze()
@@ -331,7 +293,7 @@ your back before your vision goes black.";
             Attacks = new List<Attack>()
             {
                new Attack("Stinger Strike", $"\n{this.Name} thrusts one of it's spine-tipped limbs at you.", 15, 50),
-               new Attack("Warp Strike", $"\n{this.Name} suddenly vanishes, only to reappear directly behind you, slashing furiously with it's spiny limbs.", 50, 100)
+               new Attack("Warp Strike", $"\n{this.Name} suddenly vanishes, only to reappear directly behind you, slashing furiously with it's spiny limbs.", 25, 100)
             };
             DropItems = new List<Item>(){
                 new LuminousDust(), new TwistedCrystal(), new QuiveringOoze()
