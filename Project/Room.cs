@@ -54,6 +54,7 @@ namespace CastleGrimtol.Project
         public override string Name { get; set; }
         public override string Description { get; set; }
         public override bool VisitedByPlayer { get; set; }
+        public override bool CraftingArea { get; set; }
         public override Note Note { get; set; }
         public override void UseItem(Item item)
         {
@@ -78,6 +79,7 @@ space...probably Dr. Rithbaun's handiwork.";
             Y = y;
             X = x;
             VisitedByPlayer = true;
+            CraftingArea = true;
             Note = new Note("Page from Rithbaun's Journal: Main Foyer", $@"
 
 What a fine mess I'm in! It's been nearly a week days since those three went

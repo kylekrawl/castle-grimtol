@@ -185,7 +185,7 @@ namespace CastleGrimtol.Project
                 for (var x = 0; x < Grid[y].Count; x++)
                 {
                     var room = Grid[y][x];
-
+                    //room.VisitedByPlayer = true; //For testing
                     // Build Top Border
 
                     if (y == 0)
@@ -204,7 +204,8 @@ namespace CastleGrimtol.Project
                         }
                     }
 
-                    // Build Middle Border
+                    // Build Middle Section
+
                     string centerChar;
 
                     if (room.VisitedByPlayer)
@@ -250,8 +251,7 @@ namespace CastleGrimtol.Project
                         bottomBorder += room.VisitedByPlayer ? "'---'" : "?????";
                     }
                 }
-
-                //Console.WriteLine($"{topBorder}\n{middleSection}\n{bottomBorder}");
+                
                 Console.WriteLine(topBorder);
                 Console.WriteLine(middleSection);
                 if (!(bottomBorder == ""))
@@ -260,17 +260,6 @@ namespace CastleGrimtol.Project
                 }
 
             }
-            /*
-            @",___,,___,,___,";
-            @"|        ||   |";
-            @"|- -||---||- -|";
-            @"|        ||   |";
-            @"|- -||- -||- -|";
-            @"|             |";
-            @"|---||---||- -|";
-            @"|   ||        |";
-            @"'---''---''---'";
-            */
 
         }
 

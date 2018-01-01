@@ -37,6 +37,21 @@ namespace CastleGrimtol.Project
         }
     }
 
+    public class DivinePistol : Item
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override string DamageType { get; set; }
+        public override double Damage { get; set; }
+        public DivinePistol()
+        {
+            Name = "Divine Pistol";
+            Description = "A sacred relic capable of great destruction.";
+            DamageType = "basic";
+            Damage = 50;
+        }
+    }
+
     public class IncendiaryPistol : Item
     {
         public override string Name { get; set; }
@@ -284,6 +299,36 @@ namespace CastleGrimtol.Project
         }
     }
 
+    public class MoltenExtract : Item
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
+        public MoltenExtract()
+        {
+            Name = "Molten Extract";
+            Description = "A dimly glowing red-orange liquid that emits a faint heat.";
+            CraftingCombinations = new List<List<string>>(){
+                new List<string>(){ "Reactive Solid", "Crimson Oil"}
+            };
+        }
+    }
+
+    public class ScarletMarrow : Item
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
+        public ScarletMarrow()
+        {
+            Name = "Scarlet Marrow";
+            Description = "A soft, bright red paste that gives off a strange steam.";
+            CraftingCombinations = new List<List<string>>(){
+                new List<string>(){ "Reactive Solid", "Bone Dust"}
+            };
+        }
+    }
+
     public class PulseEmitter : Item
     {
         public override string Name { get; set; }
@@ -450,10 +495,14 @@ namespace CastleGrimtol.Project
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
         public InfernalElixir()
         {
             Name = "Infernal Elixir";
-            Description = "A vial of glowing red liquid. The parchment label wrapped around it cryptically reads 'ignis aurum probat'.";
+            Description = "A vial of glowing red liquid. Its temperature seems to alternate between hot and cold.";
+            CraftingCombinations = new List<List<string>>(){
+                new List<string>(){ "Scarlet Marrow", "Molten Extract"}
+            };
         }
     }
 

@@ -28,7 +28,10 @@ namespace CastleGrimtol.Project
             typeof(Panacea),
             typeof(PulseEmitter),
             typeof(ReactiveSolid),
-            typeof(FuelOrb)
+            typeof(FuelOrb),
+            typeof(MoltenExtract),
+            typeof(ScarletMarrow),
+            typeof(InfernalElixir)
         };
         public Dictionary<string, string> EnemyWeaknesses { get; set; } = new Dictionary<string, string>() {
             {"purification", "corrosive"},
@@ -379,6 +382,11 @@ devoid of doors of any sort.
                         validActionKeys.Add("c");
                         Console.WriteLine("| C | Craft Item");
                     }
+                    if (CurrentRoom.Name == "Main Foyer")
+                    {
+                        validActionKeys.Add("r");
+                        Console.WriteLine("| R | Rest");
+                    }
                     Console.WriteLine("| H | Help");
                     Console.WriteLine("| Q | Quit");
 
@@ -465,6 +473,14 @@ devoid of doors of any sort.
                     {
                         Console.Clear();
                         MovePlayer(1, 0);
+                        break;
+                    }
+                    if (KeyInfo.Key == ConsoleKey.R && validActionKeys.Contains("r"))
+                    {
+                        Console.Clear();
+                        Rest();
+                        Console.WriteLine("\n<Press any key to continue.>");
+                        Console.ReadKey(true);
                         break;
                     }
                     Console.WriteLine("Invalid action.");
@@ -1059,6 +1075,41 @@ devoid of doors of any sort.
             }
             Console.WriteLine("\n<Press any key to continue.>");
             Console.ReadKey(true);
+        }
+
+        public void Rest()
+        {
+            Console.WriteLine("You decide to rest.");
+            Console.WriteLine($@"
+
+In your dreams, you see a horrific vision of the castle floating in a dark void, its walls 
+splitting apart, only to rearrange themselves in a confusing labyrinth. You see horrific
+creatures breaking their way through the floors, ready to haunt the nightmarish halls...");
+            CurrentPlayer.Health = CurrentPlayer.MaxHealth;
+            for (int y = 0; y < CurrentMap.Grid.Count; y++)
+            {
+                var row = CurrentMap.Grid[y];
+                for (int x = 0; x < row.Count; x++)
+                {
+                    var room = row[x];
+                    room.Exits = new List<string>();
+                    room.PassagesBuilt = false;
+                    if (room.Enemy != null && room.Enemy.Health < room.Enemy.MaxHealth)
+                    {
+                        room.Enemy.Health = room.Enemy.MaxHealth;
+                    }
+                }
+            }
+            CurrentMap.GeneratePassages();
+            Console.WriteLine("\n<Press any key to continue.>");
+            Console.ReadKey(true);
+            Console.Clear();
+            Console.WriteLine($@"
+You wake up in a cold sweat. Despite the nightmare, you feel slightly better. However, 
+something about the room doesn't seem quite right. The paintings and tapestries seem
+slightly different from before, and evrything seems to have moved around, ever so slightly.
+
+{CurrentPlayer.Name}: I could've sworn the exits were in a different spot...");
         }
 
         public Game()

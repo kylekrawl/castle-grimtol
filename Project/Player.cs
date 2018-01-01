@@ -23,7 +23,8 @@ namespace CastleGrimtol.Project
             Score = 0;
             Inventory = new List<Item>() { 
                 new FlintlockPistol(),
-                new ArcaneFuse()
+                //new ArcaneFuse()
+                //new DivinePistol()
             };
             Notes = new List<Note>() {
                 new Note("Dr. Rithbaun's Letter", $@"
