@@ -69,9 +69,10 @@ namespace CastleGrimtol.Project
         {
             Name = "Main Foyer";
             Description = $@"
-A large room crafted from dark, polished stone. A collection of tapestries and paintings adorn the walls, 
-and a large, ornately carved table sits in the room's center. A makeshift alchemical workstation takes 
-up most of the table's space...probably Dr. Rithbaun's handiwork.";
+A large room crafted from dark, polished stone. A collection of tapestries 
+and paintings adorn the walls, and a large, ornately carved table sits in the 
+room's center. A makeshift alchemical workstation takes up most of the table's 
+space...probably Dr. Rithbaun's handiwork.";
             Y = y;
             X = x;
             VisitedByPlayer = true;
@@ -174,9 +175,10 @@ long as I can keep killing them.");
         {
             Name = "Assembly Lab";
             Description = $@"
-You're in a room lit by a dim orange glow. Dark metal plates are affixed to the walls, and the floorspace is almost entirely taken up by metal operating
-tables aligned in neat, even rows. Several of them are occupied by what look to be human skeletons with strange bit of machinery attached to them. 
-A tidy alchemical workstation sits in one coerner of the room.";
+You're in a room lit by a dim orange glow. Dark metal plates are affixed to the walls, 
+and the floorspace is almost entirely taken up by metal operating tables aligned in neat, 
+even rows. Several of them are occupied by what look to be human skeletons with strange bit 
+of machinery attached to them. A tidy alchemical workstation sits in one coerner of the room.";
             Y = y;
             X = x;
             CraftingArea = true;
@@ -203,8 +205,9 @@ A tidy alchemical workstation sits in one coerner of the room.";
         {
             Name = "Storage Area";
             Description = $@"
-The room is lit only by a faintly glowing lamp on a counter at its center. The walls are completely covered with square metal lockers,
-the majority of which are filled with various mechanical components. A few of them contain bones, neatly sorted by type.";
+The room is lit only by a faintly glowing lamp on a counter at its center. The walls are completely 
+covered with square metal lockers, the majority of which are filled with various mechanical components. 
+A few of them contain bones, neatly sorted by type.";
             Y = y;
             X = x;
             RespawnItems = new List<Item>() { new BoneAsh(), new MetalCore() };
@@ -231,9 +234,10 @@ the majority of which are filled with various mechanical components. A few of th
         {
             Name = "Overgrown Lab";
             Description = $@"
-You're in a room that looks like it may have once been a lab, but is now almost entirely covered by a strange black fungus or moss. Thorned vines
-jut from cracks in the dark stone walls at odd intervals, and nearly all of the tables in the room have been overtaken by the growth. Only a small
-alchemical workstation in one corner of the room appears to be undisturbed.";
+You're in a room that looks like it may have once been a lab, but is now almost entirely covered by 
+a strange black fungus or moss. Thorned vines jut from cracks in the dark stone walls at odd intervals, 
+and nearly all of the tables in the room have been overtaken by the growth. Only a small alchemical 
+workstation in one corner of the room appears to be undisturbed.";
             Y = y;
             X = x;
             CraftingArea = true;
@@ -260,9 +264,10 @@ alchemical workstation in one corner of the room appears to be undisturbed.";
         {
             Name = "Germination Vats";
             Description = $@"
-Aside from a metal walkway around its edges, the floor of this room appears to have been rather haphazardly dug out. The gaping pit at its center is
-filled with rows of massive glass containers filled with a bright green, cloudy liquid. A few of them seem to have large, dark shapes suspended at their center.
-They look vaguely organic, but beyond that you can't quite identify them.";
+Aside from a metal walkway around its edges, the floor of this room appears to have been rather 
+haphazardly dug out. The gaping pit at its center is filled with rows of massive glass containers 
+filled with a bright green, cloudy liquid. A few of them seem to have large, dark shapes suspended 
+at their center. They look vaguely organic, but beyond that you can't quite identify them.";
             Y = y;
             X = x;
             RespawnItems = new List<Item>() { new AcridPowder(), new YellowIchor() };
@@ -289,8 +294,9 @@ They look vaguely organic, but beyond that you can't quite identify them.";
         {
             Name = "Makeshift Lab";
             Description = $@"
-The room appears to be some kind of kitchen and dining area that has been somewhat hapazardly repurposed as a lab. Pages and pages of notes cover almost every
-available surface, and alchemical tools of all sorts seem to be scattered seemingly at random around the room.";
+The room appears to be some kind of kitchen and dining area that has been somewhat hapazardly repurposed 
+as a lab. Pages and pages of notes cover almost every available surface, and alchemical tools of all 
+sorts seem to be scattered seemingly at random around the room.";
             Y = y;
             X = x;
             CraftingArea = true;
@@ -317,8 +323,9 @@ available surface, and alchemical tools of all sorts seem to be scattered seemin
         {
             Name = "Hapahazard Library";
             Description = $@"
-The room looks to have been a pantry or cellar of some sort. The wooden shelves that line it's walls, however, are now filled entirely with books. They all look to be
-fairly advanced alchemical texts, along with a few tomes on cross-planar travel and even more esoteric topics.";
+The room looks to have been a pantry or cellar of some sort. The wooden shelves that line it's walls, 
+however, are now filled entirely with books. They all look to be fairly advanced alchemical texts, 
+along with a few tomes on cross-planar travel and even more esoteric topics.";
             Y = y;
             X = x;
             RespawnItems = new List<Item>() { new LuminousDust(), new TwistedCrystal() };
@@ -357,18 +364,20 @@ fairly advanced alchemical texts, along with a few tomes on cross-planar travel 
         {
             Name = "Refining Lab";
             Description = $@"
-Sturdy wooden counters lined with various alchemical and blackmithing tools are arranged along the room's walls. At it's center lies
-a large kiln. It looks to have been recently used...a powdery residue lines its interior. The last user of the device apparently
-didn't want anyone else to have access to it, however, as the control panel next to it has been smashed to pieces with something heavy. 
-It's likely beyond repair.";
+Sturdy wooden counters lined with various alchemical and blackmithing tools are arranged along 
+the room's walls. At it's center lies a large kiln. It looks to have been recently used...a 
+powdery residue lines its interior. The last user of the device apparently didn't want anyone 
+else to have access to it, however, as the control panel next to it has been smashed to pieces 
+with something heavy. It's likely beyond repair.";
             Y = y;
             X = x;
             Items = new List<Item>() { new AlchemicalResidue() };
             Note = new Note("Page from Aldric's Journal: Refining Lab", $@"
-The catalyst has gone missing again. I assume that one of those inferior beasts my siblings created wandered off with it.
-I'm going to have to find something else to power the furnace.
+The catalyst has gone missing again. I assume that one of those inferior beasts my siblings 
+created wandered off with it. I'm going to have to find something else to power the furnace.
 
-This is infuriating! If I happen across Miranda or Theodore I'm going to strangle them with my bare hands!");
+This is infuriating! If I happen across Miranda or Theodore I'm going to strangle them with 
+my bare hands!");
         }
     }
 
@@ -388,8 +397,9 @@ This is infuriating! If I happen across Miranda or Theodore I'm going to strangl
                 RemoveItems.Add(item);
                 Stage = "furnace on";
                 Description = $@"
-The entire room is lined with thick metal plating affixed to that walls with rivets. The furnace at the center of the room gives off an intense heat as the Fuel 
-Orb in the console next to it pulses with orange light.";
+The entire room is lined with thick metal plating affixed to that walls with rivets. The 
+furnace at the center of the room gives off an intense heat as the Fuel Orb in the console 
+next to it pulses with orange light.";
             }
             else
             {
@@ -420,9 +430,10 @@ Orb in the console next to it pulses with orange light.";
         {
             Name = "Furnace Room";
             Description = $@"
-The entire room is lined with thick metal plating affixed to that walls with rivets. It's empty save for a large metal cylinder at its center. On closer inspection,
-the object appears to be an alchemical furnace of some sort, it's hatch ajar. The interior is room temperature...it's clearly not working. The console next to it has
-a hemispherical indentation.";
+The entire room is lined with thick metal plating affixed to that walls with rivets. It's 
+empty save for a large metal cylinder at its center. On closer inspection, the object appears 
+to be an alchemical furnace of some sort, it's hatch ajar. The interior is room temperature...
+it's clearly not working. The console next to it has a hemispherical indentation.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -444,15 +455,17 @@ a hemispherical indentation.";
             if (item.Name == "Steel Key")
             {
                 Console.WriteLine($@"
-The Steel Key fits perfectly into the safe's keyhole. You turn the key and swing open the door to reveal...a concrete wall. Somebody clearly didn't
-want anyone to get into this safe. On closer inspection, the wall is cracked, and there seems to be a space behind it. It'll still take a bit of force
-to break through, but you're an alchemist after all...");
+The Steel Key fits perfectly into the safe's keyhole. You turn the key and swing open the door 
+to reveal...a concrete wall. Somebody clearly didn't want anyone to get into this safe. On closer 
+inspection, the wall is cracked, and there seems to be a space behind it. It'll still take a bit 
+of force to break through, but you're an alchemist after all...");
                 RemoveItems.Add(item);
                 Stage = "safe open";
                 Description = $@"
-The room's walls are decorated with a wallpaper bearing a repeating geometric pattern, and the floor is covered with an expensive-looking rug. Two couches sit before
-an elaborate stone fireplace at one edge of the room, both covered in a thin layer of dust. The wall safe at the corner of the room lies open, but the concrete wall 
-inside presents an annoying obstacle.";
+The room's walls are decorated with a wallpaper bearing a repeating geometric pattern, and the 
+floor is covered with an expensive-looking rug. Two couches sit before an elaborate stone 
+fireplace at one edge of the room, both covered in a thin layer of dust. The wall safe at 
+the corner of the room lies open, but the concrete wall inside presents an annoying obstacle.";
             }
             else
             {
@@ -461,14 +474,16 @@ inside presents an annoying obstacle.";
                     if (Stage == "safe open")
                     {
                         Console.WriteLine($@"
-You lob an {item.Name} at the concrete wall. The explosion easily destroys it's target, revealing a small space at the very back of the safe.
-Sitting amidst the rubble of the wall is a strange, pointed object.");
+You lob an {item.Name} at the concrete wall. The explosion easily destroys it's target, revealing 
+a small space at the very back of the safe. Sitting amidst the rubble of the wall is a 
+strange, pointed object.");
                         RemoveItems.Add(item);
                         Items.Add(new SunCrest());
                         Description = $@"
-The room's walls are decorated with a wallpaper bearing a repeating geometric pattern, and the floor is covered with an expensive-looking rug. Two couches sit before
-an elaborate stone fireplace at one edge of the room, both covered in a thin layer of dust. The wall safe at the corner of the room lies open, and the concrete wall
-inide has been reduced to rubble.";
+The room's walls are decorated with a wallpaper bearing a repeating geometric pattern, and the 
+floor is covered with an expensive-looking rug. Two couches sit before an elaborate stone 
+fireplace at one edge of the room, both covered in a thin layer of dust. The wall safe at 
+the corner of the room lies open, and the concrete wall inside has been reduced to rubble.";
                     }
                     else
                     {
@@ -489,9 +504,11 @@ inide has been reduced to rubble.";
         {
             Name = "Abandoned Parlor";
             Description = $@"
-The room's walls are decorated with a wallpaper bearing a repeating geometric pattern, and the floor is covered with an expensive-looking rug. Two couches sit before
-an elaborate stone fireplace at one edge of the room, both covered in a thin layer of dust. In one corner of the room the wallpaper has been peeled aside, revealing a 
-a large safe set into the wall. A keyhole sits conspicuously above its handle.";
+The room's walls are decorated with a wallpaper bearing a repeating geometric pattern, and 
+the floor is covered with an expensive-looking rug. Two couches sit before an elaborate stone 
+fireplace at one edge of the room, both covered in a thin layer of dust. In one corner of the 
+room the wallpaper has been peeled aside, revealing a large safe set into the wall. A keyhole 
+sits conspicuously above its handle.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -513,11 +530,13 @@ a large safe set into the wall. A keyhole sits conspicuously above its handle.";
             if (item.Name == "Sun Crest")
             {
                 Console.WriteLine($@"
-You place the Sun Crest in the indentation on the stone platform. The gems on its surface begin to glow as they catch the ray of sun peeking through the skylight.
-You hear a click, and suddenly all eight of the braziers in the room light up with a burst of pale orange flame. A compartment in the platform has opened to reveal
-some kind of metal lid.
+You place the Sun Crest in the indentation on the stone platform. The gems on its surface begin 
+to glow as they catch the ray of sun peeking through the skylight. You hear a click, and suddenly 
+all eight of the braziers in the room light up with a burst of pale orange flame. A compartment 
+in the platform has opened to reveal some kind of metal lid.
 
-You notice that glowing orange letters have appeared on the platfrom beneath the crest. They spell out a cryptic message: 
+You notice that glowing orange letters have appeared on the platfrom beneath the crest. They spell 
+out a cryptic message: 
 
 'Only with darkness shall the path to light be known.'
 
@@ -526,21 +545,24 @@ You notice that glowing orange letters have appeared on the platfrom beneath the
                 RemoveItems.Add(item);
                 Items.Add(new BrazierLid());
                 Description = $@"
-The outside-facing walls of the room feature large windows that have since been neatly boarded up. The skylight in the ceiling has been given a similar treatment.
-The eight iron braziers along the room's edges are now lit, giving off a pale orange glow. The platform at the room's center now bears a cryptic message: 
+The outside-facing walls of the room feature large windows that have since been neatly boarded up. 
+The skylight in the ceiling has been given a similar treatment. The eight iron braziers along the 
+room's edges are now lit, giving off a pale orange glow. The platform at the room's center now bears 
+a cryptic message: 
 
 'Only in deepest darkness shall the path to light be known.'";
             }
             else if (item.Name == "Incendiary Pistol")
             {
                 Console.WriteLine($@"
-Thinking incendiary bullets might do the trick, you fire a shot from your pistol at the nearest brazier. It ignites briefly, but the flame quickly dies.
-This method probably won't be of much use.");
+Thinking incendiary bullets might do the trick, you fire a shot from your pistol at the nearest 
+brazier. It ignites briefly, but the flame quickly dies. This method probably won't be of much use.");
             }
             else if (item.Name == "Incendiary Grenade")
             {
                 Console.WriteLine($@"
-That would probably do quite a bit more than just lighting a few braziers. There has to be a better way...");
+That would probably do quite a bit more than just lighting a few braziers. There has to be a better 
+way...");
             }
             else if (item.Name == "Brazier Lid")
             {
@@ -600,8 +622,9 @@ That would probably do quite a bit more than just lighting a few braziers. There
                     RemoveItems.Add(item);
                     Items.Add(new ArcaneFuse());
                     Description = $@"
-The outside-facing walls of the room feature large windows that have since been neatly boarded up. The skylight in the ceiling has been given a similar treatment.
-The eight iron braziers along the room's edges remain extinguished.";
+The outside-facing walls of the room feature large windows that have since been neatly boarded up. 
+The skylight in the ceiling has been given a similar treatment. The eight iron braziers along the 
+room's edges remain extinguished.";
                 }
                 else
                 {
@@ -623,29 +646,44 @@ The eight iron braziers along the room's edges remain extinguished.";
         {
             Name = "Converted Sunroom";
             Description = $@"
-The outside-facing walls of the room feature large windows that have since been neatly boarded up. The skylight in the ceiling has been given a similar treatment.
-The room itelf is completely empty save for two features. Eight iron braziers are arranged along the room's edges, one in each corner and one at the midpoint of each wall. 
-A raised stone platform sit at the room's center. The platform has a strange, eight-pointed indentation at its center. Around this indentation, the phrase 'post tenebras lux' 
-has been carved in large, Gothic letters.";
+The outside-facing walls of the room feature large windows that have since been neatly boarded up. 
+The skylight in the ceiling has been given a similar treatment. The room itelf is completely empty 
+save for two features. Eight iron braziers are arranged along the room's edges, one in each corner 
+and one at the midpoint of each wall. A raised stone platform sit at the room's center. The platform 
+has a strange, eight-pointed indentation at its center. Around this indentation, the phrase 
+'post tenebras lux' has been carved in large, Gothic letters.";
             Y = y;
             X = x;
             Items = new List<Item>();
             RemoveItems = new List<Item>();
             Note = new Note("Page from Aldric's Journal: Converted Sunroom", $@"
-I can't stand looking at the sun anymore. What need do I have for it, when I have the pure, beautiful light of alchemical flame! And that hideous crest that once had a 
-place of honor in this room...it shall remain locked away, just like the light it celebrates. Indeed, the sun is a MOCKERY of my glorious creations! 
+I can't stand looking at the sun anymore. What need do I have for it, when I have the pure, beautiful 
+light of alchemical flame! And that hideous crest that once had a place of honor in this room...it 
+shall remain locked away, just like the light it celebrates. Indeed, the sun is a MOCKERY of my glorious 
+creations! 
 
-But Rithbaun. Rithbaun has other ideas. I know he's hunting me. He's jealous of my work! He tried to tell me I was going too far, but I've SEEN what the 
-glorious light of purity can do. If he gets to me, the world will need a record of my journey. Of my VISION.
+But Rithbaun. Rithbaun has other ideas. I know he's hunting me. He's jealous of my work! He tried to tell 
+me I was going too far, but I've SEEN what the glorious light of purity can do. If he gets to me, the 
+world will need a record of my journey. Of my VISION.
 
-I've known it since I was young. There's something wrong with the world. Greed, war, destruction...the genesis of it all lies within us. Mankind is a disease, and as a young man I 
-set out to find a cure. I left Grimtol heading northeast, until after many weeks of travel I found myself in the wastes of Siberia. I sought to conquer my own mental weakness through exposure 
-to the elements, but it left me feeling empty. I continued my search, heading south into China. I spoke to many of the scholars there, but none could help me in my search. Losing hope, 
-I headed southeast through Laos and Vietnam,eventually making my way to the Phillippines. It was there that rumors of a revered sage brought me west to India. I studied under many 
-excellent teachers there, but never found the person or the answer I sought. Falling deeper into despair, I turned my sights to the southwest, crossing the Atlantic until I reached
-South America. From there, I wandered northwest through Central America. I was barely lucid, but I felt something powerful driving me onward. I soon reached the United States, and heard
-a beautiful voice calling me to the north. And it was in the middle of the Canadian wilderness that I saw it. A beautiful vison of the world, cleansed by fire, and humanity elevated to
-its ideal form. No war, no disease, no suffering...the path lay before me with astonishing clarity. When I finally sailed east, returning to Grimtol, I knew that I had finally found it.
+I've known it since I was young. There's something wrong with the world. Greed, war, destruction...the 
+genesis of it all lies within us. Mankind is a disease, and as a young man I set out to find a cure. 
+
+I left Grimtol heading northeast, until after many weeks of travel I found myself in the wastes of Siberia. 
+I sought to conquer my own mental weakness through exposure to the elements, but it left me feeling empty. 
+I continued my search, heading south into China. I spoke to many of the scholars there, but none could help 
+me in my search. Losing hope, I headed southeast through Laos and Vietnam,eventually making my way to the 
+Phillippines. It was there that rumors of a revered sage brought me west to India. 
+
+I studied under many excellent teachers there, but never found the person or the answer I sought. Falling 
+deeper into despair, I turned my sights to the southwest, crossing the Atlantic until I reached South America. 
+From there, I wandered northwest through Central America. I was barely lucid, but I felt something powerful 
+driving me onward. I soon reached the United States, and heard a beautiful voice calling me to the north. 
+And it was in the middle of the Canadian wilderness that I saw it. A beautiful vison of the world, cleansed 
+by fire, and humanity elevated to its ideal form. No war, no disease, no suffering...the path lay before 
+me with astonishing clarity. When I finally sailed east, returning to Grimtol, I knew that I had finally found 
+it.
+
 The CURE. The cure for humanity.
 
 <After this are several pages of mostly incomprehensible ranting>");
@@ -670,11 +708,12 @@ The CURE. The cure for humanity.
         {
             Name = "Immaculate Gallery";
             Description = $@"
-The room is crafted almost entirely from white stone, and lit by lanterns tucked into wall sconces at regular intervals. The walls
-are lined with paintings, most of them rendered in a stunningly realistic style. Statues of human figures reminiscent of the work
-of the great Classical sculptors are arranged neatly around the room's edges. At the center of the room is a massive jade statue of
-an Eastern dragon. It's eyes seem to stare directly at you. The statues's tail is wrapped around an egg seemingly carved from solid gold. 
-At the base of the statue is an elaborate arrangement of thick copper wires, all of them connected to a cylindrical indentation that currently 
+The room is crafted almost entirely from white stone, and lit by lanterns tucked into wall sconces at regular 
+intervals. The walls are lined with paintings, most of them rendered in a stunningly realistic style. Statues 
+of human figures reminiscent of the work of the great Classical sculptors are arranged neatly around the room's 
+edges. At the center of the room is a massive jade statue of an Eastern dragon. It's eyes seem to stare directly 
+at you. The statues's tail is wrapped around an egg seemingly carved from solid gold. At the base of the statue 
+is an elaborate arrangement of thick copper wires, all of them connected to a cylindrical indentation that currently 
 lies empty.";
             Y = y;
             X = x;
@@ -704,9 +743,10 @@ lies empty.";
         {
             Name = "Aldric's Study";
             Description = $@"
-A wood-panelled room decorated with tapestries and sculptures, all placed with seemingly painstaking precision. A small desk lies in one corner, the papers on its 
-surface neatly organized. Several bookshelves line the walls, and a quick glance suggests the books have been arranged alphabetically. The only thing out of place 
-in the room is the glowing red disc hovering in midair at the room's center. Strange runes flicker across it's surface.";
+A wood-panelled room decorated with tapestries and sculptures, all placed with seemingly painstaking precision. 
+A small desk lies in one corner, the papers on its surface neatly organized. Several bookshelves line the walls, 
+and a quick glance suggests the books have been arranged alphabetically. The only thing out of place in the room 
+is the glowing red disc hovering in midair at the room's center. Strange runes flicker across it's surface.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -714,16 +754,17 @@ in the room is the glowing red disc hovering in midair at the room's center. Str
 
 <It looks like Dr. Rithbaun's handwriting...>
 
-This is worse than I thought. If that portal in his study is any indication, Aldric has found a way to travel between planes. No telling what sorts of power he could
-gain.
+This is worse than I thought. If that portal in his study is any indication, Aldric has found a way to travel 
+between planes. No telling what sorts of power he could gain.
 
-He was a promising enough student. But it would appear that alchemy was only a means to an end for him. He was obsessed with honing his body and mind, and saw the discipline of
-alchemical Purification as the path to perfection. It would've been fine if he'd stopped there, but once he started ranting about elevating humanity itself to a more ideal form,
-I knew there'd be trouble. I don't quite know why, but that man despised human nature. I'm not sure how those infernal things he created play into his crazed vision, but I'd rather 
-not wait around to find out.
+He was a promising enough student. But it would appear that alchemy was only a means to an end for him. He was 
+obsessed with honing his body and mind, and saw the discipline of alchemical Purification as the path to perfection. 
+It would've been fine if he'd stopped there, but once he started ranting about elevating humanity itself to a more 
+ideal form, I knew there'd be trouble. I don't quite know why, but that man despised human nature. I'm not sure 
+how those infernal things he created play into his crazed vision, but I'd rather not wait around to find out.
 
-If I can reopen that portal, I might be able to pull him back to this plane. For a portal like that, he'd have to have hidden an Anchor somewhere...if I can find it, opening this
-portal will be a trivial matter.");
+If I can reopen that portal, I might be able to pull him back to this plane. For a portal like that, he'd have to 
+have hidden an Anchor somewhere...if I can find it, opening this portal will be a trivial matter.");
         }
     }
 
@@ -745,8 +786,8 @@ portal will be a trivial matter.");
                 }
                 Items.Add(new MisshapenSkull());
                 Description = $@"
-You're in an open courtyard that looks to have been abandoned long ago. The remnants of cobblestone pathways are barely visible beneath overgrown shrubs. The pool at the 
-courtyard's center now lies empty.";
+You're in an open courtyard that looks to have been abandoned long ago. The remnants of cobblestone pathways are barely 
+visible beneath overgrown shrubs. The pool at the courtyard's center now lies empty.";
             }
             else
             {
@@ -766,9 +807,9 @@ courtyard's center now lies empty.";
         {
             Name = "Fetid Courtyard";
             Description = $@"
-You're in an open courtyard that looks to have been abandoned long ago. The remnants of cobblestone pathways are barely visible beneath overgrown shrubs. The pool at the 
-courtyard's center is clogged with thick slime that appears to be slowly eating away at the marble tiles around it. You can barely make out an object beneath the 
-corrosive muck.";
+You're in an open courtyard that looks to have been abandoned long ago. The remnants of cobblestone pathways are barely 
+visible beneath overgrown shrubs. The pool at the courtyard's center is clogged with thick slime that appears to be slowly 
+eating away at the marble tiles around it. You can barely make out an object beneath the corrosive muck.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -807,8 +848,9 @@ Vivi...I dedicate this to you.");
         {
             Name = "Macabre Workroom";
             Description = $@"
-The room is dimly lit by a faint green glow. As your eyes adjust to the light, you see that the walls of the room are covered with sketches, all depicting horrific
-figures. Some appear to be horrifically deformed skeletons, while others resemble carnivorous, plantlike creatures. Hanging in the center of the room is a collection 
+The room is dimly lit by a faint green glow. As your eyes adjust to the light, you see that the walls of the 
+room are covered with sketches, all depicting horrific figures. Some appear to be horrifically deformed skeletons, 
+while others resemble carnivorous, plantlike creatures. Hanging in the center of the room is a collection 
 of bones wired together into a terrifiying skeletal form. The grim sculpture appears to be missing a head.";
             Y = y;
             X = x;
@@ -834,10 +876,12 @@ of bones wired together into a terrifiying skeletal form. The grim sculpture app
         {
             Name = "Clockwork Garden";
             Description = $@"
-The room is dominated by a massive structure composed of a multitude of gears and mechanical limbs that protude from the walls, ceiling and floor to form a veritable
-maze of strange clockwork parts. On closer inspection, the contraption appears to have been designed with a plant motif -- the gears resemble thorned flowers, while the 
-mechanical limbs mimic vines and branches. The centerpoint of the device appears to be a 'trunk' at the center of the room. It's covered with gears of varying sizes. You
-notice that only one of the gears is spinning...the gear that would go next to it appears to be missing.";
+The room is dominated by a massive structure composed of a multitude of gears and mechanical limbs that protude 
+from the walls, ceiling and floor to form a veritable maze of strange clockwork parts. On closer inspection, 
+the contraption appears to have been designed with a plant motif -- the gears resemble thorned flowers, while the 
+mechanical limbs mimic vines and branches. The centerpoint of the device appears to be a 'trunk' at the center of 
+the room. It's covered with gears of varying sizes. You notice that only one of the gears is spinning...the gear 
+that would go next to it appears to be missing.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -862,10 +906,11 @@ notice that only one of the gears is spinning...the gear that would go next to i
         {
             Name = "Ransacked Workroom";
             Description = $@"
-The room looks to have been used for artistic work at some point, but now lies in complete disarray. Discarded sketches cover the floor alongside spilled
-containers of ink and paint. An overturned easel lies in one corner next to a wall of empty shelves. Only one item appears undisturbed: A large painting of
-a young girl hanging on one of the walls. Beneath the painting a small brass plate with the name 'Vivian Grimtol' inscribed on it. On closer inspection, there appears to
-be a hole gouged in the portrait where the subject's left eye should be.";
+The room looks to have been used for artistic work at some point, but now lies in complete disarray. Discarded 
+sketches cover the floor alongside spilled containers of ink and paint. An overturned easel lies in one corner 
+next to a wall of empty shelves. Only one item appears undisturbed: A large painting of a young girl hanging on 
+one of the walls. Beneath the painting is a small brass plate with the name 'Vivian Grimtol' inscribed on it. On 
+closer inspection, there appears to be a hole gouged in the portrait where the subject's left eye should be.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -890,9 +935,9 @@ be a hole gouged in the portrait where the subject's left eye should be.";
         {
             Name = "Vivian's Room";
             Description = $@"
-You're in what looks to be a child's room. The wallpaper features a pink, floral design, and the ceiling has been painted to resemble a blue sky with a few
-puffy clouds. The bed looks unmade, yet the thin layer of dust coating every surface in the room suggest it hasn't been disturbed in awhile. A few dolls lie scattered
-on the floor.";
+You're in what looks to be a child's room. The wallpaper features a pink, floral design, and the ceiling has been 
+painted to resemble a blue sky with a few puffy clouds. The bed looks unmade, yet the thin layer of dust coating 
+every surface in the room suggest it hasn't been disturbed in awhile. A few dolls lie scattered on the floor.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -922,9 +967,10 @@ on the floor.";
         {
             Name = "Miranda's Studio";
             Description = $@"
-The wall of the room are covered with half-finished sketches and paintings, most of them in a decidely grotesque style. Aside from the artwork,
-the room is unfurnished save for a sleeping cushion and blanket thrown into one of the corners, seemingly as an afterthought. Hovering in the 
-center of the room is a glowing green disc, it's surface covered in strange runes.";
+The wall of the room are covered with half-finished sketches and paintings, most of them in a decidely grotesque 
+style. Aside from the artwork, the room is unfurnished save for a sleeping cushion and blanket thrown into one 
+of the corners, seemingly as an afterthought. Hovering in the center of the room is a glowing green disc, it's 
+surface covered in strange runes.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -932,14 +978,18 @@ center of the room is a glowing green disc, it's surface covered in strange rune
 
 <It looks like Dr. Rithbaun's handwriting...>
 
-So, it would appear that Miranda has jumped to another plane like the others. There's no way giving that woman access to that much power could ever end well.
+So, it would appear that Miranda has jumped to another plane like the others. There's no way giving that woman 
+access to that much power could ever end well.
 
-She was always more of an artist than a scholar, but that approach made her into one of the most capable students I've had so far. She hadn't been able to create so much as a
-sketch since Vivian died, so alchemy must have been a welcome distraction. If only I'd realized how hard Vivian's death had hit her, perhaps I could've stopped this. But it 
-would appear that in her despair, Miranda sought meaning in the discipline of alchemical Corruption. And those abominations are her magnum opus, a pefect manifestation of her despair.
-Given access to extraplanar resources, I'm not sure what kind of horrific works she'd create...
+She was always more of an artist than a scholar, but that approach made her into one of the most capable students 
+I've had so far. She hadn't been able to create so much as a sketch since Vivian died, so alchemy must have been 
+a welcome distraction. If only I'd realized how hard Vivian's death had hit her, perhaps I could've stopped this. 
+But it would appear that in her despair, Miranda sought meaning in the discipline of alchemical Corruption. And 
+those abominations are her magnum opus, a pefect manifestation of her despair.Given access to extraplanar resources, 
+I'm not sure what kind of horrific works she'd create...
 
-I'm running out of time. If I can find that portal's Anchor, I should be able to wrench it back open and retrieve Miranda.");
+I'm running out of time. If I can find that portal's Anchor, I should be able to wrench it back open and retrieve 
+Miranda.");
         }
     }
 
@@ -961,9 +1011,10 @@ I'm running out of time. If I can find that portal's Anchor, I should be able to
         {
             Name = "Crystallography Lab";
             Description = $@"
-The walls of the room are completely taken up by shelves, each one packed haphazardly with crystals of varying shape, size, and color. Jut under half of them appear to be accompanied
-by an identifying label. At the center of the room is a contraption that resembles an hourglass. At it's base appears to be a kind of alchemical furnace but it's more advanced than
-any you've seen before.";
+The walls of the room are completely taken up by shelves, each one packed haphazardly with crystals of varying 
+shape, size, and color. Jut under half of them appear to be accompanied by an identifying label. At the center 
+of the room is a contraption that resembles an hourglass. At it's base appears to be a kind of alchemical furnace 
+but it's more advanced than any you've seen before.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -988,8 +1039,9 @@ any you've seen before.";
         {
             Name = "Optics Lab";
             Description = $@"
-The room is composed almost completely of white stone. Several tables line the walls, all of them covered in a disorganized array of lenses, crystals, and assorted alchemical
-components. A strange device in the center of the room's ceiling projects a beam of light directly downward, illuminating a platform at the room's center.";
+The room is composed almost completely of white stone. Several tables line the walls, all of them covered in a 
+disorganized array of lenses, crystals, and assorted alchemical components. A strange device in the center of 
+the room's ceiling projects a beam of light directly downward, illuminating a platform at the room's center.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -1014,9 +1066,9 @@ components. A strange device in the center of the room's ceiling projects a beam
         {
             Name = "Liquefaction Lab";
             Description = $@"
-The room is empty except for a large device at its center. The contraption is a cylindrical container with a removable lid connected
-to a series of pipes that lead up to the ceiling. A single panel next to it is covered with poorly labelled buttons and valves that appear to
-control the operation of the device.";
+The room is empty except for a large device at its center. The contraption is a cylindrical container with a 
+removable lid connected to a series of pipes that lead up to the ceiling. A single panel next to it is covered 
+with poorly labelled buttons and valves that appear to control the operation of the device.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -1041,10 +1093,11 @@ control the operation of the device.";
         {
             Name = "Vaporization Lab";
             Description = $@"
-The room is a mess of tables and shelves strewn with a combination of alchemical, handwritten notes, and mechanical components of all sorts. On a
-table at the center of the room sits a device consisting of a glass chamber with a removable door. A thin pipe connects the interior of the chamber
-to a metal box on a seperate table. The device appears to be operated by a nearby panel of levers and valves, a few of them labelled with nearly
-illegible handwriting.";
+The room is a mess of tables and shelves strewn with a combination of alchemical, handwritten notes, and 
+mechanical components of all sorts. On a table at the center of the room sits a device consisting of a 
+glass chamber with a removable door. A thin pipe connects the interior of the chamber to a metal box on 
+a seperate table. The device appears to be operated by a nearby panel of levers and valves, a few of them 
+labelled with nearly illegible handwriting.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -1069,11 +1122,12 @@ illegible handwriting.";
         {
             Name = "Grand Library";
             Description = $@"
-The first thing you notice is that the walls of the room are completely covered in bookshelves, all haphazardly 
-packed with tomes of all sorts. The second thing you notice is that both the ceiling and floor of the room have been carved out,
-and filled with a complex mess of rickety wooden walkways and...even *more* bookshelves. The 'floor' of the level on which you're currently standing
-is little more than a haphazardly constructed platform itself. Even stranger, there doesn't even appear to be a way to reach any of the bookshelves 
-aside from those on the level where you're currently standing.";
+The first thing you notice is that the walls of the room are completely covered in bookshelves, all 
+haphazardly packed with tomes of all sorts. The second thing you notice is that both the ceiling and 
+floor of the room have been carved out, and filled with a complex mess of rickety wooden walkways and...
+even *more* bookshelves. The 'floor' of the level on which you're currently standing is little more 
+than a haphazardly constructed platform itself. Even stranger, there doesn't even appear to be a way to 
+reach any of the bookshelves aside from those on the level where you're currently standing.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -1103,9 +1157,9 @@ aside from those on the level where you're currently standing.";
         {
             Name = "Theodores's Study";
             Description = $@"
-The room is essentially a maze of bookshelves leading to a desk at the center. Open books and scattered notes lay everywhere. It's so cluttered that
-you almost don't notice the overing in the glowing violet disc floating just above the desk. The surface of the disk is marked with luminous runes from
-a language you don't recognize.";
+The room is essentially a maze of bookshelves leading to a desk at the center. Open books and scattered notes 
+lay everywhere. It's so cluttered that you almost don't notice the overing in the glowing violet disc floating 
+just above the desk. The surface of the disk is marked with luminous runes from a language you don't recognize.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -1113,14 +1167,17 @@ a language you don't recognize.";
 
 <It looks like Dr. Rithbaun's handwriting...>
 
-Well, I can't say I'm that surprised to find a portal here. Out of the three Grimtol heirs, Theodore would be the most likely to dabble in interplanar travel. Not that that's
-at all comforting.
+Well, I can't say I'm that surprised to find a portal here. Out of the three Grimtol heirs, Theodore would be 
+the most likely to dabble in interplanar travel. Not that that's at all comforting.
 
-That man was easily my greatest pupil. A true scholar seeking to unlock the mysteries of the unvierse. His grasp of the alchemical discipline of Transmutation is positively
-astounding. I should have guessed that he was one of those students who would walk to close to the edge in their pursuit of knowledge. At any rate, his thirst for knowledge 
-appears to have driven him into an even deeper madness than his siblings. The damage he could cause with planar travel in his toolkit is almost immeasurable.
+That man was easily my greatest pupil. A true scholar seeking to unlock the mysteries of the unvierse. His 
+grasp of the alchemical discipline of Transmutation is positively astounding. I should have guessed that he 
+was one of those students who would walk to close to the edge in their pursuit of knowledge. At any rate, his 
+thirst for knowledge appears to have driven him into an even deeper madness than his siblings. The damage he 
+could cause with planar travel in his toolkit is almost immeasurable.
 
-I'll have to find the Anchor he used to create thi portal, and quickly. If I bring it here, I should be able to bring him back to this plane before he breaks reality.");
+I'll have to find the Anchor he used to create thi portal, and quickly. If I bring it here, I should be able 
+to bring him back to this plane before he breaks reality.");
         }
     }
 
@@ -1137,15 +1194,19 @@ I'll have to find the Anchor he used to create thi portal, and quickly. If I bri
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a page that looks like it's been wripped out of a journal. It's in Dr. Rithbaun's handwriting.");
+                game.GetNote();
+            }
         }
         public CentralChamber(int y, int x) : base(y, x)
         {
             Name = "Central Chamber";
             Description = $@"
-You're in an unfurnished chamber made from roughly hewn stone. It seems that the castle residents never got around to
-using it for anything in particular. Curiously, however, there's a strange, glowing white disc floating in the center of the room,
-it' surface dotted with unfamiliar runes.";
+You're in an unfurnished chamber made from roughly hewn stone. It seems that the castle residents never 
+got around to using it for anything in particular. Curiously, however, there's a strange, glowing white 
+disc floating in the center of the room, its surface dotted with unfamiliar runes.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -1153,11 +1214,12 @@ it' surface dotted with unfamiliar runes.";
 
 <It looks like Dr. Rithbaun's handwriting...>
 
-It would appear I underestimated those three. They had a trap waiting for me the whole time. No sense running now, I can already see the 
-portal forming before my eyes. It's more advanced than the others. I'd wager all three of them had a hand in building it...no telling where the
-Anchor is hidden...
+It would appear I underestimated those three. They had a trap waiting for me the whole time. No sense 
+running now, I can already see the portal forming before my eyes. It's more advanced than the others. 
+I'd wager all three of them had a hand in building it...no telling where the Anchor is hidden...
 
-What a nuisance. I just hope that letter I sent out reaches its destination. It's my only hope at this rate.");
+What a nuisance. I just hope that letter I sent out reaches its destination. It's my only hope at 
+this rate.");
         }
     }
 
@@ -1179,8 +1241,9 @@ What a nuisance. I just hope that letter I sent out reaches its destination. It'
         {
             Name = "Forgotten Dungeon";
             Description = $@"
-The stone room is lined with cells, their iron bars coated with rust. Look to be some sort of dungeon...fitting for a castle. Although'
-a few of the cells have a few bones strewn about, it doesn't look like thi dungeon has been getting much use as of late.";
+The stone room is lined with cells, their iron bars coated with rust. Look to be some sort of dungeon...
+fitting for a castle. Although a few of the cells have a few bones strewn about, it doesn't look like 
+this dungeon has been getting much use as of late.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -1205,10 +1268,11 @@ a few of the cells have a few bones strewn about, it doesn't look like thi dunge
         {
             Name = "Operating Room";
             Description = $@"
-The room is bare save for a row of operating tables and a large, metal locker. A medicinal smell fills the air. The door to the locker lies open, revealing a 
-pile of strange corpses resembling creatures out of a nightmare. On one of the operating tables lies the body of something that looks vaguely humanoid, save for 
-the gray skin and extra limbs. A black circle has been drawn on its chest, about where it's heart would be if it were human. A simple alchemical workstation has 
-been set up in one of the room's corners.";
+The room is bare save for a row of operating tables and a large, metal locker. A medicinal smell fills 
+the air. The door to the locker lies open, revealing a pile of strange corpses resembling creatures 
+out of a nightmare. On one of the operating tables lies the body of something that looks vaguely humanoid, 
+save for the gray skin and extra limbs. A black circle has been drawn on its chest, about where it's heart 
+would be if it were human. A simple alchemical workstation has been set up in one of the room's corners.";
             CraftingArea = true;
             Y = y;
             X = x;
@@ -1234,8 +1298,9 @@ been set up in one of the room's corners.";
         {
             Name = "Trophy Room";
             Description = $@"
-You're in a simple room with wood-panelled walls. It appears to be some sort of hunter's trophy room, and is filled with taxidermied animals of all sorts.
-Once majestic elk now gaze at you with glass eyes, and a ferociously positioned bear rears up at the center of the room.";
+You're in a simple room with wood-panelled walls. It appears to be some sort of hunter's trophy room, and is 
+filled with taxidermied animals of all sorts. Once majestic elk now gaze at you with glass eyes, and a 
+ferociously positioned bear rears up at the center of the room.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -1260,8 +1325,8 @@ Once majestic elk now gaze at you with glass eyes, and a ferociously positioned 
         {
             Name = "Dusty Armory";
             Description = $@"
-The walls of the room are covered in weapons straight out of medieval Europe, alongside tapestries depicting historic battles. The floorspace is devoted to
-immaculately maintained suits of armor from various nations.";
+The walls of the room are covered in weapons straight out of medieval Europe, alongside tapestries depicting 
+historic battles. The floorspace is devoted to immaculately maintained suits of armor from various nations.";
             Y = y;
             X = x;
             Items = new List<Item>();

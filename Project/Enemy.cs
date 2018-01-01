@@ -62,15 +62,18 @@ namespace CastleGrimtol.Project
             Name = "Kilnborn Sentinel";
             ApproachDescription = @"
 The smell of burning metal fills your nostrils. Standing at the center of the room is what 
-looks to be a human skeleton. In place of muscle and sinew it's bones are wrapped in charcoal-tinged clay, and long blades 
-protrude from its arms. As the abomination turns to face you, you see that its ribcage is filled with some kind of strange machinery.
-The creature stares at you, its eyeless sockets illuminated by an orange glow. Suddenly, it begins jerkily sprinting 
-toward you, it's bony feet clacking against the stone floor.";
-            CombatDescription = @"The abomination circles you menacingly, it's bladed arms raised in a combat stance.";
-            DefeatedDescription = @"The creature suddenly freezes as the machinery in its chest grinds to a halt. The glow 
-in its empty eyes fades as its body falls to the ground.";
-            VictoriousDescription = @"The creature's attack cuts deep. As you clutch your stomach, the last thing you see 
-is a blade hurtling toward you.";
+looks to be a human skeleton. In place of muscle and sinew it's bones are wrapped in charcoal-tinged 
+clay, and long blades protrude from its arms. As the abomination turns to face you, you see that its 
+ribcage is filled with some kind of strange machinery.
+
+The creature stares at you, its eyeless sockets illuminated by an orange glow. Suddenly, it begins 
+jerkily sprinting toward you, it's bony feet clacking against the stone floor.";
+            CombatDescription = @"The abomination circles you menacingly, it's bladed arms raised in 
+a combat stance.";
+            DefeatedDescription = @"The creature suddenly freezes as the machinery in its chest 
+grinds to a halt. The glow in its empty eyes fades as its body falls to the ground.";
+            VictoriousDescription = @"The creature's attack cuts deep. As you clutch your stomach, 
+the last thing you see is a blade hurtling toward you.";
             Type = "purification";
             MaxHealth = 20;
             Health = MaxHealth;
@@ -106,16 +109,17 @@ is a blade hurtling toward you.";
         {
             Name = "Cinder Golem";
             ApproachDescription = @"
-Facing you is a hulking suit of black armor, robed in a cloud of thick black smoke. A dull orange glow shines from within the 
-towering construct, and you can feel the heat it radiates even at a distance. As the smoke around it shifts, you see that it's 
-carrying a massive halberd with a wickedly curved blade. You can see that its metal faceplate has been worked into a terrifying 
-mockery of a human face, it's expression somewhere between a rictus of pain and a malicious grin. With heavy, echoing footfall, 
-the golem begins lumbbering toward you.";
+Facing you is a hulking suit of black armor, robed in a cloud of thick black smoke. A dull orange 
+glow shines from within the towering construct, and you can feel the heat it radiates even at a 
+distance. As the smoke around it shifts, you see that it's carrying a massive halberd with a wickedly 
+curved blade. You can see that its metal faceplate has been worked into a terrifying mockery of a 
+human face, its expression somewhere between a rictus of pain and a malicious grin. With heavy, 
+echoing footfall, the golem begins lumbering toward you.";
             CombatDescription = @"The golem stands in a threatening stance, halberd at they ready.";
-            DefeatedDescription = @"The construct lets out a roar as red smoke spews forth from it's armor. The glow within it 
-quickly fades, and it falls to the ground with a loud crash.";
-            VictoriousDescription = @"The golem's strike staggers you. As you struggle to regain your balance, it's halberd swings 
-toward you in a lethal arc.";
+            DefeatedDescription = @"The construct lets out a roar as red smoke spews forth from it's 
+armor. The glow within it quickly fades, and it falls to the ground with a loud crash.";
+            VictoriousDescription = @"The golem's strike staggers you. As you struggle to regain your 
+balance, it's halberd swings toward you in a lethal arc.";
             Type = "purification";
             MaxHealth = 20;
             Health = MaxHealth;
@@ -151,9 +155,11 @@ toward you in a lethal arc.";
         {
             Name = "Ravenous Husk";
             ApproachDescription = @"
-You see a humanoid figure shambling toward you. In the dim light you can see that the creature is composed of some kind of sickening, dark yellow
-fungus. Black, fist-size nodules protrude from it's body at odd intervals. As the horror gets closer, you realize that its face is featureless aside
-from a gaping mouth lined with needle-like fang. Suddenly, the creature lets out horrific shriek and begins running directly toward you.";
+You see a humanoid figure shambling toward you. In the dim light you can see that the creature is composed 
+of some kind of sickening, dark yellow fungus. Black, fist-size nodules protrude from it's body at odd 
+intervals. As the horror gets closer, you realize that its face is featureless aside from a gaping mouth 
+lined with needle-like fang. Suddenly, the creature lets out horrific shriek and begins running directly 
+toward you.";
             CombatDescription = @"The horror dashes around erratically, all the while moving closer to your position.";
             DefeatedDescription = @"The creature lets out a gurgling cry and falls to the ground, it's body slowly dissolving into a thick black ooze.";
             VictoriousDescription = @"In your weakened state, the creature grabs you. It's terrifying maw fills your vision as it lets out a triumphant shriek.";
@@ -192,10 +198,11 @@ from a gaping mouth lined with needle-like fang. Suddenly, the creature lets out
         {
             Name = "Weeping Horror";
             ApproachDescription = @"
-You hear a strange, mournful sound, almost like a woman sobbing. And then, you see the sound's source. A mass of writhing, wormlike vines sits at the center 
-of the room. As your eyes adjust to the dim light, you can make out a single, gigantic eye at the center of the mass. Pale green tears leak from around it, 
-hitting the floor with a hissing sound as they eat away at the stone. You realize the eye is staring directly at you, unblinking, as the fould creature moves 
-forward, constantly emitting it's hideous cries.";
+You hear a strange, mournful sound, almost like a woman sobbing. And then, you see the sound's source. 
+A mass of writhing, wormlike vines sits at the center of the room. As your eyes adjust to the dim light, 
+you can make out a single, gigantic eye at the center of the mass. Pale green tears leak from around it, 
+hitting the floor with a hissing sound as they eat away at the stone. You realize the eye is staring 
+directly at you, unblinking, as the fould creature moves forward, constantly emitting it's hideous cries.";
             CombatDescription = @"The terrifying beast moves closer, it's mournful cries echoing.";
             DefeatedDescription = @"The creature lets out a final, desperate wail as it crumbles to the floor. It's single eye stares dully into space as 
 it finally stops moving.";
@@ -236,9 +243,11 @@ hear is it's horrific wails.";
         {
             Name = "Shifting Slime";
             ApproachDescription = @"
-You hear a wet, slithering sound, and notice a strange creature in the room with you. It looks to be a flowing pile of translucent, silvery liquid 
-roiling in constant motion. As it draws closer, you see that hundreds of glowing violet lights dot it's surface. The slime suddenly rises up off of the ground, 
-looking much like a serpent ready to strike, and you realize that the lights are actually eyes. Soundlessly, the creature throws itself toward you.";
+You hear a wet, slithering sound, and notice a strange creature in the room with you. It looks to be a 
+flowing pile of translucent, silvery liquid roiling in constant motion. As it draws closer, you see that 
+hundreds of glowing violet lights dot it's surface. The slime suddenly rises up off of the ground, 
+looking much like a serpent ready to strike, and you realize that the lights are actually eyes. 
+Soundlessly, the creature throws itself toward you.";
             CombatDescription = @"The slime shifts around eratically, moving almost too quickly to follow.";
             DefeatedDescription = @"The creature explodes into gelatinous chunks that evaporate into nothingness before they even hit the ground.";
             VictoriousDescription = @"Dazed and injured, you're unable to dodge as the creature lunges toward you, engulfing you completely.";
@@ -277,10 +286,12 @@ looking much like a serpent ready to strike, and you realize that the lights are
         {
             Name = "Flickering Terror";
             ApproachDescription = @"
-You feel a sudden, terrifying feeling that you're being watched. Suddenly, a strange figure appears in the center of the room, only to vanish 
-almost immediately. You can just barely discern that it's some kind of spindly, many-limbed humanoid figure. Suddenly, it appears again, but closer. 
-This time, it lingers for a second before disappearing. It resembles a gigantic insect with an oddly geometric, mirrored carapace. When it appears for
-the third time, it's mere feet away, and you can see the wicked spines protruding from its limbs.";
+You feel a sudden, terrifying feeling that you're being watched. Suddenly, a strange figure appears 
+in the center of the room, only to vanish almost immediately. You can just barely discern that 
+it's some kind of spindly, many-limbed humanoid figure. Suddenly, it appears again, but closer. 
+This time, it lingers for a second before disappearing. It resembles a gigantic insect with an 
+oddly geometric, mirrored carapace. When it appears for the third time, it's mere feet away, 
+and you can see the wicked spines protruding from its limbs.";
             CombatDescription = @"The insectoid monstrosity blinks in and out of visibility as it darts around the room.";
             DefeatedDescription = @"The creature lets out a surprised shriek, then suddenly explodes, sending glassy bits of shell in every direction.";
             VictoriousDescription = @"In a moment of distraction, you lose sight of the creature completely. You feel a stinging pain in 
