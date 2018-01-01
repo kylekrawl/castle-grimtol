@@ -750,8 +750,8 @@ The CURE. The cure for humanity.
 You insert the Arcane Fuse into the indentation at the statue's base. Suddenly, fires spews forth from the statue's 
 mouth, blanketing you with infernal heat. Except...you can't feel it. Your body is completely unaffected.
 
-As the flames subside, you notice that the golden egg nestled within the statue's tail has been melted, revealing 
-a strange, luminous object at its core.");
+Jut as you start to feel the elixr wear off, the flames subside. You notice that the golden egg nestled within the 
+statue's tail has been melted, revealing a strange, luminous object at its core.");
                         RemoveItems.Add(item);
                         Items.Add(new AnchorOfPurification());
                     }
@@ -1011,7 +1011,7 @@ move quickly to escape.");
                 int index = 0;
                 Console.WriteLine("\n<Press any key to continue.>");
                 Console.ReadKey(true);
-                while (true)
+                while (index < correctOrder.Count)
                 {
                     string currentMove = null;
                     Console.Clear();
@@ -1043,7 +1043,7 @@ move quickly to escape.");
                     else if (KeyInfo.Key == ConsoleKey.S || KeyInfo.Key == ConsoleKey.DownArrow)
                     {
                         Console.Clear();
-                        Console.WriteLine("You quickly duck.");
+                        Console.WriteLine("You quickly crouch to the ground.");
                         currentMove = "s";
                     }
                     else
@@ -1054,11 +1054,21 @@ move quickly to escape.");
                     if (currentMove == correctOrder[index])
                     {
                         Console.WriteLine("\nYou just manage to avoid a blade that was sweeping directly toward you.");
+                        index++;
                     }
                     else
                     {
                         DeathFlag = true;
+                        break;
                     }
+                }
+                if (!DeathFlag)
+                {
+                    Console.WriteLine($@"
+Suddenly, the contraption grinds to a halt. Out of the corner of your eye, you see a small object roll along the floor, 
+seemingly from out of nowhere. It comes to a stop near the center of the room.");
+                    RemoveItems.Add(item);
+                    Items.Add(new GlassEye());
                 }
             }
             else
@@ -1107,7 +1117,7 @@ The clumsily scribbled signature at the bottom reads 'Vivian'.>
        |     / \__   |    /   \    |   __/|\__   |     / \__  |   __/ \    |   /   \    |
        |_____\_______|_____________|__ _--^--_ __|_____\______|_______/____|____________|            
 
-");                                                                 
+");
         }
     }
 
@@ -1115,11 +1125,109 @@ The clumsily scribbled signature at the bottom reads 'Vivian'.>
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Glass Eye")
+            {
+                Console.WriteLine($@"
+You insert the Glass Eye into the hole in the portrait. Suddenly, you hear a mechanical click, and the painting 
+slides to the left to reveal a lockbox set into the wall. Four dials are set into the front of the box, each
+bearing the roman numerals for the numbers one through ten...a combination lock.");
+                List<string> correctCombination = new List<string>() {
+                    "v", "i", "v", "i"
+                };
+                List<string> chosenCombination = new List<string>() { };
+                Console.WriteLine("\n<Press any key to continue.>");
+                Console.ReadKey(true);
+                var dialPositions = new Dictionary<int, string>(){
+                        {1, "first"}, {2, "second"},
+                        {3, "third"}, {4, "final"}
+                };
+                var numerals = new List<string>(){
+                    "i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"
+                };
+                while (chosenCombination.Count < correctCombination.Count)
+                {
+                    var dialNumber = chosenCombination.Count + 1;
+
+                    Console.Clear();
+                    Console.WriteLine($"\nYou're currently on the {dialPositions[dialNumber]} lock.");
+                    Console.WriteLine($"\nCombination so far:\n");
+                    var combinationString = "";
+                    foreach (var numeral in chosenCombination)
+                    {
+                        combinationString += $" {numeral.ToUpper()} ";
+                    }
+                    Console.WriteLine($"{combinationString}");
+                    Console.WriteLine($"\nChoose a numeral to set the {dialPositions[dialNumber]} dial to (Type number and press <Enter>):\n");
+                    Console.WriteLine($@"
+1.   I     6.    VI
+2.  II     7.   VII
+3. III     8.  VIII
+4.  IV     9.    IX
+5.   V     10.    X");
+                    var choice = Console.ReadLine();
+                    var parsed = 0;
+                    var validNum = int.TryParse(choice, out parsed);
+                    var validStr = false;
+                    if (!validNum)
+                    {
+                        validStr = numerals.Contains(choice.ToLower());
+                    }
+                    if (validNum)
+                    {
+                        chosenCombination.Add(numerals[parsed - 1]);
+                    }
+                    else if (validStr)
+                    {
+                        chosenCombination.Add(choice.ToLower());
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid choice.");
+                    }
+                    Console.WriteLine("\n<Press any key to continue.>");
+                    Console.ReadKey(true);
+                }
+                bool isCorrectCombination = true;
+                for (var i = 0; i < chosenCombination.Count; i++)
+                {
+                    var chosen = chosenCombination[i];
+                    var correct = correctCombination[i];
+                    if (chosen != correct)
+                    {
+                        isCorrectCombination = false;
+                        break;
+                    }
+                }
+                if (isCorrectCombination)
+                {
+                    Console.Clear();
+                    Console.WriteLine($@"
+You pull on the safe door. It swings open easily. Inside is a vial of liquid.");
+                    RemoveItems.Add(item);
+                    Items.Add(new LethalVenom());
+                    Description = $@"
+The room looks to have been used for artistic work at some point, but now lies in complete disarray. Discarded 
+sketches cover the floor alongside spilled containers of ink and paint. An overturned easel lies in one corner 
+next to a wall of empty shelves. A large painting of Vivian Grimtol stares at you with a single glass eye.";
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine($@"
+You pull on the safe door to test the combination, but it doesn't budge. After a few seconds, the 
+Glass Eye pops out of the portrait. You catch it and place it back in your pocket. The painting
+slides back into place, covering the lockbox.");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {
@@ -1137,6 +1245,15 @@ closer inspection, there appears to be a hole gouged in the portrait where the s
             Y = y;
             X = x;
             Items = new List<Item>();
+            Note = new Note("Page from Miranda's Journal: Ransacked Workroom", $@"
+
+Who would do this to her?
+
+Why would they take poor Vivi's eye?
+
+Oh, Vivi. I don't know why it's all so cruel.
+
+I'll make you a new eye. I promise.");
         }
     }
 
