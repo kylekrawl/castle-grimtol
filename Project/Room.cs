@@ -22,6 +22,7 @@ namespace CastleGrimtol.Project
         public List<string> Exits { get; set; } = new List<string>();
         public virtual string Stage { get; set; }
         public virtual Trap Trap { get; set; }
+        public ConsoleKeyInfo KeyInfo { get; set; }
         public virtual void UseItem(Item item)
         {
             throw new System.NotImplementedException();
@@ -737,7 +738,7 @@ The CURE. The cure for humanity.
             {
                 Console.WriteLine($"You drink the Infernal Elixir. Suddenly, you realize that you can now longer feel the ambient temperature.");
                 RemoveItems.Add(item);
-                Stage = "elixir drunk"; // Fun idea: Have this actually grant fire resistance if you decide to leave the room before finishing the puzzle
+                Stage = "elixir drunk";
             }
             else
             {
@@ -750,7 +751,7 @@ You insert the Arcane Fuse into the indentation at the statue's base. Suddenly, 
 mouth, blanketing you with infernal heat. Except...you can't feel it. Your body is completely unaffected.
 
 As the flames subside, you notice that the golden egg nestled within the statue's tail has been melted, revealing 
-a strange, luminous object at it's core.");
+a strange, luminous object at its core.");
                         RemoveItems.Add(item);
                         Items.Add(new AnchorOfPurification());
                     }
@@ -941,7 +942,7 @@ heavy fall to the floor.");
                     }
                     else
                     {
-                        Console.WriteLine($"It seems to fit with the room's grisly theme, but where exactly would you put it?");
+                        Console.WriteLine($"It seems to fit with the room's grisly theme, but there's no obvious place for it.");
                     }
                 }
                 else
@@ -990,15 +991,94 @@ But...Vivi...why did I have to learn it like this...");
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Thorn Gear")
+            {
+                Console.WriteLine($@"
+You place the Thorn Gear into its place on the mechanical sculpture. Suddenly, all of the gears on the
+device begin spinning rapidly, and the contraption's 'limbs' begin sweeping around the room. And then, you
+see it. Each limb is tipped with a massive blade. They seem to be moving in a prescribed pattern, but you 
+can't quite make it out. A blade sails through the air just over your head...you're going to have to
+move quickly to escape.");
+
+                List<string> correctOrder = new List<string>() {
+                    "a", "w", "s", "a", "d", "w"
+                };
+                int index = 0;
+                Console.WriteLine("\n<Press any key to continue.>");
+                Console.ReadKey(true);
+                while (true)
+                {
+                    string currentMove = null;
+                    Console.Clear();
+                    Console.WriteLine("\nThe blades of the contraption slice through the air around you.\n");
+                    Console.WriteLine("\nChoose an action:\n");
+                    Console.WriteLine("| A | Dodge Left");
+                    Console.WriteLine("| D | Dodge Right");
+                    Console.WriteLine("| W | Jump");
+                    Console.WriteLine("| S | Duck");
+
+                    if (KeyInfo.Key == ConsoleKey.A || KeyInfo.Key == ConsoleKey.LeftArrow)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You quickly roll to the left.");
+                        currentMove = "a";
+                    }
+                    else if (KeyInfo.Key == ConsoleKey.W || KeyInfo.Key == ConsoleKey.UpArrow)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You quickly leap into the air");
+                        currentMove = "w";
+                    }
+                    else if (KeyInfo.Key == ConsoleKey.D || KeyInfo.Key == ConsoleKey.RightArrow)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You quickly roll to the right.");
+                        currentMove = "d";
+                    }
+                    else if (KeyInfo.Key == ConsoleKey.S || KeyInfo.Key == ConsoleKey.DownArrow)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You quickly duck.");
+                        currentMove = "s";
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Rather than taking an evasive action, you for some reason choose to stand still.");
+                    }
+                    if (currentMove == correctOrder[index])
+                    {
+                        Console.WriteLine("\nYou just manage to avoid a blade that was sweeping directly toward you.");
+                    }
+                    else
+                    {
+                        DeathFlag = true;
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note on the ground next to the contraption.");
+                game.GetNote();
+            }
+            if (DeathFlag)
+            {
+                Console.WriteLine($@"
+Unfortunately, your evasive action takes you right into the path of one of the contraptions mechanical limbs. A
+gleaming blade sweeps directly toward you...");
+            }
         }
         public ClockworkGarden(int y, int x) : base(y, x)
         {
@@ -1013,6 +1093,21 @@ that would go next to it appears to be missing.";
             Y = y;
             X = x;
             Items = new List<Item>();
+            Note = new Note("Child's Drawing: Clockwork Garden", $@"
+
+<A drawing clearly done by a young child. It seems to depict a stick figure at play. 
+The clumsily scribbled signature at the bottom reads 'Vivian'.>
+
+        ________________________________________________________________________________
+       |             |             |             |            |            |            |
+       |             |   \     /   |             |            |            |  \     /   | 
+       |             |    \ o /    |             |            |            |   \ o /    |
+       |    o ___    |      |      |             |   o ___    |   ___ o    |     |      |
+       |  \/ \       |     / \     |      o      |  \/ \      |      / \/  |    / \     |
+       |     / \__   |    /   \    |   __/|\__   |     / \__  |   __/ \    |   /   \    |
+       |_____\_______|_____________|__ _--^--_ __|_____\______|_______/____|____________|            
+
+");                                                                 
         }
     }
 
