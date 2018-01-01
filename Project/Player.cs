@@ -14,7 +14,6 @@ namespace CastleGrimtol.Project
         public double MaxHealth { get; set; }
         public double DefenseRating { get; set; }
         public double MaxDefenseRating { get; set; }
-        public Item Weapon { get; set; }
         public List<Item> Inventory { get; set; }
         public List<Note> Notes { get; set; }
 

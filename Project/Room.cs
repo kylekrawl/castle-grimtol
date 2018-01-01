@@ -511,7 +511,9 @@ room the wallpaper has been peeled aside, revealing a large safe set into the wa
 sits conspicuously above its handle.";
             Y = y;
             X = x;
-            Items = new List<Item>();
+            Items = new List<Item>(){
+                new WoodenEffigy()
+            };
             RemoveItems = new List<Item>();
             Stage = null;
         }
@@ -598,6 +600,8 @@ way...");
                     }
                     else
                     {
+                        torch = litTorches[parsed - 1];
+                        torchLocation = torch.Length == 1 ? "Wall" : "Corner";
                         Console.WriteLine($"You use the Brazier Lid to extinguish the brazier at the room's {torch.ToUpper()} {torchLocation}");
                         litTorches.Remove(torch);
                         chosenOrder.Add(torch);
@@ -618,6 +622,7 @@ way...");
                 }
                 if (isCorrectOrder)
                 {
+                    Console.Clear();
                     Console.WriteLine("You hear a mechanical click. Another compartment in the central platform appears to have opened, revealing a strange cylindrical object.");
                     RemoveItems.Add(item);
                     Items.Add(new ArcaneFuse());
@@ -628,6 +633,7 @@ room's edges remain extinguished.";
                 }
                 else
                 {
+                    Console.Clear();
                     Console.WriteLine("After a few seconds, the braziers suddenly light up once again. Looks like that wasn't quite the correct solution.");
                 }
             }
@@ -640,7 +646,11 @@ room's edges remain extinguished.";
 
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note on the floor next to the platform.");
+                game.GetNote();
+            }
         }
         public ConvertedSunroom(int y, int x) : base(y, x)
         {

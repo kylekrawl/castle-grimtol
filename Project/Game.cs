@@ -27,8 +27,8 @@ namespace CastleGrimtol.Project
             typeof(MedicinalSalve),
             typeof(Panacea),
             typeof(PulseEmitter),
-            typeof(ReactiveSolid)
-
+            typeof(ReactiveSolid),
+            typeof(FuelOrb)
         };
         public Dictionary<string, string> EnemyWeaknesses { get; set; } = new Dictionary<string, string>() {
             {"purification", "corrosive"},
