@@ -755,6 +755,10 @@ devoid of doors of any sort.
                 {
                     Console.WriteLine($"You use the {item.Name}.\n");
                     CurrentRoom.UseItem(item);
+                    if (CurrentRoom.RemoveItems.Contains(item)) {
+                        CurrentPlayer.Inventory.Remove(item);
+                        CurrentRoom.RemoveItems.Remove(item);
+                    }
                     break;
                 }
             }

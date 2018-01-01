@@ -424,6 +424,17 @@ namespace CastleGrimtol.Project
         }
     }
 
+    public class BrazierLid : Item
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public BrazierLid()
+        {
+            Name = "Brazier Lid";
+            Description = "A mechanical lid meant to be placed on top of a brazier. Tiny fans line the inside. It seems to be designed to efficiently extinguish flames";
+        }
+    }
+
     public class ArcaneFuse : Item
     {
         public override string Name { get; set; }

@@ -11,6 +11,7 @@ namespace CastleGrimtol.Project
         public virtual List<Item> Items { get; set; } = new List<Item>();
         public virtual Note Note { get; set; }
         public virtual List<Item> RespawnItems { get; set; }
+        public virtual List<Item> RemoveItems { get; set; } = new List<Item>();
         public virtual Enemy Enemy { get; set; }
         public int Y { get; set; }
         public int X { get; set; }
@@ -378,11 +379,13 @@ This is infuriating! If I happen across Miranda or Theodore I'm going to strangl
         public override string Stage { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
+        public override List<Item> RemoveItems { get; set; }
         public override void UseItem(Item item)
         {
             if (item.Name == "Fuel Orb")
             {
                 Console.WriteLine($"You place the Fuel Orb into the indentation on the furnace console. The machine roars to life, giving off an intense heat.");
+                RemoveItems.Add(item);
                 Stage = "furnace on";
                 Description = $@"
 The entire room is lined with thick metal plating affixed to that walls with rivets. The furnace at the center of the room gives off an intense heat as the Fuel 
@@ -395,6 +398,7 @@ Orb in the console next to it pulses with orange light.";
                     if (Stage == "furnace on")
                     {
                         Console.WriteLine($"Using a nearby pair of tongs, you place the Wooden Effigy into the furnace. It quickly burns, revealing the Steel Key that had been sealed inside.");
+                        RemoveItems.Add(item);
                         Items.Add(new SteelKey());
                     }
                     else
@@ -422,6 +426,7 @@ a hemispherical indentation.";
             Y = y;
             X = x;
             Items = new List<Item>();
+            RemoveItems = new List<Item>();
             Stage = null;
         }
     }
@@ -433,6 +438,7 @@ a hemispherical indentation.";
         public override string Stage { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
+        public override List<Item> RemoveItems { get; set; }
         public override void UseItem(Item item)
         {
             if (item.Name == "Steel Key")
@@ -441,6 +447,7 @@ a hemispherical indentation.";
 The Steel Key fits perfectly into the safe's keyhole. You turn the key and swing open the door to reveal...a concrete wall. Somebody clearly didn't
 want anyone to get into this safe. On closer inspection, the wall is cracked, and there seems to be a space behind it. It'll still take a bit of force
 to break through, but you're an alchemist after all...");
+                RemoveItems.Add(item);
                 Stage = "safe open";
                 Description = $@"
 The room's walls are decorated with a wallpaper bearing a repeating geometric pattern, and the floor is covered with an expensive-looking rug. Two couches sit before
@@ -456,6 +463,7 @@ inside presents an annoying obstacle.";
                         Console.WriteLine($@"
 You lob an {item.Name} at the concrete wall. The explosion easily destroys it's target, revealing a small space at the very back of the safe.
 Sitting amidst the rubble of the wall is a strange, pointed object.");
+                        RemoveItems.Add(item);
                         Items.Add(new SunCrest());
                         Description = $@"
 The room's walls are decorated with a wallpaper bearing a repeating geometric pattern, and the floor is covered with an expensive-looking rug. Two couches sit before
@@ -487,6 +495,7 @@ a large safe set into the wall. A keyhole sits conspicuously above its handle.";
             Y = y;
             X = x;
             Items = new List<Item>();
+            RemoveItems = new List<Item>();
             Stage = null;
         }
     }
@@ -498,15 +507,29 @@ a large safe set into the wall. A keyhole sits conspicuously above its handle.";
         public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
+        public override List<Item> RemoveItems { get; set; }
         public override void UseItem(Item item)
         {
             if (item.Name == "Sun Crest")
             {
-                Console.WriteLine($@"");
+                Console.WriteLine($@"
+You place the Sun Crest in the indentation on the stone platform. The gems on its surface begin to glow as they catch the ray of sun peeking through the skylight.
+You hear a click, and suddenly all eight of the braziers in the room light up with a burst of pale orange flame. A compartment in the platform has opened to reveal
+some kind of metal lid.
+
+You notice that glowing orange letters have appeared on the platfrom beneath the crest. They spell out a cryptic message: 
+
+'Only with darkness shall the path to light be known.'
+
+");
                 Stage = "braziers lit";
+                RemoveItems.Add(item);
+                Items.Add(new BrazierLid());
                 Description = $@"
 The outside-facing walls of the room feature large windows that have since been neatly boarded up. The skylight in the ceiling has been given a similar treatment.
-The eight iron braziers along the room's edges are now lit, giving off a pale orange glow.";
+The eight iron braziers along the room's edges are now lit, giving off a pale orange glow. The platform at the room's center now bears a cryptic message: 
+
+'Only in deepest darkness shall the path to light be known.'";
             }
             else if (item.Name == "Incendiary Pistol")
             {
@@ -519,6 +542,73 @@ This method probably won't be of much use.");
                 Console.WriteLine($@"
 That would probably do quite a bit more than just lighting a few braziers. There has to be a better way...");
             }
+            else if (item.Name == "Brazier Lid")
+            {
+                List<string> litTorches = new List<string>() {
+                    "n", "ne", "e", "se", "s", "sw", "w", "nw"
+                };
+                List<string> correctOrder = new List<string>() {
+                    "ne", "s", "se", "w", "sw", "nw", "n", "e"
+                };
+                List<string> chosenOrder = new List<string>() { };
+                Console.WriteLine("The lid seems like it could be useful for putting out the braziers. Worth a shot.");
+                Console.WriteLine("\n<Press any key to continue.>");
+                Console.ReadKey(true);
+                while (litTorches.Count > 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine("\nThe following braziers are still lit:\n");
+                    Console.WriteLine("\nChoose a brazier to extinguish (Type number and press <Enter>):\n");
+                    string torch = null;
+                    string torchLocation = null;
+                    for (var i = 0; i < litTorches.Count; i++)
+                    {
+                        torch = litTorches[i];
+                        torchLocation = torch.Length == 1 ? "Wall" : "Corner";
+                        Console.WriteLine($"{i + 1}. {torch.ToUpper()} {torchLocation}");
+                    }
+                    var choice = Console.ReadLine();
+                    var parsed = 0;
+                    var valid = int.TryParse(choice, out parsed);
+                    if (!valid || parsed < 1 || parsed > litTorches.Count)
+                    {
+                        Console.WriteLine("Invalid choice.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"You use the Brazier Lid to extinguish the brazier at the room's {torch.ToUpper()} {torchLocation}");
+                        litTorches.Remove(torch);
+                        chosenOrder.Add(torch);
+                    }
+                    Console.WriteLine("\n<Press any key to continue.>");
+                    Console.ReadKey(true);
+                }
+                bool isCorrectOrder = true;
+                for (var i = 0; i < chosenOrder.Count; i++)
+                {
+                    var chosen = chosenOrder[i];
+                    var correct = correctOrder[i];
+                    if (chosen != correct)
+                    {
+                        isCorrectOrder = false;
+                        break;
+                    }
+                }
+                if (isCorrectOrder)
+                {
+                    Console.WriteLine("You hear a mechanical click. Another compartment in the central platform appears to have opened, revealing a strange cylindrical object.");
+                    RemoveItems.Add(item);
+                    Items.Add(new ArcaneFuse());
+                    Description = $@"
+The outside-facing walls of the room feature large windows that have since been neatly boarded up. The skylight in the ceiling has been given a similar treatment.
+The eight iron braziers along the room's edges remain extinguished.";
+                }
+                else
+                {
+                    Console.WriteLine("After a few seconds, the braziers suddenly light up once again. Looks like that wasn't quite the correct solution.");
+                }
+            }
+
             else
             {
                 Console.WriteLine($"{item.Name} fails to be of any use.");
@@ -540,6 +630,7 @@ has been carved in large, Gothic letters.";
             Y = y;
             X = x;
             Items = new List<Item>();
+            RemoveItems = new List<Item>();
             Note = new Note("Page from Aldric's Journal: Converted Sunroom", $@"
 I can't stand looking at the sun anymore. What need do I have for it, when I have the pure, beautiful light of alchemical flame! And that hideous crest that once had a 
 place of honor in this room...it shall remain locked away, just like the light it celebrates. Indeed, the sun is a MOCKERY of my glorious creations! 
@@ -636,20 +727,40 @@ portal will be a trivial matter.");
         }
     }
 
-
     public class FetidCourtyard : Room, IRoom
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
+        public override List<Item> RemoveItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name.Split(" ")[0] == "Incendiary")
+            {
+                Console.WriteLine($@"You use the {item.Name} to set the strange murk aflame. It gradually burns away, revealing a strange-looking skull.");
+                if (item.Name.Split(" ")[1] == "Grenade")
+                {
+                    RemoveItems.Add(item);
+                }
+                Items.Add(new MisshapenSkull());
+                Description = $@"
+You're in an open courtyard that looks to have been abandoned long ago. The remnants of cobblestone pathways are barely visible beneath overgrown shrubs. The pool at the 
+courtyard's center now lies empty.";
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note on the ground next to the pool.");
+                game.GetNote();
+                game.MainQuestStage["purification"] = "catalyst";
+            }
         }
         public FetidCourtyard(int y, int x) : base(y, x)
         {
@@ -661,6 +772,20 @@ corrosive muck.";
             Y = y;
             X = x;
             Items = new List<Item>();
+            RemoveItems = new List<Item>();
+            Note = new Note("Page from Miranda's Journal: Fetid Courtyard", $@"
+
+She would always play here. She loved the garden...the pool...
+
+This place is just a symbol now. A symbol of youth eaten away. That's why I transformed it.
+
+Aldric keeps trying to burn this courtyard down. He says I've turned it into something disgusting.
+
+He can burn all he wants. I'll simply create my art anew. Perhaps one of these days he'll become my next piece.
+
+It's probably the only potential he has.
+
+Vivi...I dedicate this to you.");
         }
     }
 
