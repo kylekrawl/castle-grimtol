@@ -17,6 +17,7 @@ namespace CastleGrimtol.Project
         public int X { get; set; }
         public bool PassagesBuilt { get; set; }
         public virtual bool CraftingArea { get; set; }
+        public virtual bool DeathFlag { get; set; }
         public virtual bool VisitedByPlayer { get; set; }
         public List<string> Exits { get; set; } = new List<string>();
         public virtual string Stage { get; set; }
@@ -40,6 +41,7 @@ namespace CastleGrimtol.Project
             VisitedByPlayer = false;
             Exits = new List<string>();
             CraftingArea = false;
+            DeathFlag = false;
             Note = null;
             Enemy = null;
             Trap = null;
@@ -77,8 +79,6 @@ space...probably Dr. Rithbaun's handiwork.";
             X = x;
             VisitedByPlayer = true;
             Note = new Note("Page from Rithbaun's Journal: Main Foyer", $@"
-
-<It looks like Dr. Rithbaun's handwriting...>
 
 What a fine mess I'm in! It's been nearly a week days since those three went
 absolutely mad and I'm at a complete loss as to how to escape this place. Good
@@ -182,8 +182,8 @@ of machinery attached to them. A tidy alchemical workstation sits in one coerner
             Y = y;
             X = x;
             CraftingArea = true;
-            RespawnItems = new List<Item>() { new BoneAsh(), new CrimsonOil() };
-            Items = new List<Item>() { new BoneAsh(), new CrimsonOil() };
+            RespawnItems = new List<Item>() { new BoneAsh(), new CrimsonOil(), new PulseCrystal() };
+            Items = new List<Item>() { new BoneAsh(), new CrimsonOil(), new PulseCrystal() };
         }
     }
 
@@ -191,6 +191,7 @@ of machinery attached to them. A tidy alchemical workstation sits in one coerner
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -199,7 +200,11 @@ of machinery attached to them. A tidy alchemical workstation sits in one coerner
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note on the floor next to one of the lockers.");
+                game.GetNote();
+            }
         }
         public StorageArea(int y, int x) : base(y, x)
         {
@@ -212,6 +217,13 @@ A few of them contain bones, neatly sorted by type.";
             X = x;
             RespawnItems = new List<Item>() { new BoneAsh(), new MetalCore() };
             Items = new List<Item>() { new BoneAsh(), new MetalCore() };
+            Note = new Note("Page from Rithbaun's Journal: Storage Area", $@"
+
+I've started to figure out a few ways to use the remains of the creatures those three unleashed. It 
+seems that it's possible to harvest useful alchemical Substrates from quite a few of them. I've found
+that combining two substrates of differing type will almost invariably produce a highly reactive substance.
+This substance is quite useful...combining it with alchemical Powders seems to produce a nice explosive,
+for example.");
         }
     }
 
@@ -219,6 +231,7 @@ A few of them contain bones, neatly sorted by type.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
@@ -228,7 +241,11 @@ A few of them contain bones, neatly sorted by type.";
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note next to the workstation.");
+                game.GetNote();
+            }
         }
         public OvergrownLab(int y, int x) : base(y, x)
         {
@@ -241,8 +258,14 @@ workstation in one corner of the room appears to be undisturbed.";
             Y = y;
             X = x;
             CraftingArea = true;
-            RespawnItems = new List<Item>() { new AcridPowder(), new PutridNodule() };
-            Items = new List<Item>() { new AcridPowder(), new PutridNodule() };
+            RespawnItems = new List<Item>() { new AcridPowder(), new PutridNodule(), new PulseCrystal() };
+            Items = new List<Item>() { new AcridPowder(), new PutridNodule(), new PulseCrystal() };
+            Note = new Note("Page from Rithbaun's Journal: Overgrown Lab", $@"
+
+I'm really glad I brought along these Pulse Crystals. Turns out that you can combine them with a sufficiently 
+reactive alchemical solid to create a device that makes short work of all the traps those three rigged up.
+Creating the base alchemical solid isn't even that hard...just have to combine two alchemical Substrates of
+different type. At least, that seems to usually work...");
         }
     }
 
@@ -300,8 +323,8 @@ sorts seem to be scattered seemingly at random around the room.";
             Y = y;
             X = x;
             CraftingArea = true;
-            RespawnItems = new List<Item>() { new LuminousDust(), new QuiveringOoze() };
-            Items = new List<Item>() { new LuminousDust(), new QuiveringOoze() };
+            RespawnItems = new List<Item>() { new LuminousDust(), new QuiveringOoze(), new PulseCrystal() };
+            Items = new List<Item>() { new LuminousDust(), new QuiveringOoze(), new PulseCrystal() };
         }
     }
 
@@ -708,11 +731,47 @@ The CURE. The cure for humanity.
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Infernal Elixir")
+            {
+                Console.WriteLine($"You drink the Infernal Elixir. Suddenly, you realize that you can now longer feel the ambient temperature.");
+                RemoveItems.Add(item);
+                Stage = "elixir drunk"; // Fun idea: Have this actually grant fire resistance if you decide to leave the room before finishing the puzzle
+            }
+            else
+            {
+                if (item.Name == "Arcane Fuse")
+                {
+                    if (Stage == "elixir drunk")
+                    {
+                        Console.WriteLine($@"
+You insert the Arcane Fuse into the indentation at the statue's base. Suddenly, fires spews forth from the statue's 
+mouth, blanketing you with infernal heat. Except...you can't feel it. Your body is completely unaffected.
+
+As the flames subside, you notice that the golden egg nestled within the statue's tail has been melted, revealing 
+a strange, luminous object at it's core.");
+                        RemoveItems.Add(item);
+                        Items.Add(new AnchorOfPurification());
+                    }
+                    else
+                    {
+                        DeathFlag = true;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"{item.Name} fails to be of any use.");
+                }
+            }
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (DeathFlag)
+            {
+                Console.WriteLine($@"
+You insert the Arcane Fuse into the indentation at the statue's base. Suddenly, fires spews forth from the statue's 
+mouth, blanketing you with infernal heat. With nothing to protect you from the fiery onslaught, you are immediately
+incinerated.");
+            }
         }
         public ImmaculateGallery(int y, int x) : base(y, x)
         {
@@ -762,8 +821,6 @@ is the glowing red disc hovering in midair at the room's center. Strange runes f
             Items = new List<Item>();
             Note = new Note("Page from Rithbaun's Journal: Aldric's Study", $@"
 
-<It looks like Dr. Rithbaun's handwriting...>
-
 This is worse than I thought. If that portal in his study is any indication, Aldric has found a way to travel 
 between planes. No telling what sorts of power he could gain.
 
@@ -810,7 +867,6 @@ visible beneath overgrown shrubs. The pool at the courtyard's center now lies em
             {
                 Console.WriteLine("\nYou spot a note on the ground next to the pool.");
                 game.GetNote();
-                game.MainQuestStage["purification"] = "catalyst";
             }
         }
         public FetidCourtyard(int y, int x) : base(y, x)
@@ -985,8 +1041,6 @@ surface covered in strange runes.";
             X = x;
             Items = new List<Item>();
             Note = new Note("Page from Rithbaun's Journal: Miranda's Studio", $@"
-
-<It looks like Dr. Rithbaun's handwriting...>
 
 So, it would appear that Miranda has jumped to another plane like the others. There's no way giving that woman 
 access to that much power could ever end well.
@@ -1175,8 +1229,6 @@ just above the desk. The surface of the disk is marked with luminous runes from 
             Items = new List<Item>();
             Note = new Note("Page from Rithbaun's Journal: Theodore's Study", $@"
 
-<It looks like Dr. Rithbaun's handwriting...>
-
 Well, I can't say I'm that surprised to find a portal here. Out of the three Grimtol heirs, Theodore would be 
 the most likely to dabble in interplanar travel. Not that that's at all comforting.
 
@@ -1221,8 +1273,6 @@ disc floating in the center of the room, its surface dotted with unfamiliar rune
             X = x;
             Items = new List<Item>();
             Note = new Note("Page from Rithbaun's Journal: Central Chamber", $@"
-
-<It looks like Dr. Rithbaun's handwriting...>
 
 It would appear I underestimated those three. They had a trap waiting for me the whole time. No sense 
 running now, I can already see the portal forming before my eyes. It's more advanced than the others. 

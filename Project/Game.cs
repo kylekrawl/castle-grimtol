@@ -164,7 +164,7 @@ namespace CastleGrimtol.Project
             CurrentPlayer = new Player(CurrentMap);
             CurrentRoom = CurrentMap.Grid[CurrentPlayer.Y][CurrentPlayer.X];
             SavedProgress = true;
-            Intro();            
+            Intro();
             MainLoop();
             //Console.Clear();
         }
@@ -427,6 +427,10 @@ devoid of doors of any sort.
                     {
                         Console.Clear();
                         UseItemInterface();
+                        if (!Playing || !ApplicationActive)
+                        {
+                            return;
+                        }
                         Console.WriteLine("\n<Press any key to continue.>");
                         Console.ReadKey(true);
                         break;
@@ -469,7 +473,8 @@ devoid of doors of any sort.
                 }
             }
         }
-        public void GetNote() {
+        public void GetNote()
+        {
             if (!(CurrentRoom.Note == null))
             {
                 CurrentPlayer.Notes.Add(CurrentRoom.Note);
@@ -755,14 +760,22 @@ devoid of doors of any sort.
                 {
                     Console.WriteLine($"You use the {item.Name}.\n");
                     CurrentRoom.UseItem(item);
-                    if (CurrentRoom.RemoveItems.Contains(item)) {
+                    if (CurrentRoom.RemoveItems.Contains(item))
+                    {
                         CurrentPlayer.Inventory.Remove(item);
                         CurrentRoom.RemoveItems.Remove(item);
                     }
                     break;
                 }
             }
-
+            if (CurrentRoom.DeathFlag)
+            {
+                CurrentRoom.Event(this, CurrentPlayer);
+                CurrentRoom.DeathFlag = false;
+                Console.WriteLine("\n<Press any key to continue.>");
+                Console.ReadKey(true);
+                GameOver();
+            }
         }
         public void TakeItem(string itemName)
         {
@@ -1056,7 +1069,7 @@ devoid of doors of any sort.
                             MW:ER:CG:TR:ER:DA:OB.
                             OL:FC:OR:CC:HL:CL:TR.
                             TR:RL:ER:FR:IG:ER:TM.
-                            AS:MF:AL:TR:AP:SA:CS.";
+                            AS:MF:SA:TR:AP:AL:CS.";
             StartScreen();
         }
     }
