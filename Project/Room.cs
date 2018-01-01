@@ -794,6 +794,7 @@ lies empty.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -839,6 +840,7 @@ have hidden an Anchor somewhere...if I can find it, opening this portal will be 
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override List<Item> RemoveItems { get; set; }
@@ -900,15 +902,59 @@ Vivi...I dedicate this to you.");
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Misshapen Skull")
+            {
+                Console.WriteLine($@"
+You place the Misshapen Skull onto the neck of the skeletal figure. You hear a click, and several of the wires 
+holding the bones snap, causing the grim sculpture to lurch toward you. Its left arm swings in a wild arc, 
+the hand stopping just before your face. The fingers of the hand snap open, something. You hear a metallic 
+clang as the object hits the floor.
+
+You notice for the first time that nestled within the sculpture's ribcage is a small iron box, exaclty where 
+it's heart would be. The lid is open, as if daring you to place something inside.");
+                RemoveItems.Add(item);
+                Stage = "skull placed";
+                Description = $@"
+The room is dimly lit by a faint green glow. The walls of the room are covered with sketches, all depicting 
+horrific figures. The grim sculpture in the center leans forward, almost menacingly. It it's ribcage where
+is a strange iron box, the lid open and beckoning.";
+            }
+            else
+            {
+                if (item.Name == "Malformed Heart")
+                {
+                    if (Stage == "skull placed")
+                    {
+                        Console.WriteLine($@"
+You place the Malformed Heart inside the box in the skeletal scuplture's rincage. It immediately slams shut. 
+Suddenly, the sculpture's skull bursts apart, scattering fragments of bone in every direction. You hear something
+heavy fall to the floor.");
+                        RemoveItems.Add(item);
+                        Items.Add(new ThornGear());
+                    }
+                    else
+                    {
+                        Console.WriteLine($"It seems to fit with the room's grisly theme, but where exactly would you put it?");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"{item.Name} fails to be of any use.");
+                }
+            }
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note on the ground next to the pool.");
+                game.GetNote();
+            }
         }
         public MacabreWorkroom(int y, int x) : base(y, x)
         {
@@ -917,10 +963,24 @@ Vivi...I dedicate this to you.");
 The room is dimly lit by a faint green glow. As your eyes adjust to the light, you see that the walls of the 
 room are covered with sketches, all depicting horrific figures. Some appear to be horrifically deformed skeletons, 
 while others resemble carnivorous, plantlike creatures. Hanging in the center of the room is a collection 
-of bones wired together into a terrifiying skeletal form. The grim sculpture appears to be missing a head.";
+of bones wired together into a terrifiying skeletal form. The grim sculpture appears to be missing a head.
+It's bony hands are clenched tightly.";
             Y = y;
             X = x;
             Items = new List<Item>();
+            Note = new Note("Page from Miranda's Journal: Macabre Workroom", $@"
+
+Aldric rants on and on about the flaws of humanity. About how his grand vision would remake us 
+into something greater.
+
+He's a fool. Suffering is the essence of humanity. And I've grown to appreciate it's beauty.
+
+He simply can't stomach the truth that my art conveys. It would ruin him to admit his 
+blindness.
+
+Suffering is all we have. I can finally see...
+
+But...Vivi...why did I have to learn it like this...");
         }
     }
 
