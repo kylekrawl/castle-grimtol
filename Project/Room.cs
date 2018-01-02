@@ -163,6 +163,7 @@ long as I can keep killing them.");
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
@@ -172,7 +173,11 @@ long as I can keep killing them.");
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note on one of the operating tables.");
+                game.GetNote();
+            }
         }
         public AssemblyLab(int y, int x) : base(y, x)
         {
@@ -181,12 +186,22 @@ long as I can keep killing them.");
 You're in a room lit by a dim orange glow. Dark metal plates are affixed to the walls, 
 and the floorspace is almost entirely taken up by metal operating tables aligned in neat, 
 even rows. Several of them are occupied by what look to be human skeletons with strange bit 
-of machinery attached to them. A tidy alchemical workstation sits in one coerner of the room.";
+of machinery attached to them. A tidy alchemical workstation sits in one corner of the room.";
             Y = y;
             X = x;
             CraftingArea = true;
             RespawnItems = new List<Item>() { new BoneAsh(), new CrimsonOil(), new PulseCrystal() };
             Items = new List<Item>() { new BoneAsh(), new CrimsonOil(), new PulseCrystal() };
+            Note = new Note("Page from Theodore's Journal: Assembly Lab", $@"
+
+<This note seems to be just one in a series...the writing is completely disorganized>
+
+Just look at this place! Aldric's taste keeps getting weirder and weirder.
+
+Anyway, continuing our little trip into the process of liquefying gems, once you've let the
+gem-fluid into the matter condenser and brought it out of superposition...or whatever..you'll
+want to hit the Red Button to flush the ignition chamber. This is crucial. I've caused so
+many explosions by forgetting this...");
         }
     }
 
@@ -276,6 +291,7 @@ different type. At least, that seems to usually work...");
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -284,7 +300,11 @@ different type. At least, that seems to usually work...");
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note next to one of the glass containers.");
+                game.GetNote();
+            }
         }
         public GerminationVats(int y, int x) : base(y, x)
         {
@@ -298,6 +318,24 @@ at their center. They look vaguely organic, but beyond that you can't quite iden
             X = x;
             RespawnItems = new List<Item>() { new AcridPowder(), new YellowIchor() };
             Items = new List<Item>() { new AcridPowder(), new YellowIchor() };
+            Note = new Note("Page from Theodore's Journal: Germination Vats", $@"
+
+<Oddly, the note appears to be written on the back of a child's drawing in an almost illegile scribble>
+
+So *this* is where Miranda grows those scary little guys. Yeesh.
+
+Anyway, back to business. I'm leaving this as a record of this nice little process I devised for
+low-temperature fusion of silicates. Essentially, liquefying gems. For...various uses, probably. And
+I'm going to leave the first step here in this random room because...well...reasons. You know how 
+this works.
+
+Anyway, first thing you want to do after putting the Gem (I'm just gonna capitalize it, because why 
+not?) in the fusion chamber is hit the ignition switch...sorry, the Ignition Switch. This will activate
+the matter destabilizer, triggering...you know what, the details don't matter. Just hit the Ignition 
+Switch.
+
+...I just realized I'm writing this on the back on one of Vivian's drawings. Oof. Miranda's not gonna
+be happy...");
         }
     }
 
@@ -305,6 +343,7 @@ at their center. They look vaguely organic, but beyond that you can't quite iden
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override bool CraftingArea { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
@@ -314,7 +353,11 @@ at their center. They look vaguely organic, but beyond that you can't quite iden
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note sitting in a realtively clean area of the room.");
+                game.GetNote();
+            }
         }
         public MakeshiftLab(int y, int x) : base(y, x)
         {
@@ -328,6 +371,13 @@ sorts seem to be scattered seemingly at random around the room.";
             CraftingArea = true;
             RespawnItems = new List<Item>() { new LuminousDust(), new QuiveringOoze(), new PulseCrystal() };
             Items = new List<Item>() { new LuminousDust(), new QuiveringOoze(), new PulseCrystal() };
+            Note = new Note("Page from Theodore's Journal: Makeshift Lab", $@"
+
+<This note seems to be just one in a series...the writing is completely disorganized>
+
+Okay, we're onto the penultimate and possibly most important step in the gem liquefaction process...
+Once you've purged the ignition chamber (hopefully preventing unwanted explosions), you'll want to
+open the Small Valve and let the now-stable gem fluid flow into the filtering chamber. Piece of cake.");
         }
     }
 
@@ -335,6 +385,7 @@ sorts seem to be scattered seemingly at random around the room.";
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -343,7 +394,11 @@ sorts seem to be scattered seemingly at random around the room.";
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note sitting on the floor next to one of the shelves.");
+                game.GetNote();
+            }
         }
         public HaphazardLibrary(int y, int x) : base(y, x)
         {
@@ -356,6 +411,17 @@ along with a few tomes on cross-planar travel and even more esoteric topics.";
             X = x;
             RespawnItems = new List<Item>() { new LuminousDust(), new TwistedCrystal() };
             Items = new List<Item>() { new LuminousDust(), new TwistedCrystal() };
+            Note = new Note("Page from Theodore's Journal: Haphazard Library", $@"
+
+<This note seems to be just one in a series...the writing is completely disorganized>
+
+Pardon the mess, dear reader. This is just how I work.
+
+But where was I? Ah, right, low-temperature gem liquefaction! Okay, so after the ignition's complete
+you'll want to open the Large Valve so the destabilized gem...stuff can flow into the matter condenser.
+This just takes it out of superposition. Is that right? That doesn't sound right. Whatever. Just open the
+valve.
+");
         }
     }
 
@@ -1344,7 +1410,8 @@ Girl: 'Please help mommy. She didn't mean to hurt anyone...'
                         Console.Clear();
 
                         Console.WriteLine($@"
-You wake up on the floor of the room. Impulsively, you put a hand to your chest. Your heart appears to be beating.
+You wake up on the floor of the room. Impulsively, you put a hand to your chest. Thankfully, your heart 
+appears to be beating.
 
 A familiar orb of green light and shadow sits on the floor at the center of the room.
 ");
@@ -1570,6 +1637,7 @@ One image shows several suits of armor lined up in rows.
 Another image shows a bear rearing up in an aggressive pose.
 
 The third image shows an odd assortment of chairs, vases, and various treasures.");
+                Stage = "prism placed";
                 RemoveItems.Add(item);
                 Items.Add(new OpticalDisruptor());
                 Description = $@"
@@ -1594,6 +1662,43 @@ The third image shows an odd assortment of chairs, vases, and various treasures.
             {
                 Console.WriteLine("\nYou spot a note on one of the tables.");
                 game.GetNote();
+            }
+
+            if (Stage == "prism placed")
+            {
+                var deviceCount = 0;
+                for (var i = 0; i < player.Inventory.Count; i++)
+                {
+                    var item = player.Inventory[i];
+                    if (item.Name == "Mysterious Device")
+                    {
+                        deviceCount++;
+                    }
+                }
+                if (deviceCount == 3)
+                {
+                    for (var i = 0; i < player.Inventory.Count; i++)
+                    {
+                        var item = player.Inventory[i];
+                        if (item.Name == "Mysterious Device" || item.Name == "Optical Disruptor")
+                        {
+                            player.Inventory.Remove(item);
+                        }
+                    }
+                    Items.Add(new ShimmeringGem());
+                    Console.WriteLine($@"
+As you step into the room, you hear a strange beeping noise emanating from your pockets. You reach in and pull out
+one of the Mysterious Devices you found. The three of them are definitely the source of the beeping, and they're 
+temperatures appear to be rising.
+
+Reacting quickly, you pull all three of the strange machines out of your pockets and hurl them away. You're greeted
+by an explosion of dazzling lights to rival any fireworks display. As the smoke clears, you notice a shiny object on
+the floor of the room.
+
+On a whim, you pull out the Optical Disruptor. It immediately disintegrates into a pile of metallic dust.
+
+{player.Name}: 'Well, that was odd.'");
+                }
             }
         }
         public OpticsLab(int y, int x) : base(y, x)
@@ -1627,6 +1732,7 @@ reference. Good luck!");
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -1635,7 +1741,11 @@ reference. Good luck!");
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note on floor next to the strange device.");
+                game.GetNote();
+            }
         }
         public LiquefactionLab(int y, int x) : base(y, x)
         {
@@ -1647,6 +1757,28 @@ with poorly labelled buttons and valves that appear to control the operation of 
             Y = y;
             X = x;
             Items = new List<Item>();
+            Note = new Note("Page from Theodore's Journal: Liquefaction Lab", $@"
+
+Honestly, the look on Aldric's face when I told him I have a lab *just* for liquefaction. What a rube.
+
+But where was I? And why am I writing like this? It seems almost conversational...
+
+Nope, nope, focus Theodore, focus! Okay. Right. I was devising a low-temperature process for converting 
+that unbelievably shiny Gem into a liquid. Because why not?
+
+But wait, dear reader! Yes, I know you're there. Why else would I be leaving all these notes around? Who has
+such a terrible journal that it just drops pages at convenient locations?
+
+But I digress. Dr. Rithbaun, or Aldric, or Miranda, or whoever you are...I'm going to share something with you. 
+Turns out I already devised the very process I was describing! I just can't quite recall where I left all my 
+notes.
+
+Eh, I'm sure someone will track them down. Good luck finding the Gem, I have no idea where that thing went 
+off to.
+
+I will give you one hint: The fifth and final step in the prcoess is pressing the Blue Button. That activates the
+filtering device. Not that it really matters, you probably just want to get something out of this room so
+you can move on.");
         }
     }
 
@@ -1802,7 +1934,28 @@ this rate.");
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Optical Disruptior")
+            {
+                Console.WriteLine($@"
+You press the switch on the Optical Disruptor. It gives off a pulse of violet light.
+
+You look around the room. You notice that in the portrait of Augustus Grimtol, the man's
+fur coat has been replaced by bright red long johns. A live racoon appears to be perched on his head.
+
+Additionally, you now notice a strange object beneath the painting that you hadn't seen before.");
+                Items.Add(new MysteriousDevice());
+                Description = $@"
+The stone room is filled with expensive-looking antiques and furniture, all arranged hapahazardly. 
+Most likely just a storage area. The copious amounts of dust suggest it doesn't get
+many visitors.
+
+The portrait of Augustus Grimtol now depicts the man wearing red long johns, a live racoon perched 
+atop his head.";
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {
@@ -1840,6 +1993,7 @@ You use the Surgical Knife to cut into the strange corpse on the table. It's sur
 easy. It looks as if there is, in fact, a heart inside the horrific thing. Given the crazy
 state of this castle it might actually be of use somewhere.");
                 RemoveItems.Add(item);
+                Items.Add(new MalformedHeart());
                 Description = $@"
 The room is bare save for a row of operating tables and a large, metal locker. A medicinal smell fills 
 the air. The door to the locker lies open, revealing a pile of strange corpses resembling creatures 
@@ -1881,7 +2035,29 @@ would be if it were human. A simple alchemical workstation has been set up in on
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Optical Disruptior")
+            {
+                Console.WriteLine($@"
+You press the switch on the Optical Disruptor. It gives off a pulse of violet light.
+
+As you look around the room again, you notice a few changes. In the portrait of Augustus Grimtol,
+the rifle has been replaced with a comically oversized lollipop, and the once stern-looking man
+now appears to be crying like a spoiled child.
+
+Additionally, you now notice a strange object beneath the painting that you hadn't seen before.");
+                Items.Add(new MysteriousDevice());
+                Description = $@"
+You're in a simple room with wood-panelled walls. It appears to be some sort of hunter's trophy room, and is 
+filled with taxidermied animals of all sorts. Once majestic elk now gaze at you with glass eyes, and a 
+ferociously positioned bear rears up at the center of the room.
+
+The portrait of Augustus Grimtol now depicts the man holding a comically oversized lollipop and crying like
+a spoiled child.";
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {
@@ -1911,7 +2087,26 @@ a look of mild annoyance on his face. Below the painting is a plaque reading 'Au
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Optical Disruptior")
+            {
+                Console.WriteLine($@"
+You press the switch on the Optical Disruptor. It gives off a pulse of violet light.
+
+You look around the room. You notice that in the portrait of Augustus Grimtol, the man
+is now dressed in a ridiculous clown outfit, complete with makeup.
+
+Additionally, you now notice a strange object beneath the painting that you hadn't seen before.");
+                Items.Add(new MysteriousDevice());
+                Description = $@"
+The walls of the room are covered in weapons straight out of medieval Europe, alongside tapestries depicting 
+historic battles. The floorspace is devoted to immaculately maintained suits of armor from various nations.
+
+The portrait of Augustus Grimtol now depicts the man in a ridiculous clown outfit.";
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {

@@ -675,6 +675,17 @@ namespace CastleGrimtol.Project
         }
     }
 
+    public class MysteriousDevice: Item
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public MysteriousDevice()
+        {
+            Name = "Mysterious Device";
+            Description = "A small metal box of unknown purpose.";
+        }
+    }
+
     public class ShimmeringGem : Item
     {
         public override string Name { get; set; }
