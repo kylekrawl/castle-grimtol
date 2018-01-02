@@ -39,7 +39,7 @@ namespace CastleGrimtol.Project
             {"GL", typeof(GrandLibrary)},
             {"TS", typeof(TheodoresStudy)},
             {"CC", typeof(CentralChamber)},
-            {"FD", typeof(ForgottenDungeon)},
+            {"FV", typeof(ForgottenVault)},
             {"DA", typeof(DustyArmory)},
             {"TM", typeof(TrophyRoom)},
             {"OR", typeof(OperatingRoom)}

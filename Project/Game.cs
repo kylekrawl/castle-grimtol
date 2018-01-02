@@ -1143,7 +1143,7 @@ slightly different from before, and evrything seems to have moved around, ever s
         public Game()
         {
             ApplicationActive = true;
-            MapTemplate = @"VR:MS:TR:FD:ML:GL:ER.
+            MapTemplate = @"VR:MS:TR:FV:ML:GL:ER.
                             TR:RW:GV:ER:VL:TS:LL.
                             MW:ER:CG:TR:ER:DA:OB.
                             OL:FC:OR:CC:HL:CL:TR.

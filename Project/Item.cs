@@ -664,6 +664,17 @@ namespace CastleGrimtol.Project
         }
     }
 
+    public class OpticalDisruptor : Item
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public OpticalDisruptor()
+        {
+            Name = "Optical Disruptor";
+            Description = "A small handheld device with a dazzling array of lenses and a single switch.";
+        }
+    }
+
     public class ShimmeringGem : Item
     {
         public override string Name { get; set; }

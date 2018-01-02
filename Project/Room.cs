@@ -936,6 +936,7 @@ clang as the object hits the floor.
 You notice for the first time that nestled within the sculpture's ribcage is a small iron box, exaclty where 
 it's heart would be. The lid is open, as if daring you to place something inside.");
                 RemoveItems.Add(item);
+                Items.Add(new SurgicalKnife());
                 Stage = "skull placed";
                 Description = $@"
 The room is dimly lit by a faint green glow. The walls of the room are covered with sketches, all depicting 
@@ -1553,15 +1554,47 @@ Might have to go hunting. Hope Miranda and Aldric don't get too peeved if a few 
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Unnatural Prism")
+            {
+                Console.WriteLine($@"
+You place the Prism in the beam of light at the center of the platform. It splits the light into three seperate beams,
+each directed at a different wall in the room. You notice that at the end of each beam an image is illuminated on the wall.
+
+One image shows several suits of armor lined up in rows.
+
+Another image shows a bear rearing up in an aggressive pose.
+
+The third image shows an odd assortment of chairs, vases, and various treasures.");
+                RemoveItems.Add(item);
+                Items.Add(new OpticalDisruptor());
+                Description = $@"
+The room is composed almost completely of white stone. Several tables line the walls, all of them covered in a 
+disorganized array of lenses, crystals, and assorted alchemical components. The prism at the room's center illuminates
+the walls with three images.
+
+One image shows several suits of armor lined up in rows.
+
+Another image shows a bear rearing up in an aggressive pose.
+
+The third image shows an odd assortment of chairs, vases, and various treasures.";
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note on one of the tables.");
+                game.GetNote();
+            }
         }
         public OpticsLab(int y, int x) : base(y, x)
         {
@@ -1573,6 +1606,20 @@ the room's ceiling projects a beam of light directly downward, illuminating a pl
             Y = y;
             X = x;
             Items = new List<Item>();
+            Note = new Note("Page from Theodore's Journal: Optics Lab", $@"
+
+Finally figured out that optical camouflage idea I've been playing around with. And just in time! It seems
+*someone* found out about the little treasure I've hidden away in this room, and couldn't resist digging 
+around a bit. Probably Dr. Rithbaun. Oh, and if you're reading this, good Doctor, hello! Although I wouldn't 
+put it past Aldric and Miranda to come snooping around in here too.
+
+So, whoever you are, I've set up a fun little game for you. Just to give you a hint, I finally found a use for
+all of father's old haunts. Well, my father anyway, not yours, Doctor. Or if you're Aldric or Miranda, then yes,
+your father too. And if you're one of the gribblies running about...how are you even reading this note? All clear? 
+Great.
+
+Oh, hint number two: On it's own, hint number one is woefully insufficient. See first sentence of this note for 
+reference. Good luck!");
         }
     }
 
@@ -1747,7 +1794,7 @@ this rate.");
         }
     }
 
-    public class ForgottenDungeon : Room, IRoom
+    public class ForgottenVault : Room, IRoom
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
@@ -1761,13 +1808,16 @@ this rate.");
         {
             Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
         }
-        public ForgottenDungeon(int y, int x) : base(y, x)
+        public ForgottenVault(int y, int x) : base(y, x)
         {
-            Name = "Forgotten Dungeon";
+            Name = "Forgotten Vault";
             Description = $@"
-The stone room is lined with cells, their iron bars coated with rust. Look to be some sort of dungeon...
-fitting for a castle. Although a few of the cells have a few bones strewn about, it doesn't look like 
-this dungeon has been getting much use as of late.";
+The stone room is filled with expensive-looking antiques and furniture, all arranged hapahazardly. 
+Most likely just a storage area. The copious amounts of dust suggest it doesn't get
+many visitors.
+
+Hanging prominently on one wall is a painting of a man with a bushy mustache standing in a snowy tableu,
+robed in a majestic fur coat. Below the painting is a plaque reading 'Augustus Grimtol'.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -1783,7 +1833,25 @@ this dungeon has been getting much use as of late.";
         public override bool CraftingArea { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Surgical Knife")
+            {
+                Console.WriteLine($@"
+You use the Surgical Knife to cut into the strange corpse on the table. It's surprisingly
+easy. It looks as if there is, in fact, a heart inside the horrific thing. Given the crazy
+state of this castle it might actually be of use somewhere.");
+                RemoveItems.Add(item);
+                Description = $@"
+The room is bare save for a row of operating tables and a large, metal locker. A medicinal smell fills 
+the air. The door to the locker lies open, revealing a pile of strange corpses resembling creatures 
+out of a nightmare. On one of the operating tables lies the body of something that looks vaguely humanoid, 
+a gaping hole in it chest as a result of your slapdash surgical technique. A simple alchemical workstation 
+has been set up in one of the room's corners.";
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
+
         }
         public override void Event(Game game, Player player)
         {
@@ -1825,7 +1893,10 @@ would be if it were human. A simple alchemical workstation has been set up in on
             Description = $@"
 You're in a simple room with wood-panelled walls. It appears to be some sort of hunter's trophy room, and is 
 filled with taxidermied animals of all sorts. Once majestic elk now gaze at you with glass eyes, and a 
-ferociously positioned bear rears up at the center of the room.";
+ferociously positioned bear rears up at the center of the room.
+
+Hanging prominently on one wall is a painting of a man with a bushy mustache holding an old-looking rifle, 
+a look of mild annoyance on his face. Below the painting is a plaque reading 'Augustus Grimtol'.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -1851,7 +1922,10 @@ ferociously positioned bear rears up at the center of the room.";
             Name = "Dusty Armory";
             Description = $@"
 The walls of the room are covered in weapons straight out of medieval Europe, alongside tapestries depicting 
-historic battles. The floorspace is devoted to immaculately maintained suits of armor from various nations.";
+historic battles. The floorspace is devoted to immaculately maintained suits of armor from various nations.
+
+Hanging prominently on one wall is a painting of a man in a military uniform and a bushy mustache. Below the
+painting is a plaque reading 'Augustus Grimtol'.";
             Y = y;
             X = x;
             Items = new List<Item>();
