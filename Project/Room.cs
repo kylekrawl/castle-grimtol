@@ -796,7 +796,7 @@ lies empty.";
 Every day I come closer to discovering the purest form of alchemical fire...the Fire that will cure humanity.
 In pursuit of this, I've devised an elixir to test the raw potential of an alchemical flame.
 
-I discovered that by comining a sufficiently reactive alchemical Substrate with human bone, I was able to
+I discovered that by combining a sufficiently reactive alchemical Substrate with human bone, I was able to
 harvest a beautiful, flame-red Marrow with powerful fire-resistant properties.
 
 By obtaining a second, equally reactive Substrate and combining that with some of the Oil I've developed for use
@@ -1312,10 +1312,42 @@ You're in what looks to be a child's room. A soft, calming white light blankets 
                     if (Stage == "charm used")
                     {
                         Console.WriteLine($@"
-                        //TODO
+You hesitantly remove the stopper from the vial and swallow the Lethal Venom. Your vision immediately
+goes black. When you wake up, you see that you're still in the same room, but it's...changed.
+Everything is colored in shades of gray, and faded, as if shrouded in a thin fog.
+
+You look around, then stop suddenly when your eyes reach a strange shape on the ground. It's your body.
+It's at this point you realize that you can't feel your heartbeat.
+
+You sense a prescence nearby, and turn around to see the little girl from before. She looks at you with
+sad eyes.
+
+Girl: 'It's okay. You're safe. You're still...there, but you're here too. You're in the between place. 
+That's where mommy hid the dark thing.'
+
+As if to emphasize, she points at the area behind you. As you turn around, you see it. A small sphere
+of pulsing green light and swirling shadows, hovering in midair.
+
+Girl: 'I tried to get it, but I can't. I'm too far away.'
+
+You reach your hand out toward the orb. The room suddenly fills with green light, and your vision 
+once again fades to black. As you fade away, you hear the girl's voice...
+
+Girl: 'Please help mommy. She didn't mean to hurt anyone...'
 ");
+
                         RemoveItems.Add(item);
                         Items.Add(new AnchorOfCorruption());
+                        Console.WriteLine("\n<Press any key to continue.>");
+                        Console.ReadKey(true);
+                        Console.Clear();
+
+                        Console.WriteLine($@"
+You wake up on the floor of the room. Impulsively, you put a hand to your chest. Your heart appears to be beating.
+
+A familiar orb of green light and shadow sits on the floor at the center of the room.
+");
+
                     }
                     else
                     {
@@ -1338,7 +1370,8 @@ You're in what looks to be a child's room. A soft, calming white light blankets 
             if (DeathFlag)
             {
                 Console.WriteLine($@"
-//TODO");
+You rip the stopper off of the vial and swallow the Lethal Venom. Your body is immediately wracked by pain, and
+your vision grows hazy. As you fall to the ground, you can hear a sickening laughter ringing in your ears.");
             }
             if (game.MainQuestStage["corruption"] == "start")
             {
@@ -1364,27 +1397,30 @@ Voice: 'Drriink iiit...'
 
 You find yourself reaching for something in your pocket..the vial of Lethal Venom you picked up earlier.
 
-You feel compelled to obey the voice. You keep trying to shove the thought out of your mind, but it's getting harder to resist.
+You feel compelled to obey the voice. You keep trying to shove the thought out of your mind, but it's getting harder 
+to resist.
 
 You suddenly feel incredibly tired. Perhaps it would be best to leave for now...");
                     Description = $@"
-You're in what looks to be a child's room. The floral wallpaper is now riddled with a strange patchwork of shadows and glowing
-green runes. You hear a faint whispering that seems to emanate from everywhere at once.
+You're in what looks to be a child's room. The floral wallpaper is now riddled with a strange patchwork of shadows 
+and glowing green runes. You hear a faint whispering that seems to emanate from everywhere at once.
 
 Something about this room makes you feel incredibly tired.";
                 }
             }
-            if (game.MainQuestStage["corruption"] == "has poison" && !DeathFlag) {
+            if (game.MainQuestStage["corruption"] == "has poison" && !DeathFlag)
+            {
                 Console.WriteLine($@"Strange patterns of green light and shadow dance through the air around you. 
 You suddenly hear a hideous voice echoing throughout the room.
 
 Voice: 'Drriink iiit...'
 
-Before you realize it, you're holding the vial of Lethal Venom. You unconsciouly begin reaching for the stopper, then quickly jerk your 
-hand away. A sound resembling pained laughter echoes around you. You quickly tuck the vial back in your pocket, but it's almost as if it's
-calling out to you.
+Before you realize it, you're holding the vial of Lethal Venom. You unconsciouly begin reaching for the stopper, 
+then quickly jerk your hand away. A sound resembling pained laughter echoes around you. You quickly tuck the vial 
+back in your pocket, but it's almost as if it'scalling out to you.
 
-You suddenly feel incredibly tired. The fatigue isn't helping your mental state. It might be best to leave this place and get some rest.");
+You suddenly feel incredibly tired. The fatigue isn't helping your mental state. It might be best to leave this 
+place and get some rest.");
             }
         }
         public ViviansRoom(int y, int x) : base(y, x)
@@ -1461,15 +1497,32 @@ Miranda.");
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Prismatic Dust")
+            {
+                Console.WriteLine($@"
+You pour the Prismatic Dust into the top of the hourglass contraption. As it slowly falls, a brilliant blue
+flame ignites within the furnace at the device's base. Once all of the dust has fallen, the flame vanishes, 
+revealing an impossibly smooth crystalline prism.");
+                RemoveItems.Add(item);
+                Items.Add(new UnnaturalPrism());
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note on the floor next to the hourglass contraption.");
+                game.GetNote();
+            }
         }
         public CrystallographyLab(int y, int x) : base(y, x)
         {
@@ -1482,6 +1535,17 @@ but it's more advanced than any you've seen before.";
             Y = y;
             X = x;
             Items = new List<Item>();
+            Note = new Note("Page from Theodore's Journal: Crystallography Lab", $@"
+
+Just remembered that I need to synthesize another Prism for all those experiments on crossplanar optics I've been
+putting off. Let's see, a Prism should be two components. They can most likely be combined at a regular alchemical
+workstation, and then I'd just have to run the resulting product through this hourglass-filter/furnace combo. 
+Been awhile since I've used this thing.
+
+Now, what two components to use? Most likely alchemical Powders. But there are lot of different Powders. Oh, wait, I've 
+got it! Probably a corruption Powder and a purification Powder! Yes, that'll do! Do I have any of those lying around?
+Might have to go hunting. Hope Miranda and Aldric don't get too peeved if a few of their gribblies go missing...
+");
         }
     }
 
@@ -1716,6 +1780,7 @@ this dungeon has been getting much use as of late.";
         public override string Description { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
+        public override bool CraftingArea { get; set; }
         public override void UseItem(Item item)
         {
             Console.WriteLine($"{item.Name} fails to be of any use.");

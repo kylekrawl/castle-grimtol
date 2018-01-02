@@ -638,6 +638,21 @@ namespace CastleGrimtol.Project
         }
     }
 
+    public class PrismaticDust : Item
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
+        public PrismaticDust()
+        {
+            Name = "Prismatic Dust";
+            Description = "A glassy, coarse-grained powder. A strange mix of light and shadow seem to dance within each particle.";
+            CraftingCombinations = new List<List<string>>(){
+                new List<string>(){"Acrid Powder", "Bone Dust"}
+            };
+        }
+    }
+
     public class UnnaturalPrism : Item
     {
         public override string Name { get; set; }
