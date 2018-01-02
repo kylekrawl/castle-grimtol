@@ -24,7 +24,7 @@ namespace CastleGrimtol.Project
             Inventory = new List<Item>() { 
                 //new FlintlockPistol(),
                 new DivinePistol(),
-                new GlowingVapor(),
+                new LethalVenom(),
                 new ReactiveSolid()
             };
             Notes = new List<Note>() {

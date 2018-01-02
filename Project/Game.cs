@@ -1126,10 +1126,7 @@ small silver locket. It feels surpisingly cold to the touch.
             }
             else
             {
-                Console.WriteLine("\n<Press any key to continue.>");
-                Console.ReadKey(true);
                 Console.Clear();
-
                 Console.WriteLine($@"
 You wake up in a cold sweat. Despite the nightmare, you feel slightly better. However, 
 something about the room doesn't seem quite right. The paintings and tapestries seem

@@ -1374,7 +1374,7 @@ The Charm shatters into fragments. The source of the voice appears to have retre
 The room now appears to be filled with a faint glow. A feeling of calm washes over you.
 Then, you hear the quiet voice of a young girl.
 
-Girl: 'It's okay to drink it now. I'll protect you. I promise.'");
+Girl: 'You have to drink it now. It's the only way. I'll protect you...I promise.'");
                 RemoveItems.Add(item);
                 Stage = "charm used";
                 Description = $@"
@@ -1382,7 +1382,7 @@ You're in what looks to be a child's room. A soft, calming white light blankets 
             }
             else
             {
-                if (item.Name == "Lethal Poison")
+                if (item.Name == "Lethal Venom")
                 {
                     if (Stage == "charm used")
                     {
@@ -1466,17 +1466,7 @@ your vision grows hazy. As you fall to the ground, you can hear a sickening laug
                     game.MainQuestStage["corruption"] = "has poison";
                     Console.WriteLine($@"
 You feel the room grow suddenly colder. Strange patterns of bright green light and shadow begin crawling
-across the walls. It almost looks like writing, but it's unlike any language you've seen. And then, a 
-voice that manages to be both rasping and gurgling at the same time fills your ears.
-
-Voice: 'Drriink iiit...'
-
-You find yourself reaching for something in your pocket..the vial of Lethal Venom you picked up earlier.
-
-You feel compelled to obey the voice. You keep trying to shove the thought out of your mind, but it's getting harder 
-to resist.
-
-You suddenly feel incredibly tired. Perhaps it would be best to leave for now...");
+across the walls. It almost looks like writing, but it's unlike any language you've seen.");
                     Description = $@"
 You're in what looks to be a child's room. The floral wallpaper is now riddled with a strange patchwork of shadows 
 and glowing green runes. You hear a faint whispering that seems to emanate from everywhere at once.
@@ -1486,8 +1476,8 @@ Something about this room makes you feel incredibly tired.";
             }
             if (game.MainQuestStage["corruption"] == "has poison" && !DeathFlag)
             {
-                Console.WriteLine($@"Strange patterns of green light and shadow dance through the air around you. 
-You suddenly hear a hideous voice echoing throughout the room.
+                Console.WriteLine($@"
+You suddenly hear a voice that manages to be both rasping and gurgling at the same time.
 
 Voice: 'Drriink iiit...'
 
