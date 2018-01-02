@@ -730,6 +730,7 @@ The CURE. The cure for humanity.
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
@@ -790,6 +791,20 @@ lies empty.";
             Y = y;
             X = x;
             Items = new List<Item>();
+            Note = new Note("Page from Aldric's Journal: Immaculate Gallery", $@"
+
+Every day I come closer to discovering the purest form of alchemical fire...the Fire that will cure humanity.
+In pursuit of this, I've devised an elixir to test the raw potential of an alchemical flame.
+
+I discovered that by comining a sufficiently reactive alchemical Substrate with human bone, I was able to
+harvest a beautiful, flame-red Marrow with powerful fire-resistant properties.
+
+By obtaining a second, equally reactive Substrate and combining that with some of the Oil I've developed for use
+in my soldiers, I was able to produce a wonderfully pure Extract.
+
+Combining this Marrow and Extract should produce an Elixir that imbues a living creature with incredible, though 
+short-lived, resistance to heat. This will be the tool I use find the true Alchemical Fire. If it can overcome the
+protection of the Elixir, then it may be powerful enough to elevate humanity to its highest form...");
         }
     }
 
@@ -1288,7 +1303,7 @@ Girl: 'It's okay to drink it now. I'll protect you. I promise.'");
                 RemoveItems.Add(item);
                 Stage = "charm used";
                 Description = $@"
-You're in what looks to be a child's room. A soft, calming white light blankets the room.";
+You're in what looks to be a child's room. A soft, calming white light blankets the area.";
             }
             else
             {
@@ -1354,7 +1369,9 @@ You feel compelled to obey the voice. You keep trying to shove the thought out o
 You suddenly feel incredibly tired. Perhaps it would be best to leave for now...");
                     Description = $@"
 You're in what looks to be a child's room. The floral wallpaper is now riddled with a strange patchwork of shadows and glowing
-green runes. You hear a faint whispering that seems to emanate from everywhere at once.";
+green runes. You hear a faint whispering that seems to emanate from everywhere at once.
+
+Something about this room makes you feel incredibly tired.";
                 }
             }
             if (game.MainQuestStage["corruption"] == "has poison" && !DeathFlag) {
@@ -1365,7 +1382,9 @@ Voice: 'Drriink iiit...'
 
 Before you realize it, you're holding the vial of Lethal Venom. You unconsciouly begin reaching for the stopper, then quickly jerk your 
 hand away. A sound resembling pained laughter echoes around you. You quickly tuck the vial back in your pocket, but it's almost as if it's
-calling out to you...");
+calling out to you.
+
+You suddenly feel incredibly tired. The fatigue isn't helping your mental state. It might be best to leave this place and get some rest.");
             }
         }
         public ViviansRoom(int y, int x) : base(y, x)
@@ -1385,7 +1404,7 @@ Sometimes, Vivi, I can still hear you. I can't bear the thought of never seeing 
 If I die, will we be reunited? I wondered for so long...I made something that would let me try...
 hid it away in my workroom, in the secret place.
 
-But I found a better way. A way to conquer the natrual laws that shackle this plane...
+But I found a better way. A way to conquer the natural laws that shackle this plane...
 
 A way to bring you back.");
         }

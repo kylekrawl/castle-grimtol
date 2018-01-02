@@ -1104,12 +1104,39 @@ creatures breaking their way through the floors, ready to haunt the nightmarish 
             Console.WriteLine("\n<Press any key to continue.>");
             Console.ReadKey(true);
             Console.Clear();
-            Console.WriteLine($@"
+
+            if (MainQuestStage["corruption"] == "has poison")
+            {
+                Console.WriteLine($@"
+And then, the nightmare fades away. You find yourself surrounded by an endless sea of pale light.
+Standing before you is a young girl.
+
+She reaches her hand out to you. You can see she's holding something in her palm...");
+                Console.WriteLine("\n<Press any key to continue.>");
+                Console.ReadKey(true);
+                Console.Clear();
+                CurrentPlayer.Inventory.Add(new ViviansCharm());
+                Console.WriteLine($@"
+You bolt awake. You feel something clutched in your hand. You open your palm to reveal a
+small silver locket. It feels surpisingly cold to the touch. 
+
+<Vivian's Charm added to inventory.>");
+            }
+            else
+            {
+                Console.WriteLine("\n<Press any key to continue.>");
+                Console.ReadKey(true);
+                Console.Clear();
+
+                Console.WriteLine($@"
 You wake up in a cold sweat. Despite the nightmare, you feel slightly better. However, 
 something about the room doesn't seem quite right. The paintings and tapestries seem
 slightly different from before, and evrything seems to have moved around, ever so slightly.
 
 {CurrentPlayer.Name}: I could've sworn the exits were in a different spot...");
+            }
+
+
         }
 
         public Game()

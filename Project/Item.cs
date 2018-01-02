@@ -290,7 +290,7 @@ namespace CastleGrimtol.Project
         public ReactiveSolid()
         {
             Name = "Reactive Solid";
-            Description = "A highly volatile alchemical substrate. Useful for crafting more advanced recipes.";
+            Description = "[Advanced Alchemical Substrate] A highly volatile alchemical substrate. Useful for crafting more advanced recipes.";
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Putrid Nodule", "Metal Core"},
                 new List<string>(){ "Putrid Nodule", "Twisted Crytal"},
