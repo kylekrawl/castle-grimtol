@@ -309,22 +309,22 @@ namespace CastleGrimtol.Project
             Name = "Molten Extract";
             Description = "A dimly glowing red-orange liquid that emits a faint heat.";
             CraftingCombinations = new List<List<string>>(){
-                new List<string>(){ "Reactive Solid", "Crimson Oil"}
+                new List<string>(){ "Acrid Powder", "Crimson Oil"}
             };
         }
     }
 
-    public class ScarletMarrow : Item
+    public class EbonyMarrow : Item
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
         public override List<List<string>> CraftingCombinations { get; set; }
-        public ScarletMarrow()
+        public EbonyMarrow()
         {
-            Name = "Scarlet Marrow";
-            Description = "A soft, bright red paste that gives off a strange steam.";
+            Name = "Ebony Marrow";
+            Description = "A soft, pitch black paste that gives off a strange green smoke.";
             CraftingCombinations = new List<List<string>>(){
-                new List<string>(){ "Reactive Solid", "Bone Dust"}
+                new List<string>(){ "Bone Ash", "Yellow Ichor"}
             };
         }
     }
@@ -501,7 +501,7 @@ namespace CastleGrimtol.Project
             Name = "Infernal Elixir";
             Description = "A vial of glowing red liquid. Its temperature seems to alternate between hot and cold.";
             CraftingCombinations = new List<List<string>>(){
-                new List<string>(){ "Scarlet Marrow", "Molten Extract"}
+                new List<string>(){ "Ebony Marrow", "Molten Extract"}
             };
         }
     }
@@ -648,7 +648,7 @@ namespace CastleGrimtol.Project
             Name = "Prismatic Dust";
             Description = "A glassy, coarse-grained powder. A strange mix of light and shadow seem to dance within each particle.";
             CraftingCombinations = new List<List<string>>(){
-                new List<string>(){"Acrid Powder", "Bone Dust"}
+                new List<string>(){"Acrid Powder", "Bone Ash"}
             };
         }
     }
@@ -718,7 +718,7 @@ namespace CastleGrimtol.Project
             Name = "Extraplanar Fluid";
             Description = "A shifting, silvery-white fluid that seems to defy at least three natural laws.";
             CraftingCombinations = new List<List<string>>(){
-                new List<string>(){"Panacea", "Luminous Dust"}
+                new List<string>(){"Iridescent Fluid", "Reactive Solid"}
             };
         }
     }

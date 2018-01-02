@@ -22,8 +22,10 @@ namespace CastleGrimtol.Project
             Name = "Alchemist";
             Score = 0;
             Inventory = new List<Item>() { 
-                new FlintlockPistol(),
-                //new DivinePistol()
+                //new FlintlockPistol(),
+                new DivinePistol(),
+                new GlowingVapor(),
+                new ReactiveSolid()
             };
             Notes = new List<Note>() {
                 new Note("Dr. Rithbaun's Letter", $@"

@@ -835,6 +835,11 @@ statue's tail has been melted, revealing a strange, luminous object at its core.
         }
         public override void Event(Game game, Player player)
         {
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note on the floor next to the statue.");
+                game.GetNote();
+            }
             if (DeathFlag)
             {
                 Console.WriteLine($@"
@@ -862,11 +867,11 @@ lies empty.";
 Every day I come closer to discovering the purest form of alchemical fire...the Fire that will cure humanity.
 In pursuit of this, I've devised an elixir to test the raw potential of an alchemical flame.
 
-I discovered that by combining a sufficiently reactive alchemical Substrate with human bone, I was able to
-harvest a beautiful, flame-red Marrow with powerful fire-resistant properties.
+I discovered that by combining some of that disgusting Ichor dropped by Miranda's awful creations
+with Ash derived from human bones produces a pitch-black Marrow with powerful alchemical properties.
 
-By obtaining a second, equally reactive Substrate and combining that with some of the Oil I've developed for use
-in my soldiers, I was able to produce a wonderfully pure Extract.
+Also, by combining some of the sulfurous Powder those foul beasts drop with some of the Oil I've developed for 
+use in my soldiers, I was able to produce a wonderfully pure Extract.
 
 Combining this Marrow and Extract should produce an Elixir that imbues a living creature with incredible, though 
 short-lived, resistance to heat. This will be the tool I use find the true Alchemical Fire. If it can overcome the
@@ -1103,7 +1108,7 @@ move quickly to escape.");
                     Console.WriteLine("| D | Dodge Right");
                     Console.WriteLine("| W | Jump");
                     Console.WriteLine("| S | Duck");
-
+                    KeyInfo = Console.ReadKey(true);
                     if (KeyInfo.Key == ConsoleKey.A || KeyInfo.Key == ConsoleKey.LeftArrow)
                     {
                         Console.Clear();
@@ -1137,6 +1142,8 @@ move quickly to escape.");
                     {
                         Console.WriteLine("\nYou just manage to avoid a blade that was sweeping directly toward you.");
                         index++;
+                        Console.WriteLine("\n<Press any key to continue.>");
+                        Console.ReadKey(true);
                     }
                     else
                     {
@@ -1146,6 +1153,7 @@ move quickly to escape.");
                 }
                 if (!DeathFlag)
                 {
+                    Console.Clear();
                     Console.WriteLine($@"
 Suddenly, the contraption grinds to a halt. Out of the corner of your eye, you see a small object roll along the floor, 
 seemingly from out of nowhere. It comes to a stop near the center of the room.");
@@ -1636,7 +1644,9 @@ One image shows several suits of armor lined up in rows.
 
 Another image shows a bear rearing up in an aggressive pose.
 
-The third image shows an odd assortment of chairs, vases, and various treasures.");
+The third image shows an odd assortment of chairs, vases, and various treasures.
+
+You also notice that a compartment in the platform has opened, revealing a strange handheld contraption.");
                 Stage = "prism placed";
                 RemoveItems.Add(item);
                 Items.Add(new OpticalDisruptor());
@@ -1683,6 +1693,7 @@ The third image shows an odd assortment of chairs, vases, and various treasures.
                         if (item.Name == "Mysterious Device" || item.Name == "Optical Disruptor")
                         {
                             player.Inventory.Remove(item);
+                            i--;
                         }
                     }
                     Items.Add(new ShimmeringGem());
@@ -1760,7 +1771,7 @@ whirs to life, and the console next to it lights up.");
                     Console.WriteLine("| L | Turn Large Valve");
                     Console.WriteLine("| B | Press Blue Button");
                     Console.WriteLine("| R | Press Red Button");
-
+                    KeyInfo = Console.ReadKey(true);
                     if (KeyInfo.Key == ConsoleKey.I)
                     {
                         Console.Clear();
@@ -1802,6 +1813,8 @@ whirs to life, and the console next to it lights up.");
 The machine starts emitting a horrifying clacking sound...and then you hear a soft chime.
 A green light flickers slowly on the console.");
                         index++;
+                        Console.WriteLine("\n<Press any key to continue.>");
+                        Console.ReadKey(true);
                     }
                     else
                     {
@@ -1811,6 +1824,7 @@ A green light flickers slowly on the console.");
                 }
                 if (!DeathFlag)
                 {
+                    Console.Clear();
                     Console.WriteLine($@"
 The metal box at the end of the contraption suddenly snaps open, revealing a vial of sparkling liquid.");
                     RemoveItems.Add(item);
@@ -1897,6 +1911,10 @@ The box snaps open, revealing a stoppered glass bottle filled with the strange v
                 RemoveItems.Add(item);
                 Items.Add(new GlowingVapor());
             }
+            else if (item.Name == "Iridescent Fluid")
+            {
+                Console.WriteLine($"That seems to be a logical idea, but it can't be used in its current form.");
+            }
             else
             {
                 Console.WriteLine($"{item.Name} fails to be of any use.");
@@ -1936,9 +1954,8 @@ a few things beforehand to prep that gem-liquid you're lugging around.
 
 First things first: You're gonna need to create an extraplanar fluid. It's not as hard as 
 it sounds...you can actually do it at a basic alchemy workstation. Weirdly enough, all you 
-need to do is combine the gem-fluid you already have with some Luminous Dust. As for getting 
-the dust, just kill some of the gribblies I accidentally let loose. Or check some of the 
-nearby labs, I know I've stashed some around here.
+need to do is combine the gem-fluid you already have with an Advanced Alchemical Substrate.
+You know how to craft those, right?
 
 Once you have that extraplanar fluid, all you need to do is plop it in the machine, flip
 a switch, and you're golden.
@@ -1967,7 +1984,7 @@ breathe...might want to make this fast.");
                 List<string> directions = new List<string>() {
                     "u", "n", "d", "w", "e", "s"
                 };
-                Dictionary<string, string> Clues = new Dictionary<string, string>()
+                Dictionary<string, string> clues = new Dictionary<string, string>()
                 {
                     //TODO: finish clues
                     {"n", "It's an engraving of a starry sky. One star seems slightly larger than the others. The label next to it reads 'Polaris'."},
@@ -1981,7 +1998,8 @@ breathe...might want to make this fast.");
                 List<string> correctOrder = new List<string>() {
                     "u", "n", "d", "w", "e", "s"
                 };
-                for(var i = 0; i < 20; i++) {
+                for (var i = 0; i < 20; i++)
+                {
                     Random r = new Random();
                     int randIndex = r.Next(0, directions.Count);
                     var direction = correctOrder[randIndex];
@@ -1996,7 +2014,8 @@ breathe...might want to make this fast.");
                 {
                     string currentMove = null;
                     Console.Clear();
-                    Console.WriteLine("\nYou float onward through the glowing vapor..\n");
+                    Console.WriteLine("\nThrough the thick haze, you see an object before you...\n");
+                    Console.WriteLine($"\n{clues[correctOrder[index]]}\n");
                     Console.WriteLine("\nChoose an action:\n");
                     Console.WriteLine("| W | Move North");
                     Console.WriteLine("| D | Move East");
@@ -2004,7 +2023,7 @@ breathe...might want to make this fast.");
                     Console.WriteLine("| A | Move West");
                     Console.WriteLine("| Z | Move Up");
                     Console.WriteLine("| X | Move Down");
-
+                    KeyInfo = Console.ReadKey(true);
                     if (KeyInfo.Key == ConsoleKey.A || KeyInfo.Key == ConsoleKey.LeftArrow)
                     {
                         Console.Clear();
@@ -2051,8 +2070,10 @@ breathe...might want to make this fast.");
                     }
                     if (currentMove == correctOrder[index])
                     {
-                        Console.WriteLine("\nYou see a strange object coming into view...");
+                        Console.WriteLine("\nYou float onward through the glowing vapor..\n");
                         index++;
+                        Console.WriteLine("\n<Press any key to continue.>");
+                        Console.ReadKey(true);
                     }
                     else
                     {
@@ -2063,6 +2084,7 @@ breathe...might want to make this fast.");
                 }
                 if (!DeathFlag)
                 {
+                    Console.Clear();
                     Console.WriteLine($@"
 You find yourself standing in front of an a shelf probably located in some deeply hidden section 
 of the library. Nestled in the space between two books is a strange orb flickering with blue 
@@ -2222,7 +2244,7 @@ this rate.");
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            if (item.Name == "Optical Disruptior")
+            if (item.Name == "Optical Disruptor")
             {
                 Console.WriteLine($@"
 You press the switch on the Optical Disruptor. It gives off a pulse of violet light.
@@ -2323,7 +2345,7 @@ would be if it were human. A simple alchemical workstation has been set up in on
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            if (item.Name == "Optical Disruptior")
+            if (item.Name == "Optical Disruptor")
             {
                 Console.WriteLine($@"
 You press the switch on the Optical Disruptor. It gives off a pulse of violet light.
@@ -2375,7 +2397,7 @@ a look of mild annoyance on his face. Below the painting is a plaque reading 'Au
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            if (item.Name == "Optical Disruptior")
+            if (item.Name == "Optical Disruptor")
             {
                 Console.WriteLine($@"
 You press the switch on the Optical Disruptor. It gives off a pulse of violet light.

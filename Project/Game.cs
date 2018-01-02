@@ -30,7 +30,7 @@ namespace CastleGrimtol.Project
             typeof(ReactiveSolid),
             typeof(FuelOrb),
             typeof(MoltenExtract),
-            typeof(ScarletMarrow),
+            typeof(EbonyMarrow),
             typeof(InfernalElixir),
             typeof(PrismaticDust),
             typeof(ExtraplanarFluid)
