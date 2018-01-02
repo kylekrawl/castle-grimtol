@@ -1168,7 +1168,7 @@ seemingly from out of nowhere. It comes to a stop near the center of the room.")
             if (DeathFlag)
             {
                 Console.WriteLine($@"
-Unfortunately, your evasive action takes you right into the path of one of the contraptions mechanical limbs. A
+Unfortunately, your evasive action takes you right into the path of one of the contraption's mechanical limbs. A
 gleaming blade sweeps directly toward you...");
             }
         }
@@ -1829,7 +1829,7 @@ The metal box at the end of the contraption suddenly snaps open, revealing a via
                 Console.WriteLine("\nYou spot a note on floor next to the strange device.");
                 game.GetNote();
             }
-             if (DeathFlag)
+            if (DeathFlag)
             {
                 Console.WriteLine($@"
 The machine suddenly grows quiet. You notice that a red light is flashing on the console.
@@ -1935,10 +1935,10 @@ first thought, anyway. The device in this room will take care of it. You just ha
 a few things beforehand to prep that gem-liquid you're lugging around.
 
 First things first: You're gonna need to create an extraplanar fluid. It's not as hard as 
-it sounds...weirdly enough, if you combine a sufficiently powerful healing item with
-some Luminous Dust it seems to do the trick just fine. As for getting the dust, just
-kill some of the gribblies I accidentally let loose. Or check some of the nearby labs,
-I know I've stashed some around here.
+it sounds...you can actually do it at a basic alchemy workstation. Weirdly enough, all you 
+need to do is combine the gem-fluid you already have with some Luminous Dust. As for getting 
+the dust, just kill some of the gribblies I accidentally let loose. Or check some of the 
+nearby labs, I know I've stashed some around here.
 
 Once you have that extraplanar fluid, all you need to do is plop it in the machine, flip
 a switch, and you're golden.
@@ -1951,15 +1951,152 @@ At least, I think that's how it works. It's been awhile...");
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Glowing Vapor")
+            {
+                Console.WriteLine($@"
+You uncork the bottle of Glowing Vapor and watch as it fills the sprawling library. You find that you can 
+swim through the gas almost like water. This should make it easy to access previously out-of-reach areas.
+
+The downside is that the thick vapor makes it a bit hard to see. Also, it's getting a little harder to 
+breathe...might want to make this fast.");
+                List<string> directions = new List<string>() {
+                    "u", "n", "d", "w", "e", "s"
+                };
+                Dictionary<string, string> Clues = new Dictionary<string, string>()
+                {
+                    //TODO: finish clues
+                    {"n", "It's an engraving of a starry sky. One star seems slightly larger than the others. The label next to it reads 'Polaris'."},
+                    {"e", "It's a <east clue>"},
+                    {"s", "It's a <south clue>"},
+                    {"w", "It's a <west clue>"},
+                    {"u", "It's a statue of an angelic figure carved from alabaster."},
+                    {"d", "It's a statue of a horned demon carved from basalt."}
+                };
+
+                List<string> correctOrder = new List<string>() {
+                    "u", "n", "d", "w", "e", "s"
+                };
+                for(var i = 0; i < 20; i++) {
+                    Random r = new Random();
+                    int randIndex = r.Next(0, directions.Count);
+                    var direction = correctOrder[randIndex];
+                    correctOrder.Remove(direction);
+                    correctOrder.Add(direction);
+                }
+                //TODO: Better randomization method
+                int index = 0;
+                Console.WriteLine("\n<Press any key to continue.>");
+                Console.ReadKey(true);
+                while (index < correctOrder.Count)
+                {
+                    string currentMove = null;
+                    Console.Clear();
+                    Console.WriteLine("\nYou float onward through the glowing vapor..\n");
+                    Console.WriteLine("\nChoose an action:\n");
+                    Console.WriteLine("| W | Move North");
+                    Console.WriteLine("| D | Move East");
+                    Console.WriteLine("| S | Move South");
+                    Console.WriteLine("| A | Move West");
+                    Console.WriteLine("| Z | Move Up");
+                    Console.WriteLine("| X | Move Down");
+
+                    if (KeyInfo.Key == ConsoleKey.A || KeyInfo.Key == ConsoleKey.LeftArrow)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You float to the west.");
+                        currentMove = "w";
+                    }
+                    else if (KeyInfo.Key == ConsoleKey.W || KeyInfo.Key == ConsoleKey.UpArrow)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You float to the north.");
+                        currentMove = "n";
+                    }
+                    else if (KeyInfo.Key == ConsoleKey.D || KeyInfo.Key == ConsoleKey.RightArrow)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You float to the east.");
+                        currentMove = "e";
+                    }
+                    else if (KeyInfo.Key == ConsoleKey.S || KeyInfo.Key == ConsoleKey.DownArrow)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You float to the south.");
+                        currentMove = "s";
+                    }
+                    else if (KeyInfo.Key == ConsoleKey.Z)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You float upward.");
+                        currentMove = "u";
+                    }
+                    else if (KeyInfo.Key == ConsoleKey.X)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You float downward.");
+                        currentMove = "d";
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Random r = new Random();
+                        int randIndex = r.Next(0, directions.Count);
+                        currentMove = directions[randIndex];
+                        Console.WriteLine("You're not sure what direction you just went in, but hopefully it's the right one.");
+                    }
+                    if (currentMove == correctOrder[index])
+                    {
+                        Console.WriteLine("\nYou see a strange object coming into view...");
+                        index++;
+                    }
+                    else
+                    {
+                        //TODO: Allow multiple mistakes before death flag
+                        DeathFlag = true;
+                        break;
+                    }
+                }
+                if (!DeathFlag)
+                {
+                    Console.WriteLine($@"
+You find yourself standing in front of an a shelf probably located in some deeply hidden section 
+of the library. Nestled in the space between two books is a strange orb flickering with blue 
+and violet light.
+
+As you reach out to grab it, it suddenly falls from its perch and vanishes into the clouds below...
+Except, you immediately hear a dull thud. You notice the vapor beginning to disperse...and notice
+that both you and the orb are both resting on the main walkway at the center of the library.
+
+Apparently the orb was right next to you at the start. Go figure.");
+                    RemoveItems.Add(item);
+                    Items.Add(new AnchorOfTransmutation());
+                }
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note on one of the walkways.");
+                game.GetNote();
+            }
+            if (DeathFlag)
+            {
+                Console.WriteLine($@"
+You continue floating through the vapor for what feels like ages, but fail to come across
+anything of use. You feel youself getting lightheaded.
+
+lLoks like you made a wrong turn somewhere...");
+            }
         }
         public GrandLibrary(int y, int x) : base(y, x)
         {
@@ -1974,6 +2111,21 @@ reach any of the bookshelves aside from those on the level where you're currentl
             Y = y;
             X = x;
             Items = new List<Item>();
+            Note = new Note("Page from Theodore's Journal: Grand Library", $@"
+
+Ah, my favorite room in the castle. A shame that over half the books are all but inaccessible now.
+What to do about that...
+
+Wait, here's an idea: A portable propulsion system! No, too elaborate. Hmm...think Theodore,
+think! It's not like I can just swim through the air...Oh. OH. But what if I were to *replace* 
+the air with something a bit more amenable to flotation...some kind of alchemical gas might
+do the trick...
+
+I mean, I have to find some place to hide this Anchor. A virtually inaccessable alcove somewhere in
+the library should be perfect.
+
+But I'll leave clues, of course. What if I need to find it again? Can't rely on my memory...I can't even 
+remember what I ate for breakfast. Wait, did I even eat breakfast today? Hmm...");
         }
     }
 
