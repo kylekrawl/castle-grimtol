@@ -33,7 +33,7 @@ namespace CastleGrimtol.Project
             Name = "Flintlock Pistol";
             Description = "A basic sidearm.";
             DamageType = "basic";
-            Damage = 5;
+            Damage = 15;
         }
     }
 
@@ -518,7 +518,7 @@ namespace CastleGrimtol.Project
         public override string Description { get; set; }
         public AnchorOfPurification()
         {
-            Name = "Anchor Of Purification";
+            Name = "Anchor of Purification";
             Description = "A crystal orb glowing with a shifting pattern of red, yellow and orange light. It radiates an aura of incredible power.";
         }
     }
@@ -628,7 +628,7 @@ namespace CastleGrimtol.Project
         public override string Description { get; set; }
         public AnchorOfCorruption()
         {
-            Name = "Anchor Of Corruption";
+            Name = "Anchor of Corruption";
             Description = "A crystal orb glowing with a shifting pattern of green light and impossibly dark shadows. It radiates an aura of incredible power.";
         }
     }
@@ -746,7 +746,7 @@ namespace CastleGrimtol.Project
         public override string Description { get; set; }
         public AnchorOfTransmutation()
         {
-            Name = "Anchor Of Transmutation";
+            Name = "Anchor of Transmutation";
             Description = "A crystal orb glowing with a shifting pattern of blue and violet light. It radiates an aura of incredible power.";
         }
     }

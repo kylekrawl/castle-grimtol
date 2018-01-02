@@ -777,11 +777,20 @@ devoid of doors of any sort.
                 if (item.Name == itemName)
                 {
                     Console.WriteLine($"You use the {item.Name}.\n");
-                    CurrentRoom.UseItem(item);
-                    if (CurrentRoom.RemoveItems.Contains(item))
+                    if (!HealingItems.Contains(item.Name))
                     {
-                        CurrentPlayer.Inventory.Remove(item);
-                        CurrentRoom.RemoveItems.Remove(item);
+                        CurrentRoom.UseItem(item);
+                        if (CurrentRoom.RemoveItems.Contains(item))
+                        {
+                            CurrentPlayer.Inventory.Remove(item);
+                            CurrentRoom.RemoveItems.Remove(item);
+                        }
+                    } else {
+                        Console.WriteLine($"You regain {item.HealAmount} health.\n");
+                        CurrentPlayer.Health += item.HealAmount;
+                        if (CurrentPlayer.Health > CurrentPlayer.MaxHealth) {
+                            CurrentPlayer.Health = CurrentPlayer.MaxHealth;
+                        }
                     }
                     break;
                 }
@@ -793,6 +802,10 @@ devoid of doors of any sort.
                 Console.WriteLine("\n<Press any key to continue.>");
                 Console.ReadKey(true);
                 GameOver();
+            }
+            if (CurrentRoom.CombatFlag)
+            {
+                CurrentRoom.Event(this, CurrentPlayer);
             }
         }
         public void TakeItem(string itemName)
@@ -817,10 +830,8 @@ devoid of doors of any sort.
                 for (var i = 0; i < CurrentPlayer.Inventory.Count; i++)
                 {
                     var item = CurrentPlayer.Inventory[i];
-                    Console.WriteLine($"{i + 1}. {item.Name}");
-                    Console.WriteLine($"-----------------------------");
-                    Console.WriteLine($"{item.Description}");
-                    Console.WriteLine($"-----------------------------\n");
+                    Console.WriteLine($"{i + 1}. {item.Name}:");
+                    Console.WriteLine($"{item.Description}\n");
                 }
                 var choice = Console.ReadLine();
                 var parsed = 0;
@@ -848,10 +859,8 @@ devoid of doors of any sort.
                 for (var i = 0; i < CurrentRoom.Items.Count; i++)
                 {
                     var item = CurrentRoom.Items[i];
-                    Console.WriteLine($"{i + 1}. {item.Name}");
-                    Console.WriteLine($"-----------------------------");
-                    Console.WriteLine($"{item.Description}");
-                    Console.WriteLine($"-----------------------------\n");
+                    Console.WriteLine($"{i + 1}. {item.Name}:");
+                    Console.WriteLine($"{item.Description}\n");
                 }
                 var choice = Console.ReadLine();
                 var parsed = 0;
@@ -885,10 +894,8 @@ devoid of doors of any sort.
                     for (var i = 0; i < CurrentPlayer.Inventory.Count; i++)
                     {
                         var item = CurrentPlayer.Inventory[i];
-                        Console.WriteLine($"{i + 1}. {item.Name}");
-                        Console.WriteLine($"-----------------------------");
-                        Console.WriteLine($"{item.Description}");
-                        Console.WriteLine($"-----------------------------\n");
+                        Console.WriteLine($"{i + 1}. {item.Name}:");
+                        Console.WriteLine($"{item.Description}\n");
                     }
                     var choice = Console.ReadLine();
                     var parsed = 0;
@@ -913,10 +920,8 @@ devoid of doors of any sort.
                     for (var i = 0; i < CurrentPlayer.Inventory.Count; i++)
                     {
                         var item = CurrentPlayer.Inventory[i];
-                        Console.WriteLine($"{i + 1}. {item.Name}");
-                        Console.WriteLine($"-----------------------------");
-                        Console.WriteLine($"{item.Description}");
-                        Console.WriteLine($"-----------------------------\n");
+                        Console.WriteLine($"{i + 1}. {item.Name}:");
+                        Console.WriteLine($"{item.Description}\n");
                     }
                     var choice2 = Console.ReadLine();
                     var parsed2 = 0;
@@ -1022,19 +1027,11 @@ devoid of doors of any sort.
                 for (var i = 0; i < CurrentPlayer.Inventory.Count; i++)
                 {
                     var item = CurrentPlayer.Inventory[i];
-                    Console.WriteLine($"{item.Name}");
-                    Console.WriteLine($"-----------------------------");
-                    Console.WriteLine($"{item.Description}");
-                    Console.WriteLine($"-----------------------------\n");
+                    Console.WriteLine($"{item.Name}:");
+                    Console.WriteLine($"{item.Description}\n");
                 }
-                Console.WriteLine("| U | Use Item");
-                Console.WriteLine("\n<Press any other key to continue.>");
-                KeyInfo = Console.ReadKey(true);
-                if (KeyInfo.Key == ConsoleKey.U)
-                {
-                    Console.Clear();
-                    UseItemInterface();
-                }
+                Console.WriteLine("\n<Press any key to continue.>");
+                Console.ReadKey(true);
             }
             else
             {
@@ -1051,10 +1048,8 @@ devoid of doors of any sort.
                 for (var i = 0; i < CurrentRoom.Items.Count; i++)
                 {
                     var item = CurrentRoom.Items[i];
-                    Console.WriteLine($"{item.Name}");
-                    Console.WriteLine($"-----------------------------");
-                    Console.WriteLine($"{item.Description}");
-                    Console.WriteLine($"-----------------------------\n");
+                    Console.WriteLine($"{item.Name}:");
+                    Console.WriteLine($"{item.Description}\n");
                 }
             }
         }
@@ -1135,7 +1130,6 @@ slightly different from before, and evrything seems to have moved around, ever s
 {CurrentPlayer.Name}: I could've sworn the exits were in a different spot...");
             }
 
-
         }
 
         public Game()
@@ -1151,23 +1145,3 @@ slightly different from before, and evrything seems to have moved around, ever s
         }
     }
 }
-/*
- 
-                                                
-                       
-
-                 .|_
-                  :;|_|        |_|_|_|
-                 |_|_|_|        | = |
-                  | = | :.,.  |_|_|_|_|
-                |_|_|_|_|:;:   | = = |
-                 | = | | = |   | = = |
-               ';.;.|_|_|_|_|_|_|_|_|_|_|
-                :;:.  =  =  =  =  =  = |
-                |; = [-] =  =  =  =  = | 
-              ..'''''''''''''''''''''''''.,
-          ..''                            '.
-       .''                                  ;
-     .'                                      '.
-  .''                                          ''.
- */

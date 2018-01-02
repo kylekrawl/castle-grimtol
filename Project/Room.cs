@@ -18,6 +18,7 @@ namespace CastleGrimtol.Project
         public bool PassagesBuilt { get; set; }
         public virtual bool CraftingArea { get; set; }
         public virtual bool DeathFlag { get; set; }
+        public virtual bool CombatFlag { get; set; }
         public virtual bool VisitedByPlayer { get; set; }
         public List<string> Exits { get; set; } = new List<string>();
         public virtual string Stage { get; set; }
@@ -43,6 +44,7 @@ namespace CastleGrimtol.Project
             Exits = new List<string>();
             CraftingArea = false;
             DeathFlag = false;
+            CombatFlag = false;
             Note = null;
             Enemy = null;
             Trap = null;
@@ -901,16 +903,43 @@ protection of the Elixir, then it may be powerful enough to elevate humanity to 
         public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
+        public override Enemy Enemy { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+
+            if (item.Name == "Anchor of Purification")
+            {
+                Console.WriteLine($@"
+You hold the Anchor of Purification up to the portal. It suddenly glows with an intense red light, then vanishes.
+The portal glows brighter for a second, then vanishes as well. Standing in it's place is a sturdily build man
+with a mad look in his eyes.
+
+Aldric Grimtol: 'I knew some unworthy soul would follow me. But it's too late. I've found it...the Divine
+Fire that will cure humanity!'");
+                RemoveItems.Add(item);
+                CombatFlag = true;
+                Console.WriteLine("\n<Press any key to continue.>");
+                Console.ReadKey(true);
+
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {
             if (!(Note == null))
             {
-                Console.WriteLine("\nYou spot a page that looks like it's been wripped out of a journal. It's in Dr. Rithbaun's handwriting.");
+                Console.WriteLine("\nYou spot a page that looks like it's been ripped out of a journal. It's in Dr. Rithbaun's handwriting.");
                 game.GetNote();
+            }
+            if (CombatFlag)
+            {
+                if (Enemy.Health > 0)
+                {
+                    game.Combat(Enemy);
+                }
             }
         }
         public AldricsStudy(int y, int x) : base(y, x)
@@ -924,6 +953,7 @@ is the glowing red disc hovering in midair at the room's center. Strange runes f
             Y = y;
             X = x;
             Items = new List<Item>();
+            Enemy = new AvatarOfRage();
             Note = new Note("Page from Dr. Rithbaun's Journal [Aldric's Study]", $@"
 
 This is worse than I thought. If that portal in his study is any indication, Aldric has found a way to travel 
@@ -1540,9 +1570,27 @@ A way to bring you back.
         public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
+        public override Enemy Enemy { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Anchor of Corruption")
+            {
+                Console.WriteLine($@"
+You hold the Anchor of Corruption up to the portal. It suddenly glows with an intense green light, then vanishes.
+The portal glows brighter for a second, then vanishes as well. Standing in it's place is a woman with dark hair
+and sad eyes.
+
+Miranda Grimtol: 'No...I'll bring her back. No one will keep me from her...no one...");
+                RemoveItems.Add(item);
+                CombatFlag = true;
+                Console.WriteLine("\n<Press any key to continue.>");
+                Console.ReadKey(true);
+
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {
@@ -1550,6 +1598,13 @@ A way to bring you back.
             {
                 Console.WriteLine("\nYou spot a page that looks like it's been wripped out of a journal. It's in Dr. Rithbaun's handwriting.");
                 game.GetNote();
+            }
+            if (CombatFlag)
+            {
+                if (Enemy.Health > 0)
+                {
+                    game.Combat(Enemy);
+                }
             }
         }
         public MirandasStudio(int y, int x) : base(y, x)
@@ -1563,6 +1618,7 @@ surface covered in strange runes.";
             Y = y;
             X = x;
             Items = new List<Item>();
+            Enemy = new AvatarOfDespair();
             Note = new Note("Page from Dr. Rithbaun's Journal [Miranda's Studio]", $@"
 
 So, it would appear that Miranda has jumped to another plane like the others. There's no way giving that woman 
@@ -2178,9 +2234,27 @@ remember what I ate for breakfast. Wait, did I even eat breakfast today? Hmm...
         public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
+        public override Enemy Enemy { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Anchor of Transmutation")
+            {
+                Console.WriteLine($@"
+You hold the Anchor of Transmutation up to the portal. It suddenly glows with an intense blue light, then vanishes.
+The portal glows brighter for a second, then vanishes as well. Standing in it's is a thin man with a scattered look 
+in his eyes..
+
+Theodore Grimtol: 'Oh, good, you made it! But you see, I can't let you stop me. This is just too much fun...");
+                RemoveItems.Add(item);
+                CombatFlag = true;
+                Console.WriteLine("\n<Press any key to continue.>");
+                Console.ReadKey(true);
+
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {
@@ -2188,6 +2262,13 @@ remember what I ate for breakfast. Wait, did I even eat breakfast today? Hmm...
             {
                 Console.WriteLine("\nYou spot a page that looks like it's been wripped out of a journal. It's in Dr. Rithbaun's handwriting.");
                 game.GetNote();
+            }
+            if (CombatFlag)
+            {
+                if (Enemy.Health > 0)
+                {
+                    game.Combat(Enemy);
+                }
             }
         }
         public TheodoresStudy(int y, int x) : base(y, x)
@@ -2199,6 +2280,7 @@ lay everywhere. It's so cluttered that you almost don't notice the overing in th
 just above the desk. The surface of the disk is marked with luminous runes from a language you don't recognize.";
             Y = y;
             X = x;
+            Enemy = new AvatarOfMadness();
             Items = new List<Item>();
             Note = new Note("Page from Dr. Rithbaun's Journal [Theodore's Study]", $@"
 

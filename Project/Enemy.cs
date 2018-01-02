@@ -75,7 +75,7 @@ grinds to a halt. The glow in its empty eyes fades as its body falls to the grou
             VictoriousDescription = @"The creature's attack cuts deep. As you clutch your stomach, 
 the last thing you see is a blade hurtling toward you.";
             Type = "purification";
-            MaxHealth = 20;
+            MaxHealth = 100;
             Health = MaxHealth;
             MaxDefenseRating = 10;
             DefenseRating = MaxDefenseRating;
@@ -121,9 +121,9 @@ armor. The glow within it quickly fades, and it falls to the ground with a loud 
             VictoriousDescription = @"The golem's strike staggers you. As you struggle to regain your 
 balance, it's halberd swings toward you in a lethal arc.";
             Type = "purification";
-            MaxHealth = 20;
+            MaxHealth = 120;
             Health = MaxHealth;
-            MaxDefenseRating = 10;
+            MaxDefenseRating = 12;
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
@@ -164,14 +164,14 @@ toward you.";
             DefeatedDescription = @"The creature lets out a gurgling cry and falls to the ground, it's body slowly dissolving into a thick black ooze.";
             VictoriousDescription = @"In your weakened state, the creature grabs you. It's terrifying maw fills your vision as it lets out a triumphant shriek.";
             Type = "corruption";
-            MaxHealth = 20;
+            MaxHealth = 80;
             Health = MaxHealth;
             MaxDefenseRating = 10;
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
-               new Attack("Claw Strike", $"\n{this.Name} swings at you with it's piercing claws.", 10, 50),
-               new Attack("Vicious Bite", $"\n{this.Name} lurches toward you with it's horrific mouth open wide.", 20, 100)
+               new Attack("Claw Strike", $"\n{this.Name} swings at you with it's piercing claws.", 12, 50),
+               new Attack("Vicious Bite", $"\n{this.Name} lurches toward you with it's horrific mouth open wide.", 24, 100)
             };
             DropItems = new List<Item>(){
                 new AcridPowder(), new PutridNodule(), new YellowIchor()
@@ -209,14 +209,14 @@ it finally stops moving.";
             VictoriousDescription = @"Weakened from your wounds, you fall forward. The creature grabs you with it's vinelike limbs. The last thing you 
 hear is it's horrific wails.";
             Type = "corruption";
-            MaxHealth = 20;
+            MaxHealth = 100;
             Health = MaxHealth;
-            MaxDefenseRating = 10;
+            MaxDefenseRating = 12;
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
-               new Attack("Vine Lash", $"\n{this.Name} strikes at you with a hideous, barbed vine.", 15, 50),
-               new Attack("Acidic Burst", $"\n{this.Name} launches a blob of corrosive liquid in your direction.", 25, 100)
+               new Attack("Vine Lash", $"\n{this.Name} strikes at you with a hideous, barbed vine.", 17, 50),
+               new Attack("Acidic Burst", $"\n{this.Name} launches a blob of corrosive liquid in your direction.", 27, 100)
             };
             DropItems = new List<Item>(){
                 new AcridPowder(), new PutridNodule(), new YellowIchor()
@@ -252,9 +252,9 @@ Soundlessly, the creature throws itself toward you.";
             DefeatedDescription = @"The creature explodes into gelatinous chunks that evaporate into nothingness before they even hit the ground.";
             VictoriousDescription = @"Dazed and injured, you're unable to dodge as the creature lunges toward you, engulfing you completely.";
             Type = "transmutation";
-            MaxHealth = 20;
+            MaxHealth = 100;
             Health = MaxHealth;
-            MaxDefenseRating = 10;
+            MaxDefenseRating = 12;
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
@@ -297,9 +297,9 @@ and you can see the wicked spines protruding from its limbs.";
             VictoriousDescription = @"In a moment of distraction, you lose sight of the creature completely. You feel a stinging pain in 
 your back before your vision goes black.";
             Type = "transmutation";
-            MaxHealth = 20;
+            MaxHealth = 100;
             Health = MaxHealth;
-            MaxDefenseRating = 10;
+            MaxDefenseRating = 14;
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
@@ -308,6 +308,166 @@ your back before your vision goes black.";
             };
             DropItems = new List<Item>(){
                 new LuminousDust(), new TwistedCrystal(), new QuiveringOoze()
+            };
+        }
+    }
+
+    public class AvatarOfRage : Enemy
+    {
+        public override string Name { get; set; }
+        public override string ApproachDescription { get; set; }
+        public override string CombatDescription { get; set; }
+        public override string DefeatedDescription { get; set; }
+        public override string VictoriousDescription { get; set; }
+        public override string Type { get; set; }
+        public override double Health { get; set; }
+        public override double MaxHealth { get; set; }
+        public override double DefenseRating { get; set; }
+        public override double MaxDefenseRating { get; set; }
+        public override List<Attack> Attacks { get; set; }
+        public override List<Item> DropItems { get; set; }
+
+        public AvatarOfRage()
+        {
+            Name = "Avatar of Rage";
+            ApproachDescription = @"
+Aldric suddenly bursts into flames, leaving behind a massive pile of ash. And then a figure rises from the still-warm dust. It's
+vaugely humanoid, but it's body is covered in wickedly spined armor that looks to be crafted from scorched bone. It's draconic skull 
+resembles something out of a myth, and it gazes at you with glowing orange eyes.
+
+The creature slowly kneels to ground, and removes a massive sword of iron and bone from the pile of ash. Flames begin to arise from
+the demonic figure and it's blade. It lets out a roar, then begins to move quickly toward you.";
+            CombatDescription = @"
+The skeletal creature circles you, it's flaming sword at the ready.";
+            DefeatedDescription = @"
+The creature lets out a horrifc roar. It's body begins to slowly crumble into ash and cinder.
+
+As the remains of the monster slowly burn away, you hear a voice fill the room.
+
+Voice: 'The Fire...the cleansing, glorious Fire...so beautiful...'
+
+";
+            VictoriousDescription = @"
+The creature lets out a triumphant roar as your body is consumed by flames.";
+            Type = "transmutation";
+            MaxHealth = 200;
+            Health = MaxHealth;
+            MaxDefenseRating = 12;
+            DefenseRating = MaxDefenseRating;
+            Attacks = new List<Attack>()
+            {
+               new Attack("Burning Strike", $"\n{this.Name} slashes at you with its sword of flame.", 17, 50),
+               new Attack("Eyes of Wrath", $"\n{this.Name} emits two beams of glowing orange light from it's eyes.", 30, 100)
+            };
+            DropItems = new List<Item>(){
+                new IconOfRage()
+            };
+        }
+    }
+
+    public class AvatarOfDespair : Enemy
+    {
+        public override string Name { get; set; }
+        public override string ApproachDescription { get; set; }
+        public override string CombatDescription { get; set; }
+        public override string DefeatedDescription { get; set; }
+        public override string VictoriousDescription { get; set; }
+        public override string Type { get; set; }
+        public override double Health { get; set; }
+        public override double MaxHealth { get; set; }
+        public override double DefenseRating { get; set; }
+        public override double MaxDefenseRating { get; set; }
+        public override List<Attack> Attacks { get; set; }
+        public override List<Item> DropItems { get; set; }
+
+        public AvatarOfDespair()
+        {
+            Name = "Avatar of Despair";
+            ApproachDescription = @"
+A cloud of green fog surrounds Miranda, hiding her from view. As the fog fades, you see that she's been transformed into
+a terrifying creature. It's little more than a vaguely humanoid mass of black thorns. It's misshapen head gazes at you
+with three dull, yellow eyes that seem to be leaking a thick, yellow fluid that sends up thin trails of smoke as it
+hit the ground.
+
+The creature suddenly lets out an inhuman wail. Then, with a jerky, unnatural gait, it advances slowly toward you.";
+            CombatDescription = @"
+The thorned abomination lurches toward, weeping acidic tears.";
+            DefeatedDescription = @"
+The creature lets out a terrifying cry, then falls to the ground. It's body slowly dissolves, giving off a pale
+green smoke.
+
+As the remains of the monster melt away, you hear a voice fill the room.
+
+Voice: 'Vivi...'
+
+";
+            VictoriousDescription = @"
+The creature lets out a gurgling laugh as your body begins to dissolve.";
+            Type = "transmutation";
+            MaxHealth = 175;
+            Health = MaxHealth;
+            MaxDefenseRating = 15;
+            DefenseRating = MaxDefenseRating;
+            Attacks = new List<Attack>()
+            {
+               new Attack("Thorn Strike", $"\n{this.Name} tears at you with its thorn-like claws.", 15, 60),
+               new Attack("Corrosive Cloud", $"\nA cloud of corrosive, pale green vapor emanates from {this.Name}.", 40, 100)
+            };
+            DropItems = new List<Item>(){
+                new IconOfDespair()
+            };
+        }
+    }
+
+    public class AvatarOfMadness : Enemy
+    {
+        public override string Name { get; set; }
+        public override string ApproachDescription { get; set; }
+        public override string CombatDescription { get; set; }
+        public override string DefeatedDescription { get; set; }
+        public override string VictoriousDescription { get; set; }
+        public override string Type { get; set; }
+        public override double Health { get; set; }
+        public override double MaxHealth { get; set; }
+        public override double DefenseRating { get; set; }
+        public override double MaxDefenseRating { get; set; }
+        public override List<Attack> Attacks { get; set; }
+        public override List<Item> DropItems { get; set; }
+
+        public AvatarOfMadness()
+        {
+            Name = "Avatar of Madness";
+            ApproachDescription = @"
+Theodore is suddenly consumed by a flash of bluish light. As the light fades, an unnatural creature hovers in his place.
+It seems to be a collection of irregularlly shaped, crystalline forms orbiting a glowing core of glowing blue gas. A strange
+electricity crackles around it.
+
+The eldritch horror begins floating slowly toward you, the air around it rippling as it moves.";
+            CombatDescription = @"
+The unnatural creature hovers in place, distorting the area around it with a strange light.";
+            DefeatedDescription = @"
+The core at the center of the creature suddenly turns pure black. The crystalline masses orbiting it
+are suddenly drawn into it's now-dark center. And then, with a flash of blue light, the feature vanishes.
+
+You hear a voice fill the room.
+
+Voice: 'Ah, so this is all there is? How disappointing...'
+
+";
+            VictoriousDescription = @"
+The creature's core flashes almost mockingly as your body fades into nothingness.'";
+            Type = "transmutation";
+            MaxHealth = 150;
+            Health = MaxHealth;
+            MaxDefenseRating = 16;
+            DefenseRating = MaxDefenseRating;
+            Attacks = new List<Attack>()
+            {
+               new Attack("Crackling Burst", $"\nA burst of electricity arcs out of {this.Name}.", 20, 50),
+               new Attack("Crystal Bombardment", $"\n{this.Name} launches a torrent of jagged crystal shards directly at you.", 40, 100)
+            };
+            DropItems = new List<Item>(){
+                new IconOfMadness()
             };
         }
     }

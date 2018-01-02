@@ -24,8 +24,9 @@ namespace CastleGrimtol.Project
             Inventory = new List<Item>() { 
                 //new FlintlockPistol(),
                 new DivinePistol(),
-                new LethalVenom(),
-                new ReactiveSolid()
+                new AnchorOfPurification(),
+                new AnchorOfCorruption(),
+                new AnchorOfTransmutation()
             };
             Notes = new List<Note>() {
                 new Note("Dr. Rithbaun's Letter", $@"
