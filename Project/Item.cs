@@ -294,7 +294,10 @@ namespace CastleGrimtol.Project
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Putrid Nodule", "Metal Core"},
                 new List<string>(){ "Putrid Nodule", "Twisted Crytal"},
-                new List<string>(){ "Twisted Crystal", "Metal Core"}
+                new List<string>(){ "Twisted Crystal", "Metal Core"},
+                new List<string>(){ "Putrid Nodule", "Putrid Nodule"},
+                new List<string>(){ "Metal Core", "Metal Core"},
+                new List<string>(){ "Twisted Crystal", "Twisted Crystal"}
             };
         }
     }
@@ -357,7 +360,10 @@ namespace CastleGrimtol.Project
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Yellow Ichor", "Crimson Oil"},
                 new List<string>(){ "Yellow Ichor", "Quivering Ooze"},
-                new List<string>(){ "Quivering Ooze", "Crimson Oil"}
+                new List<string>(){ "Quivering Ooze", "Crimson Oil"},
+                new List<string>(){ "Yellow Ichor", "Yellow Ichor"},
+                new List<string>(){ "Quivering Ooze", "Quivering Ooze"},
+                new List<string>(){ "Crimson Oil", "Crimson Oil"}
             };
             HealAmount = 10;
         }

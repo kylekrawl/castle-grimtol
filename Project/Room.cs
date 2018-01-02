@@ -81,7 +81,7 @@ space...probably Dr. Rithbaun's handiwork.";
             X = x;
             VisitedByPlayer = true;
             CraftingArea = true;
-            Note = new Note("Page from Rithbaun's Journal: Main Foyer", $@"
+            Note = new Note("Page from Dr. Rithbaun's Journal [Main Foyer]", $@"
 
 What a fine mess I'm in! It's been nearly a week days since those three went
 absolutely mad and I'm at a complete loss as to how to escape this place. Good
@@ -192,7 +192,7 @@ of machinery attached to them. A tidy alchemical workstation sits in one corner 
             CraftingArea = true;
             RespawnItems = new List<Item>() { new BoneAsh(), new CrimsonOil(), new PulseCrystal() };
             Items = new List<Item>() { new BoneAsh(), new CrimsonOil(), new PulseCrystal() };
-            Note = new Note("Page from Theodore's Journal: Assembly Lab", $@"
+            Note = new Note("On Gem Liquefaction: A Series [Assembly Lab]", $@"
 
 <This note seems to be just one in a series...the writing is completely disorganized>
 
@@ -201,7 +201,9 @@ Just look at this place! Aldric's taste keeps getting weirder and weirder.
 Anyway, continuing our little trip into the process of liquefying gems, once you've let the
 gem-fluid into the matter condenser and brought it out of superposition...or whatever..you'll
 want to hit the Red Button to flush the ignition chamber. This is crucial. I've caused so
-many explosions by forgetting this...");
+many explosions by forgetting this...
+
+- Theodore Grimtol");
         }
     }
 
@@ -235,13 +237,14 @@ A few of them contain bones, neatly sorted by type.";
             X = x;
             RespawnItems = new List<Item>() { new BoneAsh(), new MetalCore() };
             Items = new List<Item>() { new BoneAsh(), new MetalCore() };
-            Note = new Note("Page from Rithbaun's Journal: Storage Area", $@"
+            Note = new Note("Alchemical Properties of the Creatures [Storage Area]", $@"
 
 I've started to figure out a few ways to use the remains of the creatures those three unleashed. It 
 seems that it's possible to harvest useful alchemical Substrates from quite a few of them. I've found
-that combining two substrates of differing type will almost invariably produce a highly reactive substance.
-This substance is quite useful...combining it with alchemical Powders seems to produce a nice explosive,
-for example.");
+that combining two substrates will almost invariably produce a highly reactive substance. This substance 
+is quite useful...combining it with alchemical Powders seems to produce a nice explosive, for example.
+
+- Dr. Damian Rithbaun");
         }
     }
 
@@ -278,7 +281,7 @@ workstation in one corner of the room appears to be undisturbed.";
             CraftingArea = true;
             RespawnItems = new List<Item>() { new AcridPowder(), new PutridNodule(), new PulseCrystal() };
             Items = new List<Item>() { new AcridPowder(), new PutridNodule(), new PulseCrystal() };
-            Note = new Note("Page from Rithbaun's Journal: Overgrown Lab", $@"
+            Note = new Note("Page from Dr. Rithbaun's Journal [Overgrown Lab]", $@"
 
 I'm really glad I brought along these Pulse Crystals. Turns out that you can combine them with a sufficiently 
 reactive alchemical solid to create a device that makes short work of all the traps those three rigged up.
@@ -318,7 +321,7 @@ at their center. They look vaguely organic, but beyond that you can't quite iden
             X = x;
             RespawnItems = new List<Item>() { new AcridPowder(), new YellowIchor() };
             Items = new List<Item>() { new AcridPowder(), new YellowIchor() };
-            Note = new Note("Page from Theodore's Journal: Germination Vats", $@"
+            Note = new Note("On Gem Liquefaction: A Series [Germination Vats]", $@"
 
 <Oddly, the note appears to be written on the back of a child's drawing in an almost illegile scribble>
 
@@ -335,7 +338,9 @@ the matter destabilizer, triggering...you know what, the details don't matter. J
 Switch.
 
 ...I just realized I'm writing this on the back on one of Vivian's drawings. Oof. Miranda's not gonna
-be happy...");
+be happy...
+
+- Theodore Grimtol");
         }
     }
 
@@ -371,13 +376,15 @@ sorts seem to be scattered seemingly at random around the room.";
             CraftingArea = true;
             RespawnItems = new List<Item>() { new LuminousDust(), new QuiveringOoze(), new PulseCrystal() };
             Items = new List<Item>() { new LuminousDust(), new QuiveringOoze(), new PulseCrystal() };
-            Note = new Note("Page from Theodore's Journal: Makeshift Lab", $@"
+            Note = new Note("On Gem Liquefaction: A Series [Makeshift Lab]", $@"
 
 <This note seems to be just one in a series...the writing is completely disorganized>
 
 Okay, we're onto the penultimate and possibly most important step in the gem liquefaction process...
 Once you've purged the ignition chamber (hopefully preventing unwanted explosions), you'll want to
-open the Small Valve and let the now-stable gem fluid flow into the filtering chamber. Piece of cake.");
+open the Small Valve and let the now-stable gem fluid flow into the filtering chamber. Piece of cake.
+
+- Theodore Grimtol");
         }
     }
 
@@ -411,7 +418,7 @@ along with a few tomes on cross-planar travel and even more esoteric topics.";
             X = x;
             RespawnItems = new List<Item>() { new LuminousDust(), new TwistedCrystal() };
             Items = new List<Item>() { new LuminousDust(), new TwistedCrystal() };
-            Note = new Note("Page from Theodore's Journal: Haphazard Library", $@"
+            Note = new Note("On Gem Liquefaction: A Series [Haphazard Library]", $@"
 
 <This note seems to be just one in a series...the writing is completely disorganized>
 
@@ -421,6 +428,8 @@ But where was I? Ah, right, low-temperature gem liquefaction! Okay, so after the
 you'll want to open the Large Valve so the destabilized gem...stuff can flow into the matter condenser.
 This just takes it out of superposition. Is that right? That doesn't sound right. Whatever. Just open the
 valve.
+
+- Theodore Grimtol
 ");
         }
     }
@@ -464,12 +473,14 @@ with something heavy. It's likely beyond repair.";
             Y = y;
             X = x;
             Items = new List<Item>() { new AlchemicalResidue() };
-            Note = new Note("Page from Aldric's Journal: Refining Lab", $@"
+            Note = new Note("Missing Catalyst [Refining Lab]", $@"
 The catalyst has gone missing again. I assume that one of those inferior beasts my siblings 
 created wandered off with it. I'm going to have to find something else to power the furnace.
 
 This is infuriating! If I happen across Miranda or Theodore I'm going to strangle them with 
-my bare hands!");
+my bare hands!
+
+- Aldric Grimtol");
         }
     }
 
@@ -758,7 +769,7 @@ has a strange, eight-pointed indentation at its center. Around this indentation,
             X = x;
             Items = new List<Item>();
             RemoveItems = new List<Item>();
-            Note = new Note("Page from Aldric's Journal: Converted Sunroom", $@"
+            Note = new Note("Discarded Manifesto [Converted Sunroom]", $@"
 I can't stand looking at the sun anymore. What need do I have for it, when I have the pure, beautiful 
 light of alchemical flame! And that hideous crest that once had a place of honor in this room...it 
 shall remain locked away, just like the light it celebrates. Indeed, the sun is a MOCKERY of my glorious 
@@ -787,6 +798,8 @@ me with astonishing clarity. When I finally sailed east, returning to Grimtol, I
 it.
 
 The CURE. The cure for humanity.
+
+- Aldric Grimtol
 
 <After this are several pages of mostly incomprehensible ranting>");
         }
@@ -862,7 +875,7 @@ lies empty.";
             Y = y;
             X = x;
             Items = new List<Item>();
-            Note = new Note("Page from Aldric's Journal: Immaculate Gallery", $@"
+            Note = new Note("A Wondrous Elixir [Immaculate Gallery]", $@"
 
 Every day I come closer to discovering the purest form of alchemical fire...the Fire that will cure humanity.
 In pursuit of this, I've devised an elixir to test the raw potential of an alchemical flame.
@@ -875,7 +888,9 @@ use in my soldiers, I was able to produce a wonderfully pure Extract.
 
 Combining this Marrow and Extract should produce an Elixir that imbues a living creature with incredible, though 
 short-lived, resistance to heat. This will be the tool I use find the true Alchemical Fire. If it can overcome the
-protection of the Elixir, then it may be powerful enough to elevate humanity to its highest form...");
+protection of the Elixir, then it may be powerful enough to elevate humanity to its highest form...
+
+- Aldric Grimtol");
         }
     }
 
@@ -909,7 +924,7 @@ is the glowing red disc hovering in midair at the room's center. Strange runes f
             Y = y;
             X = x;
             Items = new List<Item>();
-            Note = new Note("Page from Rithbaun's Journal: Aldric's Study", $@"
+            Note = new Note("Page from Dr. Rithbaun's Journal [Aldric's Study]", $@"
 
 This is worse than I thought. If that portal in his study is any indication, Aldric has found a way to travel 
 between planes. No telling what sorts of power he could gain.
@@ -971,7 +986,7 @@ eating away at the marble tiles around it. You can barely make out an object ben
             X = x;
             Items = new List<Item>();
             RemoveItems = new List<Item>();
-            Note = new Note("Page from Miranda's Journal: Fetid Courtyard", $@"
+            Note = new Note("the pool [Fetid Courtyard]", $@"
 
 She would always play here. She loved the garden...the pool...
 
@@ -983,7 +998,9 @@ He can burn all he wants. I'll simply create my art anew. Perhaps one of these d
 
 It's probably the only potential he has.
 
-Vivi...I dedicate this to you.");
+Vivi...I dedicate this to you.
+
+- Miranda Grimtol");
         }
     }
 
@@ -1058,7 +1075,7 @@ It's bony hands are clenched tightly.";
             Y = y;
             X = x;
             Items = new List<Item>();
-            Note = new Note("Page from Miranda's Journal: Macabre Workroom", $@"
+            Note = new Note("suffering [Macabre Workroom]", $@"
 
 Aldric rants on and on about the flaws of humanity. About how his grand vision would remake us 
 into something greater.
@@ -1070,7 +1087,9 @@ blindness.
 
 Suffering is all we have. I can finally see...
 
-But...Vivi...why did I have to learn it like this...");
+But...Vivi...why did I have to learn it like this...
+
+- Miranda Grimtol");
         }
     }
 
@@ -1193,7 +1212,7 @@ that would go next to it appears to be missing.";
             Y = y;
             X = x;
             Items = new List<Item>();
-            Note = new Note("Child's Drawing: Clockwork Garden", $@"
+            Note = new Note("Child's Drawing [Clockwork Garden]", $@"
 
 <A drawing clearly done by a young child. It seems to depict a stick figure at play. 
 The clumsily scribbled signature at the bottom reads 'Vivian'.>
@@ -1339,7 +1358,7 @@ closer inspection, there appears to be a hole gouged in the portrait where the s
             Y = y;
             X = x;
             Items = new List<Item>();
-            Note = new Note("Page from Miranda's Journal: Ransacked Workroom", $@"
+            Note = new Note("they took her eye [Ransacked Workroom]", $@"
 
 Who would do this to her?
 
@@ -1499,7 +1518,7 @@ every surface in the room suggest it hasn't been disturbed in awhile. A few doll
             Y = y;
             X = x;
             Items = new List<Item>();
-            Note = new Note("Page from Miranda's Journal: Vivian's Room", $@"
+            Note = new Note("death and rebirth [Vivian's Room]", $@"
 
 Sometimes, Vivi, I can still hear you. I can't bear the thought of never seeing you again.
 
@@ -1508,7 +1527,9 @@ hid it away in my workroom, in the secret place.
 
 But I found a better way. A way to conquer the natural laws that shackle this plane...
 
-A way to bring you back.");
+A way to bring you back.
+
+- Miranda Grimtol");
         }
     }
 
@@ -1542,7 +1563,7 @@ surface covered in strange runes.";
             Y = y;
             X = x;
             Items = new List<Item>();
-            Note = new Note("Page from Rithbaun's Journal: Miranda's Studio", $@"
+            Note = new Note("Page from Dr. Rithbaun's Journal [Miranda's Studio]", $@"
 
 So, it would appear that Miranda has jumped to another plane like the others. There's no way giving that woman 
 access to that much power could ever end well.
@@ -1601,7 +1622,7 @@ but it's more advanced than any you've seen before.";
             Y = y;
             X = x;
             Items = new List<Item>();
-            Note = new Note("Page from Theodore's Journal: Crystallography Lab", $@"
+            Note = new Note("Reminder: Make Prism [Crystallography Lab]", $@"
 
 Just remembered that I need to synthesize another Prism for all those experiments on crossplanar optics I've been
 putting off. Let's see, a Prism should be two components. They can most likely be combined at a regular alchemical
@@ -1611,7 +1632,8 @@ Been awhile since I've used this thing.
 Now, what two components to use? Most likely alchemical Powders. But there are lot of different Powders. Oh, wait, I've 
 got it! Probably a corruption Powder and a purification Powder! Yes, that'll do! Do I have any of those lying around?
 Might have to go hunting. Hope Miranda and Aldric don't get too peeved if a few of their gribblies go missing...
-");
+
+- Theodore Grimtol");
         }
     }
 
@@ -1712,7 +1734,7 @@ the room's ceiling projects a beam of light directly downward, illuminating a pl
             Y = y;
             X = x;
             Items = new List<Item>();
-            Note = new Note("Page from Theodore's Journal: Optics Lab", $@"
+            Note = new Note("Fun With Optical Camouflage! [Optics Lab]", $@"
 
 Finally figured out that optical camouflage idea I've been playing around with. And just in time! It seems
 *someone* found out about the little treasure I've hidden away in this room, and couldn't resist digging 
@@ -1725,7 +1747,9 @@ your father too. And if you're one of the gribblies running about...how are you 
 Great.
 
 Oh, hint number two: On it's own, hint number one is woefully insufficient. See first sentence of this note for 
-reference. Good luck!");
+reference. Good luck!
+
+- Theodore Grimtol");
         }
     }
 
@@ -1855,7 +1879,7 @@ valves that appear to control the operation of the device.";
             Y = y;
             X = x;
             Items = new List<Item>();
-            Note = new Note("Page from Theodore's Journal: Liquefaction Lab", $@"
+            Note = new Note("The Delights of Low-Temperature Gem Fusion [Liquefaction Lab]", $@"
 
 Honestly, the look on Aldric's face when I told him I have a lab *just* for liquefaction. What a rube.
 
@@ -1876,7 +1900,9 @@ off to.
 
 I will give you one hint: The fifth and final step in the prcoess is pressing the Blue Button. That activates the
 filtering device. Not that it really matters, you probably just want to get something out of this room so
-you can move on.");
+you can move on.
+
+- Theodore Grimtol");
         }
     }
 
@@ -1929,7 +1955,7 @@ a seperate table. The device appears to be operated by a nearby panel with a sin
             Y = y;
             X = x;
             Items = new List<Item>();
-            Note = new Note("Page from Theodore's Journal: Vaporization Lab", $@"
+            Note = new Note("Vaporizer Instructions [Vaporization Lab]", $@"
 
 Welcome back, mysterious reader! Now, if you're not carrying around a liquified gem right
 now, don't even bother reading this. Or do, I don't really care.
@@ -1950,7 +1976,9 @@ You know how to craft those, right?
 Once you have that extraplanar fluid, all you need to do is plop it in the machine, flip
 a switch, and you're golden.
 
-At least, I think that's how it works. It's been awhile...");
+At least, I think that's how it works. It's been awhile...
+
+- Theodore Grimtol");
         }
     }
 
@@ -2123,7 +2151,7 @@ reach any of the bookshelves aside from those on the level where you're currentl
             Y = y;
             X = x;
             Items = new List<Item>();
-            Note = new Note("Page from Theodore's Journal: Grand Library", $@"
+            Note = new Note("Anchor Hiding Place [Grand Library]", $@"
 
 Ah, my favorite room in the castle. A shame that over half the books are all but inaccessible now.
 What to do about that...
@@ -2137,7 +2165,9 @@ I mean, I have to find some place to hide this Anchor. A virtually inaccessable 
 the library should be perfect.
 
 But I'll leave clues, of course. What if I need to find it again? Can't rely on my memory...I can't even 
-remember what I ate for breakfast. Wait, did I even eat breakfast today? Hmm...");
+remember what I ate for breakfast. Wait, did I even eat breakfast today? Hmm...
+
+- Theodore Grimtol");
         }
     }
 
@@ -2170,7 +2200,7 @@ just above the desk. The surface of the disk is marked with luminous runes from 
             Y = y;
             X = x;
             Items = new List<Item>();
-            Note = new Note("Page from Rithbaun's Journal: Theodore's Study", $@"
+            Note = new Note("Page from Dr. Rithbaun's Journal [Theodore's Study]", $@"
 
 Well, I can't say I'm that surprised to find a portal here. Out of the three Grimtol heirs, Theodore would be 
 the most likely to dabble in interplanar travel. Not that that's at all comforting.
@@ -2215,7 +2245,7 @@ disc floating in the center of the room, its surface dotted with unfamiliar rune
             Y = y;
             X = x;
             Items = new List<Item>();
-            Note = new Note("Page from Rithbaun's Journal: Central Chamber", $@"
+            Note = new Note("Page from Dr. Rithbaun's Journal [Central Chamber]", $@"
 
 It would appear I underestimated those three. They had a trap waiting for me the whole time. No sense 
 running now, I can already see the portal forming before my eyes. It's more advanced than the others. 
