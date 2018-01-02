@@ -1231,7 +1231,11 @@ slides back into place, covering the lockbox.");
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note beneath the portrait.");
+                game.GetNote();
+            }
         }
         public RansackedWorkroom(int y, int x) : base(y, x)
         {
@@ -1261,15 +1265,108 @@ I'll make you a new eye. I promise.");
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Vivian's Charm")
+            {
+                Console.WriteLine($@"
+You hold up the Charm. Suddenly a confused, inhuman wail echoes throughout the room. 
+The strange runes slowly fade from the walls. The horrific cries slowly die down, and
+the voice utters a final word.
+
+Voice: 'Vivi...'
+
+The Charm shatters into fragments. The source of the voice appears to have retreated.
+
+The room now appears to be filled with a faint glow. A feeling of calm washes over you.
+Then, you hear the quiet voice of a young girl.
+
+Girl: 'It's okay to drink it now. I'll protect you. I promise.'");
+                RemoveItems.Add(item);
+                Stage = "charm used";
+                Description = $@"
+You're in what looks to be a child's room. A soft, calming white light blankets the room.";
+            }
+            else
+            {
+                if (item.Name == "Lethal Poison")
+                {
+                    if (Stage == "charm used")
+                    {
+                        Console.WriteLine($@"
+                        //TODO
+");
+                        RemoveItems.Add(item);
+                        Items.Add(new AnchorOfCorruption());
+                    }
+                    else
+                    {
+                        DeathFlag = true;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"{item.Name} fails to be of any use.");
+                }
+            }
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note on the floor next to the bed.");
+                game.GetNote();
+            }
+            if (DeathFlag)
+            {
+                Console.WriteLine($@"
+//TODO");
+            }
+            if (game.MainQuestStage["corruption"] == "start")
+            {
+                var hasPoison = false;
+                for (var i = 0; i < player.Inventory.Count; i++)
+                {
+                    var item = player.Inventory[i];
+                    if (item.Name == "Lethal Venom")
+                    {
+                        hasPoison = true;
+                        break;
+                    }
+                }
+                if (hasPoison)
+                {
+                    game.MainQuestStage["corruption"] = "has poison";
+                    Console.WriteLine($@"
+You feel the room grow suddenly colder. Strange patterns of bright green light and shadow begin crawling
+across the walls. It almost looks like writing, but it's unlike any language you've seen. And then, a 
+voice that manages to be both rasping and gurgling at the same time fills your ears.
+
+Voice: 'Drriink iiit...'
+
+You find yourself reaching for something in your pocket..the vial of Lethal Venom you picked up earlier.
+
+You feel compelled to obey the voice. You keep trying to shove the thought out of your mind, but it's getting harder to resist.
+
+You suddenly feel incredibly tired. Perhaps it would be best to leave for now...");
+                    Description = $@"
+You're in what looks to be a child's room. The floral wallpaper is now riddled with a strange patchwork of shadows and glowing
+green runes. You hear a faint whispering that seems to emanate from everywhere at once.";
+                }
+            }
+            if (game.MainQuestStage["corruption"] == "has poison" && !DeathFlag) {
+                Console.WriteLine($@"Strange patterns of green light and shadow dance through the air around you. 
+You suddenly hear a hideous voice echoing throughout the room.
+
+Voice: 'Drriink iiit...'
+
+Before you realize it, you're holding the vial of Lethal Venom. You unconsciouly begin reaching for the stopper, then quickly jerk your 
+hand away. A sound resembling pained laughter echoes around you. You quickly tuck the vial back in your pocket, but it's almost as if it's
+calling out to you...");
+            }
         }
         public ViviansRoom(int y, int x) : base(y, x)
         {
@@ -1281,6 +1378,16 @@ every surface in the room suggest it hasn't been disturbed in awhile. A few doll
             Y = y;
             X = x;
             Items = new List<Item>();
+            Note = new Note("Page from Miranda's Journal: Vivian's Room", $@"
+
+Sometimes, Vivi, I can still hear you. I can't bear the thought of never seeing you again.
+
+If I die, will we be reunited? I wondered for so long...I made something that would let me try...
+hid it away in my workroom, in the secret place.
+
+But I found a better way. A way to conquer the natrual laws that shackle this plane...
+
+A way to bring you back.");
         }
     }
 
