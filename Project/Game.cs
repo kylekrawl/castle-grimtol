@@ -32,7 +32,8 @@ namespace CastleGrimtol.Project
             typeof(MoltenExtract),
             typeof(ScarletMarrow),
             typeof(InfernalElixir),
-            typeof(PrismaticDust)
+            typeof(PrismaticDust),
+            typeof(ExtraplanarFluid)
         };
         public Dictionary<string, string> EnemyWeaknesses { get; set; } = new Dictionary<string, string>() {
             {"purification", "corrosive"},

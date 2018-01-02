@@ -1737,7 +1737,90 @@ reference. Good luck!");
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Shimmering Gem")
+            {
+                Console.WriteLine($@"
+You place the Shimmering Gem into the device's main container and close the lid. The machine immediately
+whirs to life, and the console next to it lights up.");
+
+                List<string> correctOrder = new List<string>() {
+                    "i", "l", "r", "s", "b"
+                };
+                int index = 0;
+                Console.WriteLine("\n<Press any key to continue.>");
+                Console.ReadKey(true);
+                while (index < correctOrder.Count)
+                {
+                    string currentAction = null;
+                    Console.Clear();
+                    Console.WriteLine("\nThe machine emits a faint hum.\n");
+                    Console.WriteLine("\nChoose an action:\n");
+                    Console.WriteLine("| I | Flip Ignition Switch");
+                    Console.WriteLine("| S | Turn Small Valve");
+                    Console.WriteLine("| L | Turn Large Valve");
+                    Console.WriteLine("| B | Press Blue Button");
+                    Console.WriteLine("| R | Press Red Button");
+
+                    if (KeyInfo.Key == ConsoleKey.I)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You flip the Ignition Switch.");
+                        currentAction = "i";
+                    }
+                    else if (KeyInfo.Key == ConsoleKey.S)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You turn the Small Valve.");
+                        currentAction = "s";
+                    }
+                    else if (KeyInfo.Key == ConsoleKey.L)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You turn the Large Valve.");
+                        currentAction = "l";
+                    }
+                    else if (KeyInfo.Key == ConsoleKey.B)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You press the Blue Button.");
+                        currentAction = "b";
+                    }
+                    else if (KeyInfo.Key == ConsoleKey.R)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You press the Red Button.");
+                        currentAction = "r";
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You accidentally press some strange, unlabelled button.");
+                    }
+                    if (currentAction == correctOrder[index])
+                    {
+                        Console.WriteLine($@"
+The machine starts emitting a horrifying clacking sound...and then you hear a soft chime.
+A green light flickers slowly on the console.");
+                        index++;
+                    }
+                    else
+                    {
+                        DeathFlag = true;
+                        break;
+                    }
+                }
+                if (!DeathFlag)
+                {
+                    Console.WriteLine($@"
+The metal box at the end of the contraption suddenly snaps open, revealing a vial of sparkling liquid.");
+                    RemoveItems.Add(item);
+                    Items.Add(new IridescentFluid());
+                }
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {
@@ -1746,14 +1829,25 @@ reference. Good luck!");
                 Console.WriteLine("\nYou spot a note on floor next to the strange device.");
                 game.GetNote();
             }
+             if (DeathFlag)
+            {
+                Console.WriteLine($@"
+The machine suddenly grows quiet. You notice that a red light is flashing on the console.
+It's hard to read the writing next to it, but it looks like it says 'Exposition Warring'.
+
+...on closer inspection, it almost certainly says 'Explosion Warning'.
+
+{player.Name}: 'Oh, you gotta be kidding m--'");
+            }
         }
         public LiquefactionLab(int y, int x) : base(y, x)
         {
             Name = "Liquefaction Lab";
             Description = $@"
 The room is empty except for a large device at its center. The contraption is a cylindrical container with a 
-removable lid connected to a series of pipes that lead up to the ceiling. A single panel next to it is covered 
-with poorly labelled buttons and valves that appear to control the operation of the device.";
+removable lid connected to a series of pipes that lead to a secondary chamber, which in turn is connected via 
+a single tube to a small metal box. A single panel next to it is covered with poorly labelled buttons and 
+valves that appear to control the operation of the device.";
             Y = y;
             X = x;
             Items = new List<Item>();
@@ -1786,15 +1880,35 @@ you can move on.");
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
+        public override Note Note { get; set; }
         public override List<Item> Items { get; set; }
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Extraplanar Fluid")
+            {
+                Console.WriteLine($@"
+You pour the Extraplanar Fluid into the glass chamber of the device and shut the door.
+After you flip the switch on the nearby panel the machine emits a shrill tone. You
+see the liquid inside the chamber slowly transform into a cloud of glowing violet gas.
+
+After a few minutes, the gas is sucked though a tube into the connected metal box.
+The box snaps open, revealing a stoppered glass bottle filled with the strange vapor.");
+                RemoveItems.Add(item);
+                Items.Add(new GlowingVapor());
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {
-            Console.WriteLine("\nYou don't detect any threats, but still feel a bit unsettled.");
+            if (!(Note == null))
+            {
+                Console.WriteLine("\nYou spot a note on the table next to the strange device.");
+                game.GetNote();
+            }
         }
         public VaporizationLab(int y, int x) : base(y, x)
         {
@@ -1803,11 +1917,33 @@ you can move on.");
 The room is a mess of tables and shelves strewn with a combination of alchemical, handwritten notes, and 
 mechanical components of all sorts. On a table at the center of the room sits a device consisting of a 
 glass chamber with a removable door. A thin pipe connects the interior of the chamber to a metal box on 
-a seperate table. The device appears to be operated by a nearby panel of levers and valves, a few of them 
-labelled with nearly illegible handwriting.";
+a seperate table. The device appears to be operated by a nearby panel with a single switch.";
             Y = y;
             X = x;
             Items = new List<Item>();
+            Note = new Note("Page from Theodore's Journal: Vaporization Lab", $@"
+
+Welcome back, mysterious reader! Now, if you're not carrying around a liquified gem right
+now, don't even bother reading this. Or do, I don't really care.
+
+Now, if you *are* carrying around some sort of shiny, gem-derived fluid right now, then
+I'm sorry about what you just went through. I really need to write up better instructions 
+for that machine.
+
+But now I'm sure, like any true alchemist, you want to *vaporize* that stuff. That'd be my
+first thought, anyway. The device in this room will take care of it. You just have to do 
+a few things beforehand to prep that gem-liquid you're lugging around.
+
+First things first: You're gonna need to create an extraplanar fluid. It's not as hard as 
+it sounds...weirdly enough, if you combine a sufficiently powerful healing item with
+some Luminous Dust it seems to do the trick just fine. As for getting the dust, just
+kill some of the gribblies I accidentally let loose. Or check some of the nearby labs,
+I know I've stashed some around here.
+
+Once you have that extraplanar fluid, all you need to do is plop it in the machine, flip
+a switch, and you're golden.
+
+At least, I think that's how it works. It's been awhile...");
         }
     }
 

@@ -675,7 +675,7 @@ namespace CastleGrimtol.Project
         }
     }
 
-    public class MysteriousDevice: Item
+    public class MysteriousDevice : Item
     {
         public override string Name { get; set; }
         public override string Description { get; set; }
@@ -705,6 +705,21 @@ namespace CastleGrimtol.Project
         {
             Name = "Iridescent Fluid";
             Description = "A vial of impossibly bright silver liquid.";
+        }
+    }
+
+    public class ExtraplanarFluid : Item
+    {
+        public override string Name { get; set; }
+        public override string Description { get; set; }
+        public override List<List<string>> CraftingCombinations { get; set; }
+        public ExtraplanarFluid()
+        {
+            Name = "Extraplanar Fluid";
+            Description = "A shifting, silvery-white fluid that seems to defy at least three natural laws.";
+            CraftingCombinations = new List<List<string>>(){
+                new List<string>(){"Panacea", "Luminous Dust"}
+            };
         }
     }
 
