@@ -3,6 +3,7 @@
 ### Overview
 
 Winning the game requires you to complete three separate questlines (`Purification`, `Corruption`, `Transmutation`) consisting of a themed series of puzzles followed by a boss battle.
+
 These can be completed in any order. 
 
 After defeating the boss at the end of each questline, you'll receive the items needed to unlock the endgame scene.
@@ -20,6 +21,9 @@ between playthroughs).
 If you need to kill additional enemies for the items they drop, you can respawn all of them by `Rest`-ing in the `Main Foyer` room (x = 1, y = 0).
 
 In each path below, start at the first room listed and proceed as instructed from there.
+
+If you choose `test` as your character's name when the game starts up, you'll gain a significant increase to `Health` and `Defense`. Additionally,
+several items needed for crafting during the questlines will be available for taking in the `Main Foyer`.
 
 ### Common Components Guide
 
