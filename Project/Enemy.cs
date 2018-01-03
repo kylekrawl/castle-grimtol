@@ -75,14 +75,14 @@ grinds to a halt. The glow in its empty eyes fades as its body falls to the grou
             VictoriousDescription = @"The creature's attack cuts deep. As you clutch your stomach, 
 the last thing you see is a blade hurtling toward you.";
             Type = "purification";
-            MaxHealth = 100;
+            MaxHealth = 50;
             Health = MaxHealth;
             MaxDefenseRating = 10;
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
-               new Attack("Blade Strike", $"\n{this.Name} slashes at you with a bladed arm.", 10, 50),
-               new Attack("Blade Spin", $"\n{this.Name} begins whirling toward you, striking wildly with its blades.", 20, 100)
+               new Attack("Blade Strike", $"\n{this.Name} slashes at you with a bladed arm.", 5, 50),
+               new Attack("Blade Spin", $"\n{this.Name} begins whirling toward you, striking wildly with its blades.", 10, 100)
             };
             DropItems = new List<Item>(){
                 new BoneAsh(), new MetalCore(), new CrimsonOil()
@@ -121,14 +121,14 @@ armor. The glow within it quickly fades, and it falls to the ground with a loud 
             VictoriousDescription = @"The golem's strike staggers you. As you struggle to regain your 
 balance, it's halberd swings toward you in a lethal arc.";
             Type = "purification";
-            MaxHealth = 120;
+            MaxHealth = 75;
             Health = MaxHealth;
             MaxDefenseRating = 12;
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
-               new Attack("Halberd Strike", $"\n{this.Name} swings at you with it's halberd.", 15, 50),
-               new Attack("Incinerating Breath", $"\n{this.Name} spews a glowing cloud of flame in your direction.", 25, 100)
+               new Attack("Halberd Strike", $"\n{this.Name} swings at you with it's halberd.", 7, 50),
+               new Attack("Incinerating Breath", $"\n{this.Name} spews a glowing cloud of flame in your direction.", 15, 100)
             };
             DropItems = new List<Item>(){
                 new BoneAsh(), new MetalCore(), new CrimsonOil()
@@ -164,14 +164,14 @@ toward you.";
             DefeatedDescription = @"The creature lets out a gurgling cry and falls to the ground, it's body slowly dissolving into a thick black ooze.";
             VictoriousDescription = @"In your weakened state, the creature grabs you. It's terrifying maw fills your vision as it lets out a triumphant shriek.";
             Type = "corruption";
-            MaxHealth = 80;
+            MaxHealth = 40;
             Health = MaxHealth;
             MaxDefenseRating = 10;
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
-               new Attack("Claw Strike", $"\n{this.Name} swings at you with it's piercing claws.", 12, 50),
-               new Attack("Vicious Bite", $"\n{this.Name} lurches toward you with it's horrific mouth open wide.", 24, 100)
+               new Attack("Claw Strike", $"\n{this.Name} swings at you with it's piercing claws.", 5, 50),
+               new Attack("Vicious Bite", $"\n{this.Name} lurches toward you with it's horrific mouth open wide.", 15, 100)
             };
             DropItems = new List<Item>(){
                 new AcridPowder(), new PutridNodule(), new YellowIchor()
@@ -209,14 +209,14 @@ it finally stops moving.";
             VictoriousDescription = @"Weakened from your wounds, you fall forward. The creature grabs you with it's vinelike limbs. The last thing you 
 hear is it's horrific wails.";
             Type = "corruption";
-            MaxHealth = 100;
+            MaxHealth = 65;
             Health = MaxHealth;
             MaxDefenseRating = 12;
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
-               new Attack("Vine Lash", $"\n{this.Name} strikes at you with a hideous, barbed vine.", 17, 50),
-               new Attack("Acidic Burst", $"\n{this.Name} launches a blob of corrosive liquid in your direction.", 27, 100)
+               new Attack("Vine Lash", $"\n{this.Name} strikes at you with a hideous, barbed vine.", 10, 50),
+               new Attack("Acidic Burst", $"\n{this.Name} launches a blob of corrosive liquid in your direction.", 15, 100)
             };
             DropItems = new List<Item>(){
                 new AcridPowder(), new PutridNodule(), new YellowIchor()
@@ -252,14 +252,14 @@ Soundlessly, the creature throws itself toward you.";
             DefeatedDescription = @"The creature explodes into gelatinous chunks that evaporate into nothingness before they even hit the ground.";
             VictoriousDescription = @"Dazed and injured, you're unable to dodge as the creature lunges toward you, engulfing you completely.";
             Type = "transmutation";
-            MaxHealth = 100;
+            MaxHealth = 40;
             Health = MaxHealth;
             MaxDefenseRating = 12;
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
-               new Attack("Gelatinous Strike", $"\n{this.Name} attacks you with a clublike pseudopod.", 10, 50),
-               new Attack("Gelatinous Bombardment", $"\n{this.Name} launches a mass of pulsating silver ooze directly at you.", 20, 100)
+               new Attack("Gelatinous Strike", $"\n{this.Name} attacks you with a clublike pseudopod.", 5, 50),
+               new Attack("Gelatinous Bombardment", $"\n{this.Name} launches a mass of pulsating silver ooze directly at you.", 10, 100)
             };
             DropItems = new List<Item>(){
                 new LuminousDust(), new TwistedCrystal(), new QuiveringOoze()
@@ -297,14 +297,14 @@ and you can see the wicked spines protruding from its limbs.";
             VictoriousDescription = @"In a moment of distraction, you lose sight of the creature completely. You feel a stinging pain in 
 your back before your vision goes black.";
             Type = "transmutation";
-            MaxHealth = 100;
+            MaxHealth = 70;
             Health = MaxHealth;
             MaxDefenseRating = 14;
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
-               new Attack("Stinger Strike", $"\n{this.Name} thrusts one of it's spine-tipped limbs at you.", 15, 50),
-               new Attack("Warp Strike", $"\n{this.Name} suddenly vanishes, only to reappear directly behind you, slashing furiously with it's spiny limbs.", 25, 100)
+               new Attack("Stinger Strike", $"\n{this.Name} thrusts one of it's spine-tipped limbs at you.", 7, 75),
+               new Attack("Warp Strike", $"\n{this.Name} suddenly vanishes, only to reappear directly behind you, slashing furiously with it's spiny limbs.", 20, 100)
             };
             DropItems = new List<Item>(){
                 new LuminousDust(), new TwistedCrystal(), new QuiveringOoze()
@@ -356,8 +356,8 @@ The creature lets out a triumphant roar as your body is consumed by flames.";
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
-               new Attack("Burning Strike", $"\n{this.Name} slashes at you with its sword of flame.", 17, 50),
-               new Attack("Eyes of Wrath", $"\n{this.Name} emits two beams of glowing orange light from it's eyes.", 30, 100)
+               new Attack("Burning Strike", $"\n{this.Name} slashes at you with its sword of flame.", 10, 75),
+               new Attack("Eyes of Wrath", $"\n{this.Name} emits two beams of glowing orange light from it's eyes.", 20, 100)
             };
             DropItems = new List<Item>(){
                 new IconOfRage()
@@ -410,8 +410,8 @@ The creature lets out a gurgling laugh as your body begins to dissolve.";
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
-               new Attack("Thorn Strike", $"\n{this.Name} tears at you with its thorn-like claws.", 15, 60),
-               new Attack("Corrosive Cloud", $"\nA cloud of corrosive, pale green vapor emanates from {this.Name}.", 40, 100)
+               new Attack("Thorn Strike", $"\n{this.Name} tears at you with its thorn-like claws.", 8, 80),
+               new Attack("Corrosive Cloud", $"\nA cloud of corrosive, pale green vapor emanates from {this.Name}.", 25, 100)
             };
             DropItems = new List<Item>(){
                 new IconOfDespair()
@@ -463,8 +463,8 @@ The creature's core flashes almost mockingly as your body fades into nothingness
             DefenseRating = MaxDefenseRating;
             Attacks = new List<Attack>()
             {
-               new Attack("Crackling Burst", $"\nA burst of electricity arcs out of {this.Name}.", 20, 50),
-               new Attack("Crystal Bombardment", $"\n{this.Name} launches a torrent of jagged crystal shards directly at you.", 40, 100)
+               new Attack("Crackling Burst", $"\nA burst of electricity arcs out of {this.Name}.", 10, 60),
+               new Attack("Crystal Bombardment", $"\n{this.Name} launches a torrent of jagged crystal shards directly at you.", 20, 100)
             };
             DropItems = new List<Item>(){
                 new IconOfMadness()

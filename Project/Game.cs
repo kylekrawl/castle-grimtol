@@ -129,7 +129,6 @@ namespace CastleGrimtol.Project
                                            ");
             Console.WriteLine("\n<Press any key to continue.>");
             Console.ReadKey(true);
-            SavedProgress = false;
             StartScreen();
         }
 
@@ -142,6 +141,7 @@ namespace CastleGrimtol.Project
             Console.WriteLine(@" _______ __   _ ______   
  |______ | \  | |     \  
  |______ |  \_| |_____/ .");
+            SavedProgress = false;
             Console.WriteLine("\n<Press any key to continue.>");
             Console.ReadKey(true);
             StartScreen();
@@ -174,7 +174,7 @@ namespace CastleGrimtol.Project
         public void Setup()
         {
             Playing = true;
-            CurrentMap = new Map(MapTemplate, "Test");
+            CurrentMap = new Map(MapTemplate, "Default");
             CurrentPlayer = new Player(CurrentMap);
             CurrentRoom = CurrentMap.Grid[CurrentPlayer.Y][CurrentPlayer.X];
             SavedProgress = true;
@@ -901,6 +901,7 @@ figure out which items to combine).");
                         {
                             CurrentPlayer.Health = CurrentPlayer.MaxHealth;
                         }
+                        CurrentPlayer.Inventory.Remove(item);
                     }
                     break;
                 }
@@ -1063,11 +1064,21 @@ figure out which items to combine).");
                     for (var j = 0; j < item.CraftingCombinations.Count; j++)
                     {
                         var combination = item.CraftingCombinations[j];
-                        if (combination.Contains(component1.Name) && combination.Contains(component2.Name))
+                        if (!(component1.Name == component2.Name))
                         {
-                            validCombination = true;
-                            validItem = item;
-                            break;
+                            if (combination.Contains(component1.Name) && combination.Contains(component2.Name))
+                            {
+                                validCombination = true;
+                                validItem = item;
+                                break;
+                            }
+                        } else {
+                            if (combination[0] == component1.Name && combination[1] == component1.Name)
+                            {
+                                validCombination = true;
+                                validItem = item;
+                                break;
+                            }
                         }
                     }
                 }

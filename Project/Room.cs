@@ -126,8 +126,11 @@ long as I can keep killing them.");
         }
         public EnemyRoom(int y, int x) : base(y, x)
         {
-            Name = "Enemy Room";
-            Description = $"Enemy Room at (x:{x} , y:{y})";
+            Name = "Dark Chamber";
+            Description = $@"
+You're in what looks to be an unfurnished room with roughly
+hewn stone floors. It's difficult to see anything in the 
+darkness.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
@@ -153,8 +156,10 @@ long as I can keep killing them.");
         }
         public TrapRoom(int y, int x) : base(y, x)
         {
-            Name = "Trap Room";
-            Description = $"Trap Room at (x:{x} , y:{y})";
+            Name = "Empty Vestibule";
+            Description = $@"
+You're in a seemingly empty room. Its stone floors are covered in dust, and the walls are
+completely bare.";
             Y = y;
             X = x;
             VisitedByPlayer = false;
@@ -647,7 +652,7 @@ in the platform has opened to reveal some kind of metal lid.
 You notice that glowing orange letters have appeared on the platfrom beneath the crest. They spell 
 out a cryptic message: 
 
-'Only with darkness shall the path to light be known.'
+'Only in deepest darkness shall the path to light be known.'
 
 ");
                 Stage = "braziers lit";
@@ -2062,11 +2067,10 @@ breathe...might want to make this fast.");
                 };
                 Dictionary<string, string> clues = new Dictionary<string, string>()
                 {
-                    //TODO: finish clues
-                    {"n", "It's an engraving of a starry sky. One star seems slightly larger than the others. The label next to it reads 'Polaris'."},
-                    {"e", "It's a <east clue>"},
-                    {"s", "It's a <south clue>"},
-                    {"w", "It's a <west clue>"},
+                    {"n", "It's an engraving of a constellation in a starry sky. One of the stars is labelled 'Polaris'."},
+                    {"e", "It's a painting of a vivid sunrise."},
+                    {"s", "It's an engraving of a constellation in a starry sky. One of the stars is labelled 'Crux'."},
+                    {"w", "It's a painting of a breathtaking sunset."},
                     {"u", "It's a statue of an angelic figure carved from alabaster."},
                     {"d", "It's a statue of a horned demon carved from basalt."}
                 };
