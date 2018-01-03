@@ -1760,7 +1760,7 @@ The third image shows an odd assortment of chairs, vases, and various treasures.
                         deviceCount++;
                     }
                 }
-                if (deviceCount == 3)
+                if (deviceCount >= 3)
                 {
                     for (var i = 0; i < player.Inventory.Count; i++)
                     {
@@ -2339,7 +2339,7 @@ The portal glows brighter for a second, then vanishes as well. Standing in it's 
                     icons.Add(item);
                 }
             }
-            if (icons.Count == 3)
+            if (icons.Count >= 3)
             {
                 Console.WriteLine($@"
 As you step into the room, you hear a faint hum coming from your pockets. Suddenly, the Icons of Rage,
@@ -2361,6 +2361,7 @@ the icons have vanished, and a glowing white orb sits in their place.");
             }
             if (SceneFlag)
             {
+                Console.Clear();
                 Console.WriteLine($@"
 Dr. Rithbaun: 'About time, {player.Name}! I was beginning to think I'd die in that awful place.'
 

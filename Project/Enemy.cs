@@ -68,11 +68,16 @@ ribcage is filled with some kind of strange machinery.
 
 The creature stares at you, its eyeless sockets illuminated by an orange glow. Suddenly, it begins 
 jerkily sprinting toward you, it's bony feet clacking against the stone floor.";
-            CombatDescription = @"The abomination circles you menacingly, it's bladed arms raised in 
+            CombatDescription = @"
+The abomination circles you menacingly, it's bladed arms raised in 
 a combat stance.";
-            DefeatedDescription = @"The creature suddenly freezes as the machinery in its chest 
+            DefeatedDescription = @"
+
+The creature suddenly freezes as the machinery in its chest 
 grinds to a halt. The glow in its empty eyes fades as its body falls to the ground.";
-            VictoriousDescription = @"The creature's attack cuts deep. As you clutch your stomach, 
+            VictoriousDescription = @"
+
+The creature's attack cuts deep. As you clutch your stomach, 
 the last thing you see is a blade hurtling toward you.";
             Type = "purification";
             MaxHealth = 50;
@@ -115,10 +120,15 @@ distance. As the smoke around it shifts, you see that it's carrying a massive ha
 curved blade. You can see that its metal faceplate has been worked into a terrifying mockery of a 
 human face, its expression somewhere between a rictus of pain and a malicious grin. With heavy, 
 echoing footfall, the golem begins lumbering toward you.";
-            CombatDescription = @"The golem stands in a threatening stance, halberd at they ready.";
-            DefeatedDescription = @"The construct lets out a roar as red smoke spews forth from it's 
+            CombatDescription = @"
+The golem stands in a threatening stance, halberd at they ready.";
+            DefeatedDescription = @"
+
+The construct lets out a roar as red smoke spews forth from it's 
 armor. The glow within it quickly fades, and it falls to the ground with a loud crash.";
-            VictoriousDescription = @"The golem's strike staggers you. As you struggle to regain your 
+            VictoriousDescription = @"
+
+The golem's strike staggers you. As you struggle to regain your 
 balance, it's halberd swings toward you in a lethal arc.";
             Type = "purification";
             MaxHealth = 75;
@@ -160,9 +170,14 @@ of some kind of sickening, dark yellow fungus. Black, fist-size nodules protrude
 intervals. As the horror gets closer, you realize that its face is featureless aside from a gaping mouth 
 lined with needle-like fang. Suddenly, the creature lets out horrific shriek and begins running directly 
 toward you.";
-            CombatDescription = @"The horror dashes around erratically, all the while moving closer to your position.";
-            DefeatedDescription = @"The creature lets out a gurgling cry and falls to the ground, it's body slowly dissolving into a thick black ooze.";
-            VictoriousDescription = @"In your weakened state, the creature grabs you. It's terrifying maw fills your vision as it lets out a triumphant shriek.";
+            CombatDescription = @"
+The horror dashes around erratically, all the while moving closer to your position.";
+            DefeatedDescription = @"
+
+The creature lets out a gurgling cry and falls to the ground, it's body slowly dissolving into a thick black ooze.";
+            VictoriousDescription = @"
+
+In your weakened state, the creature grabs you. It's terrifying maw fills your vision as it lets out a triumphant shriek.";
             Type = "corruption";
             MaxHealth = 40;
             Health = MaxHealth;
@@ -203,10 +218,15 @@ A mass of writhing, wormlike vines sits at the center of the room. As your eyes 
 you can make out a single, gigantic eye at the center of the mass. Pale green tears leak from around it, 
 hitting the floor with a hissing sound as they eat away at the stone. You realize the eye is staring 
 directly at you, unblinking, as the fould creature moves forward, constantly emitting it's hideous cries.";
-            CombatDescription = @"The terrifying beast moves closer, it's mournful cries echoing.";
-            DefeatedDescription = @"The creature lets out a final, desperate wail as it crumbles to the floor. It's single eye stares dully into space as 
+            CombatDescription = @"
+The terrifying beast moves closer, it's mournful cries echoing.";
+            DefeatedDescription = @"
+
+The creature lets out a final, desperate wail as it crumbles to the floor. It's single eye stares dully into space as 
 it finally stops moving.";
-            VictoriousDescription = @"Weakened from your wounds, you fall forward. The creature grabs you with it's vinelike limbs. The last thing you 
+            VictoriousDescription = @"
+
+Weakened from your wounds, you fall forward. The creature grabs you with it's vinelike limbs. The last thing you 
 hear is it's horrific wails.";
             Type = "corruption";
             MaxHealth = 65;
@@ -248,9 +268,14 @@ flowing pile of translucent, silvery liquid roiling in constant motion. As it dr
 hundreds of glowing violet lights dot it's surface. The slime suddenly rises up off of the ground, 
 looking much like a serpent ready to strike, and you realize that the lights are actually eyes. 
 Soundlessly, the creature throws itself toward you.";
-            CombatDescription = @"The slime shifts around eratically, moving almost too quickly to follow.";
-            DefeatedDescription = @"The creature explodes into gelatinous chunks that evaporate into nothingness before they even hit the ground.";
-            VictoriousDescription = @"Dazed and injured, you're unable to dodge as the creature lunges toward you, engulfing you completely.";
+            CombatDescription = @"
+The slime shifts around eratically, moving almost too quickly to follow.";
+            DefeatedDescription = @"
+
+The creature explodes into gelatinous chunks that evaporate into nothingness before they even hit the ground.";
+            VictoriousDescription = @"
+
+Dazed and injured, you're unable to dodge as the creature lunges toward you, engulfing you completely.";
             Type = "transmutation";
             MaxHealth = 40;
             Health = MaxHealth;
@@ -292,9 +317,14 @@ it's some kind of spindly, many-limbed humanoid figure. Suddenly, it appears aga
 This time, it lingers for a second before disappearing. It resembles a gigantic insect with an 
 oddly geometric, mirrored carapace. When it appears for the third time, it's mere feet away, 
 and you can see the wicked spines protruding from its limbs.";
-            CombatDescription = @"The insectoid monstrosity blinks in and out of visibility as it darts around the room.";
-            DefeatedDescription = @"The creature lets out a surprised shriek, then suddenly explodes, sending glassy bits of shell in every direction.";
-            VictoriousDescription = @"In a moment of distraction, you lose sight of the creature completely. You feel a stinging pain in 
+            CombatDescription = @"
+The insectoid monstrosity blinks in and out of visibility as it darts around the room.";
+            DefeatedDescription = @"
+
+The creature lets out a surprised shriek, then suddenly explodes, sending glassy bits of shell in every direction.";
+            VictoriousDescription = @"
+
+In a moment of distraction, you lose sight of the creature completely. You feel a stinging pain in 
 your back before your vision goes black.";
             Type = "transmutation";
             MaxHealth = 70;
@@ -340,6 +370,7 @@ the demonic figure and it's blade. It lets out a roar, then begins to move quick
             CombatDescription = @"
 The skeletal creature circles you, it's flaming sword at the ready.";
             DefeatedDescription = @"
+
 The creature lets out a horrifc roar. It's body begins to slowly crumble into ash and cinder.
 
 As the remains of the monster slowly burn away, you hear a voice fill the room.
@@ -348,6 +379,7 @@ Voice: 'The Fire...the cleansing, glorious Fire...so beautiful...'
 
 ";
             VictoriousDescription = @"
+
 The creature lets out a triumphant roar as your body is consumed by flames.";
             Type = "purification";
             MaxHealth = 200;
@@ -393,6 +425,7 @@ The creature suddenly lets out an inhuman wail. Then, with a jerky, unnatural ga
             CombatDescription = @"
 The thorned abomination lurches toward, weeping acidic tears.";
             DefeatedDescription = @"
+
 The creature lets out a terrifying cry, then falls to the ground. It's body slowly dissolves, giving off a pale
 green smoke.
 
@@ -402,6 +435,7 @@ Voice: 'Vivi...'
 
 ";
             VictoriousDescription = @"
+
 The creature lets out a gurgling laugh as your body begins to dissolve.";
             Type = "corruption";
             MaxHealth = 175;
@@ -446,6 +480,7 @@ The eldritch horror begins floating slowly toward you, the air around it ripplin
             CombatDescription = @"
 The unnatural creature hovers in place, distorting the area around it with a strange light.";
             DefeatedDescription = @"
+
 The core at the center of the creature suddenly turns pure black. The crystalline masses orbiting it
 are suddenly drawn into it's now-dark center. And then, with a flash of blue light, the feature vanishes.
 
@@ -455,6 +490,7 @@ Voice: 'Ah, so this is all there is? How disappointing...'
 
 ";
             VictoriousDescription = @"
+            
 The creature's core flashes almost mockingly as your body fades into nothingness.'";
             Type = "transmutation";
             MaxHealth = 150;

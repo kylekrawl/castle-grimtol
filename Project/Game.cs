@@ -103,8 +103,6 @@ namespace CastleGrimtol.Project
                 }
                 if (KeyInfo.Key == ConsoleKey.C && SavedProgress)
                 {
-                    // Reset player position to room visited just before the room they died in / quit from
-                    // Will eventually need to have more logic resetting the latter
                     CurrentPlayer.Y = CurrentPlayer.PreviousY;
                     CurrentPlayer.X = CurrentPlayer.PreviousX;
                     CurrentRoom = CurrentMap.Grid[CurrentPlayer.Y][CurrentPlayer.X];
@@ -182,6 +180,24 @@ namespace CastleGrimtol.Project
             MainLoop();
         }
 
+        public void CheatMode()
+        {
+            CurrentPlayer.MaxHealth = 300;
+            CurrentPlayer.Health = 300;
+            CurrentPlayer.MaxDefenseRating = 16;
+            CurrentPlayer.DefenseRating = 16;
+            var startItems = new List<Item>(){
+                new ReactiveSolid(), new ReactiveSolid(), new ReactiveSolid(),
+                new BoneAsh(), new BoneAsh(), new BoneAsh(), new BoneAsh(),
+                new YellowIchor(), new YellowIchor(),
+                new AcridPowder(), new AcridPowder(), new AcridPowder(),
+                new CrimsonOil(), new CrimsonOil()
+            };
+            foreach (var item in startItems) {
+                CurrentRoom.Items.Add(item);
+            }
+        }
+
         public void Intro()
         {
             Console.WriteLine("Choose a name:");
@@ -189,6 +205,17 @@ namespace CastleGrimtol.Project
             if (choice != "")
             {
                 CurrentPlayer.Name = choice;
+            }
+            if (CurrentPlayer.Name.ToLower() == "test")
+            {
+                CheatMode();
+                Console.WriteLine($@"
+With a name like that, you must have been born under a favorable star.
+Your health and defensive capabilities are much greater than the average mortal.
+
+Also, you may want to check the castle's Main Foyer for some useful items...");
+                Console.WriteLine("\n<Press any key to continue.>");
+                Console.ReadKey(true);
             }
             Console.Clear();
             Console.WriteLine(@"
@@ -592,7 +619,7 @@ figure out which items to combine).");
                         Console.ReadKey(true);
                         break;
                     }
-                    Console.WriteLine("Invalid action.");
+                    Console.WriteLine("\nInvalid action.");
                     Console.WriteLine("\n<Press any key to continue.>");
                     Console.ReadKey(true);
                 }
@@ -728,7 +755,7 @@ figure out which items to combine).");
                             {
                                 var item = validCombatItems[i];
                                 Console.WriteLine($"{i + 1}. {item.Name}");
-                                Console.WriteLine($"{item.Description}\n");                
+                                Console.WriteLine($"{item.Description}\n");
                             }
                             var choice = Console.ReadLine();
                             var parsed = 0;
@@ -793,7 +820,7 @@ figure out which items to combine).");
                         Console.WriteLine($"\nYou lob the {chosenCombatItem.Name} at {enemy.Name}.");
                     }
                     Random r = new Random();
-                    int attackVal = r.Next(1, 21);
+                    int attackVal = r.Next(1, 21) + 2;
                     if (attackVal >= enemy.DefenseRating)
                     {
                         var damage = chosenCombatItem.Damage;
@@ -1017,7 +1044,7 @@ figure out which items to combine).");
                     if (!valid || parsed < 1 || parsed > CurrentPlayer.Inventory.Count)
                     {
                         Console.WriteLine("Invalid choice.");
-                        Console.WriteLine("\n<Press any other key to continue.>");
+                        Console.WriteLine("\n<Press any key to continue.>");
                         KeyInfo = Console.ReadKey(true);
                     }
                     else
@@ -1068,7 +1095,9 @@ figure out which items to combine).");
                                 validItem = item;
                                 break;
                             }
-                        } else {
+                        }
+                        else
+                        {
                             if (combination[0] == component1.Name && combination[1] == component1.Name)
                             {
                                 validCombination = true;
@@ -1216,7 +1245,7 @@ creatures breaking their way through the floors, ready to haunt the nightmarish 
                     var room = row[x];
                     room.Exits = new List<string>();
                     room.PassagesBuilt = false;
-                    if (room.Enemy != null && room.Enemy.Health < room.Enemy.MaxHealth)
+                    if (room.Enemy != null && room.Enemy.Health < room.Enemy.MaxHealth && !(room.Enemy.Name.Split(" ")[0] == "Avatar"))
                     {
                         room.Enemy.Health = room.Enemy.MaxHealth;
                     }

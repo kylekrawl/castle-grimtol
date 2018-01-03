@@ -36,8 +36,8 @@ namespace CastleGrimtol.Project
         public FlameTrap()
         {
             Name = "Flame Trap";
-            Damage = 10;
-            TriggeredText = "Suddenly, jets of fire spew from carefully concealed openings in the walls and ceiling of the room.";
+            Damage = 20;
+            TriggeredText = "Suddenly, jets of fire spew from carefully concealed openings in the walls and ceiling of the room.\n";
             DisabledText = $"The {Name}, thankfully, is still disabled.";
             SuccessText = $"You find yourself caught by a blast of flame, and take {Damage} damage!";
             FailureText = $"You successfully deactivate the {Name}.";
@@ -56,8 +56,8 @@ namespace CastleGrimtol.Project
         public AcidTrap()
         {
             Name = "Acid Trap";
-            Damage = 10;
-            TriggeredText = "Suddenly, droplets of corrosive liquid egin to leak from the ceiling.";
+            Damage = 20;
+            TriggeredText = "Suddenly, droplets of corrosive liquid egin to leak from the ceiling.\n";
             DisabledText = $"The {Name}, thankfully, is still disabled.";
             SuccessText = $"The acid lands on you, dealing {Damage} damage!";
             FailureText = $"You successfully deactivate the {Name}.";
@@ -77,8 +77,8 @@ namespace CastleGrimtol.Project
         public RiftTrap()
         {
             Name = "Rift Trap";
-            Damage = 10;
-            TriggeredText = "Suddenly, a glowing rift appears in the air at the center of the room, emitting a sickening violet light.";
+            Damage = 20;
+            TriggeredText = "Suddenly, a glowing rift appears in the air at the center of the room, emitting a sickening violet light.\n";
             DisabledText = $"The {Name}, thankfully, is still disabled.";
             SuccessText = $"The light from the rift strikes you, dealing {Damage} damage!";
             FailureText = $"You successfully deactivate the {Name}.";
