@@ -19,6 +19,7 @@ namespace CastleGrimtol.Project
         public virtual bool CraftingArea { get; set; }
         public virtual bool DeathFlag { get; set; }
         public virtual bool CombatFlag { get; set; }
+        public virtual bool SceneFlag { get; set; }
         public virtual bool VisitedByPlayer { get; set; }
         public List<string> Exits { get; set; } = new List<string>();
         public virtual string Stage { get; set; }
@@ -45,6 +46,7 @@ namespace CastleGrimtol.Project
             CraftingArea = false;
             DeathFlag = false;
             CombatFlag = false;
+            SceneFlag = false;
             Note = null;
             Enemy = null;
             Trap = null;
@@ -2293,7 +2295,7 @@ was one of those students who would walk to close to the edge in their pursuit o
 thirst for knowledge appears to have driven him into an even deeper madness than his siblings. The damage he 
 could cause with planar travel in his toolkit is almost immeasurable.
 
-I'll have to find the Anchor he used to create thi portal, and quickly. If I bring it here, I should be able 
+I'll have to find the Anchor he used to create this portal, and quickly. If I bring it here, I should be able 
 to bring him back to this plane before he breaks reality.");
         }
     }
@@ -2307,14 +2309,64 @@ to bring him back to this plane before he breaks reality.");
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            Console.WriteLine($"{item.Name} fails to be of any use.");
+            if (item.Name == "Impossible Anchor")
+            {
+                Console.WriteLine($@"
+You hold the Impossible Anchor up to the portal. It suddenly glows with an intense white light, then vanishes.
+The portal glows brighter for a second, then vanishes as well. Standing in it's place is Dr. Rithbaun.");
+                RemoveItems.Add(item);
+                SceneFlag = true;
+                Console.WriteLine("\n<Press any key to continue.>");
+                Console.ReadKey(true);
+            }
+            else
+            {
+                Console.WriteLine($"{item.Name} fails to be of any use.");
+            }
         }
         public override void Event(Game game, Player player)
         {
+            var icons = new List<Item>();
+            for (var i = 0; i < player.Inventory.Count; i++)
+            {
+                var item = player.Inventory[i];
+                if (item.Name.Split(" ")[0] == "Icon")
+                {
+                    icons.Add(item);
+                }
+            }
+            if (icons.Count == 3)
+            {
+                Console.WriteLine($@"
+As you step into the room, you hear a faint hum coming from your pockets. Suddenly, the Icons of Rage,
+Despair, and Madness that you collected from the Grimtol heirs fly out into the center of the room.
+
+As they collide, there's a brilliant flash of silver light. When the light clears,
+the icons have vanished, and a glowing white orb sits in their place.");
+                for (var i = 0; i < icons.Count; i++)
+                {
+                    var icon = icons[i];
+                    player.Inventory.Remove(icon);
+                }
+                Items.Add(new ImpossibleAnchor());
+            }
             if (!(Note == null))
             {
-                Console.WriteLine("\nYou spot a page that looks like it's been wripped out of a journal. It's in Dr. Rithbaun's handwriting.");
+                Console.WriteLine("\nYou spot a page that looks like it's been ripped out of a journal. It's in Dr. Rithbaun's handwriting.");
                 game.GetNote();
+            }
+            if (SceneFlag)
+            {
+                Console.WriteLine($@"
+Dr. Rithbaun: 'About time, {player.Name}! I was beginning to think I'd die in that awful place.'
+
+{player.Name}: 'Ungrateful as always, I see.'
+
+Dr. Rithbaun: 'Ha! But really, it's good to see a familiar face. What do you say we
+leave this blasted castle? It's gotten a little tiresome.
+
+{player.Name}: 'Yeah, for you and me both, old man...'
+                ");
             }
         }
         public CentralChamber(int y, int x) : base(y, x)

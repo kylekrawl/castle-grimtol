@@ -129,6 +129,21 @@ namespace CastleGrimtol.Project
                                            ");
             Console.WriteLine("\n<Press any key to continue.>");
             Console.ReadKey(true);
+            SavedProgress = false;
+            StartScreen();
+        }
+
+        public void GameCleared()
+        {
+            Playing = false;
+            Console.Clear();
+            SetConsoleColors("gameCleared");
+            Console.Clear();
+            Console.WriteLine(@" _______ __   _ ______   
+ |______ | \  | |     \  
+ |______ |  \_| |_____/ .");
+            Console.WriteLine("\n<Press any key to continue.>");
+            Console.ReadKey(true);
             StartScreen();
         }
 
@@ -139,10 +154,10 @@ namespace CastleGrimtol.Project
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
-            if (mode == "alternate")
+            if (mode == "gameCleared")
             {
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = ConsoleColor.DarkCyan;
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
             if (mode == "gameOver")
             {
@@ -806,6 +821,13 @@ devoid of doors of any sort.
             if (CurrentRoom.CombatFlag)
             {
                 CurrentRoom.Event(this, CurrentPlayer);
+            }
+            if (CurrentRoom.SceneFlag)
+            {
+                CurrentRoom.Event(this, CurrentPlayer);
+                Console.WriteLine("\n<Press any key to continue.>");
+                Console.ReadKey(true);
+                GameCleared();
             }
         }
         public void TakeItem(string itemName)
