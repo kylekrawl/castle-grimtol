@@ -62,9 +62,9 @@ namespace CastleGrimtol.Project
         public IncendiaryPistol()
         {
             Name = "Incendiary Pistol";
-            Description = "A pistol capable of firing incendiary rounds.";
+            Description = "[Combat] [Burning Dmg] A pistol capable of firing incendiary rounds.";
             DamageType = "burning";
-            Damage = 7;
+            Damage = 20;
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Flintlock Pistol", "Bone Ash"},
                 new List<string>(){ "Venomous Pistol", "Bone Ash"},
@@ -83,9 +83,9 @@ namespace CastleGrimtol.Project
         public VenomousPistol()
         {
             Name = "Venomous Pistol";
-            Description = "A pistol capable of firing corrosive rounds.";
+            Description = "[Combat] [Corrosive Dmg] A pistol capable of firing corrosive rounds.";
             DamageType = "corrosive";
-            Damage = 7;
+            Damage = 20;
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Flintlock Pistol", "Acrid Powder"},
                 new List<string>(){ "Incendiary Pistol", "Acrid Powder"},
@@ -104,9 +104,9 @@ namespace CastleGrimtol.Project
         public WarpPistol()
         {
             Name = "Warp Pistol";
-            Description = "A pistol capable of firing chaotic rounds.";
+            Description = "[Combat] [Chaos Dmg] A pistol capable of firing chaotic rounds.";
             DamageType = "chaos";
-            Damage = 7;
+            Damage = 20;
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Flintlock Pistol", "Luminous Dust"},
                 new List<string>(){ "Incendiary Pistol", "Luminous Dust"},
@@ -125,9 +125,9 @@ namespace CastleGrimtol.Project
         public IncendiaryGrenade()
         {
             Name = "Incendiary Grenade";
-            Description = "An incendiary explosive projectile.";
+            Description = "[Combat] [Burning Dmg] An incendiary explosive projectile.";
             DamageType = "burning";
-            Damage = 10;
+            Damage = 30;
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Reactive Solid", "Bone Ash"}
             };
@@ -144,9 +144,9 @@ namespace CastleGrimtol.Project
         public VenomousGrenade()
         {
             Name = "Venomous Grenade";
-            Description = "An explosive projectile with an acidic payload.";
+            Description = "[Combat] [Corrosive Dmg] An explosive projectile with an acidic payload.";
             DamageType = "corrosive";
-            Damage = 10;
+            Damage = 30;
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Reactive Solid", "Acrid Powder"}
             };
@@ -163,9 +163,9 @@ namespace CastleGrimtol.Project
         public WarpGrenade()
         {
             Name = "Warp Grenade";
-            Description = "An explosive projectile capable of destabilizing matter.";
+            Description = "[Combat] [Chaos Dmg] An explosive projectile capable of destabilizing matter.";
             DamageType = "chaos";
-            Damage = 10;
+            Damage = 30;
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Reactive Solid", "Luminous Dust"}
             };
@@ -179,7 +179,7 @@ namespace CastleGrimtol.Project
         public YellowIchor()
         {
             Name = "Yellow Ichor";
-            Description = "[Alchemical Fluid] A viscous amber liquid. Slightly acidic.";
+            Description = "[Alchemical Fluid] [Corruption] A viscous amber liquid. Slightly acidic.";
         }
     }
 
@@ -190,7 +190,7 @@ namespace CastleGrimtol.Project
         public PutridNodule()
         {
             Name = "Putrid Nodule";
-            Description = "[Alchemical Substrate] A dark chitinous lump covered in slime.";
+            Description = "[Alchemical Substrate] [Corruption] A dark chitinous lump covered in slime.";
         }
     }
 
@@ -201,7 +201,7 @@ namespace CastleGrimtol.Project
         public AcridPowder()
         {
             Name = "Acrid Powder";
-            Description = "[Alchemical Powder] A fine yellow-green powder with a strong sulfurous odor.";
+            Description = "[Alchemical Powder] [Corruption] A fine yellow-green powder with a strong sulfurous odor.";
         }
     }
 
@@ -212,7 +212,7 @@ namespace CastleGrimtol.Project
         public CrimsonOil()
         {
             Name = "Crimson Oil";
-            Description = "[Alchemical Fluid] A thin liquid that looks disturbingly similar to blood.";
+            Description = "[Alchemical Fluid] [Purification] A thin liquid that looks disturbingly similar to blood.";
         }
     }
 
@@ -223,7 +223,7 @@ namespace CastleGrimtol.Project
         public MetalCore()
         {
             Name = "Metal Core";
-            Description = "[Alchemical Substrate] A dense sphere of gleaming white metal. It gives off a faint warmth.";
+            Description = "[Alchemical Substrate] [Purification] A dense sphere of gleaming white metal. It gives off a faint warmth.";
         }
     }
 
@@ -234,7 +234,7 @@ namespace CastleGrimtol.Project
         public BoneAsh()
         {
             Name = "Bone Ash";
-            Description = "[Alchemical Powder] A fine ash derived from incinerated bones.";
+            Description = "[Alchemical Powder] [Purification] A fine ash derived from incinerated bones.";
         }
     }
 
@@ -245,7 +245,7 @@ namespace CastleGrimtol.Project
         public QuiveringOoze()
         {
             Name = "Quivering Ooze";
-            Description = "[Alchemical Fluid] A shimmering silver liquid that seems to be in constant motion.";
+            Description = "[Alchemical Fluid] [Transmutation] A shimmering silver liquid that seems to be in constant motion.";
         }
     }
 
@@ -256,7 +256,7 @@ namespace CastleGrimtol.Project
         public TwistedCrystal()
         {
             Name = "Twisted Crystal";
-            Description = "[Alchemical Substrate] A faintly glowing crystal warped into a shape that defies explanation.";
+            Description = "[Alchemical Substrate] [Transmutation] A faintly glowing crystal warped into a shape that defies explanation.";
         }
     }
 
@@ -267,7 +267,7 @@ namespace CastleGrimtol.Project
         public LuminousDust()
         {
             Name = "Luminous Dust";
-            Description = "[Alchemical Powder] A violet powder that pulsates with a strange light.";
+            Description = "[Alchemical Powder] [Transmutation] A violet powder that pulsates with a strange light.";
         }
     }
 
@@ -340,7 +340,7 @@ namespace CastleGrimtol.Project
         public PulseEmitter()
         {
             Name = "Pulse Emitter";
-            Description = "A device capable of deactivating mechanical traps.";
+            Description = "[Special] A device capable of deactivating mechanical traps.";
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Reactive Solid", "Pulse Crystal"}
             };
@@ -356,7 +356,7 @@ namespace CastleGrimtol.Project
         public HealingElixir()
         {
             Name = "Healing Elixir";
-            Description = "A small vial of restorative liquid.";
+            Description = "[Healing] A small vial of restorative liquid.";
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Yellow Ichor", "Crimson Oil"},
                 new List<string>(){ "Yellow Ichor", "Quivering Ooze"},
@@ -365,7 +365,7 @@ namespace CastleGrimtol.Project
                 new List<string>(){ "Quivering Ooze", "Quivering Ooze"},
                 new List<string>(){ "Crimson Oil", "Crimson Oil"}
             };
-            HealAmount = 10;
+            HealAmount = 20;
         }
     }
 
@@ -378,13 +378,13 @@ namespace CastleGrimtol.Project
         public MedicinalSalve()
         {
             Name = "Medicinal Salve";
-            Description = "A thick paste with healing properties.";
+            Description = "[Healing] A thick paste with healing properties.";
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Reactive Solid", "Crimson Oil"},
                 new List<string>(){ "Yellow Ichor", "Reactive Solid"},
                 new List<string>(){ "Quivering Ooze", "Reactive Solid"}
             };
-            HealAmount = 20;
+            HealAmount = 35;
         }
     }
 
@@ -397,11 +397,11 @@ namespace CastleGrimtol.Project
         public Panacea()
         {
             Name = "Panacea";
-            Description = "A draught to cure almost any wound or ailment.";
+            Description = "[Healing] A draught to cure almost any wound or ailment.";
             CraftingCombinations = new List<List<string>>(){
                 new List<string>(){ "Reactive Solid", "Healing Elixir"}
             };
-            HealAmount = 30;
+            HealAmount = 50;
         }
     }
 

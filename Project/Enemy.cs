@@ -349,7 +349,7 @@ Voice: 'The Fire...the cleansing, glorious Fire...so beautiful...'
 ";
             VictoriousDescription = @"
 The creature lets out a triumphant roar as your body is consumed by flames.";
-            Type = "transmutation";
+            Type = "purification";
             MaxHealth = 200;
             Health = MaxHealth;
             MaxDefenseRating = 12;
@@ -403,7 +403,7 @@ Voice: 'Vivi...'
 ";
             VictoriousDescription = @"
 The creature lets out a gurgling laugh as your body begins to dissolve.";
-            Type = "transmutation";
+            Type = "corruption";
             MaxHealth = 175;
             Health = MaxHealth;
             MaxDefenseRating = 15;

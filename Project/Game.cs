@@ -728,9 +728,7 @@ figure out which items to combine).");
                             {
                                 var item = validCombatItems[i];
                                 Console.WriteLine($"{i + 1}. {item.Name}");
-                                Console.WriteLine($"-----------------------------");
-                                Console.WriteLine($"{item.Description}");
-                                Console.WriteLine($"-----------------------------\n");
+                                Console.WriteLine($"{item.Description}\n");                
                             }
                             var choice = Console.ReadLine();
                             var parsed = 0;
@@ -758,9 +756,7 @@ figure out which items to combine).");
                             {
                                 var item = validHealingItems[i];
                                 Console.WriteLine($"{i + 1}. {item.Name}");
-                                Console.WriteLine($"-----------------------------");
-                                Console.WriteLine($"{item.Description}");
-                                Console.WriteLine($"-----------------------------\n");
+                                Console.WriteLine($"{item.Description}\n");
                             }
                             var choice = Console.ReadLine();
                             var parsed = 0;
