@@ -168,17 +168,11 @@ namespace CastleGrimtol.Project
 
         public void Reset()
         {
-            Setup(); // What different logic is needed here?
+            Setup();
         }
 
         public void Setup()
         {
-            // Set Playing to true
-            // Generate Player
-            // Generate Map
-            // Set Player Location to Start Location On Map
-            // Play Intro
-            // Run MainLoop
             Playing = true;
             CurrentMap = new Map(MapTemplate, "Test");
             CurrentPlayer = new Player(CurrentMap);
@@ -186,14 +180,10 @@ namespace CastleGrimtol.Project
             SavedProgress = true;
             Intro();
             MainLoop();
-            //Console.Clear();
         }
 
         public void Intro()
         {
-            // Print intro text, keypress to advance
-            // Choose player name
-
             Console.WriteLine("Choose a name:");
             var choice = Console.ReadLine();
             if (choice != "")
@@ -204,12 +194,14 @@ namespace CastleGrimtol.Project
             Console.WriteLine(@"
 After a week of traveling, you had finally arrived at Castle Grimtol. It had all started with a
 hastily scrawled note from Dr. Damian Rithbaun, the man who had taught you everything you knew
-about the art of alchemy. A note that said only 'I am in danger. Come to Grimtol.' After talking
-with a few locals in the nearby town, you'd managed to piece together that the good Doctor had
-been staying at the castle to teach the three Grimtol heirs in the arts of alchemy. Nothing all
-that suspicious, except he hadn't been seen for weeks. Coupled with all the stories of strange 
-happenings in the vicinity of the castle grounds, there was definitely *something* going on. And now, 
-standing before the castle doors, it was your job to figure it out.");
+about the art of alchemy. A note that said only 'I am in danger. Come to Grimtol.' 
+
+After talking with a few locals in the nearby town, you'd managed to piece together that the 
+good Doctor had been staying at the castle to teach the three Grimtol heirs in the arts of 
+alchemy. Nothing all that suspicious, except he hadn't been seen for weeks. Coupled with all 
+the stories of strange happenings in the vicinity of the castle grounds, there was definitely 
+*something* going on. And now, standing before the castle doors, it was your job to 
+figure out what.");
 
             Console.WriteLine("\n<Press any key to continue.>");
             Console.ReadKey(true);
@@ -259,77 +251,176 @@ devoid of doors of any sort.
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("\nChoose a topic (Type number and press <Enter>):\n");
+                Console.WriteLine("\nChoose a topic (Type number and press <ENTER>):\n");
                 Console.WriteLine("1. Movement");
                 Console.WriteLine("2. Basic Commands");
                 Console.WriteLine("3. Crafting");
                 Console.WriteLine("4. Combat");
+                Console.WriteLine("5. Traps");
                 var choice = Console.ReadLine();
                 var parsed = 0;
                 var valid = int.TryParse(choice, out parsed);
-                if (!valid || parsed < 1 || parsed > 4)
+                if (!valid || parsed < 1 || parsed > 5)
                 {
                     Console.WriteLine("Invalid choice.");
                     Console.WriteLine("\n<Press any key to continue.>");
                     Console.ReadKey(true);
+                    break;
                 }
                 else
                 {
                     Console.Clear();
                     if (parsed == 1)
                     {
-                        Console.WriteLine("\nUnless otherwise stated, all commands are performed by pressing a single key.");
-                        Console.WriteLine("\n-------------------------------");
-                        Console.WriteLine("MOVEMENT:");
-                        Console.WriteLine("-------------------------------");
-                        Console.WriteLine("\nOnly move directions that lead to valid passageways will be available.\n");
-                        Console.WriteLine("Go West  | A or ←");
-                        Console.WriteLine("Go North | W or ↑");
-                        Console.WriteLine("Go East  | D or →");
-                        Console.WriteLine("Go South | S or ↓");
+                        Console.WriteLine($@"
+Unless otherwise stated, all commands are performed by pressing a single key.
+(You do not need to press ENTER)
+
+-------------------------------                     
+MOVEMENT                  
+-------------------------------
+
+Only move directions that lead to valid passageways will be available.
+
+Go West  | A or ←
+Go North | W or ↑
+Go East  | D or →
+Go South | S or ↓");
+
                     }
                     if (parsed == 2)
                     {
-                        Console.WriteLine("\nUnless otherwise stated, all commands are performed by pressing a single key.");
-                        Console.WriteLine("\n-------------------------------");
-                        Console.WriteLine("BASIC COMMANDS:");
-                        Console.WriteLine("-------------------------------");
-                        Console.WriteLine("\nLook | L");
-                        Console.WriteLine("Review the description of the current room, including takeable items.\n");
-                        Console.WriteLine("\nView Notebook | N");
-                        Console.WriteLine("Review the notes you've collected.");
-                        Console.WriteLine("\nView Inventory | I");
-                        Console.WriteLine("View the items in your inventory.");
-                        Console.WriteLine("\nUse Item | U");
-                        Console.WriteLine("Brings up the Use Item menu, displaying a numbered list of items in your inventory.\n Type a number and press ENTER to use the corresponding item in the current room.");
-                        Console.WriteLine("\nTake Item | T");
-                        Console.WriteLine("Brings up the Take Item menu, displaying a numbered list of items in the room.\n Type a number and press ENTER to add the corresponding item to your inventory.");
-                        Console.WriteLine("This command is only available if there are takeable items in the room.");
-                        Console.WriteLine("\nCraft Item | C");
-                        Console.WriteLine("Brings up the Craft Item menu (see CRAFTING below.)");
-                        Console.WriteLine("This command is only available if there is an alchemical workstation in the current room.");
-                        Console.WriteLine("\nQuit | Q");
-                        Console.WriteLine("Exits the game, returning you to the Start Menu. \nYour current progress will be saved as long as you do not fully exit the application.");
+                        Console.WriteLine($@"
+Unless otherwise stated, all commands are performed by pressing a single key.
+(You do not need to press ENTER)
+
+-------------------------------                  
+BASIC COMMANDS               
+-------------------------------
+
+Look | L
+
+    Review the description of the current room, including takeable items.
+
+View Notebook | N
+
+    Displays the Notes menu, allowing you to read the text of notes you've collected.
+
+View Inventory | I
+
+    Displays the name and description of each item in your inventory.
+
+Use Item | U
+
+    Displays the Use Item menu, displaying a numbered list of items in your inventory.
+    Type a number and press ENTER to use the corresponding item in the current room.
+    Some items can be used anywhere, while others will only have an effect in certain 
+    rooms.
+
+Take Item | T
+
+    Brings up the Take Item menu, displaying a numbered list of items in the room.
+    Type a number and press ENTER to add the corresponding item to your inventory.
+    This command is only available if there are takeable items in the room.
+
+Craft Item | C
+
+    Brings up the Craft Item Menu. For additional information, see the CRAFTING 
+    Help section. This command is only available if there is an alchemical 
+    workstation in the current room.
+
+Rest | R
+
+    Restores the player to full health. However, all enemies in the castle aside from bosses
+    will also be restored to full health. In additon, all disabled traps will be reset, and 
+    the passageways that connect the castle's rooms may change position. This command is only 
+    available in the Main Foyer of the castle.
+
+Quit | Q
+
+    Exits the game, returning you to the Start Menu. Your current progress will be 
+    saved as long as you do not fully exit the application.");
+
                     }
                     if (parsed == 3)
                     {
-                        Console.WriteLine("\nUnless otherwise stated, all commands are performed by pressing a single key.");
-                        Console.WriteLine("\n-------------------------------");
-                        Console.WriteLine("CRAFTING:");
-                        Console.WriteLine("-------------------------------");
-                        Console.WriteLine("\nThe Craft Item Menu allows you to attempt to combine two items.");
-                        Console.WriteLine("Opening the Craft Item Menu will display a numbered list of items in your inventory.\n You will be prompted to select an item to use as the first crafting component,\n which can be done by typing a number from the list and pressing ENTER.");
-                        Console.WriteLine("This process will be repeated for the second component.\n Once two components are selected, if they are a valid combination they will both be consumed, and a new item will be added to your inventory.");
-                        Console.WriteLine("If the combination is invalid, the items will not be consumed.");
+                        Console.WriteLine($@"
+Unless otherwise stated, all commands are performed by pressing a single key.
+(You do not need to press ENTER)
+
+-------------------------------                     
+CRAFTING                  
+-------------------------------
+
+Only move directions that lead to valid passageways will be available.
+
+The Craft Item Menu (accessible using the 'C' key in rooms with an alchemical 
+workstation) allows you to attempt to combine two items and create a new item.
+
+Opening the Craft Item Menu will display a numbered list of items in your inventory.
+You will be prompted to select an item to use as the first crafting component, which 
+can be done by typing a number from the list and pressing ENTER. This process will 
+be repeated for the second component.
+
+Once two components are selected, if they are a valid combination they will both 
+be consumed, and a new item will be added to your inventory. If the combination 
+is invalid, the items will not be consumed.");
                     }
                     if (parsed == 4)
                     {
-                        Console.WriteLine("\nUnless otherwise stated, all commands are performed by pressing a single key.");
-                        Console.WriteLine("\n-------------------------------");
-                        Console.WriteLine("COMBAT:");
-                        Console.WriteLine("-------------------------------");
-                        Console.WriteLine("todo");
-                        Console.WriteLine("-------------------------------");
+                        Console.WriteLine($@"
+Unless otherwise stated, all commands are performed by pressing a single key.
+(You do not need to press ENTER)
+
+-------------------------------                     
+COMBAT                
+-------------------------------
+
+The Player will always attack first during combat.
+
+The following actions are available during the Player's turn (1 action per turn):
+
+| A | Pistol Attack
+
+    Attacks the enemy using the currently equipped Pistol item. Pistols with
+    a particular damage type will be more effective against enemies weak to
+    that damage type.
+
+| C | Use Combat Item
+
+    Displays a numbered list of the Player's currently equipped combat items. 
+    Type a number and press ENTER to attack with the corresponding item. Items 
+    with a particular damage type will be more effective against enemies weak to
+    that damage type. This command is only available if you have at least one
+    combat item in your inventory.
+
+| H | Use Healing Item
+
+    Displays a numbered list of the Player's currently equipped healing items. 
+    Type a number and press ENTER to heal with the corresponding item. This 
+    command is only available if you have at least one combat item in your 
+    inventory.");
+                    }
+                    if (parsed == 5)
+                    {
+                        Console.WriteLine($@"
+Unless otherwise stated, all commands are performed by pressing a single key.
+(You do not need to press ENTER)
+
+-------------------------------                     
+TRAPS              
+-------------------------------
+
+Certain rooms have traps that can trigger and damage the Player.
+
+If the Player has a Pulse Emitter in their inventory, they will be given the 
+option to use it by pressing the 'U' key.
+
+Using a Pulse Emitter will disable the trap, preventing damage to the player. 
+This will consume the Pulse Emitter.
+
+Pulse Emitters can be crafted at alchemical workstation (it's up to you to
+figure out which items to combine).");
                     }
                     Console.WriteLine("\n| X | Exit Help Menu");
                     Console.WriteLine("\n<Press any other key to continue.>");
@@ -343,6 +434,7 @@ devoid of doors of any sort.
 
             }
         }
+
 
         public void MainLoop()
         {
@@ -800,10 +892,13 @@ devoid of doors of any sort.
                             CurrentPlayer.Inventory.Remove(item);
                             CurrentRoom.RemoveItems.Remove(item);
                         }
-                    } else {
+                    }
+                    else
+                    {
                         Console.WriteLine($"You regain {item.HealAmount} health.\n");
                         CurrentPlayer.Health += item.HealAmount;
-                        if (CurrentPlayer.Health > CurrentPlayer.MaxHealth) {
+                        if (CurrentPlayer.Health > CurrentPlayer.MaxHealth)
+                        {
                             CurrentPlayer.Health = CurrentPlayer.MaxHealth;
                         }
                     }
@@ -1000,7 +1095,7 @@ devoid of doors of any sort.
                 if (CurrentPlayer.Notes.Count > 0)
                 {
                     Console.Clear();
-                    Console.WriteLine("\nChoose a note to read (Type number and press <Enter>):\n");
+                    Console.WriteLine("\nChoose a note to read (Type number and press <ENTER>):\n");
                     for (var i = 0; i < CurrentPlayer.Notes.Count; i++)
                     {
                         var note = CurrentPlayer.Notes[i];
@@ -1014,6 +1109,7 @@ devoid of doors of any sort.
                         Console.WriteLine("Invalid choice.");
                         Console.WriteLine("\n<Press any key to continue.>");
                         Console.ReadKey(true);
+                        break;
                     }
                     else
                     {
@@ -1116,6 +1212,10 @@ creatures breaking their way through the floors, ready to haunt the nightmarish 
                     if (room.Enemy != null && room.Enemy.Health < room.Enemy.MaxHealth)
                     {
                         room.Enemy.Health = room.Enemy.MaxHealth;
+                    }
+                    if (room.Trap != null && !room.Trap.Active)
+                    {
+                        room.Trap.Active = true;
                     }
                 }
             }
