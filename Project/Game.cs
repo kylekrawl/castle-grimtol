@@ -193,7 +193,8 @@ namespace CastleGrimtol.Project
                 new AcridPowder(), new AcridPowder(), new AcridPowder(),
                 new CrimsonOil(), new CrimsonOil()
             };
-            foreach (var item in startItems) {
+            foreach (var item in startItems)
+            {
                 CurrentRoom.Items.Add(item);
             }
         }
@@ -211,7 +212,8 @@ namespace CastleGrimtol.Project
                 CheatMode();
                 Console.WriteLine($@"
 With a name like that, you must have been born under a favorable star.
-Your health and defensive capabilities are much greater than the average mortal.
+Your health and defensive capabilities are much greater than the average 
+mortal.
 
 Also, you may want to check the castle's Main Foyer for some useful items...");
                 Console.WriteLine("\n<Press any key to continue.>");
@@ -253,15 +255,16 @@ owe him one.'");
 
             Console.WriteLine($@"
 You walk inside, and find yourself in a large room crafted from dark, polished stone. A collection
-of tapestries and paintings adorn the walls, and a large, ornately carved table sits in the room's center.
-A makeshift alchemical workstation takes up most of the table's space...probably Dr. Rithbaun's handiwork.
+of tapestries and paintings adorn the walls, and a large, ornately carved table sits in the room's 
+center. A makeshift alchemical workstation takes up most of the table's space...probably Dr. 
+Rithbaun's handiwork.
             
 Suddenly, you hear the door slam shut behind you.
 
 {CurrentPlayer.Name}: 'Knew it.'
 
-As you turn around, you notice the door isn't just locked. It's gone. The wall is a smooth, stone surface
-devoid of doors of any sort.
+As you turn around, you notice the door isn't just locked. It's gone. The wall is a smooth, stone 
+surface devoid of doors of any sort.
 
 {CurrentPlayer.Name}: 'Huh...well, that's new.'");
 
@@ -461,7 +464,6 @@ figure out which items to combine).");
 
             }
         }
-
 
         public void MainLoop()
         {
@@ -762,7 +764,7 @@ figure out which items to combine).");
                             var valid = int.TryParse(choice, out parsed);
                             if (!valid || parsed < 1 || parsed > validCombatItems.Count)
                             {
-                                Console.WriteLine("Invalid choice.");
+                                Console.WriteLine("\nInvalid choice.");
                             }
                             else
                             {
@@ -790,7 +792,7 @@ figure out which items to combine).");
                             var valid = int.TryParse(choice, out parsed);
                             if (!valid || parsed < 1 || parsed > validHealingItems.Count)
                             {
-                                Console.WriteLine("Invalid choice.");
+                                Console.WriteLine("\nInvalid choice.");
                             }
                             else
                             {
@@ -803,7 +805,7 @@ figure out which items to combine).");
                     }
                     else
                     {
-                        Console.WriteLine("Invalid choice.");
+                        Console.WriteLine("\nInvalid choice.");
                         Console.WriteLine("\n<Press any key to continue.>");
                         Console.ReadKey(true);
                     }
@@ -1031,7 +1033,7 @@ figure out which items to combine).");
                 while (true)
                 {
                     Console.Clear();
-                    Console.WriteLine("\nChoose first component (Type number and press <Enter>):\n");
+                    Console.WriteLine("\nChoose first component (Type number and press <Enter>, or type 'X' and <Enter> to exit.):\n");
                     for (var i = 0; i < CurrentPlayer.Inventory.Count; i++)
                     {
                         var item = CurrentPlayer.Inventory[i];
@@ -1039,6 +1041,9 @@ figure out which items to combine).");
                         Console.WriteLine($"{item.Description}\n");
                     }
                     var choice = Console.ReadLine();
+                    if (choice.ToLower() == "x") {
+                        return;
+                    }
                     var parsed = 0;
                     var valid = int.TryParse(choice, out parsed);
                     if (!valid || parsed < 1 || parsed > CurrentPlayer.Inventory.Count)
@@ -1057,7 +1062,7 @@ figure out which items to combine).");
                 while (true)
                 {
                     Console.Clear();
-                    Console.WriteLine("\nChoose second component (Type number and press <Enter>):\n");
+                    Console.WriteLine("\nChoose second component (Type number and press <Enter>, or type 'X' and <Enter> to exit.):\n");
                     for (var i = 0; i < CurrentPlayer.Inventory.Count; i++)
                     {
                         var item = CurrentPlayer.Inventory[i];
@@ -1065,6 +1070,10 @@ figure out which items to combine).");
                         Console.WriteLine($"{item.Description}\n");
                     }
                     var choice2 = Console.ReadLine();
+                    if (choice2.ToLower() == "x") {
+                        CurrentPlayer.Inventory.Add(component1);
+                        return;
+                    }
                     var parsed2 = 0;
                     var valid2 = int.TryParse(choice2, out parsed2);
                     if (!valid2 || parsed2 < 1 || parsed2 > CurrentPlayer.Inventory.Count)
@@ -1131,13 +1140,16 @@ figure out which items to combine).");
                 if (CurrentPlayer.Notes.Count > 0)
                 {
                     Console.Clear();
-                    Console.WriteLine("\nChoose a note to read (Type number and press <ENTER>):\n");
+                    Console.WriteLine("\nChoose a note to read (Type number and press <ENTER>), or type 'X' and <Enter> to exit:\n");
                     for (var i = 0; i < CurrentPlayer.Notes.Count; i++)
                     {
                         var note = CurrentPlayer.Notes[i];
                         Console.WriteLine($"{i + 1}. {note.Name}");
                     }
                     var choice = Console.ReadLine();
+                    if (choice.ToLower() == "x") {
+                        break;
+                    }
                     var parsed = 0;
                     var valid = int.TryParse(choice, out parsed);
                     if (!valid || parsed < 1 || parsed > CurrentPlayer.Notes.Count)
@@ -1263,14 +1275,15 @@ creatures breaking their way through the floors, ready to haunt the nightmarish 
             if (MainQuestStage["corruption"] == "has poison")
             {
                 Console.WriteLine($@"
-And then, the nightmare fades away. You find yourself surrounded by an endless sea of pale light.
-Standing before you is a young girl.
+And then, the nightmare fades away. You find yourself surrounded by an endless sea of pale 
+light. Standing before you is a young girl.
 
 She reaches her hand out to you. You can see she's holding something in her palm...");
                 Console.WriteLine("\n<Press any key to continue.>");
                 Console.ReadKey(true);
                 Console.Clear();
                 CurrentPlayer.Inventory.Add(new ViviansCharm());
+                MainQuestStage["corruption"] = "has charm";
                 Console.WriteLine($@"
 You bolt awake. You feel something clutched in your hand. You open your palm to reveal a
 small silver locket. It feels surpisingly cold to the touch. 
@@ -1283,7 +1296,7 @@ small silver locket. It feels surpisingly cold to the touch.
                 Console.WriteLine($@"
 You wake up in a cold sweat. Despite the nightmare, you feel slightly better. However, 
 something about the room doesn't seem quite right. The paintings and tapestries seem
-slightly different from before, and evrything seems to have moved around, ever so slightly.
+slightly different from before, and everything seems to have moved around, ever so slightly.
 
 {CurrentPlayer.Name}: I could've sworn the exits were in a different spot...");
             }

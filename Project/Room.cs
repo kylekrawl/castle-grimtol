@@ -918,7 +918,7 @@ protection of the Elixir, then it may be powerful enough to elevate humanity to 
             {
                 Console.WriteLine($@"
 You hold the Anchor of Purification up to the portal. It suddenly glows with an intense red light, then vanishes.
-The portal glows brighter for a second, then vanishes as well. Standing in it's place is a sturdily build man
+The portal glows brighter for a second, then vanishes as well. Standing in it's place is a sturdily built man
 with a mad look in his eyes.
 
 Aldric Grimtol: 'I knew some unworthy soul would follow me. But it's too late. I've found it...the Divine
@@ -1635,7 +1635,7 @@ She was always more of an artist than a scholar, but that approach made her into
 I've had so far. She hadn't been able to create so much as a sketch since Vivian died, so alchemy must have been 
 a welcome distraction. If only I'd realized how hard Vivian's death had hit her, perhaps I could've stopped this. 
 But it would appear that in her despair, Miranda sought meaning in the discipline of alchemical Corruption. And 
-those abominations are her magnum opus, a pefect manifestation of her despair.Given access to extraplanar resources, 
+those abominations are her magnum opus, a pefect manifestation of her despair. Given access to extraplanar resources, 
 I'm not sure what kind of horrific works she'd create...
 
 I'm running out of time. If I can find that portal's Anchor, I should be able to wrench it back open and retrieve 
@@ -2067,12 +2067,12 @@ breathe...might want to make this fast.");
                 };
                 Dictionary<string, string> clues = new Dictionary<string, string>()
                 {
-                    {"n", "It's an engraving of a constellation in a starry sky. One of the stars is labelled 'Polaris'."},
+                    {"n", "It's an engraving of a constellation labelled 'Polaris'."},
                     {"e", "It's a painting of a vivid sunrise."},
-                    {"s", "It's an engraving of a constellation in a starry sky. One of the stars is labelled 'Crux'."},
+                    {"s", "It's an engraving of a constellation labelled 'Southern Cross'."},
                     {"w", "It's a painting of a breathtaking sunset."},
-                    {"u", "It's a statue of an angelic figure carved from alabaster."},
-                    {"d", "It's a statue of a horned demon carved from basalt."}
+                    {"u", "It's a statue of an angelic figure carved from alabaster, face raised heavenward."},
+                    {"d", "It's a statue of a horned demon carved from basalt, eyes leering down at you."}
                 };
 
                 List<string> correctOrder = new List<string>() {
@@ -2247,10 +2247,10 @@ remember what I ate for breakfast. Wait, did I even eat breakfast today? Hmm...
             {
                 Console.WriteLine($@"
 You hold the Anchor of Transmutation up to the portal. It suddenly glows with an intense blue light, then vanishes.
-The portal glows brighter for a second, then vanishes as well. Standing in it's is a thin man with a scattered look 
-in his eyes..
+The portal glows brighter for a second, then vanishes as well. Standing in it's place is a thin man with a scattered 
+look in his eyes..
 
-Theodore Grimtol: 'Oh, good, you made it! But you see, I can't let you stop me. This is just too much fun...");
+Theodore Grimtol: 'Oh, good, you made it! But you see, I can't let you stop me. This is just too much fun...'");
                 RemoveItems.Add(item);
                 CombatFlag = true;
                 Console.WriteLine("\n<Press any key to continue.>");
@@ -2293,7 +2293,7 @@ just above the desk. The surface of the disk is marked with luminous runes from 
 Well, I can't say I'm that surprised to find a portal here. Out of the three Grimtol heirs, Theodore would be 
 the most likely to dabble in interplanar travel. Not that that's at all comforting.
 
-That man was easily my greatest pupil. A true scholar seeking to unlock the mysteries of the unvierse. His 
+That man was easily my greatest pupil. A true scholar seeking to unlock the mysteries of the universe. His 
 grasp of the alchemical discipline of Transmutation is positively astounding. I should have guessed that he 
 was one of those students who would walk to close to the edge in their pursuit of knowledge. At any rate, his 
 thirst for knowledge appears to have driven him into an even deeper madness than his siblings. The damage he 
@@ -2403,7 +2403,7 @@ this rate.");
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            if (item.Name == "Optical Disruptor")
+            if (item.Name == "Optical Disruptor" && !(Stage == "disruptor used"))
             {
                 Console.WriteLine($@"
 You press the switch on the Optical Disruptor. It gives off a pulse of violet light.
@@ -2420,6 +2420,7 @@ many visitors.
 
 The portrait of Augustus Grimtol now depicts the man wearing red long johns, a live racoon perched 
 atop his head.";
+                Stage = "disruptor used";
             }
             else
             {
@@ -2504,7 +2505,7 @@ would be if it were human. A simple alchemical workstation has been set up in on
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            if (item.Name == "Optical Disruptor")
+            if (item.Name == "Optical Disruptor" && !(Stage == "disruptor used"))
             {
                 Console.WriteLine($@"
 You press the switch on the Optical Disruptor. It gives off a pulse of violet light.
@@ -2522,6 +2523,7 @@ ferociously positioned bear rears up at the center of the room.
 
 The portrait of Augustus Grimtol now depicts the man holding a comically oversized lollipop and crying like
 a spoiled child.";
+                Stage = "disruptor used";
             }
             else
             {
@@ -2556,7 +2558,7 @@ a look of mild annoyance on his face. Below the painting is a plaque reading 'Au
         public override List<Item> RespawnItems { get; set; }
         public override void UseItem(Item item)
         {
-            if (item.Name == "Optical Disruptor")
+            if (item.Name == "Optical Disruptor" && !(Stage == "disruptor used"))
             {
                 Console.WriteLine($@"
 You press the switch on the Optical Disruptor. It gives off a pulse of violet light.
@@ -2571,6 +2573,7 @@ The walls of the room are covered in weapons straight out of medieval Europe, al
 historic battles. The floorspace is devoted to immaculately maintained suits of armor from various nations.
 
 The portrait of Augustus Grimtol now depicts the man in a ridiculous clown outfit.";
+                Stage = "disruptor used";
             }
             else
             {
